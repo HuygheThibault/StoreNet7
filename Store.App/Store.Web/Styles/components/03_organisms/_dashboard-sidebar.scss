@@ -1,0 +1,16 @@
+﻿.total p {
+    color: var(--secondary-color);
+}
+
+.payment-methods h4 {
+    color: var(--secondary-color);
+}
+
+.payment-button {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+}
+
+.payment-button:hover {
+    background-color: var(--text-primary);
+}

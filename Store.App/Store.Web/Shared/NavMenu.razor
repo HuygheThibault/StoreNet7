@@ -1,39 +1,92 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Store.Web</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+﻿@using System.IO
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
+
+<nav>
+    <div class="nav-toggler" @onclick="ToggleNavMenu"><i class="fa-solid fa-certificate"></i></div>
+    <div class="@(collapseNavMenu ? "side-nav-closed" : "side-nav-open")">
+        <div class="nav-header">
+            @* <AuthorizeView Roles="Admin, User">
+            <Authorized> *@
+            <div class="profile-avatar">
+                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Avatar">
+            </div>
+            <div class="profile-info mrg-vrtcl-0">
+                @* <h4 class="text-primary">@context?.User?.Identity?.Name</h4> *@
+                <p class="text-secondary">UX Designer</p>
+            </div>
+            @* </Authorized>
+            </AuthorizeView> *@
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
+        @*  <AuthorizeView Roles="Admin, User">
+        <NotAuthorized>
+        <div class="mrg-0">
+        <NavLink class="nav-link  text-primary mrg-0" href="/login">
+        <i class="fa-solid fa-user"><span class="mrg-0">Log In</span></i>
+        </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+        </NotAuthorized>
+        <Authorized> *@
+        <NavLink class="nav-link text-primary mrg-0" href="" Match="NavLinkMatch.All">
+            <i class="fa-solid fa-home"><span class="mrg-0">Home</span></i>
+        </NavLink>
+        <NavLink class="nav-link text-primary mrg-0" href="/users">
+            <i class="fa-solid fa-user"><span class="mrg-0">Users</span></i>
+        </NavLink>
+        <NavLink class="nav-link text-primary mrg-0" href="/Dashboard">
+            <i class="fa-solid fa-cart-shopping"><span class="mrg-0">Dashboard</span></i>
+        </NavLink>
+        <NavLink class="nav-link text-primary mrg-0" href="/DashboardV2">
+            <i class="fa-solid fa-cart-shopping"><span class="mrg-0">Dashboard V2</span></i>
+        </NavLink>
+        <NavLink class="nav-link text-primary mrg-0" href="/DashboardV3">
+            <i class="fa-solid fa-cart-shopping"><span class="mrg-0">Dashboard V3</span></i>
+        </NavLink>
+        <NavLink class="nav-link text-primary mrg-0" href="/calendar">
+            <i class="fa-solid fa-calendar"><span class="mrg-0">Planning</span></i>
+        </NavLink>
+        @*  </Authorized>
+        </AuthorizeView> *@
+        <div class="secondary-items">
+            @*  <AuthorizeView Roles="Admin, User">
+            <Authorized> *@
+            <NavLink class="nav-link text-secondary" href="/Stock">
+                <i class="fa-solid fa-cart-shopping"><span class="mrg-0">Stock</span></i>
             </NavLink>
+            <NavLink class="nav-link text-secondary" href="/Categories">
+                <i class="fa-solid fa-cart-shopping"><span class="mrg-0">Categories</span></i>
+            </NavLink>
+            <NavLink class="nav-link text-secondary" href="/logout">
+                <i class="fa-regular fa-user"><span class="mrg-0">Log Out</span></i>
+            </NavLink>
+            @* </Authorized>
+                </AuthorizeView> *@
         </div>
-    </nav>
-</div>
+    </div>
+</nav>
 
 @code {
     private bool collapseNavMenu = true;
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private string? NavMenuCssClass => collapseNavMenu ? "side-nav-closed" : "side-nav-open";
+
+    private enum NavSubmenu
+    {
+        None,
+        Data
+    }
+
+    private NavSubmenu navSubmenu = NavSubmenu.None;
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void ToggleSubmenu(NavSubmenu submenu)
+    {
+        if (navSubmenu == submenu)
+            navSubmenu = NavSubmenu.None;
+        else
+            navSubmenu = submenu;
     }
 }

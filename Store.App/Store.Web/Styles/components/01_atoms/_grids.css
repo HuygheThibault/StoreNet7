@@ -1,0 +1,9 @@
+﻿.grd-rpt {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(5rem, 1fr)); /*base columns and their sizes*/
+  grid-auto-flow: row; /* tells to add new children as new columns*/
+  grid-auto-rows: minmax(5rem, 1fr); /* tells the size of the dynamic columns*/
+  gap: 1rem;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_grids.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA%22%7D */

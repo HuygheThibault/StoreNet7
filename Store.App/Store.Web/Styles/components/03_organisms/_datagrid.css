@@ -1,0 +1,105 @@
+﻿.data-grid-container {
+  display: grid;
+  grid-template-areas: "actions validations" "grid grid" "notifications notifications";
+  background-color: var(--secondary-dark);
+  color: var(--primary-text);
+  overflow: auto;
+  border-radius: 0.5rem;
+}
+.data-grid-container .grid-actions {
+  grid-area: actions;
+}
+.data-grid-container .grid-validations {
+  grid-area: validations;
+}
+.data-grid-container .data-grid {
+  grid-area: grid;
+  display: grid;
+  grid-template-areas: "headers" "rows";
+  background-color: var(--body-background);
+}
+.data-grid-container .data-grid .row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /*base columns and their sizes*/
+  grid-auto-flow: column; /* tells to add new children as new columns*/
+  grid-auto-columns: 1fr; /* tells the size of the dynamic columns*/
+  grid-column-gap: 0.15rem;
+}
+.data-grid-container .data-grid row:hover {
+  opacity: 0.7;
+}
+.data-grid-container .data-grid .col {
+  display: flex;
+  justify-content: flex-start;
+}
+.data-grid-container .data-grid .headers {
+  grid-area: headers;
+}
+.data-grid-container .data-grid .headers .col {
+  background-color: var(--primary-dark);
+  justify-content: center;
+}
+.data-grid-container .data-grid .headers .col:hover {
+  cursor: pointer;
+}
+.data-grid-container .data-grid .rows {
+  grid-area: rows;
+}
+.data-grid-container .data-grid .rows .even > .col {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.data-grid-container .data-grid .rows .odd > .col {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.data-grid-container .data-grid .rows .edit > .col {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+.data-grid-container .data-grid .rows .col .validations {
+  position: fixed;
+  right: 0;
+  top: 0;
+  border-radius: 0.25rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+  color: var(--primary-text);
+  background-color: var(--notification-danger);
+}
+.data-grid-container .data-grid .rows .col .actions {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 0.5rem;
+  margin: 0.25rem;
+  width: 100%;
+}
+.data-grid-container .data-grid .rows .col input {
+  width: 100%;
+  border: none;
+  background-color: inherit;
+  color: inherit;
+}
+.data-grid-container .notification-bar {
+  grid-area: notifications;
+  border-radius: 1rem;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--primary-text);
+}
+.data-grid-container .notification-bar .Danger {
+  background-color: var(--notification-danger);
+}
+.data-grid-container .notification-bar .Success {
+  background-color: var(--notification-success);
+}
+.data-grid-container .notification-bar .Info {
+  background-color: var(--notification-info);
+}
+.data-grid-container .notification-bar .Warning {
+  background-color: var(--notification-warning);
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_datagrid.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;;AAEA;EACI;EACA;;AAGJ;EACI;;AAIR;EACI;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAIA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;AAMhB;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI%22%7D */

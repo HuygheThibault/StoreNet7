@@ -1,0 +1,26 @@
+﻿.nav-link {
+	display: flex;
+	font-size: 1.25rem;
+	line-height: 1.25rem;
+	font-weight: 700;
+	text-decoration: none;
+	padding: 0.5rem;
+
+	text-secondary {
+		font-size: 1rem;
+		line-height: 1rem;
+		font-weight: 300;
+	}
+}
+
+.nav-link:active {
+	border-radius: 0.375rem;
+	background-color: var(--primary-light);
+	color: var(--primary-dark)
+}
+
+.nav-link:hover {
+	border-radius: 0.375rem;
+	background-color: var(--primary-light);
+	color: var(--primary-dark)
+}

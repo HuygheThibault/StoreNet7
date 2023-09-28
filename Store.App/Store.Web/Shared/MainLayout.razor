@@ -1,17 +1,48 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager navManager
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+    <NavMenu />
 
     <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
+        @Body
     </main>
+
+    <footer>
+        <h1>footer is een test</h1>
+    </footer>
 </div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapsed" : null;
+
+    private enum NavSubmenu
+    {
+        None,
+        Data
+    }
+
+    private NavSubmenu navSubmenu = NavSubmenu.None;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void ToggleSubmenu(NavSubmenu submenu)
+    {
+        if (navSubmenu == submenu)
+            navSubmenu = NavSubmenu.None;
+        else
+            navSubmenu = submenu;
+    }
+
+    // private async Task LogOut()
+    // {
+    //     var customAuthStateProvider = (CustomAuthenthicationStateProvider)authStateProvider;
+    //     await customAuthStateProvider.UpdateAuthenticationStateAsync(null);
+    //     navManager.NavigateTo("/", true);
+    // }
+}

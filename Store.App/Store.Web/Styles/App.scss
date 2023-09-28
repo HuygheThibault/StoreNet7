@@ -1,0 +1,15 @@
+﻿/* Global styles */
+@import "base//_normalize.scss";
+@import "settings/_settings.scss";
+@import "tools/_mixins.scss";
+@import "tools/_helpers.scss";
+@import "components/_components.scss";
+
+@supports(-webkit-appearance: none) or (-moz-appearance: none) {
+    input[type='checkbox'],
+    input[type='radio'] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+}
+

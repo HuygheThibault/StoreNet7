@@ -1,0 +1,164 @@
+﻿[
+  {
+    "outputFile": "Styles/base/_normalize.css",
+    "inputFile": "Styles/base/_normalize.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_align.css",
+    "inputFile": "Styles/components/01_atoms/_align.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_atoms.css",
+    "inputFile": "Styles/components/01_atoms/_atoms.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_borders.css",
+    "inputFile": "Styles/components/01_atoms/_borders.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_buttons.css",
+    "inputFile": "Styles/components/01_atoms/_buttons.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_grids.css",
+    "inputFile": "Styles/components/01_atoms/_grids.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_margins.css",
+    "inputFile": "Styles/components/01_atoms/_margins.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_profile.css",
+    "inputFile": "Styles/components/01_atoms/_profile.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_sizes.css",
+    "inputFile": "Styles/components/01_atoms/_sizes.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_text.css",
+    "inputFile": "Styles/components/01_atoms/_text.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_arrow-icons.css",
+    "inputFile": "Styles/components/02_molecules/_arrow-icons.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_container.css",
+    "inputFile": "Styles/components/02_molecules/_container.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_dropdown.css",
+    "inputFile": "Styles/components/02_molecules/_dropdown.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_forms.css",
+    "inputFile": "Styles/components/02_molecules/_forms.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_loader.css",
+    "inputFile": "Styles/components/02_molecules/_loader.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_molecule.css",
+    "inputFile": "Styles/components/02_molecules/_molecule.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_nav-header.css",
+    "inputFile": "Styles/components/02_molecules/_nav-header.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_paddings.css",
+    "inputFile": "Styles/components/01_atoms/_paddings.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_nav-links.css",
+    "inputFile": "Styles/components/02_molecules/_nav-links.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_notification-bar.css",
+    "inputFile": "Styles/components/02_molecules/_notification-bar.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_selected-items.css",
+    "inputFile": "Styles/components/02_molecules/_selected-items.scss"
+  },
+  {
+    "outputFile": "Styles/components/03_organisms/_content.css",
+    "inputFile": "Styles/components/03_organisms/_content.scss"
+  },
+  {
+    "outputFile": "Styles/components/03_organisms/_dashboard-sidebar.css",
+    "inputFile": "Styles/components/03_organisms/_dashboard-sidebar.scss"
+  },
+  {
+    "outputFile": "Styles/components/03_organisms/_datagrid.css",
+    "inputFile": "Styles/components/03_organisms/_datagrid.scss"
+  },
+  {
+    "outputFile": "Styles/components/03_organisms/_footer.css",
+    "inputFile": "Styles/components/03_organisms/_footer.scss"
+  },
+  {
+    "outputFile": "Styles/components/03_organisms/_header.css",
+    "inputFile": "Styles/components/03_organisms/_header.scss"
+  },
+  {
+    "outputFile": "Styles/components/03_organisms/_organisms.css",
+    "inputFile": "Styles/components/03_organisms/_organisms.scss"
+  },
+  {
+    "outputFile": "Styles/components/03_organisms/_product-card.css",
+    "inputFile": "Styles/components/03_organisms/_product-card.scss"
+  },
+  {
+    "outputFile": "Styles/components/03_organisms/_product-card-counter.css",
+    "inputFile": "Styles/components/03_organisms/_product-card-counter.scss"
+  },
+  {
+    "outputFile": "Styles/components/03_organisms/_side-navigation.css",
+    "inputFile": "Styles/components/03_organisms/_side-navigation.scss"
+  },
+  {
+    "outputFile": "Styles/components/04_templates/_dashboard.css",
+    "inputFile": "Styles/components/04_templates/_dashboard.scss"
+  },
+  {
+    "outputFile": "Styles/components/04_templates/_templates.css",
+    "inputFile": "Styles/components/04_templates/_templates.scss"
+  },
+  {
+    "outputFile": "Styles/components/05_pages/_pages.css",
+    "inputFile": "Styles/components/05_pages/_pages.scss"
+  },
+  {
+    "outputFile": "Styles/components/_components.css",
+    "inputFile": "Styles/components/_components.scss"
+  },
+  {
+    "outputFile": "Styles/settings/_settings.css",
+    "inputFile": "Styles/settings/_settings.scss"
+  },
+  {
+    "outputFile": "Styles/settings/_variables.css",
+    "inputFile": "Styles/settings/_variables.scss"
+  },
+  {
+    "outputFile": "Styles/tools/_helpers.css",
+    "inputFile": "Styles/tools/_helpers.scss"
+  },
+  {
+    "outputFile": "Styles/tools/_mixins.css",
+    "inputFile": "Styles/tools/_mixins.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/App.css",
+    "inputFile": "Styles/App.scss",
+    "minify": {
+      "enabled": true
+    },
+    "options": {
+      "sourceMap": true
+    }
+  }
+]

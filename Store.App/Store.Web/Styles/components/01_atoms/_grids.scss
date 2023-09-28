@@ -1,0 +1,7 @@
+﻿.grd-rpt {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(5rem, 1fr)); /*base columns and their sizes*/
+    grid-auto-flow: row; /* tells to add new children as new columns*/
+    grid-auto-rows: minmax(5rem, 1fr); /* tells the size of the dynamic columns*/
+    gap: 1rem;
+}

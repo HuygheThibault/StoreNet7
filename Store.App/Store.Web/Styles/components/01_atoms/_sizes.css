@@ -1,0 +1,46 @@
+﻿.row {
+  display: flex;
+  flex-wrap: wrap;
+  /* 12 COLUMN GRID SYSTEM */
+}
+.row .sze-1 {
+  flex-basis: 8.3333333333%;
+}
+.row .sze-2 {
+  flex-basis: 16.6666666667%;
+}
+.row .sze-3 {
+  flex-basis: 25%;
+}
+.row .sze-4 {
+  flex-basis: 33.3333333333%;
+}
+.row .sze-5 {
+  flex-basis: 41.6666666667%;
+}
+.row .sze-6 {
+  flex-basis: 50%;
+}
+.row .sze-7 {
+  flex-basis: 58.3333333333%;
+}
+.row .sze-8 {
+  flex-basis: 66.6666666667%;
+}
+.row .sze-9 {
+  flex-basis: 75%;
+}
+.row .sze-10 {
+  flex-basis: 83.3333333333%;
+}
+.row .sze-11 {
+  flex-basis: 91.6666666667%;
+}
+.row .sze-12 {
+  flex-basis: 100%;
+}
+.row .sze-auto {
+  flex-basis: auto;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_sizes.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;AACA;;AAII;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAQR;EACI%22%7D */

@@ -1,0 +1,26 @@
+﻿.a-align-item-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.a-align-item-start {
+  display: grid;
+  align-items: center;
+  justify-content: start;
+}
+
+.align-text-center {
+  text-align: center;
+  align-self: center;
+  justify-self: center;
+}
+
+.align-text-start {
+  text-align: start;
+  align-self: center;
+  justify-self: center;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_align.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA%22%7D */

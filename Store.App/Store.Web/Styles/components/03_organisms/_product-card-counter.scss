@@ -1,0 +1,43 @@
+﻿.product-card-counter {
+    background-color: var(--primary-dark);
+    transition: display 0s linear 0.33s, grid-column 0.33s linear;
+
+    .product {
+        display: grid;
+        grid-auto-flow: dense;
+        grid-template-areas: 'product counter totals';
+        grid-template-columns: 1fr 1fr auto;
+        transition: display 0s linear 3s, grid-column 3s linear;
+
+        .details {
+            grid-area: product;
+            display: grid;
+            grid-template-areas: 'img title' 'img description';
+            column-gap: 1rem;
+
+            img {
+                grid-area: img;
+                width: 5rem;
+            }
+
+            .title {
+                grid-area: title;
+            }
+
+            .description {
+                grid-area: description;
+            }
+        }
+
+        .counter {
+            grid-area: counter;
+            display: grid;
+            grid-auto-flow: column dense;
+            gap: 0.5rem;
+        }
+
+        h4 {
+            grid-area: totals;
+        }
+    }
+}

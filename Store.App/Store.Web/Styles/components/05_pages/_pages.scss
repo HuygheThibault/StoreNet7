@@ -1,0 +1,47 @@
+﻿
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+body {
+    
+}
+
+.page {
+    display: grid;
+    grid-template-areas:
+        'nav header' 'nav main' 'nav footer';
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+
+    header {
+        grid-area: header;
+    }
+
+    nav {
+        grid-area: nav;
+        z-index: 1;
+        height: 100vh;
+        padding: 0 0.5rem;
+        background-color: var(--primary-dark);
+    }
+
+    main {
+        grid-area: main;
+    }
+
+    footer {
+        grid-area: footer;
+    }
+}

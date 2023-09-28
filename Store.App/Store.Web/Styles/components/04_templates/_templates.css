@@ -1,0 +1,32 @@
+﻿.dashboard {
+  display: grid;
+  grid-template-areas: "parent children sidebar" "parent products sidebar";
+  grid-auto-flow: dense;
+  gap: 1rem;
+  height: 100%;
+}
+
+.parent-categories {
+  grid-area: parent;
+  overflow: auto;
+}
+
+.children-categories {
+  grid-area: children;
+  overflow: auto;
+}
+
+.dashboard-products {
+  grid-area: products;
+  overflow: auto;
+}
+
+.dashboard-sidebar {
+  grid-area: sidebar;
+  overflow: auto;
+  background-color: var(--secondary-dark);
+  color: var(--primary-text);
+  transition: width 0.3s ease-in-out;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/04_templates/_dashboard.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA,qBACI;EAEJ;EACA;EACA;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA%22%7D */

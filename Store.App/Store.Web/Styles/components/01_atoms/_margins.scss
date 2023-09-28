@@ -1,0 +1,36 @@
+﻿$margin_sizes: 0.5rem, 1rem, 1.5rem, 2rem;
+
+$counter: 0;
+
+@each $size in $margin_sizes {
+    .mrg-#{$counter} {
+        margin: $size;
+    }
+
+    .mrg-t-#{$counter} {
+        margin-top: $size;
+    }
+
+    .mrg-b-#{$counter} {
+        margin-bottom: $size;
+    }
+
+    .mrg-l-#{$counter} {
+        margin-left: $size;
+    }
+
+    .mrg-r-#{$counter} {
+        margin-right: $size;
+    }
+
+    .mrg-hrztl-#{$counter} {
+        margin: 0 $size;
+    }
+
+    .mrg-vrtcl-#{$counter} {
+        margin: $size 0;
+    }
+
+
+    $counter: $counter + 1;
+}

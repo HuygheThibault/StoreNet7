@@ -1,0 +1,35 @@
+﻿$padding_sizes: 0.5rem, 1rem, 1.5rem, 2rem;
+
+$counter: 0;
+@each $size in $padding_sizes {
+    .pd-#{$counter} {
+        padding: $size;
+    }
+
+    .pd-t-#{$counter} {
+        padding-top: $size;
+    }
+
+    .pd-b-#{$counter} {
+        padding-bottom: $size;
+    }
+
+    .pd-l-#{$counter} {
+        padding-left: $size;
+    }
+
+    .pd-r-#{$counter} {
+        padding-right: $size;
+    }
+
+    .pd-hrztl-#{$counter} {
+        padding: 0 $size;
+    }
+
+    .pd-vrtcl-#{$counter} {
+        padding: $size 0;
+    }
+
+
+    $counter: $counter + 1;
+}

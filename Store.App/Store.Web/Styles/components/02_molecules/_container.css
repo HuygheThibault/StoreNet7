@@ -1,0 +1,14 @@
+﻿.card {
+  background-color: var(--primary-dark);
+}
+.card .card-header {
+  background-color: var(--secondary-dark);
+  display: flex;
+  padding: 0 1rem;
+}
+.card .card-header .title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_container.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA%22%7D */

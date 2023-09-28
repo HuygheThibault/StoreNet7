@@ -1,0 +1,48 @@
+﻿@page "/login"
+
+
+
+@using System.Net
+@using Store.Web.Services
+@inject NavigationManager NavManager
+@* @inject IUserService UserService *@
+<div class="a-align-item-center">
+    <div class="card">
+        <div class="card-header padding-1rem">
+            <p class="title text-primary">LOGIN</p>
+        </div>
+        <div class="form">
+           @*  <div class="form-group">
+                <label class="label">User name</label>
+                <input class="form-control input" @bind="loginRequest.UserName" placeholder="User name" />
+            </div>
+            <div class="form-group">
+                <label class="label">Password</label>
+                <input class="form-control input" @bind="loginRequest.PassWord" placeholder="Password" type="password" />
+            </div>
+            <div class="form-actions">
+                <button @onclick="Authenticate" class="button confirm" disabled="@IsLoading">Login</button>
+            </div> *@
+        </div>
+    </div>
+</div>
+
+@code {
+    // private LoginRequest loginRequest = new LoginRequest() { UserName = "string", PassWord = "string" };
+
+    public bool IsLoading { get; set; } = false;
+
+    private async Task Authenticate()
+    {
+        IsLoading = true;
+
+        // UserSession userSession = await UserService.Login(loginRequest);
+
+        // if (userSession != null)
+        // {
+        //     NavManager.NavigateTo("/", true);
+        // }
+
+        IsLoading = false;
+    }
+}

@@ -1,0 +1,14 @@
+﻿.card {
+    background-color: var(--primary-dark);
+
+    .card-header {
+        background-color: var(--secondary-dark);
+        display: flex;
+        padding: 0 1rem;
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    }
+}

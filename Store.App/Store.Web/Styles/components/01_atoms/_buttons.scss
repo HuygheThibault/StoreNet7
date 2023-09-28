@@ -1,0 +1,33 @@
+﻿button {
+    border: none;
+    color: var(--primary-text);    
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
+button:focus {
+    opacity: 0.5;
+}
+
+button.submit {
+    background-color: var(--notification-success);
+}
+
+button.add {
+    background-color: var(--notification-success);
+}
+
+button.remove {
+    background-color: var(--notification-danger);
+}
+
+
+button.edit {
+    background: var(--secondary-dark);
+}
+
+button.cancel {
+    background: var(--danger);
+}
