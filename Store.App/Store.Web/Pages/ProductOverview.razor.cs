@@ -43,29 +43,16 @@ namespace Store.Web.Pages
             Items = (await ProductService.GetAllProducts()).ToList();
         }
 
-        private async Task SaveEdit(ProductDto item)
+        private async Task Save(ProductDto item)
         {
             ProductDto updatedItem = await ProductService.UpdateProduct(item);
-
             await RefreshData();
-        }
-
-        //Save new item
-        private async void SaveNewItem(ProductDto item)
-        {
-            if (item.Id != Guid.Empty)
-            {
-                ProductDto newItem = await ProductService.AddProduct(item);
-
-                await RefreshData();
-            }
         }
 
         //DELETE
         private async Task DeleteItem(Tuple<ProductDto, bool> item)
         {
             await ProductService.DeleteProduct(item.Item1.Id);
-
             await RefreshData();
         }
     }

@@ -3,8 +3,6 @@ using Microsoft.JSInterop;
 using Store.Shared.Enums;
 using Store.Shared.Modals;
 using Store.Web.Helpers.Modals;
-using System.Data.Common;
-using System.Linq;
 using System.Reflection;
 
 namespace Store.Web.Pages.Components.Datagrid
@@ -41,7 +39,7 @@ namespace Store.Web.Pages.Components.Datagrid
 
         List<Column> Columns = new List<Column>();
 
-        List<string> ColumnsToIgnore = new List<string>() { "Role", "RowId", "Id", "CreatedOn", "CreatedBy" };
+        List<string> ColumnsToIgnore = new List<string>() { "Category", "RowId", "Id", "CreatedOn", "CreatedBy" };
 
         protected override void OnInitialized()
         {
@@ -83,24 +81,12 @@ namespace Store.Web.Pages.Components.Datagrid
                         }
                         else
                         {
-                            if (prop.PropertyType.Name == "CreatedOn")
-                            {
-                                columns.Add(new Column
-                                {
-                                    Name = prop.Name,
-                                    ColumnType = prop.PropertyType.Name,
-                                    IsDisabled = true,
-                                });
-                            }
-                            else
-                            {
-                                columns.Add(new Column
-                                {
-                                    Name = prop.Name,
-                                    ColumnType = prop.PropertyType.Name,
-                                });
-                            }
 
+                            columns.Add(new Column
+                            {
+                                Name = prop.Name,
+                                ColumnType = prop.PropertyType.Name,
+                            });
                         }
                     }
                 }
@@ -183,7 +169,7 @@ namespace Store.Web.Pages.Components.Datagrid
             return src?.GetType()?.GetProperty(propName)?.GetValue(src, null);
         }
 
-        private async Task SaveEdit(T item)
+        private async Task Save(T item)
         {
             if (item != _editedItem)
             {

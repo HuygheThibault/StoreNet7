@@ -41,7 +41,7 @@
                         @*Add*@
                         @if (@GetPropValue(_editedItem, "Id") == "00000000-0000-0000-0000-000000000000")
                         {
-                            <DatagridEdit T="T" Item="_editedItem" ColumnsToIgnore="ColumnsToIgnore" Columns="Columns" OnSave="SaveEdit" />
+                            <DatagridEdit T="T" Item="_editedItem" ColumnsToIgnore="ColumnsToIgnore" Columns="Columns" OnSave="Save" />
                         }
                     }
                     @foreach (var item in _data)
@@ -90,7 +90,7 @@
                         }
                         else
                         {
-                            <DatagridEdit T="T" Item="_editedItem" ColumnsToIgnore="ColumnsToIgnore" Columns="Columns" OnSave="SaveEdit" />
+                            <DatagridEdit T="T" Item="_editedItem" ColumnsToIgnore="ColumnsToIgnore" Columns="Columns" OnSave="Save" />
                         }
                     }
                 </div>

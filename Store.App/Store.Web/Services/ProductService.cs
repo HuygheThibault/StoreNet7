@@ -79,7 +79,7 @@ namespace Store.Web.Services
             try
             {
                 var itemJson = new StringContent(JsonSerializer.Serialize(item), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PutAsync($"product/{item.Id}", itemJson);
+                var response = await _httpClient.PutAsync($"api/products/{item.Id}", itemJson);
 
                 if (response.IsSuccessStatusCode)
                 {

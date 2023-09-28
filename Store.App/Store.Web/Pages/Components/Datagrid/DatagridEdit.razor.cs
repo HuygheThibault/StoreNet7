@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using Store.Shared.Modals;
 using Store.Web.Helpers.Modals;
+using System.Reflection;
 
 namespace Store.Web.Pages.Components.Datagrid
 {
@@ -24,12 +26,11 @@ namespace Store.Web.Pages.Components.Datagrid
         [Parameter]
         public EventCallback<T> OnSave { get; set; }
 
-        private JsonPatchDocument<T> _patchDoc = new JsonPatchDocument<T>();
+        private JsonPatchDocument _patchDoc = new JsonPatchDocument();
 
         protected override void OnParametersSet()
         {
             _item = Item;
-
             EditContextItem = JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(Item));
         }
 
@@ -41,6 +42,27 @@ namespace Store.Web.Pages.Components.Datagrid
         private async Task Close()
         {
             await OnSave.InvokeAsync(_item);
+        }
+
+        private void UpdateProp(PropertyInfo p, object value, string type)
+        {
+            switch (type)
+            {
+                case "String":
+                    value = value.ToString();
+                    break;
+                case "Int32":
+                    value = int.Parse(value.ToString());
+                    break;
+                case "Decimal":
+                    value = Decimal.Parse(value.ToString());
+                    break;
+                case "DateTime":
+                    value = DateTime.Parse(value.ToString());
+                    break;
+            }
+            p.SetValue(EditContextItem, value);
+            _patchDoc.Replace(p.Name, value);
         }
     }
 }
