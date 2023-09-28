@@ -1,6 +1,8 @@
-﻿namespace Store.Shared.Dto
+﻿using Store.Shared.Modals;
+
+namespace Store.Shared.Dto
 {
-    public class ProductDto
+    public class ProductDto : DatagridRows
     {
         public Guid Id { get; set; }
 
@@ -22,6 +24,6 @@
 
         public string ModifiedBy { get; set; } = "Unknown";
 
-        public int Quantity { get; set; }
+        public CategoryDto? Category { get; set; }
     }
 }

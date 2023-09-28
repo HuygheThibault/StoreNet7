@@ -1,0 +1,48 @@
+﻿@typeparam T
+
+@if (_item != null)
+{
+    <EditForm Model="EditContextItem" OnValidSubmit="SaveEdit">
+        <div class="row edit">
+            <DataAnnotationsValidator />
+
+            @foreach (var p in EditContextItem.GetType().GetProperties())
+            {
+                @if (!ColumnsToIgnore.Contains(p.Name))
+                {
+                    <div class="col pd-0">
+                        @if (Columns.First(x => x.Name == p.Name).ColumnType == "String")
+                        {
+                            <input id="@p.Name" class="input" type="text" placeholder="@p.Name" value="@p.GetValue(EditContextItem)" @onchange="(e) => p.SetValue(EditContextItem, e.Value)" disabled="@Columns.First(x => x.Name == p.Name).IsDisabled">
+                        }
+                        else if (Columns.First(x => x.Name == p.Name).ColumnType == "Int32")
+                        {
+                            <input id="@p.Name" class="input" type="number" placeholder="@p.Name" value="@p.GetValue(EditContextItem)" @onchange="(e) => p.SetValue(EditContextItem, e.Value)" disabled="@Columns.First(x => x.Name == p.Name).IsDisabled">
+                        }
+                        @*else if (Columns.First(x => x.Name == p.Name).ColumnType == "DateTime")
+                        {
+                            <input id="@p.Name" class="input" type="datetime-local" placeholder="@p.Name" Value="@(p.GetValue(EditContextItem)?.ToString())" @onchange="(e) => p.SetValue(EditContextItem, e.Value)" disabled="@Columns.First(x => x.Name == p.Name).IsDisabled"/>
+                        }*@
+                        else if (Columns.First(x => x.Name == p.Name).ColumnType == "Dropdown")
+                        {
+                            <DropDown T="T" DropdownItem=EditContextItem Column="Columns.First(x => x.Name == p.Name)?.Dropdown" />
+                        }
+                    </div>
+                }
+            }
+            <div class="col">
+                <div class="actions">
+                    <button class="submit" type="submit">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                    </button>
+                    <button type="reset" class="cancel" @onclick="() => Close()">
+                        <i class="fa-solid fa-ban"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row validations">
+            <ValidationSummary />
+        </div>
+    </EditForm>
+}

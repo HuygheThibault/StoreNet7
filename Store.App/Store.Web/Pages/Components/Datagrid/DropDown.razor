@@ -1,0 +1,48 @@
+﻿@using System.Reflection
+@using System.Diagnostics
+@using Store.Web.Helpers.Modals;
+@typeparam T
+
+<InputSelect class="form-control dropdown" @bind-Value="SelectedValue">
+    @if (Column?.Values.Count > 0)
+    {
+        @foreach (DropdownOption option in Column.Values)
+        {
+            <option value="@option.Id">@option.Value</option>
+        }
+    }
+</InputSelect>
+
+@code {
+    [Parameter]
+    public T DropdownItem { get; set; } = default!;
+
+    [Parameter]
+    public DropdownColumn Column { get; set; } = default!;
+
+    PropertyInfo PropInfo = default!;
+
+    private Guid _selectedValue;
+
+    [Parameter]
+    public Guid SelectedValue
+    {
+        get
+        {
+            return _selectedValue;
+        }
+        set
+        {
+            _selectedValue = value;
+            PropInfo?.SetValue(DropdownItem, value);
+
+            StateHasChanged();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        PropInfo = DropdownItem.GetType().GetProperties().First(x => x.Name == Column.Name);
+        _selectedValue = Guid.Parse(PropInfo.GetValue(DropdownItem)?.ToString());
+    }
+}

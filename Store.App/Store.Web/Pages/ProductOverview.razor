@@ -1,0 +1,10 @@
+﻿@page "/ProductOverview"
+@using Store.Shared.Dto;
+@using Store.Web.Pages.Components.Datagrid
+
+<PageTitle>Users</PageTitle>
+        @if (Items != null)
+        {
+            <Datagrid T="ProductDto" Data="Items" DropdownColumns="DropdownColumns"
+                  OnSave="SaveEdit" OnDelete="DeleteItem" CanAddNewItem="true" CanDeleteItem="true" CanEditItem="true" />
+        }
