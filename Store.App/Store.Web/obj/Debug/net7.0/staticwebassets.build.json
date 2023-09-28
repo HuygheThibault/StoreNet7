@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+HrMlJoKQzb/x1AazCkPro3mzwEUXqZu2xc6J7966do=",
+  "Hash": "/3OTPIulvk43s+8N3umW9bDwyrwNOfM7LclT5OjBFsw=",
   "Source": "Store.Web",
   "BasePath": "/",
   "Mode": "Root",
@@ -16,6 +16,40 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\AutoMapper.dll",
+      "SourceId": "Store.Web",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/AutoMapper.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\E199743\\.nuget\\packages\\automapper\\12.0.1\\lib\\netstandard2.1\\AutoMapper.dll"
+    },
+    {
+      "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
+      "SourceId": "Store.Web",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\E199743\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\lib\\netstandard2.1\\AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
+    },
     {
       "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\blazor.boot.json",
       "SourceId": "Store.Web",
@@ -49,6 +83,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\E199743\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\7.0.11\\build\\net7.0\\blazor.webassembly.js"
+    },
+    {
+      "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Blazored.LocalStorage.dll",
+      "SourceId": "Store.Web",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.LocalStorage.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\E199743\\.nuget\\packages\\blazored.localstorage\\4.4.0\\lib\\net7.0\\Blazored.LocalStorage.dll"
     },
     {
       "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\dotnet.7.0.11.cxaqr75k05.js",
@@ -457,6 +508,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\E199743\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\7.0.0\\lib\\net7.0\\Microsoft.Extensions.FileSystemGlobbing.dll"
+    },
+    {
+      "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Microsoft.Extensions.Http.dll",
+      "SourceId": "Store.Web",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.Extensions.Http.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\E199743\\.nuget\\packages\\microsoft.extensions.http\\7.0.0\\lib\\net7.0\\Microsoft.Extensions.Http.dll"
     },
     {
       "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Microsoft.Extensions.Logging.Abstractions.dll",
@@ -3842,6 +3910,23 @@
       "OriginalItemSpec": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\System.Private.Uri.dll"
     },
     {
+      "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\obj\\Debug\\net7.0\\build-gz\\37vmYHkp.gz",
+      "SourceId": "Store.Web",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.LocalStorage.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Blazored.LocalStorage.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Blazored.LocalStorage.dll"
+    },
+    {
       "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\obj\\Debug\\net7.0\\build-gz\\3JJYPz9W.gz",
       "SourceId": "Store.Web",
       "SourceType": "Computed",
@@ -5746,6 +5831,23 @@
       "OriginalItemSpec": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\System.Transactions.dll"
     },
     {
+      "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\obj\\Debug\\net7.0\\build-gz\\oKFiRAVE.gz",
+      "SourceId": "Store.Web",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/AutoMapper.Extensions.Microsoft.DependencyInjection.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
+    },
+    {
       "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\obj\\Debug\\net7.0\\build-gz\\OlRhCVS0.gz",
       "SourceId": "Store.Web",
       "SourceType": "Computed",
@@ -5880,6 +5982,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\System.Runtime.Numerics.dll"
+    },
+    {
+      "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\obj\\Debug\\net7.0\\build-gz\\piRgrmjL.gz",
+      "SourceId": "Store.Web",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.Extensions.Http.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Microsoft.Extensions.Http.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Microsoft.Extensions.Http.dll"
     },
     {
       "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\obj\\Debug\\net7.0\\build-gz\\PnxZ6920.gz",
@@ -6101,6 +6220,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\System.Reflection.Emit.ILGeneration.dll"
+    },
+    {
+      "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\obj\\Debug\\net7.0\\build-gz\\REdZVKth.gz",
+      "SourceId": "Store.Web",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/AutoMapper.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\AutoMapper.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\bin\\Debug\\net7.0\\wwwroot\\_framework\\AutoMapper.dll"
     },
     {
       "Identity": "C:\\myProjects\\StoreNet7\\Store.App\\Store.Web\\obj\\Debug\\net7.0\\build-gz\\rf5xjo5t.gz",
