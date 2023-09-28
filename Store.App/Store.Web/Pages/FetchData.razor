@@ -1,4 +1,6 @@
 ﻿@page "/fetchdata"
+@using Store.Shared.Dto;
+@using Store.Web.Services;
 @inject HttpClient Http
 
 <PageTitle>Weather forecast</PageTitle>
@@ -26,10 +28,8 @@ else
             @foreach (var forecast in forecasts)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@forecast.Id</td>
+                    <td>@forecast.Title</td>
                 </tr>
             }
         </tbody>
@@ -37,11 +37,14 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    [Inject]
+    public IProductService? ProductService { get; set; }
+
+    private List<ProductDto>? forecasts;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        forecasts = (await ProductService.GetAllProducts()).ToList();
     }
 
     public class WeatherForecast

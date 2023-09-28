@@ -41,7 +41,7 @@ namespace Store.Web.Services
                 //otherwise refresh the list locally from the API and set expiration to 1 minute in future
 
                 var list = await JsonSerializer.DeserializeAsync<IEnumerable<ProductDto>>
-                    (await _httpClient.GetStreamAsync($"api/product"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    (await _httpClient.GetStreamAsync($"api/products"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
                 await _localStorageService.SetItemAsync(LocalStorageConstants.ProductListKey, list);
                 await _localStorageService.SetItemAsync(LocalStorageConstants.ProductListExpirationKey, DateTime.Now.AddMinutes(1));
