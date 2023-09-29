@@ -20,7 +20,7 @@
 }
 .data-grid-container .data-grid .row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /*base columns and their sizes*/
+  grid-template-columns: repeat(2, minmax(5rem, 1fr)); /*base columns and their sizes*/
   grid-auto-flow: column; /* tells to add new children as new columns*/
   grid-auto-columns: minmax(5rem, 1fr); /* tells the size of the dynamic columns*/
   grid-column-gap: 0.15rem;
