@@ -1,0 +1,10 @@
+﻿@keyframes slide-right {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 0;
+  }
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_animations.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAA;EACI;IACI;;EAGJ;IACI%22%7D */

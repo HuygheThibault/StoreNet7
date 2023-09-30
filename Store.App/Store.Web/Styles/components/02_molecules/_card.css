@@ -1,0 +1,33 @@
+﻿.card {
+  background-color: var(--primary-dark);
+  z-index: 9;
+}
+.card .close {
+  position: fixed;
+  top: 0;
+  right: 0;
+  color: var(--primary-text);
+}
+.card .card-header {
+  background-color: var(--secondary-dark);
+  display: flex;
+  padding: 0 1rem;
+}
+.card .card-header .title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card.right {
+  width: 30%;
+  min-width: fit-content;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  margin: auto;
+  -webkit-animation: slide-right 0.5s ease-in-out;
+  animation: slide-right 0.5s ease-in-out;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_card.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA%22%7D */

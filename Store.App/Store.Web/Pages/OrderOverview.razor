@@ -1,0 +1,5 @@
+﻿@page "/Orders"
+@using Store.Web.Pages.Components.Dialog
+
+<OrderDialog Order="@_order" />
+<button class="add" @onclick="() => AddOrder()">Add</button>

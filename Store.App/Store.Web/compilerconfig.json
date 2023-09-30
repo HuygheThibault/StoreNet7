@@ -44,10 +44,6 @@
     "inputFile": "Styles/components/02_molecules/_arrow-icons.scss"
   },
   {
-    "outputFile": "Styles/components/02_molecules/_container.css",
-    "inputFile": "Styles/components/02_molecules/_container.scss"
-  },
-  {
     "outputFile": "Styles/components/02_molecules/_dropdown.css",
     "inputFile": "Styles/components/02_molecules/_dropdown.scss"
   },
@@ -160,5 +156,13 @@
     "options": {
       "sourceMap": true
     }
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_card.css",
+    "inputFile": "Styles/components/02_molecules/_card.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_animations.css",
+    "inputFile": "Styles/components/01_atoms/_animations.scss"
   }
 ]

@@ -1,0 +1,40 @@
+﻿@using Store.Shared.Dto;
+
+@if (_order != null)
+{
+    <div class="card right">
+        <p class="close" @onclick="() => Cancel()">X</p>
+        <div class="card-header padding-1rem">
+            <p class="title text-primary">Header</p>
+        </div>
+        <EditForm Model="@_order" OnValidSubmit="@Submit">
+            <DataAnnotationsValidator />
+            <div class="form">
+                <label for="File" class="label">File: </label>
+                <InputText id="File" class="form-control input" @bind-Value="@_order.FileName" placeholder="File" />
+                <ValidationMessage class="" For="@(() => _order.FileName)" />
+                <label for="TotalCost" class="label">Total Cost: </label>
+                <InputNumber id="TotalCost" class="form-control input" @bind-Value="@_order.TotalCost" placeholder="Total Cost" />
+                <ValidationMessage class="" For="@(() => _order.TotalCost)" />
+                <label for="TotalVatCost" class="label">Vat: </label>
+                <InputNumber id="TotalVatCost" class="form-control input" @bind-Value="@_order.TotalVatCost" placeholder="Vat" />
+                <ValidationMessage class="" For="@(() => _order.TotalVatCost)" />
+                <label for="TotalVatCost" class="label">Vat: </label>
+                <InputNumber id="TotalVatCost" class="form-control input" @bind-Value="@_order.TotalVatCost" placeholder="Vat" />
+                <ValidationMessage class="" For="@(() => _order.TotalVatCost)" />
+                <label for="Supplier" class="label">Supplier: </label>
+                <InputSelect id="Supplier" class="dropdown" @bind-Value="@_order.SupplierId">
+                    @foreach (var supplier in Suppliers)
+                    {
+                        <option value="@supplier.Id">@supplier.Name</option>
+                    }
+                </InputSelect>
+                <div class="form-actions">
+                    <button class="submit" type="submit">Submit</button>
+                    <button class="cancel" type="button" @onclick="() => Cancel()">Cancel</button>
+                </div>
+                <ValidationSummary />
+            </div>
+        </EditForm>
+    </div>
+}
