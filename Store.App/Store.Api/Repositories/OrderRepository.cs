@@ -20,7 +20,7 @@ namespace Store.Api.Repositories
             {
                 logger.LogInformation($"Getting all Orders");
 
-                IQueryable<Order> query = context.Orders.Include("Category");
+                IQueryable<Order> query = context.Orders.Include("Supplier");
 
                 return await query.ToListAsync();
             }
@@ -37,7 +37,7 @@ namespace Store.Api.Repositories
             {
                 logger.LogInformation($"Getting Order: {id}");
 
-                IQueryable<Order> query = context.Orders.Include("Category");
+                IQueryable<Order> query = context.Orders.Include("Supplier");
 
                 // Query It
                 query = query.Where(c => c.Id == id);

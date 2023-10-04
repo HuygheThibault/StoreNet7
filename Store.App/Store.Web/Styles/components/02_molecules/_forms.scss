@@ -32,6 +32,38 @@
         border-radius: 0.5rem;
     }
 
+    fieldset {
+        grid-column: 1 / span 2;
+        padding-left: 1rem;
+
+        .label {
+            grid-column: 1;
+            grid-row: auto;
+            color: var(--primary-text);
+            font-weight: 700;
+            margin: auto 0;
+        }
+
+        .input {
+            grid-column: 2;
+            grid-row: auto;
+            padding: 0.4em;
+            border: 0;
+            font-size: 1.25rem;
+            border-radius: 0.5rem;
+        }
+
+        .dropdown {
+            grid-column: 2;
+            background-color: var(--primary-text);
+            color: #000000;
+            padding: 0.4em;
+            border: 0;
+            font-size: 1.25rem;
+            border-radius: 0.5rem;
+        }
+    }
+
     .form-actions {
         grid-column: 1 / span 2;
         display: flex;

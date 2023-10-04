@@ -8,6 +8,15 @@ namespace Store.Web.Pages.Components.Dialog
 {
     public partial class OrderDialog
     {
+        [Inject]
+        public IOrderService OrderService { get; set; } = default!;
+
+        [Inject]
+        public ISupplierService SupplierService { get; set; } = default!;
+
+        [Inject]
+        public IProductService ProductService { get; set; } = default!;
+
         [Parameter]
         public OrderDto? Order { get; set; }
 
@@ -15,15 +24,16 @@ namespace Store.Web.Pages.Components.Dialog
 
         public List<SupplierDto> Suppliers { get; set; } = new List<SupplierDto>();
 
-        [Inject]
-        public IOrderService OrderService { get; set; } = default!;
+        public List<ProductDto> Products { get; set; } = new List<ProductDto>();
 
-        [Inject]
-        public ISupplierService SupplierService { get; set; } = default!;
+        private IBrowserFile selectedFile;
+
+        protected bool IsSaving = false;
 
         protected override async Task OnInitializedAsync()
         {
             Suppliers = (await SupplierService.GetAllSuppliers()).ToList();
+            Products = (await ProductService.GetAllProducts()).ToList();
         }
 
         protected override async Task OnParametersSetAsync()
@@ -36,25 +46,52 @@ namespace Store.Web.Pages.Components.Dialog
                 {
                     Order = await OrderService.GetOrderById(_order.Id);
                 }
-                else
-                {
-                    _order = new OrderDto();
-                }
             }
+            IsSaving = false;
         }
 
-        private async Task Submit(EditContext editContext)
+        private async Task Submit()
         {
-            if (editContext.Validate())
+            IsSaving = true;
+
+            if (_order.Id == Guid.Empty)
             {
-                Console.WriteLine("valid submit");
-                _order = null;
+                if (selectedFile != null)
+                {
+                    var file = selectedFile;
+                    Stream stream = file.OpenReadStream();
+                    MemoryStream ms = new();
+                    await stream.CopyToAsync(ms);
+                    stream.Close();
+
+                    _order.FileName = file.Name;
+                }
+
+                _order.OrderLines.ToList().ForEach(x => x.OrderId = _order.Id);
+
+                var addedOrder = await OrderService.AddOrder(_order);
             }
+            else
+            {
+                var addedOrder = await OrderService.UpdateOrder(_order);
+            }
+            _order = null;
         }
 
         private void Cancel()
         {
             _order = null;
+        }
+
+        private void AddOrderLine()
+        {
+            _order.OrderLines.Add(new OrderLineDto() { Id = Guid.NewGuid(), OrderId = _order.Id});
+        }
+
+        private void OnInputFileChange(InputFileChangeEventArgs e)
+        {
+            selectedFile = e.File;
+            StateHasChanged();
         }
     }
 }

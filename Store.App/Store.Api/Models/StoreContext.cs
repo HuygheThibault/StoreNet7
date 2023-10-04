@@ -115,12 +115,12 @@ public partial class StoreContext : DbContext
                 .HasColumnType("datetime");
             entity.Property(e => e.Createdby).HasMaxLength(50);
             entity.Property(e => e.FileName).HasMaxLength(50);
-            entity.Property(e => e.TotalCost).HasColumnType("decimal(18, 2)");
-            entity.Property(e => e.TotalVatCost).HasColumnType("decimal(18, 2)");
-            entity.Property(e => e.UpdatedBy).HasMaxLength(50);
-            entity.Property(e => e.UpdatedOn)
+            entity.Property(e => e.ModifiedBy).HasMaxLength(50);
+            entity.Property(e => e.ModifiedOn)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.TotalCost).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.TotalVatCost).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.Supplier).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.SupplierId)

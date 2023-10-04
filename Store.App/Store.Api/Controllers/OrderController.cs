@@ -7,7 +7,7 @@ using Store.Shared.Dto;
 namespace Store.Api.Controllers
 {
     [ApiController]
-    [Route("api/Orders")]
+    [Route("api/orders")]
     public class OrderController : ControllerBase
     {
         private readonly ILogger<OrderController> _logger;

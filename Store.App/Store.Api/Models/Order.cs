@@ -21,9 +21,9 @@ public partial class Order
 
     public string Createdby { get; set; } = null!;
 
-    public DateTime UpdatedOn { get; set; }
+    public DateTime ModifiedOn { get; set; }
 
-    public string UpdatedBy { get; set; } = null!;
+    public string ModifiedBy { get; set; } = null!;
 
     public virtual ICollection<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
 

@@ -1,4 +1,7 @@
-﻿namespace Store.Api.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Store.Api.Models;
 
 public partial class OrderLine
 {

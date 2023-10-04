@@ -11,7 +11,6 @@ namespace Store.Shared.Dto
     {
         public Guid Id { get; set; }
 
-        [Required]
         public string? FileName { get; set; }
 
         [Required]
@@ -23,16 +22,16 @@ namespace Store.Shared.Dto
 
         public Guid SupplierId { get; set; }
 
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
 
-        public string Createdby { get; set; } = null!;
+        public string CreatedBy { get; set; } = "Unknown";
 
-        public DateTime UpdatedOn { get; set; }
+        public DateTime ModifiedOn { get; set; } = DateTime.Now;
 
-        public string UpdatedBy { get; set; } = null!;
+        public string ModifiedBy { get; set; } = "Unknown";
 
         public virtual ICollection<OrderLineDto> OrderLines { get; set; } = new List<OrderLineDto>();
 
-        public virtual SupplierDto Supplier { get; set; } = null!;
+        public virtual SupplierDto? Supplier { get; set; } = null!;
     }
 }

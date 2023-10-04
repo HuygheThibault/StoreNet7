@@ -2,7 +2,7 @@
 {
     public class OrderLineDto
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public Guid OrderId { get; set; }
 
@@ -14,16 +14,16 @@
 
         public decimal VatCost { get; set; }
 
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
 
-        public string CreatedBy { get; set; } = null!;
+        public string CreatedBy { get; set; } = "Unknown";
 
-        public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; } = DateTime.Now;
 
-        public string ModifiedBy { get; set; } = null!;
+        public string ModifiedBy { get; set; } = "Unknown";
 
-        public virtual OrderDto Order { get; set; } = null!;
+        public virtual OrderDto? Order { get; set; } = null!;
 
-        public virtual ProductDto Product { get; set; } = null!;
+        public virtual ProductDto? Product { get; set; } = null!;
     }
 }

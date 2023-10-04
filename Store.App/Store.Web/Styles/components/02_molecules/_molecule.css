@@ -140,6 +140,34 @@
   font-size: 1.25rem;
   border-radius: 0.5rem;
 }
+.form fieldset {
+  grid-column: 1/span 2;
+  padding-left: 1rem;
+}
+.form fieldset .label {
+  grid-column: 1;
+  grid-row: auto;
+  color: var(--primary-text);
+  font-weight: 700;
+  margin: auto 0;
+}
+.form fieldset .input {
+  grid-column: 2;
+  grid-row: auto;
+  padding: 0.4em;
+  border: 0;
+  font-size: 1.25rem;
+  border-radius: 0.5rem;
+}
+.form fieldset .dropdown {
+  grid-column: 2;
+  background-color: var(--primary-text);
+  color: #000000;
+  padding: 0.4em;
+  border: 0;
+  font-size: 1.25rem;
+  border-radius: 0.5rem;
+}
 .form .form-actions {
   grid-column: 1/span 2;
   display: flex;
@@ -166,9 +194,18 @@
   animation: loading-dot-animation 0.6s infinite ease-in-out;
 }
 
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
 .dropdown {
   border: none;
-  width: 100%;
+  width: auto;
   background-color: inherit;
   color: inherit;
 }
@@ -194,4 +231,4 @@
   -webkit-transform: rotate(45deg);
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_notification-bar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-links.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_selected-items.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_forms.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_loader.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_dropdown.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_arrow-icons.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;;;ACJH;EACG;EACA;EACA;EACA;EACA;;;ACLH;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACC;EACA;EACA;;;AAIF;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;ACxBA;EACG;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;;ACxCP;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AChCH;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;AC1CX;EACG;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;ACZX;EACG;EACA;EACA;EACA;;AAEA;EACI;EACA;;;ACRP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_notification-bar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-links.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_selected-items.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_forms.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_loader.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_dropdown.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_arrow-icons.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;;;ACJH;EACG;EACA;EACA;EACA;EACA;;;ACLH;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACC;EACA;EACA;;;AAIF;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;ACxBA;EACG;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;;ACxCP;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AChCH;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;AC1EX;EACG;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;;;ACvBH;EACG;EACA;EACA;EACA;;AAEA;EACI;EACA;;;ACRP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA%22%7D */

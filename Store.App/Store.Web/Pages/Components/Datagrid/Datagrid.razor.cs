@@ -129,11 +129,6 @@ namespace Store.Web.Pages.Components.Datagrid
                 }
 
                 ApplySorting();
-
-                InvokeAsync(() =>
-                {
-                    StateHasChanged();
-                });
             }
         }
 

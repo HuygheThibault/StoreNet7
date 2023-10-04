@@ -2,7 +2,7 @@
 
 namespace Store.Shared.Modals
 {
-    public class DatagridRows
+    public abstract class DatagridRows
     {
         public DatagridRows()
         {

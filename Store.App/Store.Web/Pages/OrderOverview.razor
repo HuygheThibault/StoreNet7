@@ -1,5 +1,81 @@
 ﻿@page "/Orders"
+@using Store.Shared.Enums;
+@using Store.Web.Helpers.Modals;
 @using Store.Web.Pages.Components.Dialog
 
 <OrderDialog Order="@_order" />
-<button class="add" @onclick="() => AddOrder()">Add</button>
+
+<div class=row>
+    <div class="data-grid-container sze-12 pd-1">
+        <div class="grid-actions">
+            <button class="add mrg-0 pd-1" @onclick="AddOrder"> Add order</button>
+        </div>
+        @if (_data != null)
+        {
+            <div class="data-grid">
+                <div class="headers row">
+                    @foreach (Column column in Columns)
+                    {
+                        <div class="col">
+                            @if (column.Name != "actions")
+                            {
+                                <span class="pd-1" @onclick="() => ToggleSort(column)">
+                                    <strong>
+                                        @column.Name
+                                    </strong>
+                                    <i class="@(column.Sort == SortDirection.Ascending ? "fa-solid fa-arrow-right fa-rotate-270" : column.Sort == SortDirection.Descending ? "fa-solid fa-arrow-right fa-rotate-90" : "")" />
+                                    @if (column.SortOrder > -1)
+                                    {
+                                        <span>@column.SortOrder</span>
+                                    }
+                                </span>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="rows">
+                    @foreach (var item in _data)
+                    {
+                        <div class="@("row " + (_data.IndexOf(item) % 2 == 0 ? "even" : "odd"))">
+                            @foreach (Column column in Columns)
+                            {
+                                @if (column.Name == "actions")
+                                {
+                                    <div class="col">
+                                        <div class="actions">
+                                            <button class="edit" @onclick="() => Edit(item)">
+                                                <i class="fa-solid fa-edit"></i>
+                                            </button>
+                                            <button class="remove" @onclick="() => DeleteItem(item)">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col pd-0">
+                                        <span>
+                                            @if (column.ColumnType == "Dropdown")
+                                            {
+                                                @column?.Dropdown?.Values.FirstOrDefault(x => x.Id.ToString() == @GetPropValue(item, column.Name).ToString()).Value
+                                            }
+                                            else
+                                            {
+                                                @GetPropValue(item, column.Name)
+                                            }
+                                        </span>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="loader"></div>
+        }
+    </div>
+</div>

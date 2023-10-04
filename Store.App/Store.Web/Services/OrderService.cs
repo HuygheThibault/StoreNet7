@@ -20,7 +20,7 @@ namespace Store.Web.Services
             try
             {
                 return await JsonSerializer.DeserializeAsync<IEnumerable<OrderDto>>
-                    (await _httpClient.GetStreamAsync($"api/Orders"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    (await _httpClient.GetStreamAsync($"api/orders"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
             catch (Exception)
             {
@@ -33,7 +33,7 @@ namespace Store.Web.Services
             try
             {
                 return await JsonSerializer.DeserializeAsync<OrderDto>
-                    (await _httpClient.GetStreamAsync($"api/Orders/{id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    (await _httpClient.GetStreamAsync($"api/orderss/{id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
             catch (Exception)
             {
@@ -45,8 +45,7 @@ namespace Store.Web.Services
         {
             try
             {
-                var itemJson = new StringContent(JsonSerializer.Serialize(item), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsJsonAsync("Order", itemJson);
+                var response = await _httpClient.PostAsJsonAsync("api/orders", item);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -66,7 +65,7 @@ namespace Store.Web.Services
             try
             {
                 var itemJson = new StringContent(JsonSerializer.Serialize(item), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PutAsync($"api/Orders/{item.Id}", itemJson);
+                var response = await _httpClient.PutAsync($"api/orderss/{item.Id}", itemJson);
 
                 if (response.IsSuccessStatusCode)
                 {
