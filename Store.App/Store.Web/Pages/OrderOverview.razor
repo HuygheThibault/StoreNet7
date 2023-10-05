@@ -1,4 +1,5 @@
 ﻿@page "/Orders"
+@using Store.Shared.Dto;
 @using Store.Shared.Enums;
 @using Store.Web.Helpers.Modals;
 @using Store.Web.Pages.Components.Dialog
@@ -14,22 +15,20 @@
         {
             <div class="data-grid">
                 <div class="headers row">
+                    <div class="col"></div>
                     @foreach (Column column in Columns)
                     {
                         <div class="col">
-                            @if (column.Name != "actions")
-                            {
-                                <span class="pd-1" @onclick="() => ToggleSort(column)">
-                                    <strong>
-                                        @column.Name
-                                    </strong>
-                                    <i class="@(column.Sort == SortDirection.Ascending ? "fa-solid fa-arrow-right fa-rotate-270" : column.Sort == SortDirection.Descending ? "fa-solid fa-arrow-right fa-rotate-90" : "")" />
-                                    @if (column.SortOrder > -1)
-                                    {
-                                        <span>@column.SortOrder</span>
-                                    }
-                                </span>
-                            }
+                            <span class="pd-1" @onclick="() => ToggleSort(column)">
+                                <strong>
+                                    @column.Name
+                                </strong>
+                                <i class="@(column.Sort == SortDirection.Ascending ? "fa-solid fa-arrow-right fa-rotate-270" : column.Sort == SortDirection.Descending ? "fa-solid fa-arrow-right fa-rotate-90" : "")" />
+                                @if (column.SortOrder > -1)
+                                {
+                                    <span>@column.SortOrder</span>
+                                }
+                            </span>
                         </div>
                     }
                 </div>
@@ -37,6 +36,11 @@
                     @foreach (var item in _data)
                     {
                         <div class="@("row " + (_data.IndexOf(item) % 2 == 0 ? "even" : "odd"))">
+                            <div class="col pd-0">
+                                <span @onclick="() => ExpandRow(item)">
+                                    <i class="fa-solid fa-plus"></i>
+                                </span>
+                            </div>
                             @foreach (Column column in Columns)
                             {
                                 @if (column.Name == "actions")
@@ -67,6 +71,37 @@
                                         </span>
                                     </div>
                                 }
+                            }
+                        </div>
+
+                        <div class="rows">
+                            <div class="headers row">
+                                @foreach (Column subColumn in SubColumns)
+                                {
+                                    <div class="col">
+                                        <strong>@subColumn.Name</strong>
+                                    </div>
+                                }
+                            </div>
+                            @foreach (OrderLineDto orderline in item.OrderLines)
+                            {
+                                <div class="@("row " + (_data.IndexOf(item) % 2 == 0 ? "even" : "odd"))">
+                                    @foreach (Column subColumn in SubColumns)
+                                    {
+                                        <div class="col pd-0">
+                                            <span>
+                                                @if (subColumn.ColumnType == "Dropdown")
+                                                {
+                                                    @subColumn?.Dropdown?.Values.FirstOrDefault(x => x.Id.ToString() == @GetPropValue(item, subColumn.Name).ToString()).Value
+                                                }
+                                                else
+                                                {
+                                                    @GetPropValue(orderline, subColumn.Name)
+                                                }
+                                            </span>
+                                        </div>
+                                    }
+                                </div>
                             }
                         </div>
                     }

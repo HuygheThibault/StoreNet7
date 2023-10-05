@@ -51,12 +51,27 @@ namespace Store.Api.Repositories
             }
         }
 
-        public void Add<T>(T entity) where T : class
+        public void AddOrder(Order order)
         {
             try
             {
-                logger.LogInformation($"Adding an object of type {entity.GetType()} to the context.");
-                context.Add(entity);
+                order.Id = Guid.NewGuid();
+
+                logger.LogInformation($"Adding an order: {order}.");
+                foreach(OrderLine orderLine in order.OrderLines)
+                {
+                    orderLine.Id = Guid.NewGuid();
+                    orderLine.OrderId = order.Id;
+                    orderLine.CreatedOn = DateTime.Now;
+                    orderLine.ModifiedOn = DateTime.Now;
+
+                    context.OrderLines.Add(orderLine);
+                }
+
+                order.CreatedOn = DateTime.Now;
+                order.ModifiedOn = DateTime.Now;
+
+                context.Orders.Add(order);
             }
             catch (Exception ex)
             {
@@ -101,7 +116,8 @@ namespace Store.Api.Repositories
 
         Task<Order> GetOrderById(Guid id);
 
-        void Add<T>(T entity) where T : class;
+        void AddOrder(Order order);
+
         void Delete<T>(T entity) where T : class;
         Task<bool> SaveChangesAsync();
     }

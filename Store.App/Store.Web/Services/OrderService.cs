@@ -22,7 +22,7 @@ namespace Store.Web.Services
                 return await JsonSerializer.DeserializeAsync<IEnumerable<OrderDto>>
                     (await _httpClient.GetStreamAsync($"api/orders"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

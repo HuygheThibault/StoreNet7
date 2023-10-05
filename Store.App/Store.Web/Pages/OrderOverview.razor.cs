@@ -15,61 +15,114 @@ namespace Store.Web.Pages
         [Inject]
         public ISupplierService SupplierService { get; set; }
 
+        [Inject]
+        public IProductService ProductService { get; set; }
+
         private OrderDto? _order;
 
         private List<OrderDto> _data;
 
+        private List<SupplierDto> _suppliers;
+
+        private List<ProductDto> _products;
+
         List<Column> Columns = new List<Column>();
 
-        List<string> ColumnsToIgnore = new List<string>() { "Category", "RowId", "Id", "CreatedOn", "CreatedBy" };
+        List<Column> SubColumns = new List<Column>();
 
-        public List<DropdownColumn>? DropdownColumns { get; set; } = new List<DropdownColumn>();
+        List<string> ColumnsToIgnore = new List<string>() { "OrderLines", "Supplier", "RowId", "Id", "CreatedOn", "CreatedBy" };
 
         protected override async Task OnInitializedAsync()
         {
             _data = (await OrderService.GetAllOrders()).ToList();
-            Columns = CreateColumns(data: _data);
+            _suppliers = (await SupplierService.GetAllSuppliers()).ToList();
+            _products = (await ProductService.GetAllProducts()).ToList();
+            CreateColumns();
             ApplySorting();
         }
 
-        private List<Column> CreateColumns(List<OrderDto> data)
+        private void CreateColumns()
         {
-            var columns = new List<Column>();
-
-            if (data?.Count() > 0)
+            Columns = new List<Column>()
             {
-                foreach (var prop in data[0].GetType().GetProperties())
+                new Column()
                 {
-                    if (!ColumnsToIgnore.Contains(prop.Name))
+                    Name = "SupplierId",
+                    ColumnType = "Dropdown",
+                    Dropdown = new DropdownColumn()
                     {
-                        if (DropdownColumns.Select(x => x.Name).ToList().Contains(prop.Name))
+                        Name = "SupplierId",
+                        Values = _suppliers.Select(x => new DropdownOption()
                         {
-                            columns.Add(new Column
-                            {
-                                Name = prop.Name,
-                                ColumnType = "Dropdown",
-                                Dropdown = DropdownColumns.FirstOrDefault(x => x.Name == prop.Name)
-                            });
-                        }
-                        else
-                        {
-
-                            columns.Add(new Column
-                            {
-                                Name = prop.Name,
-                                ColumnType = prop.PropertyType.Name,
-                            });
-                        }
+                            Value = x.Name,
+                            Id = x.Id,
+                        }).ToList()
                     }
-                }
-
-                columns.Add(new Column()
+                },
+                new Column
+                {
+                    Name = "FileName",
+                    ColumnType = "string",
+                },
+                new Column
+                {
+                    Name = "TotalCost",
+                    ColumnType = "decimal",
+                },
+                new Column
+                {
+                    Name = "TotalVatCost",
+                    ColumnType = "decimal",
+                },
+                new Column
+                {
+                    Name = "IsPaid",
+                    ColumnType = "bool",
+                },
+                new Column
+                {
+                    Name = "CreatedOn",
+                    ColumnType = "DateTime",
+                },
+                new Column()
                 {
                     Name = "actions",
                     Sort = SortDirection.None
-                });
-            }
-            return columns;
+                }
+            };
+
+            SubColumns = new List<Column>()
+            {
+                new Column()
+                {
+                    Name = "ProductId",
+                    ColumnType = "Dropdown",
+                    Dropdown = new DropdownColumn()
+                    {
+                        Name = "ProductId",
+                        Values = _products.Select(x => new DropdownOption()
+                        {
+                            Value = x.Title,
+                            Id = x.Id,
+                        }).ToList()
+                    }
+                },
+                new Column
+                {
+                    Name = "Quantity",
+                    ColumnType = "int32",
+                },
+                new Column
+                {
+                    Name = "NetCost",
+                    ColumnType = "decimal",
+                },
+                new Column
+                {
+                    Name = "VatCost",
+                    ColumnType = "decimal",
+                }
+            };
         }
 
         private void ToggleSort(Column column)
@@ -124,6 +177,10 @@ namespace Store.Web.Pages
                 column.SortOrder = sortCounter;
                 sortCounter++;
             }
+        }
+
+        private void ExpandRow(OrderDto item)
+        {
         }
 
         private void AddOrder()
