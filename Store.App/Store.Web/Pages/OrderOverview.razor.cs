@@ -79,7 +79,7 @@ namespace Store.Web.Pages
                 new Column
                 {
                     Name = "IsPaid",
-                    ColumnType = "bool",
+                    ColumnType = "Bool",
                 },
                 new Column
                 {

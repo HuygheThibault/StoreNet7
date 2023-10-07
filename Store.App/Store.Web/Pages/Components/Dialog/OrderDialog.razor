@@ -3,7 +3,7 @@
 @if (_order != null)
 {
     <div class="card right">
-        <p class="close" @onclick="() => Cancel()">X</p>
+        <p class="close" @onclick="() => Cancel()"><i class="fa-regular fa-circle-xmark"></i></p>
         <div class="card-header padding-1rem">
             @if (_order.Id == Guid.Empty)
             {

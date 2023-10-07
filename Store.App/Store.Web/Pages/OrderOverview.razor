@@ -11,28 +11,28 @@
         <div class="grid-actions">
             <button class="add mrg-0 pd-1" @onclick="AddOrder"> Add order</button>
         </div>
-        @if (_data != null)
-        {
-            <div class="data-grid">
-                <div class="headers row">
-                    <div class="col"></div>
-                    @foreach (Column column in Columns)
-                    {
-                        <div class="col">
-                            <span class="pd-1" @onclick="() => ToggleSort(column)">
-                                <strong>
-                                    @column.Name
-                                </strong>
-                                <i class="@(column.Sort == SortDirection.Ascending ? "fa-solid fa-arrow-right fa-rotate-270" : column.Sort == SortDirection.Descending ? "fa-solid fa-arrow-right fa-rotate-90" : "")" />
-                                @if (column.SortOrder > -1)
-                                {
-                                    <span>@column.SortOrder</span>
-                                }
-                            </span>
-                        </div>
-                    }
-                </div>
-                <div class="rows">
+        <div class="data-grid">
+            <div class="headers row">
+                <div class="col"></div>
+                @foreach (Column column in Columns)
+                {
+                    <div class="col">
+                        <span class="pd-1" @onclick="() => ToggleSort(column)">
+                            <strong>
+                                @column.Name
+                            </strong>
+                            <i class="@(column.Sort == SortDirection.Ascending ? "fa-solid fa-arrow-right fa-rotate-270" : column.Sort == SortDirection.Descending ? "fa-solid fa-arrow-right fa-rotate-90" : "")" />
+                            @if (column.SortOrder > -1)
+                            {
+                                <span>@column.SortOrder</span>
+                            }
+                        </span>
+                    </div>
+                }
+            </div>
+            <div class="rows">
+                @if (_data != null)
+                {
                     @foreach (var item in _data)
                     {
                         <div class="@("row " + (_data.IndexOf(item) % 2 == 0 ? "even" : "odd"))">
@@ -70,6 +70,17 @@
                                             @if (column.ColumnType == "Dropdown")
                                             {
                                                 @column?.Dropdown?.Values.FirstOrDefault(x => x.Id.ToString() == @GetPropValue(item, column.Name).ToString()).Value
+                                            }
+                                            else if (column.ColumnType == "Bool")
+                                            {
+                                                if (@GetPropValue(item, column.Name) == "True")
+                                                {
+                                                    <i class="fa-solid fa-check"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                }
                                             }
                                             else
                                             {
@@ -112,12 +123,12 @@
                             }
                         </div>
                     }
-                </div>
+                }
+                else
+                {
+                    <div class="loader"></div>
+                }
             </div>
-        }
-        else
-        {
-            <div class="loader"></div>
-        }
+        </div>
     </div>
 </div>
