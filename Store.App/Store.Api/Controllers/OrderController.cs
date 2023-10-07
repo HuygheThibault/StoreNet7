@@ -11,14 +11,16 @@ namespace Store.Api.Controllers
     public class OrderController : ControllerBase
     {
         private readonly ILogger<OrderController> _logger;
-        private readonly IOrderRepository _OrderRepository;
+        private readonly IOrderRepository _orderRepository;
+        private readonly IOrderLineRepository _orderLineRepository;
         private readonly IMapper _mapper;
 
-        public OrderController(ILogger<OrderController> logger, IOrderRepository repository, IMapper mapper
+        public OrderController(ILogger<OrderController> logger, IOrderRepository repository, IOrderLineRepository orderLineRepository, IMapper mapper
             )
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _OrderRepository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _orderRepository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _orderLineRepository = orderLineRepository ?? throw new ArgumentNullException(nameof(orderLineRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -27,7 +29,7 @@ namespace Store.Api.Controllers
         {
             try
             {
-                List<Order> items = await _OrderRepository.GetAllOrders();
+                List<Order> items = await _orderRepository.GetAllOrders();
                 return Ok(_mapper.Map<List<OrderDto>>(items));
             }
             catch (Exception ex)
@@ -42,7 +44,7 @@ namespace Store.Api.Controllers
         {
             try
             {
-                var result = await _OrderRepository.GetOrderById(id);
+                var result = await _orderRepository.GetOrderById(id);
                 if (result == null) return NotFound();
 
                 return Ok(_mapper.Map<OrderDto>(result));
@@ -61,19 +63,12 @@ namespace Store.Api.Controllers
             {
                 if (id != model.Id) ModelState.AddModelError("Order id", "Id in uri and body must be equal and cannot be changed");
 
-                var dbModel = await _OrderRepository.GetOrderById(id);
-
-                if (dbModel == null) ModelState.AddModelError("Order", $"Could not find item: {model}");
-
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                _mapper.Map(model, dbModel); // map model to dbmodel (destination)
+                var dbModel = await _orderRepository.UpdateOrder(_mapper.Map<Order>(model));
 
-                if (await _OrderRepository.SaveChangesAsync())
-                {
-                    return Ok(_mapper.Map<OrderDto>(dbModel));
-                }
+                return Ok(_mapper.Map<OrderDto>(dbModel));
             }
             catch (Exception ex)
             {
@@ -93,7 +88,7 @@ namespace Store.Api.Controllers
                     return BadRequest("Please privde a valid Order");
                 }
 
-                Order dbItem = await _OrderRepository.GetOrderById(request.Id);
+                Order dbItem = await _orderRepository.GetOrderById(request.Id);
 
                 if (dbItem != null)
                 {
@@ -105,9 +100,15 @@ namespace Store.Api.Controllers
 
                 Order newItem = _mapper.Map<Order>(request);
 
-                _OrderRepository.AddOrder(newItem);
+                foreach (OrderLine orderLine in newItem.OrderLines)
+                {
+                    orderLine.OrderId = newItem.Id;
+                    _orderLineRepository.AddOrderLine(orderLine);
+                }
 
-                if (await _OrderRepository.SaveChangesAsync())
+                _orderRepository.AddOrder(newItem);
+
+                if (await _orderRepository.SaveChangesAsync())
                 {
                     _logger.LogInformation($"Created new Order {newItem.Id}");
                     return Created($"/api/Order/{newItem.Id}", _mapper.Map<OrderDto>(newItem));
@@ -127,12 +128,12 @@ namespace Store.Api.Controllers
         {
             try
             {
-                var dbModel = await _OrderRepository.GetOrderById(id);
+                var dbModel = await _orderRepository.GetOrderById(id);
                 if (dbModel == null) return NotFound();
 
-                _OrderRepository.Delete(dbModel);
+                _orderRepository.Delete(dbModel);
 
-                if (await _OrderRepository.SaveChangesAsync())
+                if (await _orderRepository.SaveChangesAsync())
                 {
                     return NoContent();
                 }

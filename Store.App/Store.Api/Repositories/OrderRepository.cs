@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Store.Api.Models;
+using Store.Shared.Dto;
 
 namespace Store.Api.Repositories
 {
@@ -20,7 +22,7 @@ namespace Store.Api.Repositories
             {
                 logger.LogInformation($"Getting all Orders");
 
-                IQueryable<Order> query = context.Orders.Include("Supplier");
+                IQueryable<Order> query = context.Orders.Include("Supplier").Include("OrderLines");
 
                 return await query.ToListAsync();
             }
@@ -37,7 +39,7 @@ namespace Store.Api.Repositories
             {
                 logger.LogInformation($"Getting Order: {id}");
 
-                IQueryable<Order> query = context.Orders.Include("Supplier");
+                IQueryable<Order> query = context.Orders.Include("Supplier").Include("OrderLines");
 
                 // Query It
                 query = query.Where(c => c.Id == id);
@@ -55,19 +57,9 @@ namespace Store.Api.Repositories
         {
             try
             {
-                order.Id = Guid.NewGuid();
-
                 logger.LogInformation($"Adding an order: {order}.");
-                foreach(OrderLine orderLine in order.OrderLines)
-                {
-                    orderLine.Id = Guid.NewGuid();
-                    orderLine.OrderId = order.Id;
-                    orderLine.CreatedOn = DateTime.Now;
-                    orderLine.ModifiedOn = DateTime.Now;
 
-                    context.OrderLines.Add(orderLine);
-                }
-
+                order.Id = Guid.NewGuid();
                 order.CreatedOn = DateTime.Now;
                 order.ModifiedOn = DateTime.Now;
 
@@ -76,6 +68,71 @@ namespace Store.Api.Repositories
             catch (Exception ex)
             {
                 logger.LogError(ex, "error occured");
+            }
+        }
+
+        public async Task<Order> UpdateOrder(Order order)
+        {
+            using (IDbContextTransaction transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    logger.LogInformation($"Updating order: {order.Id}.");
+
+                    Order dbOrder = await GetOrderById(order.Id);
+
+                    foreach (OrderLine dbOrderline in dbOrder.OrderLines.Where(x => !order.OrderLines.Select(ol => ol.Id).Contains(x.Id))) // Remove order lines
+                    {
+                        logger.LogInformation($"Removed orderLine: {dbOrderline.Id}.");
+                        dbOrder.OrderLines.Remove(dbOrderline);
+                    }
+
+                    foreach (OrderLine dbOrderline in dbOrder.OrderLines.Where(x => order.OrderLines.Select(ol => ol.Id).Contains(x.Id))) // Updating order lines
+                    {
+                        logger.LogInformation($"Updating orderLine: {dbOrderline}.");
+
+                        OrderLine newOrderLine = order.OrderLines.FirstOrDefault(x => x.Id == dbOrderline.Id);
+                        dbOrderline.ProductId = newOrderLine.ProductId;
+                        dbOrderline.Quantity = newOrderLine.Quantity;
+                        dbOrderline.NetCost = newOrderLine.NetCost;
+                        dbOrderline.VatCost = newOrderLine.VatCost;
+                        dbOrderline.ModifiedOn = DateTime.Now;
+                        dbOrderline.ModifiedBy = "Admin";
+                    }
+
+                    foreach (OrderLine orderLine in order.OrderLines.Where(x => x.Id == Guid.Empty)) // Add order lines
+                    {
+                        orderLine.ModifiedOn = DateTime.Now;
+                        orderLine.CreatedOn = DateTime.Now;
+                        orderLine.CreatedBy = "Admin";
+                        orderLine.ModifiedBy = "Admin";
+                        orderLine.OrderId = order.Id;
+
+                        logger.LogInformation($"Adding orderLine: {orderLine}.");
+                        dbOrder.OrderLines.Add(orderLine);
+                    }
+
+                    dbOrder.SupplierId = order.SupplierId;
+                    dbOrder.TotalCost = order.TotalCost;
+                    dbOrder.TotalVatCost = order.TotalVatCost;
+                    dbOrder.IsPaid = order.IsPaid;
+                    dbOrder.ModifiedBy = "Admin";
+                    dbOrder.ModifiedOn = DateTime.Now;
+
+                    context.Update(dbOrder);
+
+                    await context.SaveChangesAsync();
+                 
+                    transaction.Commit();
+
+                    return dbOrder;
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "error occured while updating order");
+                    transaction.Rollback();
+                    throw;
+                }
             }
         }
 
@@ -115,6 +172,8 @@ namespace Store.Api.Repositories
         Task<List<Order>> GetAllOrders();
 
         Task<Order> GetOrderById(Guid id);
+
+        Task<Order> UpdateOrder(Order order);
 
         void AddOrder(Order order);
 

@@ -37,8 +37,15 @@
                     {
                         <div class="@("row " + (_data.IndexOf(item) % 2 == 0 ? "even" : "odd"))">
                             <div class="col pd-0">
-                                <span @onclick="() => ExpandRow(item)">
-                                    <i class="fa-solid fa-plus"></i>
+                                <span @onclick="() => ExpandRow(item)" style="cursor: pointer">
+                                    @if (_expandedOrder == item)
+                                    {
+                                        <i class="fa-solid fa-minus"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa-solid fa-plus"></i>
+                                    }
                                 </span>
                             </div>
                             @foreach (Column column in Columns)
@@ -74,7 +81,7 @@
                             }
                         </div>
 
-                        <div class="rows">
+                        <div class="rows" style="@(_expandedOrder == item ? "" : "display: none" )">
                             <div class="headers row">
                                 @foreach (Column subColumn in SubColumns)
                                 {
@@ -92,7 +99,7 @@
                                             <span>
                                                 @if (subColumn.ColumnType == "Dropdown")
                                                 {
-                                                    @subColumn?.Dropdown?.Values.FirstOrDefault(x => x.Id.ToString() == @GetPropValue(item, subColumn.Name).ToString()).Value
+                                                    @subColumn?.Dropdown?.Values.FirstOrDefault(x => x.Id.ToString() == @GetPropValue(orderline, subColumn.Name).ToString()).Value
                                                 }
                                                 else
                                                 {

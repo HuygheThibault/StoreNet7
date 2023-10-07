@@ -44,7 +44,7 @@ namespace Store.Web.Pages.Components.Dialog
             {
                 if (_order?.Id != Guid.Empty)
                 {
-                    Order = await OrderService.GetOrderById(_order.Id);
+                    _order = await OrderService.GetOrderById(_order.Id);
                 }
             }
             IsSaving = false;
@@ -85,7 +85,7 @@ namespace Store.Web.Pages.Components.Dialog
 
         private void AddOrderLine()
         {
-            _order.OrderLines.Add(new OrderLineDto() { Id = Guid.NewGuid(), OrderId = _order.Id});
+            _order.OrderLines.Add(new OrderLineDto());
         }
 
         private void OnInputFileChange(InputFileChangeEventArgs e)

@@ -20,6 +20,8 @@ namespace Store.Web.Pages
 
         private OrderDto? _order;
 
+        private OrderDto? _expandedOrder;
+
         private List<OrderDto> _data;
 
         private List<SupplierDto> _suppliers;
@@ -181,6 +183,14 @@ namespace Store.Web.Pages
 
         private void ExpandRow(OrderDto item)
         {
+            if (_expandedOrder == item)
+            {
+                _expandedOrder = null;
+            }
+            else
+            {
+                _expandedOrder = item;
+            }
         }
 
         private void AddOrder()

@@ -33,7 +33,7 @@ namespace Store.Web.Services
             try
             {
                 return await JsonSerializer.DeserializeAsync<OrderDto>
-                    (await _httpClient.GetStreamAsync($"api/orderss/{id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    (await _httpClient.GetStreamAsync($"api/orders/{id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
             catch (Exception)
             {
@@ -65,7 +65,7 @@ namespace Store.Web.Services
             try
             {
                 var itemJson = new StringContent(JsonSerializer.Serialize(item), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PutAsync($"api/orderss/{item.Id}", itemJson);
+                var response = await _httpClient.PutAsync($"api/orders/{item.Id}", itemJson);
 
                 if (response.IsSuccessStatusCode)
                 {

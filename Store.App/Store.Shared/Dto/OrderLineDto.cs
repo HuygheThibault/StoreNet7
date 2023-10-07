@@ -2,7 +2,7 @@
 {
     public class OrderLineDto
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; }
 
         public Guid OrderId { get; set; }
 
@@ -21,8 +21,6 @@
         public DateTime ModifiedOn { get; set; } = DateTime.Now;
 
         public string ModifiedBy { get; set; } = "Unknown";
-
-        public virtual OrderDto? Order { get; set; } = null!;
 
         public virtual ProductDto? Product { get; set; } = null!;
     }

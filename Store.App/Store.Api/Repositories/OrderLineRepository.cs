@@ -51,12 +51,16 @@ namespace Store.Api.Repositories
             }
         }
 
-        public void Add<T>(T entity) where T : class
+        public void AddOrderLine(OrderLine orderLine)
         {
             try
             {
-                logger.LogInformation($"Adding an object of type {entity.GetType()} to the context.");
-                context.Add(entity);
+                logger.LogInformation($"Adding an orderLine {orderLine} to the context.");
+
+                orderLine.Id = Guid.NewGuid();
+                orderLine.CreatedOn = DateTime.Now;
+                orderLine.ModifiedOn = DateTime.Now;
+                context.OrderLines.Add(orderLine);
             }
             catch (Exception ex)
             {
@@ -101,7 +105,8 @@ namespace Store.Api.Repositories
 
         Task<OrderLine> GetOrderLineById(Guid id);
 
-        void Add<T>(T entity) where T : class;
+        void AddOrderLine(OrderLine orderLine);
+
         void Delete<T>(T entity) where T : class;
         Task<bool> SaveChangesAsync();
     }
