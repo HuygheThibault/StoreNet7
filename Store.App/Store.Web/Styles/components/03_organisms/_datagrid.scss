@@ -1,6 +1,6 @@
 ﻿.data-grid-container {
     display: grid;
-    grid-template-areas: 'actions validations' 'grid grid' 'notifications notifications';
+    grid-template-areas: 'actions validations' 'grid grid';
     background-color: var(--secondary-dark);
     color: var(--primary-text);
     overflow: auto;
@@ -94,33 +94,6 @@
                     color: inherit;
                 }
             }
-        }
-    }
-
-    .notification-bar {
-        grid-area: notifications;
-        border-radius: 1rem;
-        width: auto;
-        height: auto;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        color: var(--primary-text);
-
-        .Danger {
-            background-color: var(--notification-danger);
-        }
-
-        .Success {
-            background-color: var(--notification-success);
-        }
-
-        .Info {
-            background-color: var(--notification-info);
-        }
-
-        .Warning {
-            background-color: var(--notification-warning);
         }
     }
 }

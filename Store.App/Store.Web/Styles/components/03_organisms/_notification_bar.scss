@@ -1,0 +1,33 @@
+.notifications {
+    bottom: 0;
+    position: absolute;
+    width: 90%;
+    margin: 1rem;
+    z-index: 999;
+
+    .notification-bar {
+        border-radius: 1rem;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: var(--primary-text);
+
+        .Danger {
+            background-color: var(--notification-danger);
+        }
+
+        .Success {
+            background-color: var(--notification-success);
+        }
+
+        .Info {
+            background-color: var(--notification-info);
+        }
+
+        .Warning {
+            background-color: var(--notification-warning);
+        }
+    }
+}

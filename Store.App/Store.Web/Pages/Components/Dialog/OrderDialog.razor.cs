@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Store.Shared.Dto;
+using Store.Web.Models;
 using Store.Web.Services;
 using System.Reflection.Metadata;
+using static Store.Web.Models.Noticiation;
 
 namespace Store.Web.Pages.Components.Dialog
 {
@@ -19,6 +21,9 @@ namespace Store.Web.Pages.Components.Dialog
 
         [Parameter]
         public OrderDto? Order { get; set; }
+
+        [Parameter]
+        public EventCallback<Noticiation> OnResult { get; set; }
 
         private OrderDto? _order;
 
@@ -70,17 +75,33 @@ namespace Store.Web.Pages.Components.Dialog
                 _order.OrderLines.ToList().ForEach(x => x.OrderId = _order.Id);
 
                 var addedOrder = await OrderService.AddOrder(_order);
+                _order = null;
+                await OnResult.InvokeAsync(new Noticiation()
+                {
+                    Name = "Order added",
+                    Sort = NoticiationType.Success
+                });
             }
             else
             {
                 var addedOrder = await OrderService.UpdateOrder(_order);
+                _order = null;
+                await OnResult.InvokeAsync(new Noticiation()
+                {
+                    Name = "Order updated",
+                    Sort = NoticiationType.Success
+                });
             }
-            _order = null;
         }
 
-        private void Cancel()
+        private async Task Cancel()
         {
             _order = null;
+            await OnResult.InvokeAsync(new Noticiation()
+            {
+                Name = "Order canceled",
+                Sort = NoticiationType.Danger
+            });
         }
 
         private void AddOrderLine()

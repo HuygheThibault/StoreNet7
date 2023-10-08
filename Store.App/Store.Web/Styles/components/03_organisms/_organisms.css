@@ -114,7 +114,7 @@
 
 .data-grid-container {
   display: grid;
-  grid-template-areas: "actions validations" "grid grid" "notifications notifications";
+  grid-template-areas: "actions validations" "grid grid";
   background-color: var(--secondary-dark);
   color: var(--primary-text);
   overflow: auto;
@@ -193,27 +193,34 @@
   background-color: inherit;
   color: inherit;
 }
-.data-grid-container .notification-bar {
-  grid-area: notifications;
+
+.notifications {
+  bottom: 0;
+  position: absolute;
+  width: 90%;
+  margin: 1rem;
+  z-index: 999;
+}
+.notifications .notification-bar {
   border-radius: 1rem;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   color: var(--primary-text);
 }
-.data-grid-container .notification-bar .Danger {
+.notifications .notification-bar .Danger {
   background-color: var(--notification-danger);
 }
-.data-grid-container .notification-bar .Success {
+.notifications .notification-bar .Success {
   background-color: var(--notification-success);
 }
-.data-grid-container .notification-bar .Info {
+.notifications .notification-bar .Info {
   background-color: var(--notification-info);
 }
-.data-grid-container .notification-bar .Warning {
+.notifications .notification-bar .Warning {
   background-color: var(--notification-warning);
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_side-navigation.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card-counter.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_dashboard-sidebar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_datagrid.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;;ACbP;EACG;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AAIR;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AClDH;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI;;;ACvCX;EACG;;;AAGJ;EACI;;;AAGJ;EACI;EACA;;;AAGJ;EACI;;;ACdH;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;;AAEA;EACI;EACA;;AAGJ;EACI;;AAIR;EACI;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAIA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;AAMhB;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_side-navigation.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card-counter.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_dashboard-sidebar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_datagrid.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_notification_bar.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;;ACbP;EACG;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AAIR;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AClDH;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI;;;ACvCX;EACG;;;AAGJ;EACI;;;AAGJ;EACI;EACA;;;AAGJ;EACI;;;ACdH;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;;AAEA;EACI;EACA;;AAGJ;EACI;;AAIR;EACI;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAIA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;;AC7FpB;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI%22%7D */

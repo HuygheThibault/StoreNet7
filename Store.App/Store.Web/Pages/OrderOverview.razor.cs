@@ -2,6 +2,7 @@
 using Store.Shared.Dto;
 using Store.Shared.Enums;
 using Store.Web.Helpers.Modals;
+using Store.Web.Models;
 using Store.Web.Services;
 using System.Reflection;
 
@@ -21,6 +22,8 @@ namespace Store.Web.Pages
         private OrderDto? _order;
 
         private OrderDto? _expandedOrder;
+
+        private Noticiation? _noticiation;
 
         private List<OrderDto> _data;
 
@@ -206,6 +209,14 @@ namespace Store.Web.Pages
         private async Task DeleteItem(OrderDto item)
         {
             await OrderService.DeleteOrder(item.Id);
+        }
+
+        private async Task ResultReceived(Noticiation noticiation)
+        {
+            _order = null;
+            _noticiation = noticiation;
+            _data = (await OrderService.GetAllOrders()).ToList();
+            _noticiation = null;
         }
 
         private static object GetPropValue(object src, string propName)

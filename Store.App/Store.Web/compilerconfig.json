@@ -164,5 +164,9 @@
   {
     "outputFile": "Styles/components/01_atoms/_animations.css",
     "inputFile": "Styles/components/01_atoms/_animations.scss"
+  },
+  {
+    "outputFile": "Styles/components/03_organisms/_notification_bar.css",
+    "inputFile": "Styles/components/03_organisms/_notification_bar.scss"
   }
 ]
