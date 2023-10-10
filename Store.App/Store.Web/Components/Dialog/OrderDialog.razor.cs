@@ -6,7 +6,7 @@ using Store.Web.Services;
 using System.Reflection.Metadata;
 using static Store.Web.Models.Noticiation;
 
-namespace Store.Web.Pages.Components.Dialog
+namespace Store.Web.Components.Dialog
 {
     public partial class OrderDialog
     {

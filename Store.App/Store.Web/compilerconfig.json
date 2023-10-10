@@ -168,5 +168,9 @@
   {
     "outputFile": "Styles/components/03_organisms/_notification_bar.css",
     "inputFile": "Styles/components/03_organisms/_notification_bar.scss"
+  },
+  {
+    "outputFile": "Styles/components/03_organisms/_supplier-card.css",
+    "inputFile": "Styles/components/03_organisms/_supplier-card.scss"
   }
 ]

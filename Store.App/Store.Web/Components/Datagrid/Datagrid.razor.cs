@@ -5,7 +5,7 @@ using Store.Shared.Modals;
 using Store.Web.Helpers.Modals;
 using System.Reflection;
 
-namespace Store.Web.Pages.Components.Datagrid
+namespace Store.Web.Components.Datagrid
 {
     public partial class Datagrid<T> where T : DatagridRows
     {

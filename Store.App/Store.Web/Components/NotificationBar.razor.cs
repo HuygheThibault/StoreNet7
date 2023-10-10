@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Store.Web.Models;
 
-namespace Store.Web.Pages.Components
+namespace Store.Web.Components
 {
     public partial class NotificationBar
     {
