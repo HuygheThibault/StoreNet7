@@ -12,6 +12,8 @@ namespace Store.Shared.Dto
 
         public decimal PricePerUnit { get; set; }
 
+        public decimal QuantityInStock { get; set; }
+
         public byte[]? Image { get; set; }
 
         public Guid CategoryId { get; set; }

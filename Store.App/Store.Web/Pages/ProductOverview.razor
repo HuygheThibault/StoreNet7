@@ -3,8 +3,12 @@
 @using Store.Web.Components.Datagrid
 
 <PageTitle>Users</PageTitle>
+<div class="row">
+    <div class="data-grid-container sze-12 pd-1">
         @if (Items != null)
         {
             <Datagrid T="ProductDto" Data="Items" DropdownColumns="DropdownColumns"
-                  OnSave="Save" OnDelete="DeleteItem" CanAddNewItem="true" CanDeleteItem="true" CanEditItem="true" />
+                      OnDelete="DeleteItem" OnEdit="EditItem" CanDeleteItem="true" CanEditItem="true" />
         }
+    </div>
+</div>

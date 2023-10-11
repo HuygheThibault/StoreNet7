@@ -15,7 +15,7 @@ namespace Store.Web.Components.Datagrid
         private List<T>? _data;
 
         [Parameter]
-        public bool CanAddNewItem { get; set; } = false;
+        public List<DropdownColumn>? DropdownColumns { get; set; } = default!;
 
         [Parameter]
         public bool CanEditItem { get; set; } = false;
@@ -24,18 +24,13 @@ namespace Store.Web.Components.Datagrid
         public bool CanDeleteItem { get; set; } = false;
 
         [Parameter]
-        public List<DropdownColumn>? DropdownColumns { get; set; } = default!;
+        public EventCallback<T> OnDelete { get; set; } = default!;
 
         [Parameter]
-        public EventCallback<T> OnSave { get; set; } = default!;
-
-        [Parameter]
-        public EventCallback<Tuple<T, bool>> OnDelete { get; set; } = default!;
+        public EventCallback<T> OnEdit { get; set; } = default!;
 
         [Inject]
         public IJSRuntime? JsRuntime { get; set; }
-
-        private T? _editedItem { get; set; }
 
         List<Column> Columns = new List<Column>();
 
@@ -54,14 +49,11 @@ namespace Store.Web.Components.Datagrid
             {
                 _data = Data;
                 ApplySorting();
-                Console.WriteLine("a parameter has changed");
             }
         }
 
         private List<Column> CreateColumns(List<T> data)
         {
-            Console.WriteLine("Creating columns");
-
             var columns = new List<Column>();
 
             if (data?.Count() > 0)
@@ -81,7 +73,6 @@ namespace Store.Web.Components.Datagrid
                         }
                         else
                         {
-
                             columns.Add(new Column
                             {
                                 Name = prop.Name,
@@ -90,12 +81,6 @@ namespace Store.Web.Components.Datagrid
                         }
                     }
                 }
-
-                columns.Add(new Column()
-                {
-                    Name = "actions",
-                    Sort = SortDirection.None
-                });
             }
             return columns;
         }
@@ -154,9 +139,9 @@ namespace Store.Web.Components.Datagrid
             }
         }
 
-        private void Edit(T item)
+        private async Task Edit(T item)
         {
-            _editedItem = item;
+            await OnEdit.InvokeAsync(item);
         }
 
         private static object GetPropValue(object src, string propName)
@@ -164,26 +149,10 @@ namespace Store.Web.Components.Datagrid
             return src?.GetType()?.GetProperty(propName)?.GetValue(src, null);
         }
 
-        private async Task Save(T item)
-        {
-            if (item != _editedItem)
-            {
-                await OnSave.InvokeAsync(item);
-            }
-
-            _editedItem = null;
-        }
-
-        //CREATE NEW item
-        private void AddNewItemRow()
-        {
-            _editedItem = (T)Activator.CreateInstance(typeof(T), new object[] { });
-        }
-
         //DELETE
-        private async Task DeleteItem(Tuple<T, bool> item)
+        private async Task DeleteItem(T item)
         {
-            if (_data.Contains(item.Item1))
+            if (_data.Contains(item))
             {
                 bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete this item?");
                 if (confirmed)

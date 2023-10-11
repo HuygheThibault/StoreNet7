@@ -1,101 +1,91 @@
 ﻿@using Store.Shared.Enums;
 @using Store.Web.Helpers.Modals;
 @typeparam T
-<div class=row>
-    @if (_data != null)
-    {
-        <div class="data-grid-container sze-12 pd-1">
-            <div class="grid-actions">
-                @if (CanAddNewItem)
-                {
-                    <button class="add mrg-0 pd-1" @onclick="AddNewItemRow"> Add new item</button>
-                }
-            </div>
-            <div class="data-grid">
-                <div class="headers row">
+@if (_data != null)
+{
+    <div class="data-grid">
+        <div class="headers row">
+            @foreach (Column column in Columns)
+            {
+                <div class="col">
+                    <span class="pd-1" @onclick="() => ToggleSort(column)">
+                        <strong>
+                            @column.Name
+                        </strong>
+                        <i class="@(column.Sort == SortDirection.Ascending ? "fa-solid fa-arrow-right fa-rotate-270" : column.Sort == SortDirection.Descending ? "fa-solid fa-arrow-right fa-rotate-90" : "")" />
+                        @if (column.SortOrder > -1)
+                        {
+                            <span>@column.SortOrder</span>
+                        }
+                    </span>
+                </div>
+            }
+            @if (CanEditItem || CanDeleteItem)
+            {
+                <div class="col">
+                    <span class="pd-1">
+                        <strong>
+                            Actions
+                        </strong>
+                    </span>
+                </div>
+            }
+        </div>
+        <div class="rows">
+            @foreach (var item in _data)
+            {
+                <div class="@("row " + (_data.IndexOf(item) % 2 == 0 ? "even" : "odd"))">
                     @foreach (Column column in Columns)
                     {
-                        <div class="col">
-                            @if (column.Name != "actions")
-                            {
-                                <span class="pd-1" @onclick="() => ToggleSort(column)">
-                                    <strong>
-                                        @column.Name
-                                    </strong>
-                                    <i class="@(column.Sort == SortDirection.Ascending ? "fa-solid fa-arrow-right fa-rotate-270" : column.Sort == SortDirection.Descending ? "fa-solid fa-arrow-right fa-rotate-90" : "")" />
-                                    @if (column.SortOrder > -1)
-                                    {
-                                        <span>@column.SortOrder</span>
-                                    }
-                                </span>
-                            }
-                        </div>
-                    }
-                </div>
-                <div class="rows">
-
-
-                    @*Edit*@
-                    @if (_editedItem != null)
-                    {
-                        @*Add*@
-                        @if (@GetPropValue(_editedItem, "Id") == "00000000-0000-0000-0000-000000000000")
-                        {
-                            <DatagridEdit T="T" Item="_editedItem" ColumnsToIgnore="ColumnsToIgnore" Columns="Columns" OnSave="Save" />
-                        }
-                    }
-                    @foreach (var item in _data)
-                    {
-                        if (item.RowId != _editedItem?.RowId)
-                        {
-                            <div class="@("row " + (_data.IndexOf(item) % 2 == 0 ? "even" : "odd"))">
-                                @foreach (Column column in Columns)
+                        <div class="col pd-0">
+                            <span>
+                                @if (column.ColumnType == "Dropdown")
                                 {
-                                    @if (column.Name == "actions")
+                                    @column?.Dropdown?.Values.FirstOrDefault(x => x.Id.ToString() == @GetPropValue(item, column.Name).ToString()).Value
+                                }
+                                else if (column.ColumnType == "Bool")
+                                {
+                                    if (@GetPropValue(item, column.Name) == "True")
                                     {
-                                        <div class="col">
-                                            <div class="actions">
-                                                @if (CanEditItem)
-                                                {
-                                                    <button class="edit" @onclick="() => Edit(item)">
-                                                        <i class="fa-solid fa-edit"></i>
-                                                    </button>
-                                                }
-                                                @if (CanDeleteItem)
-                                                {
-                                                    <button class="remove" @onclick="() => DeleteItem(Tuple.Create(item, true))">
-                                                        <i class="fa-solid fa-trash-can"></i>
-                                                    </button>
-                                                }
-                                            </div>
-                                        </div>
+                                        <i class="fa-solid fa-check"></i>
                                     }
                                     else
                                     {
-                                        <div class="col pd-0">
-                                            <span>
-                                                @if (column.ColumnType == "Dropdown")
-                                                {
-                                                    @column?.Dropdown?.Values.FirstOrDefault(x => x.Id.ToString() == @GetPropValue(item, column.Name).ToString()).Value
-                                                }
-                                                else
-                                                {
-                                                    @GetPropValue(item, column.Name)
-                                                }
-                                            </span>
-                                        </div>
+                                        <i class="fa-solid fa-xmark"></i>
                                     }
                                 }
+                                else
+                                {
+                                    @GetPropValue(item, column.Name)
+                                }
+                            </span>
+                        </div>
+                    }
+                    @if (CanEditItem || CanDeleteItem)
+                    {
+                        <div class="col">
+                            <div class="actions">
+                                @if (CanEditItem)
+                                {
+                                    <button class="edit" @onclick="() => Edit(item)">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
+                                }
+                                @if (CanDeleteItem)
+                                {
+                                    <button class="remove" @onclick="() => DeleteItem(item)">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                }
                             </div>
-                        }
-                        else
-                        {
-                            <DatagridEdit T="T" Item="_editedItem" ColumnsToIgnore="ColumnsToIgnore" Columns="Columns" OnSave="Save" />
-                        }
+                        </div>
                     }
                 </div>
-            </div>
+            }
         </div>
-
-    }
-</div>
+    </div>
+}
+else
+{
+    <div class="loader"></div>
+}
