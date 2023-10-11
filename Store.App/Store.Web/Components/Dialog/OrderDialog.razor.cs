@@ -57,40 +57,62 @@ namespace Store.Web.Components.Dialog
 
         private async Task Submit()
         {
-            IsSaving = true;
-
-            if (_order.Id == Guid.Empty)
+            try
             {
-                if (selectedFile != null)
-                {
-                    var file = selectedFile;
-                    Stream stream = file.OpenReadStream();
-                    MemoryStream ms = new();
-                    await stream.CopyToAsync(ms);
-                    stream.Close();
+                IsSaving = true;
 
-                    _order.FileName = file.Name;
+                _order.ModifiedBy = "Admin";
+                _order.ModifiedOn = DateTime.Now;
+                _order.OrderLines.ToList().ForEach(x => x.ModifiedBy = "Admin");
+                _order.OrderLines.ToList().ForEach(x => x.ModifiedOn = DateTime.Now);
+                _order.OrderLines.Where(x => x.CreatedBy == null).ToList().ForEach(x => x.CreatedBy = "Admin");
+
+                OrderDto savedOrder;
+
+                if (_order.Id == Guid.Empty)
+                {
+                    if (selectedFile != null)
+                    {
+                        var file = selectedFile;
+                        Stream stream = file.OpenReadStream();
+                        MemoryStream ms = new();
+                        await stream.CopyToAsync(ms);
+                        stream.Close();
+
+                        _order.FileName = file.Name;
+                    }
+
+                    _order.OrderLines.ToList().ForEach(x => x.OrderId = _order.Id);
+                    _order.CreatedBy = "Admin";
+
+                    savedOrder = await OrderService.AddOrder(_order);
+                }
+                else
+                {
+                    savedOrder = await OrderService.UpdateOrder(_order);
                 }
 
-                _order.OrderLines.ToList().ForEach(x => x.OrderId = _order.Id);
-
-                var addedOrder = await OrderService.AddOrder(_order);
-                _order = null;
-                await OnResult.InvokeAsync(new Noticiation()
+                if (savedOrder != null)
                 {
-                    Name = "Order added",
-                    Sort = NoticiationType.Success
-                });
+                    _order = null;
+                    await OnResult.InvokeAsync(new Noticiation()
+                    {
+                        Name = "Order saved successfully",
+                        Sort = NoticiationType.Success
+                    });
+                }
+                else
+                {
+                    await OnResult.InvokeAsync(new Noticiation()
+                    {
+                        Name = "Error while saving order",
+                        Sort = NoticiationType.Danger
+                    });
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var addedOrder = await OrderService.UpdateOrder(_order);
-                _order = null;
-                await OnResult.InvokeAsync(new Noticiation()
-                {
-                    Name = "Order updated",
-                    Sort = NoticiationType.Success
-                });
+                
             }
         }
 

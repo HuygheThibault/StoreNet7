@@ -10,17 +10,17 @@
 
         public int Quantity { get; set; }
 
-        public decimal NetCost { get; set; }
+        public decimal? CostPerItem { get; set; }
 
-        public decimal VatCost { get; set; }
+        public decimal? Cost { get; set; }
 
-        public DateTime CreatedOn { get; set; } = DateTime.Now;
+        public DateTime CreatedOn { get; set; }
 
-        public string CreatedBy { get; set; } = "Unknown";
+        public string CreatedBy { get; set; }
 
-        public DateTime ModifiedOn { get; set; } = DateTime.Now;
+        public DateTime ModifiedOn { get; set; }
 
-        public string ModifiedBy { get; set; } = "Unknown";
+        public string ModifiedBy { get; set; }
 
         public virtual ProductDto? Product { get; set; } = null!;
     }

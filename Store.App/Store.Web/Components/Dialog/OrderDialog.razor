@@ -44,23 +44,20 @@
                             <InputNumber id="quantity" class="form-control input" @bind-Value="@orderLine.Quantity" placeholder="Quantity" />
                             <ValidationMessage class="error" For="@(() => orderLine.Quantity)" />
 
-                            <label for="netCost" class="label">Net cost: </label>
-                            <InputNumber id="netCost" class="form-control input" @bind-Value="@orderLine.NetCost" />
+                            <label for="costPerItem" class="label">Cost per item: </label>
+                            <InputNumber id="costPerItem" class="form-control input" @bind-Value="@orderLine.CostPerItem" />
 
-                            <label for="vat" class="label">Vat: </label>
-                            <InputNumber id="vat" class="form-control input" @bind-Value="@orderLine.VatCost" />
+                            <label for="cost" class="label">Cost: </label>
+                            <InputNumber id="cost" class="form-control input" @bind-Value="@orderLine.Cost" />
                         </fieldset>
                     }
                 </fieldset>
-                <label for="TotalCost" class="label">Total Cost: </label>
-                <InputNumber id="TotalCost" class="form-control input" @bind-Value="@_order.TotalCost" placeholder="Total Cost" />
-                <ValidationMessage class="error" For="@(() => _order.TotalCost)" />
-                <label for="TotalVatCost" class="label">Vat: </label>
-                <InputNumber id="TotalVatCost" class="form-control input" @bind-Value="@_order.TotalVatCost" placeholder="Vat" />
-                <ValidationMessage class="error" For="@(() => _order.TotalVatCost)" />
-                <label for="TotalVatCost" class="label">Vat: </label>
-                <InputNumber id="TotalVatCost" class="form-control input" @bind-Value="@_order.TotalVatCost" placeholder="Vat" />
-                <ValidationMessage class="error" For="@(() => _order.TotalVatCost)" />
+                <label for="orderCost" class="label">Cost: </label>
+                <InputNumber id="orderCost" class="form-control input" @bind-Value="@_order.Cost" placeholder="Cost" />
+                <ValidationMessage class="error" For="@(() => _order.Cost)" />
+                <label for="comments" class="label">comments: </label>
+                <InputTextArea id="comments" class="form-control input" @bind-Value="@_order.Comments" placeholder="Comments" />
+                <ValidationMessage class="error" For="@(() => _order.Comments)" />
                 
                 <label for="File" class="label">File: </label>
                 <InputFile OnChange="OnInputFileChange" />

@@ -100,12 +100,6 @@ namespace Store.Api.Controllers
 
                 Order newItem = _mapper.Map<Order>(request);
 
-                foreach (OrderLine orderLine in newItem.OrderLines)
-                {
-                    orderLine.OrderId = newItem.Id;
-                    _orderLineRepository.AddOrderLine(orderLine);
-                }
-
                 _orderRepository.AddOrder(newItem);
 
                 if (await _orderRepository.SaveChangesAsync())

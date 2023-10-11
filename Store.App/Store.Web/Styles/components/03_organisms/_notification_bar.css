@@ -14,17 +14,17 @@
   justify-content: flex-start;
   color: var(--primary-text);
 }
-.notifications .notification-bar .Danger {
+.notifications .notification-bar.Danger {
   background-color: var(--notification-danger);
 }
-.notifications .notification-bar .Success {
+.notifications .notification-bar.Success {
   background-color: var(--notification-success);
 }
-.notifications .notification-bar .Info {
+.notifications .notification-bar.Info {
   background-color: var(--notification-info);
 }
-.notifications .notification-bar .Warning {
+.notifications .notification-bar.Warning {
   background-color: var(--notification-warning);
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_notification_bar.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_notification_bar.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI%22%7D */

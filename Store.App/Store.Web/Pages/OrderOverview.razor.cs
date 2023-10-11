@@ -71,13 +71,13 @@ namespace Store.Web.Pages
                 },
                 new Column
                 {
-                    Name = "TotalCost",
+                    Name = "Cost",
                     ColumnType = "decimal",
                 },
                 new Column
                 {
-                    Name = "TotalVatCost",
-                    ColumnType = "decimal",
+                    Name = "Comments",
+                    ColumnType = "string",
                 },
                 new Column
                 {
@@ -86,7 +86,7 @@ namespace Store.Web.Pages
                 },
                 new Column
                 {
-                    Name = "CreatedOn",
+                    Name = "ExpirationDate",
                     ColumnType = "DateTime",
                 },
                 new Column()
@@ -119,12 +119,12 @@ namespace Store.Web.Pages
                 },
                 new Column
                 {
-                    Name = "NetCost",
+                    Name = "CostPerItem",
                     ColumnType = "decimal",
                 },
                 new Column
                 {
-                    Name = "VatCost",
+                    Name = "Cost",
                     ColumnType = "decimal",
                 }
             };

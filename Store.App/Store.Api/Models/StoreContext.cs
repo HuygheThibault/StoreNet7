@@ -110,17 +110,18 @@ public partial class StoreContext : DbContext
             entity.ToTable("Order");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Comments).HasMaxLength(255);
+            entity.Property(e => e.Cost).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.CreatedOn)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Createdby).HasMaxLength(50);
+            entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
             entity.Property(e => e.FileName).HasMaxLength(50);
             entity.Property(e => e.ModifiedBy).HasMaxLength(50);
             entity.Property(e => e.ModifiedOn)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.TotalCost).HasColumnType("decimal(18, 2)");
-            entity.Property(e => e.TotalVatCost).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.Supplier).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.SupplierId)
@@ -133,6 +134,8 @@ public partial class StoreContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK_OrderProduct");
 
             entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+            entity.Property(e => e.Cost).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.CostPerItem).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.CreatedBy).HasMaxLength(255);
             entity.Property(e => e.CreatedOn)
                 .HasDefaultValueSql("(getdate())")
@@ -141,8 +144,6 @@ public partial class StoreContext : DbContext
             entity.Property(e => e.ModifiedOn)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.NetCost).HasColumnType("decimal(18, 2)");
-            entity.Property(e => e.VatCost).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderLines)
                 .HasForeignKey(d => d.OrderId)

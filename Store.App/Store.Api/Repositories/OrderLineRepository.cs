@@ -60,6 +60,10 @@ namespace Store.Api.Repositories
                 orderLine.Id = Guid.NewGuid();
                 orderLine.CreatedOn = DateTime.Now;
                 orderLine.ModifiedOn = DateTime.Now;
+
+                Product product = context.Products.First(x => x.Id == orderLine.ProductId);
+                product.QuantityInStock += orderLine.Quantity;
+
                 context.OrderLines.Add(orderLine);
             }
             catch (Exception ex)

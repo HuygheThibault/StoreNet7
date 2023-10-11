@@ -22,7 +22,7 @@ namespace Store.Api.Repositories
             {
                 logger.LogInformation($"Getting all Orders");
 
-                IQueryable<Order> query = context.Orders.Include("Supplier").Include("OrderLines");
+                IQueryable<Order> query = context.Orders.Include(x => x.Supplier).Include(x => x.OrderLines);
 
                 return await query.ToListAsync();
             }
@@ -39,7 +39,7 @@ namespace Store.Api.Repositories
             {
                 logger.LogInformation($"Getting Order: {id}");
 
-                IQueryable<Order> query = context.Orders.Include("Supplier").Include("OrderLines");
+                IQueryable<Order> query = context.Orders.Include(x => x.Supplier).Include(x => x.OrderLines).ThenInclude(x => x.Product);
 
                 // Query It
                 query = query.Where(c => c.Id == id);
@@ -55,19 +55,35 @@ namespace Store.Api.Repositories
 
         public void AddOrder(Order order)
         {
-            try
+            using (IDbContextTransaction transaction = context.Database.BeginTransaction())
             {
-                logger.LogInformation($"Adding an order: {order}.");
 
-                order.Id = Guid.NewGuid();
-                order.CreatedOn = DateTime.Now;
-                order.ModifiedOn = DateTime.Now;
+                try
+                {
+                    order.Id = Guid.NewGuid();
+                    logger.LogInformation($"Adding an order: {order}.");
 
-                context.Orders.Add(order);
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "error occured");
+                    context.Orders.Add(order);
+
+                    foreach (OrderLine orderLine in order.OrderLines)
+                    {
+                        logger.LogInformation($"Adding an orderLine {orderLine} to the context.");
+                        orderLine.OrderId = order.Id;
+                        orderLine.Id = Guid.NewGuid();
+
+                        Product product = context.Products.First(x => x.Id == orderLine.ProductId);
+                        product.QuantityInStock += orderLine.Quantity;
+
+                        context.OrderLines.Add(orderLine);
+                    }
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "error occured");
+                    transaction.Rollback();
+                }
             }
         }
 
@@ -84,6 +100,8 @@ namespace Store.Api.Repositories
                     foreach (OrderLine dbOrderline in dbOrder.OrderLines.Where(x => !order.OrderLines.Select(ol => ol.Id).Contains(x.Id))) // Remove order lines
                     {
                         logger.LogInformation($"Removed orderLine: {dbOrderline.Id}.");
+
+                        dbOrderline.Product.QuantityInStock -= dbOrderline.Quantity;
                         dbOrder.OrderLines.Remove(dbOrderline);
                     }
 
@@ -92,37 +110,44 @@ namespace Store.Api.Repositories
                         logger.LogInformation($"Updating orderLine: {dbOrderline}.");
 
                         OrderLine newOrderLine = order.OrderLines.FirstOrDefault(x => x.Id == dbOrderline.Id);
+
+                        if (dbOrderline.Quantity != newOrderLine.Quantity)
+                        {
+                            dbOrderline.Product.QuantityInStock -= dbOrderline.Quantity;
+                            dbOrderline.Product.QuantityInStock += newOrderLine.Quantity;
+                        }
+
                         dbOrderline.ProductId = newOrderLine.ProductId;
                         dbOrderline.Quantity = newOrderLine.Quantity;
-                        dbOrderline.NetCost = newOrderLine.NetCost;
-                        dbOrderline.VatCost = newOrderLine.VatCost;
-                        dbOrderline.ModifiedOn = DateTime.Now;
-                        dbOrderline.ModifiedBy = "Admin";
+                        dbOrderline.CostPerItem = newOrderLine.CostPerItem;
+                        dbOrderline.Cost = newOrderLine.Cost;
                     }
 
                     foreach (OrderLine orderLine in order.OrderLines.Where(x => x.Id == Guid.Empty)) // Add order lines
                     {
-                        orderLine.ModifiedOn = DateTime.Now;
-                        orderLine.CreatedOn = DateTime.Now;
-                        orderLine.CreatedBy = "Admin";
-                        orderLine.ModifiedBy = "Admin";
+                        logger.LogInformation($"Adding orderLine: {orderLine}.");
                         orderLine.OrderId = order.Id;
 
-                        logger.LogInformation($"Adding orderLine: {orderLine}.");
+                        Product product = context.Products.FirstOrDefault(x => x.Id == orderLine.ProductId);
+
+                        if(product != null)
+                        {
+                            orderLine.Product = product;
+                            orderLine.Product.QuantityInStock += orderLine.Quantity;
+                        }
+
                         dbOrder.OrderLines.Add(orderLine);
                     }
 
                     dbOrder.SupplierId = order.SupplierId;
-                    dbOrder.TotalCost = order.TotalCost;
-                    dbOrder.TotalVatCost = order.TotalVatCost;
+                    dbOrder.Cost = order.Cost;
+                    dbOrder.Comments = order.Comments;
                     dbOrder.IsPaid = order.IsPaid;
-                    dbOrder.ModifiedBy = "Admin";
-                    dbOrder.ModifiedOn = DateTime.Now;
 
                     context.Update(dbOrder);
 
                     await context.SaveChangesAsync();
-                 
+
                     transaction.Commit();
 
                     return dbOrder;

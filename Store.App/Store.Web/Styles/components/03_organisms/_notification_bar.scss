@@ -13,21 +13,21 @@
         align-items: center;
         justify-content: flex-start;
         color: var(--primary-text);
+    }
 
-        .Danger {
-            background-color: var(--notification-danger);
-        }
+    .notification-bar.Danger {
+        background-color: var(--notification-danger);
+    }
 
-        .Success {
-            background-color: var(--notification-success);
-        }
+    .notification-bar.Success {
+        background-color: var(--notification-success);
+    }
 
-        .Info {
-            background-color: var(--notification-info);
-        }
+    .notification-bar.Info {
+        background-color: var(--notification-info);
+    }
 
-        .Warning {
-            background-color: var(--notification-warning);
-        }
+    .notification-bar.Warning {
+        background-color: var(--notification-warning);
     }
 }

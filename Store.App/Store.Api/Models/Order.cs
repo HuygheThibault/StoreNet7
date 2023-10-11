@@ -7,15 +7,17 @@ public partial class Order
 {
     public Guid Id { get; set; }
 
+    public Guid SupplierId { get; set; }
+
     public string? FileName { get; set; }
 
-    public decimal TotalCost { get; set; }
-
-    public decimal TotalVatCost { get; set; }
+    public decimal Cost { get; set; }
 
     public bool IsPaid { get; set; }
 
-    public Guid SupplierId { get; set; }
+    public string? Comments { get; set; }
+
+    public DateTime? ExpirationDate { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
