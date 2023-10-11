@@ -1,0 +1,37 @@
+﻿@page "/CheckoutDashboard"
+@using Store.Web.Components
+<PageTitle>Checkout dashoard</PageTitle>
+<div class="dashboard pd-0">
+    <div class="parent-categories pd-1">
+        @foreach (var category in _Categories.Where(x => x.ParentCategoryId == null))
+        {
+            <div style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
+                <p class="a-align-item-center">@category.Title</p>
+            </div>
+        }
+    </div>
+
+    <div class="children-categories pd-b-1">
+        @if (_SelectedCategory != null)
+        {
+            @foreach (var category in _Categories.Where(x => x.ParentCategoryId == _SelectedCategory.Id))
+            {
+                <div style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
+                    <p class="align-text-center">@category.Title</p>
+                </div>
+            }
+        }
+    </div>
+    <div class="dashboard-products pd-b-1">
+        @foreach (var product in _Products.Where(x => x.CategoryId == _SelectedCategory.Id || x.CategoryId == _SelectedCategory.ParentCategoryId).ToList())
+        {
+            <div style="background-color:@product?.Category?.Color">
+                <img class="sze-5rem" src="@product.Image" alt="Product.Title">
+                <h4 class="align-text-center">@product.Title</h4>
+                <h3>@product.Description</h3>
+                <span class="align-text-center">@product.PricePerUnit.ToString("C")</span>
+            </div>
+        }
+    </div>
+    <TicketSidebar/>
+</div>

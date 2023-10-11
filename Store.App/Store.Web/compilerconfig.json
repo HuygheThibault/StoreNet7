@@ -172,5 +172,9 @@
   {
     "outputFile": "Styles/components/03_organisms/_supplier-card.css",
     "inputFile": "Styles/components/03_organisms/_supplier-card.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_scrollbar.css",
+    "inputFile": "Styles/components/01_atoms/_scrollbar.scss"
   }
 ]
