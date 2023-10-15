@@ -1,15 +1,15 @@
 ﻿.card {
-  background-color: var(--primary-dark);
+  background-color: var(--third-color);
   z-index: 9;
 }
 .card .close {
   position: fixed;
   top: 0;
   right: 0;
-  color: var(--primary-text);
+  color: var(--primary-text-color);
 }
 .card .card-header {
-  background-color: var(--secondary-dark);
+  background-color: var(--fourth-color);
   display: flex;
   padding: 0 1rem;
 }

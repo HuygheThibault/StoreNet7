@@ -1,5 +1,5 @@
 ﻿.product-card-counter {
-  background-color: var(--primary-dark);
+  background-color: var(--primary-color);
   transition: display 0s linear 0.33s, grid-column 0.33s linear;
 }
 .product-card-counter .product {

@@ -28,10 +28,6 @@
     "inputFile": "Styles/components/01_atoms/_margins.scss"
   },
   {
-    "outputFile": "Styles/components/01_atoms/_profile.css",
-    "inputFile": "Styles/components/01_atoms/_profile.scss"
-  },
-  {
     "outputFile": "Styles/components/01_atoms/_sizes.css",
     "inputFile": "Styles/components/01_atoms/_sizes.scss"
   },
@@ -70,10 +66,6 @@
   {
     "outputFile": "Styles/components/02_molecules/_nav-links.css",
     "inputFile": "Styles/components/02_molecules/_nav-links.scss"
-  },
-  {
-    "outputFile": "Styles/components/02_molecules/_notification-bar.css",
-    "inputFile": "Styles/components/02_molecules/_notification-bar.scss"
   },
   {
     "outputFile": "Styles/components/02_molecules/_selected-items.css",
@@ -176,5 +168,9 @@
   {
     "outputFile": "Styles/components/01_atoms/_scrollbar.css",
     "inputFile": "Styles/components/01_atoms/_scrollbar.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_profile.css",
+    "inputFile": "Styles/components/02_molecules/_profile.scss"
   }
 ]

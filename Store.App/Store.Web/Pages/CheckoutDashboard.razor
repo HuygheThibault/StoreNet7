@@ -14,6 +14,9 @@
     <div class="children-categories pd-b-1">
         @if (_SelectedCategory != null)
         {
+            <div style="background-color:@_SelectedCategory?.Color; border: solid 1rem">
+                <p class="align-text-center">@_SelectedCategory?.Title</p>
+            </div>
             @foreach (var category in _Categories.Where(x => x.ParentCategoryId == _SelectedCategory.Id))
             {
                 <div style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
@@ -26,12 +29,12 @@
         @foreach (var product in _Products.Where(x => x.CategoryId == _SelectedCategory.Id || x.CategoryId == _SelectedCategory.ParentCategoryId).ToList())
         {
             <div style="background-color:@product?.Category?.Color">
-                <img class="sze-5rem" src="@product.Image" alt="Product.Title">
+                <img class="sze-5rem" src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
                 <h4 class="align-text-center">@product.Title</h4>
                 <h3>@product.Description</h3>
                 <span class="align-text-center">@product.PricePerUnit.ToString("C")</span>
             </div>
         }
     </div>
-    <TicketSidebar/>
+    <TicketSidebar />
 </div>

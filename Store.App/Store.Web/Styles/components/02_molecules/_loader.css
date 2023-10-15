@@ -1,5 +1,5 @@
 ﻿.loading-screen {
-  background-color: var(--primary-dark);
+  background-color: var(--primary-color);
   opacity: 0.5;
 }
 .loading-screen .loader {
@@ -8,17 +8,17 @@
   gap: 1rem;
 }
 .loading-screen .loader .loading-dot {
-  background-color: var(--primary-light);
+  background-color: var(--secondary-color);
   border-radius: 50%;
   animation: loading-dot-animation 0.6s infinite ease-in-out;
 }
 
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+  border: 1rem solid var(--primary-color);
+  border-top: 1rem solid var(--secondary-color);
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 10rem;
+  height: 10rem;
   animation: spin 2s linear infinite;
 }
 

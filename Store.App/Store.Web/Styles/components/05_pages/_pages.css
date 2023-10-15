@@ -12,6 +12,11 @@ html {
   font-weight: 300;
 }
 
+body {
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
+}
+
 .page {
   display: grid;
   grid-template-areas: "nav header" "nav main" "nav footer";
@@ -27,7 +32,7 @@ html {
   z-index: 1;
   height: 100vh;
   padding: 0 0.5rem;
-  background-color: var(--primary-dark);
+  background-color: var(--secondary-color);
 }
 .page main {
   grid-area: main;
@@ -36,4 +41,4 @@ html {
   grid-area: footer;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/05_pages/_pages.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AACA;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;;;AAOJ;EACI;EACA,qBACI;EACJ;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/05_pages/_pages.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AACA;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;;;AAIJ;EACI;EACA;;;AAGJ;EACI;EACA,qBACI;EACJ;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI%22%7D */

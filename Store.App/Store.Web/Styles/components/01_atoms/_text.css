@@ -1,13 +1,13 @@
 ﻿.text-primary {
-  color: var(--primary-text);
+  color: var(--primary-text-color);
 }
 
 .text-secondary {
-  color: var(--secondary-text);
+  color: var(--secondary-text-color);
 }
 
 .error {
-  color: var(--danger);
+  color: var(--danger-color);
 }
 
 /*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_text.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;;;AAGJ;EACI;;;AAGJ;EACI%22%7D */

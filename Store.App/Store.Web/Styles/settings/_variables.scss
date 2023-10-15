@@ -1,18 +1,18 @@
 ﻿:root {
     $font-stack: Helvetica, sans-serif;
-    --primary-light: #F8F7F2;
-    --secondary-light: #D0C2B0;
-    --primary-dark: #020403;
-    --secondary-dark: #555;
-    --primary-text: #fff;
-    --secondary-text: #808080;
-    --body-background: #222;
-    --grid: #333333;
-    --danger: #e62222;
-    --success: green;
-    --notification-danger: #ff0a01;
-    --notification-warning: #2B3246;
-    --notification-success: #2B3246;
-    --notification-info: #2B3246;
-    --primary-button: #333333;
+
+    // App colors
+    --primary-color: #D8BFAA;
+    --secondary-color: #774936;
+    --third-color: #4F6D7A;
+    --fourth-color: #3A88AF;
+    // Texr
+    --primary-text-color: #fff;
+    --secondary-text-color: #808080;
+    // Action
+    --danger-color: #e62222;
+    --warning-color: #FFCE00;
+    --success-color: #29dc00;
+    --info-primary-color: #51BBFE   ;
+    --info-secondary-color: #51BBFE;
 }

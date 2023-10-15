@@ -8,9 +8,8 @@
 .form .label {
   grid-column: 1;
   grid-row: auto;
-  color: var(--primary-text);
-  font-weight: 700;
   margin: auto 0;
+  font-weight: 700;
 }
 .form .input {
   grid-column: 2;
@@ -22,10 +21,8 @@
 }
 .form .dropdown {
   grid-column: 2;
-  background-color: var(--primary-text);
-  color: #000000;
+  background-color: #ffffff;
   padding: 0.4em;
-  border: 0;
   font-size: 1.25rem;
   border-radius: 0.5rem;
 }
@@ -36,26 +33,12 @@
 .form fieldset .label {
   grid-column: 1;
   grid-row: auto;
-  color: var(--primary-text);
-  font-weight: 700;
   margin: auto 0;
 }
 .form fieldset .input {
   grid-column: 2;
   grid-row: auto;
   padding: 0.4em;
-  border: 0;
-  font-size: 1.25rem;
-  border-radius: 0.5rem;
-}
-.form fieldset .dropdown {
-  grid-column: 2;
-  background-color: var(--primary-text);
-  color: #000000;
-  padding: 0.4em;
-  border: 0;
-  font-size: 1.25rem;
-  border-radius: 0.5rem;
 }
 .form .form-actions {
   grid-column: 1/span 2;
@@ -68,4 +51,4 @@
   border-radius: 1rem;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_forms.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_forms.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA%22%7D */

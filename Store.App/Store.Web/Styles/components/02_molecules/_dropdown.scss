@@ -1,11 +1,9 @@
 ﻿.dropdown {
     border: none;
     width: auto;
-    background-color: inherit;
-    color: inherit;
 
     option {
         border: none;
-        background-color: var(--secondary-dark);
+        background-color: inherit;
     }
 }

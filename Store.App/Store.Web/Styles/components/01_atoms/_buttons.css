@@ -1,6 +1,7 @@
 ﻿button {
   border: none;
-  color: var(--primary-text);
+  color: var(--primary-text-color);
+  background: var(--info-secondary-color);
 }
 
 button:hover {
@@ -12,23 +13,19 @@ button:focus {
 }
 
 button.submit {
-  background-color: var(--notification-success);
+  background-color: var(--info-primary-color) !important;
 }
 
 button.add {
-  background-color: var(--notification-success);
+  background-color: var(--info-primary-color) !important;
 }
 
 button.remove {
-  background-color: var(--notification-danger);
+  background-color: var(--danger-color) !important;
 }
 
 button.edit {
-  background: var(--secondary-dark);
+  background: var(--info-primary-color) !important;
 }
 
-button.cancel {
-  background: var(--danger);
-}
-
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_buttons.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAIJ;EACI;;;AAGJ;EACI%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_buttons.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI%22%7D */

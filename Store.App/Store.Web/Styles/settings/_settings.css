@@ -1,19 +1,15 @@
 ﻿:root {
-  --primary-light: #F8F7F2;
-  --secondary-light: #D0C2B0;
-  --primary-dark: #020403;
-  --secondary-dark: #555;
-  --primary-text: #fff;
-  --secondary-text: #808080;
-  --body-background: #222;
-  --grid: #333333;
-  --danger: #e62222;
-  --success: green;
-  --notification-danger: #ff0a01;
-  --notification-warning: #2B3246;
-  --notification-success: #2B3246;
-  --notification-info: #2B3246;
-  --primary-button: #333333;
+  --primary-color: #D8BFAA;
+  --secondary-color: #774936;
+  --third-color: #4F6D7A;
+  --fourth-color: #3A88AF;
+  --primary-text-color: #fff;
+  --secondary-text-color: #808080;
+  --danger-color: #e62222;
+  --warning-color: #FFCE00;
+  --success-color: #29dc00;
+  --info-primary-color: #51BBFE ;
+  --info-secondary-color: #51BBFE;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/settings/_variables.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EAEG;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/settings/_variables.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EAIG;EACA;EACA;EACA;EAEA;EACA;EAEA;EACA;EACA;EACA;EACA%22%7D */

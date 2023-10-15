@@ -1,8 +1,7 @@
 ﻿.data-grid-container {
     display: grid;
     grid-template-areas: 'actions validations' 'grid grid';
-    background-color: var(--secondary-dark);
-    color: var(--primary-text);
+    /*background-color: var(--secondary-color);*/
     overflow: auto;
     border-radius: 0.5rem;
 
@@ -18,7 +17,7 @@
         grid-area: grid;
         display: grid;
         grid-template-areas: 'headers' 'rows';
-        background-color: var(--body-background);
+        background-color: var(--third-color);
 
         .row {
             display: grid;
@@ -39,9 +38,9 @@
 
         .headers {
             grid-area: headers;
+            background-color: rgba(0, 0, 0, 0.5);
 
             .col {
-                background-color: var(--primary-dark);
                 justify-content: center;
             }
 
@@ -75,8 +74,7 @@
                     display: flex;
                     align-items: center;
                     margin: 1rem;
-                    color: var(--primary-text);
-                    background-color: var(--notification-danger);
+                    background-color: var(--danger-color);
                 }
 
                 .actions {

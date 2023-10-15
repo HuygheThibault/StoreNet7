@@ -1,15 +1,15 @@
 ﻿.selected-items {
     display: grid;
     grid-auto-flow: row;
-    background-color: var(--secondary-dark);
+    background-color: var(--secondary-color);
 
     .item {
         display: grid;
         grid-template-columns: repeat(4, [col] 3rem );
         grid-template-rows: repeat(3, [row] 3rem );
         gap: 1rem;
-        background-color: var(--grid);
         border-radius: 1rem;
+        background-color: var(--third-color);
     }
 
     h4 {

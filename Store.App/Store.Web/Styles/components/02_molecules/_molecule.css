@@ -1,11 +1,4 @@
-﻿.notification-bar {
-  background-color: green;
-  display: block;
-  height: 10rem;
-  width: 10rem;
-}
-
-.nav-header {
+﻿.nav-header {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,28 +22,28 @@
 
 .nav-link:active {
   border-radius: 0.375rem;
-  background-color: var(--primary-light);
-  color: var(--primary-dark);
+  background-color: var(--primary-color);
+  color: var(--secondary-text-color);
 }
 
 .nav-link:hover {
   border-radius: 0.375rem;
-  background-color: var(--primary-light);
-  color: var(--primary-dark);
+  background-color: var(--primary-color);
+  color: var(--secondary-text-color);
 }
 
 .selected-items {
   display: grid;
   grid-auto-flow: row;
-  background-color: var(--secondary-dark);
+  background-color: var(--secondary-color);
 }
 .selected-items .item {
   display: grid;
   grid-template-columns: repeat(4, [col] 3rem);
   grid-template-rows: repeat(3, [row] 3rem);
   gap: 1rem;
-  background-color: var(--grid);
   border-radius: 1rem;
+  background-color: var(--third-color);
 }
 .selected-items h4 {
   grid-column: col/span 2;
@@ -78,17 +71,17 @@
 }
 
 .card {
-  background-color: var(--primary-dark);
+  background-color: var(--third-color);
   z-index: 9;
 }
 .card .close {
   position: fixed;
   top: 0;
   right: 0;
-  color: var(--primary-text);
+  color: var(--primary-text-color);
 }
 .card .card-header {
-  background-color: var(--secondary-dark);
+  background-color: var(--fourth-color);
   display: flex;
   padding: 0 1rem;
 }
@@ -119,9 +112,8 @@
 .form .label {
   grid-column: 1;
   grid-row: auto;
-  color: var(--primary-text);
-  font-weight: 700;
   margin: auto 0;
+  font-weight: 700;
 }
 .form .input {
   grid-column: 2;
@@ -133,10 +125,8 @@
 }
 .form .dropdown {
   grid-column: 2;
-  background-color: var(--primary-text);
-  color: #000000;
+  background-color: #ffffff;
   padding: 0.4em;
-  border: 0;
   font-size: 1.25rem;
   border-radius: 0.5rem;
 }
@@ -147,26 +137,12 @@
 .form fieldset .label {
   grid-column: 1;
   grid-row: auto;
-  color: var(--primary-text);
-  font-weight: 700;
   margin: auto 0;
 }
 .form fieldset .input {
   grid-column: 2;
   grid-row: auto;
   padding: 0.4em;
-  border: 0;
-  font-size: 1.25rem;
-  border-radius: 0.5rem;
-}
-.form fieldset .dropdown {
-  grid-column: 2;
-  background-color: var(--primary-text);
-  color: #000000;
-  padding: 0.4em;
-  border: 0;
-  font-size: 1.25rem;
-  border-radius: 0.5rem;
 }
 .form .form-actions {
   grid-column: 1/span 2;
@@ -180,7 +156,7 @@
 }
 
 .loading-screen {
-  background-color: var(--primary-dark);
+  background-color: var(--primary-color);
   opacity: 0.5;
 }
 .loading-screen .loader {
@@ -189,34 +165,32 @@
   gap: 1rem;
 }
 .loading-screen .loader .loading-dot {
-  background-color: var(--primary-light);
+  background-color: var(--secondary-color);
   border-radius: 50%;
   animation: loading-dot-animation 0.6s infinite ease-in-out;
 }
 
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+  border: 1rem solid var(--primary-color);
+  border-top: 1rem solid var(--secondary-color);
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 10rem;
+  height: 10rem;
   animation: spin 2s linear infinite;
 }
 
 .dropdown {
   border: none;
   width: auto;
-  background-color: inherit;
-  color: inherit;
 }
 .dropdown option {
   border: none;
-  background-color: var(--secondary-dark);
+  background-color: inherit;
 }
 
 .arrow {
   padding-left: 0.5rem;
-  border: solid var(--primary-text);
+  border: solid;
   border-width: 0 3px 3px 0;
   padding: 3px;
 }
@@ -231,4 +205,9 @@
   -webkit-transform: rotate(45deg);
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_notification-bar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-links.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_selected-items.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_forms.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_loader.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_dropdown.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_arrow-icons.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;;;ACJH;EACG;EACA;EACA;EACA;EACA;;;ACLH;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACC;EACA;EACA;;;AAIF;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;ACxBA;EACG;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;;ACxCP;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AChCH;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;AC1EX;EACG;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;;;ACvBH;EACG;EACA;EACA;EACA;;AAEA;EACI;EACA;;;ACRP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA%22%7D */
+.profile-avatar {
+  height: auto;
+  width: auto;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-links.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_selected-items.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_forms.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_loader.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_dropdown.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_arrow-icons.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_profile.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;;;ACLH;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACC;EACA;EACA;;;AAIF;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;ACxBA;EACG;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;;ACxCP;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AChCH;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;ACxDX;EACG;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;;;ACvBH;EACG;EACA;;AAEA;EACI;EACA;;;ACNP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA;;;ACdH;EACG;EACA%22%7D */

@@ -12,22 +12,21 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        color: var(--primary-text);
     }
 
     .notification-bar.Danger {
-        background-color: var(--notification-danger);
+        background-color: var(--danger-color);
     }
 
     .notification-bar.Success {
-        background-color: var(--notification-success);
+        background-color: var(--success-color);
     }
 
     .notification-bar.Info {
-        background-color: var(--notification-info);
+        background-color: var(--info-color);
     }
 
     .notification-bar.Warning {
-        background-color: var(--notification-warning);
+        background-color: var(--warning-color);
     }
 }
