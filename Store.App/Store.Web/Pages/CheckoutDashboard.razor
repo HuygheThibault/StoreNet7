@@ -1,22 +1,27 @@
 ﻿@page "/CheckoutDashboard"
 @using Store.Web.Components
+@using Store.Web.Components.Checkout
 <PageTitle>Checkout dashoard</PageTitle>
 <div class="dashboard pd-0">
-    <div class="parent-categories pd-1">
+    <section class="parent-categories pd-1">
         @foreach (var category in _Categories.Where(x => x.ParentCategoryId == null))
         {
-            <div style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
+            <div class="@( category.Id == _SelectedCategory?.Id || category.Id == _SelectedCategory?.ParentCategoryId ? "active-category" : "")" style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
                 <p class="a-align-item-center">@category.Title</p>
             </div>
         }
-    </div>
+    </section>
 
-    <div class="children-categories pd-b-1">
+    <section class="children-categories pd-b-1">
         @if (_SelectedCategory != null)
         {
-            <div style="background-color:@_SelectedCategory?.Color; border: solid 1rem">
-                <p class="align-text-center">@_SelectedCategory?.Title</p>
-            </div>
+            @if (_SelectedCategory.ParentCategoryId != null)
+            {
+                <div class="active-category" style="background-color:@_SelectedCategory?.Color; ">
+                    <p class="align-text-center">@_SelectedCategory?.Title</p>
+                </div>
+            }
+
             @foreach (var category in _Categories.Where(x => x.ParentCategoryId == _SelectedCategory.Id))
             {
                 <div style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
@@ -24,17 +29,12 @@
                 </div>
             }
         }
-    </div>
-    <div class="dashboard-products pd-b-1">
-        @foreach (var product in _Products.Where(x => x.CategoryId == _SelectedCategory.Id || x.CategoryId == _SelectedCategory.ParentCategoryId).ToList())
+    </section>
+    <section class="dashboard-products pd-b-1">
+        @foreach (var product in _Products.Where(x => x.CategoryId == _SelectedCategory?.Id || x.CategoryId == _SelectedCategory?.ParentCategoryId).ToList())
         {
-            <div style="background-color:@product?.Category?.Color">
-                <img class="sze-5rem" src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
-                <h4 class="align-text-center">@product.Title</h4>
-                <h3>@product.Description</h3>
-                <span class="align-text-center">@product.PricePerUnit.ToString("C")</span>
-            </div>
+            <ProductCard Product="product" />
         }
-    </div>
+    </section>
     <TicketSidebar />
 </div>

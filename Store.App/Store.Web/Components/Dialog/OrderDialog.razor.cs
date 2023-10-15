@@ -22,10 +22,10 @@ namespace Store.Web.Components.Dialog
         [Parameter]
         public OrderDto? Order { get; set; }
 
+        private OrderDto? _order;
+
         [Parameter]
         public EventCallback<Noticiation> OnResult { get; set; }
-
-        private OrderDto? _order;
 
         public List<SupplierDto> Suppliers { get; set; } = new List<SupplierDto>();
 
