@@ -5,6 +5,7 @@
         @foreach (SaleLineDto saleLine in Sale?.SaleLines)
         {
             <div class="item pd-1">
+                <i class="fa-solid fa-xmark pd-1" @onclick="() => Remove(saleLine)"></i>
                 <picture class="thumbnail">
                     <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
                 </picture>

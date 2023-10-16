@@ -39,12 +39,21 @@ namespace Store.Web.Components.Checkout
             if (NewSaleLine != null)
             {
                 SaleLineDto saleLine = Sale?.SaleLines?.FirstOrDefault(x => x.Product.Id == newSaleLine.Product.Id);
-                saleLine.Quantity--;
-                
-                if (saleLine.Quantity <= 0)
+
+                if (saleLine.Quantity > 1)
                 {
-                    Sale.SaleLines.Remove(saleLine);
+                    saleLine.Quantity--;
                 }
+            }
+        }
+
+        private void Remove(SaleLineDto newSaleLine)
+        {
+            if (NewSaleLine != null)
+            {
+                SaleLineDto saleLine = Sale?.SaleLines?.FirstOrDefault(x => x.Product.Id == newSaleLine.Product.Id);
+                Sale.SaleLines.Remove(saleLine);
+
             }
         }
     }
