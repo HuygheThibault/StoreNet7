@@ -1,6 +1,12 @@
-﻿.payment-button {
+﻿.footer-info{
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+}
+.payment-button {
     background-color: var(--primary-info-color);
     color: var(--secondary-color);
+    
 }
 
 .payment-button:hover {

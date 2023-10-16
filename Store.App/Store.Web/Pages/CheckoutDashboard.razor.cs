@@ -20,6 +20,8 @@ namespace Store.Web.Pages
 
         private CategoryDto _SelectedCategory = default!;
 
+        private SaleLineDto? _SaleLine = default!;
+
         protected override async Task OnInitializedAsync()
         {
             _Products = (await ProductService.GetAllProducts()).ToList();
@@ -31,6 +33,11 @@ namespace Store.Web.Pages
         private void SetSelectedCategroy(CategoryDto category)
         {
             _SelectedCategory = category;
+        }
+
+        private void AddItemToTicket(ProductDto product)
+        {
+           _SaleLine = new SaleLineDto() { Product = product, Quantity = 1 };
         }
     }
 }

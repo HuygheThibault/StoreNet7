@@ -1,14 +1,36 @@
-﻿<div class="dashboard-sidebar">
-    <div class="selected-items">
+﻿@using Store.Shared.Dto;
 
+<div class="dashboard-sidebar">
+    <div class="selected-items pd-r-1">
+        @foreach (SaleLineDto saleLine in Sale?.SaleLines)
+        {
+            <div class="item pd-1">
+                <picture class="thumbnail">
+                    <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
+                </picture>
+                <div class="details">
+                    <h2>@saleLine.Product.Title</h2>
+                </div>
+                <div class="actions">
+                    <button class="submit"><i class="fa-solid fa-plus"></i></button>
+                    <h2 class="mrg-hrztl-1">@saleLine.Quantity</h2>
+                    <button class="remove"><i class="fa-solid fa-minus"></i></button>
+                </div>
+                <h3>@((saleLine.Product.PricePerUnit * saleLine.Quantity).ToString("C"))</h3>
+            </div>
+
+        }
     </div>
-    <div class="total">
-        @* <p>Total: @GetTotalPrice().ToString("C")</p> *@
+    <div class="footer-info">
+        <div class="total">
+            <p>Total: @Sale.SaleLines.Sum(x => x.Quantity * x.Product.PricePerUnit).ToString("C")</p>
+        </div>
+        <div class="payment-methods">
+            <h4>Select Payment Method:</h4>
+            <button class="payment-button">Method 1</button>
+            <button class="payment-button">Method 2</button>
+            <button class="payment-button">Method 3</button>
+        </div>
     </div>
-    <div class="payment-methods">
-        <h4>Select Payment Method:</h4>
-        <button class="payment-button">Method 1</button>
-        <button class="payment-button">Method 2</button>
-        <button class="payment-button">Method 3</button>
-    </div>
+
 </div>

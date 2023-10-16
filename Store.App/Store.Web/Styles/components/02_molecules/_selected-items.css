@@ -1,39 +1,48 @@
 ﻿.selected-items {
-  display: grid;
-  grid-auto-flow: row;
-  background-color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  flex-direction: column;
+  height: 70%;
 }
 .selected-items .item {
   display: grid;
-  grid-template-columns: repeat(4, [col] 3rem);
-  grid-template-rows: repeat(3, [row] 3rem);
+  grid-template-columns: auto 1fr 1fr;
+  grid-template-rows: 1fr auto;
+  width: 100%;
   gap: 1rem;
-  border-radius: 1rem;
-  background-color: var(--third-color);
 }
-.selected-items h4 {
-  grid-column: col/span 2;
-  grid-row: row;
+.selected-items .item .thumbnail {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  justify-self: center;
 }
-.selected-items .top-right {
-  grid-column: col 3/span 2;
-  grid-row: row;
+.selected-items .item .thumbnail img {
+  display: block;
+  border: 0;
+  width: 3rem;
 }
-.selected-items img {
-  grid-column: col;
-  grid-row: row 2;
+.selected-items .item .details {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  justify-self: start;
 }
-.selected-items .actions {
-  grid-column: col 2/span 3;
-  grid-row: row 2;
-  display: grid;
-  grid-auto-flow: column;
-  gap: 1rem;
-  margin: 5rem;
+.selected-items .item .actions {
+  grid-column: 1/span 2;
+  grid-row: 2;
+  display: flex;
 }
-.selected-items .details {
-  grid-column: col/span 4;
-  grid-row: row 3;
+.selected-items .item .actions h2 {
+  align-self: center;
+}
+.selected-items .item h3 {
+  grid-column: 3;
+  grid-row: 2;
+  align-self: end;
+  justify-self: end;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_selected-items.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_selected-items.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;;AAIR;EACI;EACA;EACA;EACA%22%7D */

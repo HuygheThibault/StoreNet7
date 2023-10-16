@@ -33,8 +33,10 @@
     <section class="dashboard-products pd-b-1">
         @foreach (var product in _Products.Where(x => x.CategoryId == _SelectedCategory?.Id || x.CategoryId == _SelectedCategory?.ParentCategoryId).ToList())
         {
-            <ProductCard Product="product" />
+            <div @onclick="() => AddItemToTicket(product)">
+                <ProductCard Product="product" />
+            </div>
         }
     </section>
-    <TicketSidebar />
+    <TicketSidebar NewSaleLine="_SaleLine" />
 </div>
