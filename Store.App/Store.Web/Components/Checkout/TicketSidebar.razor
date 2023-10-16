@@ -12,9 +12,9 @@
                     <h2>@saleLine.Product.Title</h2>
                 </div>
                 <div class="actions">
-                    <button class="submit"><i class="fa-solid fa-plus"></i></button>
+                    <button class="add pd-1" @onclick="() => AddQuantity(saleLine)"><i class="fa-solid fa-plus"></i></button>
                     <h2 class="mrg-hrztl-1">@saleLine.Quantity</h2>
-                    <button class="remove"><i class="fa-solid fa-minus"></i></button>
+                    <button class="remove pd-1" @onclick="() => RemoveQuantity(saleLine)"><i class="fa-solid fa-minus"></i></button>
                 </div>
                 <h3>@((saleLine.Product.PricePerUnit * saleLine.Quantity).ToString("C"))</h3>
             </div>

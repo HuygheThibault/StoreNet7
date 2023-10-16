@@ -17,7 +17,7 @@ button.submit {
 }
 
 button.add {
-  background-color: var(--info-primary-color) !important;
+  background-color: var(--success-color) !important;
 }
 
 button.remove {

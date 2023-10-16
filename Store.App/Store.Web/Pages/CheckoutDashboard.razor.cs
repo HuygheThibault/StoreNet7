@@ -37,7 +37,7 @@ namespace Store.Web.Pages
 
         private void AddItemToTicket(ProductDto product)
         {
-           _SaleLine = new SaleLineDto() { Product = product, Quantity = 1 };
+           _SaleLine = new SaleLineDto() { Id = Guid.NewGuid(), Product = product, Quantity = 1 };
         }
     }
 }

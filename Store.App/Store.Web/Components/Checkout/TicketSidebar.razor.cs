@@ -14,7 +14,37 @@ namespace Store.Web.Components.Checkout
         {
             if (NewSaleLine != null && NewSaleLine?.Product != null)
             {
-                Sale.SaleLines.Add(NewSaleLine);
+                if (Sale.SaleLines.Select(x => x.Product.Id).ToList().Contains(NewSaleLine.Product.Id))
+                {
+                    AddQuantity(NewSaleLine);
+                }
+                else
+                {
+                    Sale.SaleLines.Add(NewSaleLine);
+                }
+            }
+        }
+
+        private void AddQuantity(SaleLineDto newSaleLine)
+        {
+            if (NewSaleLine != null)
+            {
+                SaleLineDto saleLine = Sale?.SaleLines?.FirstOrDefault(x => x.Product.Id == newSaleLine.Product.Id);
+                saleLine.Quantity++;
+            }
+        }
+
+        private void RemoveQuantity(SaleLineDto newSaleLine)
+        {
+            if (NewSaleLine != null)
+            {
+                SaleLineDto saleLine = Sale?.SaleLines?.FirstOrDefault(x => x.Product.Id == newSaleLine.Product.Id);
+                saleLine.Quantity--;
+                
+                if (saleLine.Quantity <= 0)
+                {
+                    Sale.SaleLines.Remove(saleLine);
+                }
             }
         }
     }
