@@ -1,7 +1,7 @@
 ﻿.dashboard {
   display: grid;
   grid-template-columns: 15% 55% 30%;
-  grid-template-rows: 25% 75%;
+  grid-template-rows: 30% 70%;
   grid-auto-flow: row;
   gap: 1rem;
   height: 90vh;
@@ -21,13 +21,14 @@
 .dashboard .parent-categories div {
   cursor: pointer;
 }
+.dashboard .parent-categories .product-card {
+  flex: 0 0 7rem;
+}
 .dashboard .children-categories {
   grid-column: 2;
   grid-row: 1;
-  display: grid;
-  grid-template-columns: repeat(2, 6rem);
-  grid-auto-flow: column;
-  grid-auto-columns: 6rem;
+  display: flex;
+  flex-direction: row;
   grid-gap: 1rem;
   overflow-y: hidden;
   overflow-x: scroll;
@@ -35,16 +36,21 @@
 .dashboard .children-categories div {
   cursor: pointer;
 }
+.dashboard .children-categories .product-card {
+  flex: 0 0 5rem;
+}
 .dashboard .dashboard-products {
   grid-column: 2;
   grid-row: 2;
-  display: grid;
-  grid-template-columns: repeat(4, 10rem);
-  grid-template-rows: auto;
-  grid-auto-flow: row;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   grid-gap: 1rem;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+.dashboard .dashboard-products .product-card {
+  flex: 0 0 10rem;
 }
 .dashboard .dashboard-sidebar {
   grid-column: 3;
@@ -56,4 +62,4 @@
   max-width: 100%;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/04_templates/_dashboard.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/04_templates/_dashboard.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA%22%7D */
