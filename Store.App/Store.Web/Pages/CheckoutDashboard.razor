@@ -3,12 +3,17 @@
 @using Store.Web.Components.Checkout
 <PageTitle>Checkout dashoard</PageTitle>
 <div class="dashboard pd-0">
-    <section class="parent-categories pd-1">
+    <section class="parent-categories mrg-1">
         @foreach (var category in _Categories.Where(x => x.ParentCategoryId == null))
         {
-            <div class="@( category.Id == _SelectedCategory?.Id || category.Id == _SelectedCategory?.ParentCategoryId ? "active-category" : "")" style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
-                <p class="a-align-item-center">@category.Title</p>
-            </div>
+            <article class="@( category.Id == _SelectedCategory?.Id || category.Id == _SelectedCategory?.ParentCategoryId ? "product-card active-category" : "product-card")" style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
+                <picture class="thumbnail">
+                    <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
+                </picture>
+                <div class="details">
+                    <h1>@category.Title</h1>
+                </div>
+            </article>
         }
     </section>
 
@@ -17,26 +22,41 @@
         {
             @if (_SelectedCategory.ParentCategoryId != null)
             {
-                <div class="active-category" style="background-color:@_SelectedCategory?.Color; ">
-                    <p class="align-text-center">@_SelectedCategory?.Title</p>
-                </div>
+                <article class="product-card active-category" style="background-color:@_SelectedCategory?.Color;">
+                    <picture class="thumbnail">
+                        <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
+                    </picture>
+                    <div class="details">
+                        <h1>@_SelectedCategory?.Title</h1>
+                    </div>
+                </article>
             }
 
             @foreach (var category in _Categories.Where(x => x.ParentCategoryId == _SelectedCategory.Id))
             {
-                <div style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
-                    <p class="align-text-center">@category.Title</p>
-                </div>
+                <article class="product-card" style="background-color:@_SelectedCategory?.Color;" @onclick="() => SetSelectedCategroy(category)">
+                    <picture class="thumbnail">
+                        <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
+                    </picture>
+                    <div class="details">
+                        <h1>@category.Title</h1>
+                    </div>
+                </article>
             }
         }
     </section>
-    <section class="dashboard-products pd-b-1">
+    <section class="dashboard-products pd-1">
         @foreach (var product in _Products.Where(x => x.CategoryId == _SelectedCategory?.Id || x.CategoryId == _SelectedCategory?.ParentCategoryId).ToList())
         {
-            <div @onclick="() => AddItemToTicket(product)">
-                <ProductCard Product="product" />
-            </div>
-        }
-    </section>
+            <article class="product-card" @onclick="() => AddItemToTicket(product)">
+                <picture class="thumbnail">
+                    <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="@product.Title">
+                </picture>
+                <div class="details">
+                    <h1>@product?.Title</h1>
+                    <h2>@product?.PricePerUnit.ToString("C")</h2>
+                </div>
+            </article>
+        }    </section>
     <TicketSidebar NewSaleLine="_SaleLine" />
 </div>
