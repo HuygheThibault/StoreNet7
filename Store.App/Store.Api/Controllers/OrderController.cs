@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Store.Api.Models;
 using Store.Api.Repositories;
 using Store.Shared.Dto;
+using System.Text.Json;
 
 namespace Store.Api.Controllers
 {
@@ -14,6 +15,7 @@ namespace Store.Api.Controllers
         private readonly IOrderRepository _orderRepository;
         private readonly IOrderLineRepository _orderLineRepository;
         private readonly IMapper _mapper;
+        const int maxPageSize = 20;
 
         public OrderController(ILogger<OrderController> logger, IOrderRepository repository, IOrderLineRepository orderLineRepository, IMapper mapper
             )
@@ -25,12 +27,22 @@ namespace Store.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllOrders()
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetAllOrders(string? name, string? searchQuery, int pageNumber = 1, int pageSize = 10)
         {
             try
             {
-                List<Order> items = await _orderRepository.GetAllOrders();
-                return Ok(_mapper.Map<List<OrderDto>>(items));
+                if (pageSize > maxPageSize)
+                {
+                    pageSize = maxPageSize;
+                }
+
+                var (cityEntities, paginationMetadata) = await _orderRepository.GetAllOrders(name, searchQuery, pageNumber, pageSize);
+
+                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
+
+                //User.Claims.FirstOrDefault(x => x.Type == "UserName")?.Value;
+
+                return Ok(_mapper.Map<IEnumerable<OrderDto>>(cityEntities));
             }
             catch (Exception ex)
             {
@@ -40,7 +52,7 @@ namespace Store.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetOrderById(Guid id)
+        public async Task<ActionResult<OrderDto>> GetOrderById(Guid id)
         {
             try
             {
@@ -57,7 +69,7 @@ namespace Store.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, [FromBody] OrderDto model)
+        public async Task<ActionResult<OrderDto>> Put(Guid id, [FromBody] OrderDto model)
         {
             try
             {
@@ -75,7 +87,6 @@ namespace Store.Api.Controllers
                 _logger.LogError(ex, "error occured");
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Database failure while updating a Order by id.");
             }
-            return BadRequest();
         }
 
         [HttpPost]
@@ -83,14 +94,7 @@ namespace Store.Api.Controllers
         {
             try
             {
-                if (request == null)
-                {
-                    return BadRequest("Please privde a valid Order");
-                }
-
-                Order dbItem = await _orderRepository.GetOrderById(request.Id);
-
-                if (dbItem != null)
+                if (await _orderRepository.GetOrderById(request.Id) != null)
                 {
                     ModelState.AddModelError("Id", "Id already exists");
                 }
@@ -118,7 +122,7 @@ namespace Store.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             try
             {

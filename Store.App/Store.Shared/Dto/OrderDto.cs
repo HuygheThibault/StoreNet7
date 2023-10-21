@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Store.Shared.Dto
 {
@@ -32,6 +27,11 @@ namespace Store.Shared.Dto
         public DateTime ModifiedOn { get; set; }
 
         public string ModifiedBy { get; set; }
+
+        public int NumberOfOrderLines { get
+            {
+                return OrderLines.Count;
+            } }
 
         public virtual ICollection<OrderLineDto> OrderLines { get; set; } = new List<OrderLineDto>();
 

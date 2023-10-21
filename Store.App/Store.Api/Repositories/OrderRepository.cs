@@ -7,28 +7,50 @@ namespace Store.Api.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
-        private readonly StoreContext context;
-        private readonly ILogger<OrderRepository> logger;
+        private readonly StoreContext _context;
+        private readonly ILogger<OrderRepository> _logger;
 
         public OrderRepository(StoreContext context, ILogger<OrderRepository> logger)
         {
-            this.context = context;
-            this.logger = logger;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<List<Order>> GetAllOrders()
+        public async Task<(IEnumerable<Order>, PaginationMetadata)> GetAllOrders(string? name, string? searchQuery, int pageNumber, int pageSize)
         {
             try
             {
-                logger.LogInformation($"Getting all Orders");
+                _logger.LogInformation($"Getting all Orders");
 
-                IQueryable<Order> query = context.Orders.Include(x => x.Supplier).Include(x => x.OrderLines);
+                var collection = _context.Orders as IQueryable<Order>;
 
-                return await query.ToListAsync();
+                if(!string.IsNullOrWhiteSpace(name))
+                {
+                    name = name.Trim();
+                    collection = collection.Where(c => c.FileName == name);
+                }
+
+                if (!string.IsNullOrWhiteSpace(searchQuery))
+                {
+                    searchQuery = searchQuery.Trim();
+                    collection = collection.Where(x => (x.FileName != null && x.FileName.Contains(searchQuery)) || (x.Supplier != null && x.Supplier.Name.Contains(searchQuery)));
+                }
+
+                var totalItemCount = await collection.CountAsync();
+
+                var paginationMetadata = new PaginationMetadata(
+                    totalItemCount, pageSize, pageNumber);
+
+                var collectionToReturn = await collection
+                .Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize)
+                .ToListAsync();
+
+                return (collectionToReturn, paginationMetadata);
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "error occured");
+                _logger.LogError(ex, "error occured");
                 throw;
             }
         }
@@ -37,51 +59,47 @@ namespace Store.Api.Repositories
         {
             try
             {
-                logger.LogInformation($"Getting Order: {id}");
+                _logger.LogInformation($"Getting Order: {id}");
 
-                IQueryable<Order> query = context.Orders.Include(x => x.Supplier).Include(x => x.OrderLines).ThenInclude(x => x.Product);
+                IQueryable<Order> query = _context.Orders.Include(x => x.Supplier).Include(x => x.OrderLines).ThenInclude(x => x.Product);
 
-                // Query It
-                query = query.Where(c => c.Id == id);
-
-                return await query.FirstOrDefaultAsync();
+                return await query.FirstOrDefaultAsync(c => c.Id == id);
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "error occured");
+                _logger.LogError(ex, "error occured");
                 throw;
             }
         }
 
         public void AddOrder(Order order)
         {
-            using (IDbContextTransaction transaction = context.Database.BeginTransaction())
+            using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
-
                 try
                 {
                     order.Id = Guid.NewGuid();
-                    logger.LogInformation($"Adding an order: {order}.");
+                    _logger.LogInformation($"Adding an order: {order}.");
 
-                    context.Orders.Add(order);
+                    _context.Orders.Add(order);
 
                     foreach (OrderLine orderLine in order.OrderLines)
                     {
-                        logger.LogInformation($"Adding an orderLine {orderLine} to the context.");
-                        orderLine.OrderId = order.Id;
+                        _logger.LogInformation($"Adding an orderLine {orderLine} to the context.");
                         orderLine.Id = Guid.NewGuid();
+                        orderLine.OrderId = order.Id;
 
-                        Product product = context.Products.First(x => x.Id == orderLine.ProductId);
+                        Product product = _context.Products.First(x => x.Id == orderLine.ProductId);
                         product.QuantityInStock += orderLine.Quantity;
 
-                        context.OrderLines.Add(orderLine);
+                        _context.OrderLines.Add(orderLine);
                     }
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "error occured");
+                    _logger.LogError(ex, "error occured");
                     transaction.Rollback();
                 }
             }
@@ -89,17 +107,17 @@ namespace Store.Api.Repositories
 
         public async Task<Order> UpdateOrder(Order order)
         {
-            using (IDbContextTransaction transaction = context.Database.BeginTransaction())
+            using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
                 try
                 {
-                    logger.LogInformation($"Updating order: {order.Id}.");
+                    _logger.LogInformation($"Updating order: {order.Id}.");
 
                     Order dbOrder = await GetOrderById(order.Id);
 
                     foreach (OrderLine dbOrderline in dbOrder.OrderLines.Where(x => !order.OrderLines.Select(ol => ol.Id).Contains(x.Id))) // Remove order lines
                     {
-                        logger.LogInformation($"Removed orderLine: {dbOrderline.Id}.");
+                        _logger.LogInformation($"Removed orderLine: {dbOrderline.Id}.");
 
                         dbOrderline.Product.QuantityInStock -= dbOrderline.Quantity;
                         dbOrder.OrderLines.Remove(dbOrderline);
@@ -107,7 +125,7 @@ namespace Store.Api.Repositories
 
                     foreach (OrderLine dbOrderline in dbOrder.OrderLines.Where(x => order.OrderLines.Select(ol => ol.Id).Contains(x.Id))) // Updating order lines
                     {
-                        logger.LogInformation($"Updating orderLine: {dbOrderline}.");
+                        _logger.LogInformation($"Updating orderLine: {dbOrderline}.");
 
                         OrderLine newOrderLine = order.OrderLines.FirstOrDefault(x => x.Id == dbOrderline.Id);
 
@@ -125,10 +143,10 @@ namespace Store.Api.Repositories
 
                     foreach (OrderLine orderLine in order.OrderLines.Where(x => x.Id == Guid.Empty)) // Add order lines
                     {
-                        logger.LogInformation($"Adding orderLine: {orderLine}.");
+                        _logger.LogInformation($"Adding orderLine: {orderLine}.");
                         orderLine.OrderId = order.Id;
 
-                        Product product = context.Products.FirstOrDefault(x => x.Id == orderLine.ProductId);
+                        Product product = _context.Products.FirstOrDefault(x => x.Id == orderLine.ProductId);
 
                         if(product != null)
                         {
@@ -144,9 +162,9 @@ namespace Store.Api.Repositories
                     dbOrder.Comments = order.Comments;
                     dbOrder.IsPaid = order.IsPaid;
 
-                    context.Update(dbOrder);
+                    _context.Update(dbOrder);
 
-                    await context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
 
                     transaction.Commit();
 
@@ -154,7 +172,7 @@ namespace Store.Api.Repositories
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "error occured while updating order");
+                    _logger.LogError(ex, "error occured while updating order");
                     transaction.Rollback();
                     throw;
                 }
@@ -165,12 +183,12 @@ namespace Store.Api.Repositories
         {
             try
             {
-                logger.LogInformation($"Removing an object of type {entity.GetType()} to the context.");
-                context.Remove(entity);
+                _logger.LogInformation($"Removing an object of type {entity.GetType()} to the context.");
+                _context.Remove(entity);
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "error occured");
+                _logger.LogError(ex, "error occured");
             }
         }
 
@@ -178,14 +196,14 @@ namespace Store.Api.Repositories
         {
             try
             {
-                logger.LogInformation($"Attempitng to save the changes in the context");
+                _logger.LogInformation($"Attempitng to save the changes in the context");
 
                 // Only return success if at least one row was changed
-                return (await context.SaveChangesAsync()) > 0;
+                return (await _context.SaveChangesAsync()) > 0;
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "error occured");
+                _logger.LogError(ex, "error occured");
                 throw;
             }
         }
@@ -194,7 +212,7 @@ namespace Store.Api.Repositories
 
     public interface IOrderRepository
     {
-        Task<List<Order>> GetAllOrders();
+        Task<(IEnumerable<Order>, PaginationMetadata)> GetAllOrders(string? name, string? searchQuery, int pageNumber, int pageSize);
 
         Task<Order> GetOrderById(Guid id);
 
