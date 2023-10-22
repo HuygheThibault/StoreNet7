@@ -5,6 +5,7 @@ using Store.Web.Helpers.Modals;
 using Store.Web.Models;
 using Store.Web.Services;
 using System.Reflection;
+using static Store.Web.Models.Noticiation;
 
 namespace Store.Web.Pages
 {
@@ -208,14 +209,34 @@ namespace Store.Web.Pages
 
         private async Task DeleteItem(OrderDto item)
         {
-            await OrderService.DeleteOrder(item.Id);
+            bool isDeleted = await OrderService.DeleteOrder(item.Id);
+            if(isDeleted)
+            {
+                await ResultReceived(new Noticiation()
+                {
+                    Name = "Order deleted successfully",
+                    Sort = NoticiationType.Success
+                });
+            }
+            else
+            {
+                await ResultReceived(new Noticiation()
+                {
+                    Name = "Failed to delete order",
+                    Sort = NoticiationType.Danger
+                });
+            }
+
         }
 
-        private async Task ResultReceived(Noticiation noticiation)
+        public async Task ResultReceived(Noticiation noticiation)
         {
             _order = null;
             _noticiation = noticiation;
             _data = (await OrderService.GetAllOrders()).ToList();
+
+            await InvokeAsync(StateHasChanged);
+
             _noticiation = null;
         }
 

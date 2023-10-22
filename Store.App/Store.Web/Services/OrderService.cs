@@ -1,5 +1,6 @@
-﻿using Blazored.LocalStorage;
-using Store.Shared.Dto;
+﻿using Store.Shared.Dto;
+using Store.Web.Exceptions;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -17,86 +18,77 @@ namespace Store.Web.Services
 
         public async Task<IEnumerable<OrderDto>> GetAllOrders()
         {
-            try
+            var request = await _httpClient.GetAsync($"api/orders");
+
+            if (request != null)
             {
-                return await JsonSerializer.DeserializeAsync<IEnumerable<OrderDto>>
-                    (await _httpClient.GetStreamAsync($"api/orders"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                if (request.IsSuccessStatusCode)
+                {
+                    return await request.Content.ReadFromJsonAsync<IEnumerable<OrderDto>>();
+                }
+                else if (request.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
+
+            throw new HttpRequestFailedException(message: $"Request failed: {request?.StatusCode}, {request}");
         }
 
         public async Task<OrderDto> GetOrderById(Guid id)
         {
-            try
+            var request = await _httpClient.GetAsync($"api/orders/{id}");
+
+            if (request != null)
             {
-                return await JsonSerializer.DeserializeAsync<OrderDto>
-                    (await _httpClient.GetStreamAsync($"api/orders/{id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                if (request.IsSuccessStatusCode)
+                {
+                    return await request.Content.ReadFromJsonAsync<OrderDto>();
+                }
+                else if (request.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            throw new HttpRequestFailedException(message: $"Request failed: {request?.StatusCode}, {request}");
         }
 
         public async Task<OrderDto> AddOrder(OrderDto item)
         {
-            try
-            {
-                var response = await _httpClient.PostAsJsonAsync("api/orders", item);
+            var response = await _httpClient.PostAsJsonAsync("api/orders", item);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    return await JsonSerializer.DeserializeAsync<OrderDto>(await response.Content.ReadAsStreamAsync());
-                }
-
-                return null;
-            }
-            catch (Exception ex)
+            if (response.IsSuccessStatusCode)
             {
-                throw;
+                return await response.Content.ReadFromJsonAsync<OrderDto>();
             }
+
+            throw new HttpRequestFailedException(message: $"Request failed: {response?.StatusCode}, {response}");
         }
 
         public async Task<OrderDto> UpdateOrder(OrderDto item)
         {
-            try
-            {
-                var itemJson = new StringContent(JsonSerializer.Serialize(item), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PutAsync($"api/orders/{item.Id}", itemJson);
+            var itemJson = new StringContent(JsonSerializer.Serialize(item), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync($"api/orders/{item.Id}", itemJson);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    return await JsonSerializer.DeserializeAsync<OrderDto>(await response.Content.ReadAsStreamAsync());
-                }
-
-                return null;
-            }
-            catch (Exception ex)
+            if (response.IsSuccessStatusCode)
             {
-                throw;
+                return await response.Content.ReadFromJsonAsync<OrderDto>();
             }
+
+            throw new HttpRequestFailedException(message: $"Request failed: {response?.StatusCode}, {response}");
         }
 
         public async Task<bool> DeleteOrder(Guid id)
         {
-            try
-            {
-                var response = await _httpClient.DeleteAsync($"Order/{id}");
+            var response = await _httpClient.DeleteAsync($"api/orders/{id}");
 
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-
-                return false;
-            }
-            catch (Exception ex)
+            if (response.IsSuccessStatusCode)
             {
-                throw;
+                return true;
             }
+
+            throw new HttpRequestFailedException(message: $"Request failed: {response?.StatusCode}, {response}");
         }
     }
 

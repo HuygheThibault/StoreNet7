@@ -41,7 +41,7 @@ namespace Store.Api.Repositories
                 var paginationMetadata = new PaginationMetadata(
                     totalItemCount, pageSize, pageNumber);
 
-                var collectionToReturn = await collection
+                var collectionToReturn = await collection.Include(x => x.OrderLines)
                 .Skip(pageSize * (pageNumber - 1))
                 .Take(pageSize)
                 .ToListAsync();
@@ -72,30 +72,30 @@ namespace Store.Api.Repositories
             }
         }
 
-        public void AddOrder(Order order)
+        public async Task AddOrder(Order order)
         {
             using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
                 try
                 {
-                    order.Id = Guid.NewGuid();
                     _logger.LogInformation($"Adding an order: {order}.");
 
-                    _context.Orders.Add(order);
-
-                    foreach (OrderLine orderLine in order.OrderLines)
+                    if(await GetOrderById(order.Id) == null)
                     {
-                        _logger.LogInformation($"Adding an orderLine {orderLine} to the context.");
-                        orderLine.Id = Guid.NewGuid();
-                        orderLine.OrderId = order.Id;
+                        _context.Orders.Add(order);
 
-                        Product product = _context.Products.First(x => x.Id == orderLine.ProductId);
-                        product.QuantityInStock += orderLine.Quantity;
+                        foreach (OrderLine orderLine in order.OrderLines)
+                        {
+                            _logger.LogInformation($"Adding an orderLine {orderLine} to the context.");
+                         
+                            orderLine.OrderId = order.Id;
+                            _context.OrderLines.Add(orderLine);
 
-                        _context.OrderLines.Add(orderLine);
+                            Product product = _context.Products.First(x => x.Id == orderLine.ProductId);
+                            product.QuantityInStock += orderLine.Quantity;
+                        }
+                        transaction.Commit();
                     }
-
-                    transaction.Commit();
                 }
                 catch (Exception ex)
                 {
@@ -179,12 +179,24 @@ namespace Store.Api.Repositories
             }
         }
 
-        public void Delete<T>(T entity) where T : class
+        public void Delete(Order order)
         {
             try
             {
-                _logger.LogInformation($"Removing an object of type {entity.GetType()} to the context.");
-                _context.Remove(entity);
+                _logger.LogInformation($"Removing order {order} from the context.");
+
+                foreach(OrderLine orderLine in order.OrderLines)
+                {
+                    Product product = _context.Products.First(x => x.Id == orderLine.ProductId);
+                    if(product != null )
+                    {
+                        product.QuantityInStock -= orderLine.Quantity;
+                    }
+
+                    _context.Remove(orderLine);
+                }
+
+                _context.Remove(order);
             }
             catch (Exception ex)
             {
@@ -218,9 +230,10 @@ namespace Store.Api.Repositories
 
         Task<Order> UpdateOrder(Order order);
 
-        void AddOrder(Order order);
+        Task AddOrder(Order order);
 
-        void Delete<T>(T entity) where T : class;
+        void Delete(Order order);
+
         Task<bool> SaveChangesAsync();
     }
 }

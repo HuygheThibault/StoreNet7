@@ -104,7 +104,7 @@ namespace Store.Api.Controllers
 
                 Order newItem = _mapper.Map<Order>(request);
 
-                _orderRepository.AddOrder(newItem);
+                await _orderRepository.AddOrder(newItem);
 
                 if (await _orderRepository.SaveChangesAsync())
                 {

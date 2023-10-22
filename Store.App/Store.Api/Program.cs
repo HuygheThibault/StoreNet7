@@ -73,6 +73,7 @@ builder.Services.AddSwaggerGen(setupAction =>
             }, new List<string>() }
     });
 });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

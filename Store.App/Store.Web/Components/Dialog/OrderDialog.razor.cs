@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Store.Shared.Dto;
+using Store.Web.Exceptions;
 using Store.Web.Models;
 using Store.Web.Services;
 using System.Reflection.Metadata;
@@ -35,6 +36,8 @@ namespace Store.Web.Components.Dialog
 
         protected bool IsSaving = false;
 
+        protected bool IsNew = true;
+
         protected override async Task OnInitializedAsync()
         {
             Suppliers = (await SupplierService.GetAllSuppliers()).ToList();
@@ -47,10 +50,20 @@ namespace Store.Web.Components.Dialog
 
             if (_order != null)
             {
-                if (_order?.Id != Guid.Empty)
+                try
                 {
-                    _order = await OrderService.GetOrderById(_order.Id);
+                    var dbOrder = await OrderService.GetOrderById(_order.Id);
+                    if (dbOrder != null)
+                    {
+                        _order = dbOrder;
+                        IsNew = false;
+                    }
+                    else
+                    {
+                        IsNew = true;
+                    }
                 }
+                catch (HttpRequestFailedException) { }
             }
             IsSaving = false;
         }
@@ -69,7 +82,7 @@ namespace Store.Web.Components.Dialog
 
                 OrderDto savedOrder;
 
-                if (_order.Id == Guid.Empty)
+                if (IsNew)
                 {
                     if (selectedFile != null)
                     {
@@ -112,7 +125,7 @@ namespace Store.Web.Components.Dialog
             }
             catch (Exception ex)
             {
-                
+
             }
         }
 
