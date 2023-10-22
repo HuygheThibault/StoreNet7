@@ -4,6 +4,7 @@
 @using Store.Web.Helpers.Modals;
 @using Store.Web.Components
 @using Store.Web.Components.Dialog
+@attribute [Authorize]
 
 <OrderDialog Order="@_order" OnResult="ResultReceived" />
 

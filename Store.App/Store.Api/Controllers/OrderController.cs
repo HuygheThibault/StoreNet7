@@ -13,16 +13,14 @@ namespace Store.Api.Controllers
     {
         private readonly ILogger<OrderController> _logger;
         private readonly IOrderRepository _orderRepository;
-        private readonly IOrderLineRepository _orderLineRepository;
         private readonly IMapper _mapper;
         const int maxPageSize = 20;
 
-        public OrderController(ILogger<OrderController> logger, IOrderRepository repository, IOrderLineRepository orderLineRepository, IMapper mapper
+        public OrderController(ILogger<OrderController> logger, IOrderRepository repository, IMapper mapper
             )
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _orderRepository = repository ?? throw new ArgumentNullException(nameof(repository));
-            _orderLineRepository = orderLineRepository ?? throw new ArgumentNullException(nameof(orderLineRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 

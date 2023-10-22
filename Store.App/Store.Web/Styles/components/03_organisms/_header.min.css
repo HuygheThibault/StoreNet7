@@ -1,1 +1,1 @@
-﻿header{height:10vh;display:flex;flex-direction:row;align-items:center;}header .search-box{align-self:flex-start;justify-self:center;height:100%;}header .search-box button{height:2rem;width:2rem;border-radius:1rem;align-self:center;}
+﻿header{height:10vh;display:flex;flex-direction:row;align-items:center;}header .search-box{align-self:flex-start;justify-self:center;height:100%;}header .search-box button{height:2rem;width:2rem;border-radius:1rem;align-self:center;}header .nav-link{margin-left:auto;}header .h4{margin-left:auto;}

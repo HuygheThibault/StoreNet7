@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store.Api.Models;
 using Store.Api.Repositories;
@@ -68,83 +69,6 @@ namespace Store.Api.Controllers
             {
                 _logger.LogError(ex, "error occured");
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Database failure while getting a Category by title.");
-            }
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, [FromBody] CategoryDto model)
-        {
-            try
-            {
-                if (id != model.Id) ModelState.AddModelError("Category id", "Id in uri and body must be equal and cannot be changed");
-
-                var dbModel = await _CategoryRepository.GetCategoryById(id);
-
-                if (dbModel == null) ModelState.AddModelError("Category", $"Could not find item: {model}");
-
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
-
-                _mapper.Map(model, dbModel); // map model to dbmodel (destination)
-
-                if (await _CategoryRepository.SaveChangesAsync())
-                {
-                    return Ok(_mapper.Map<CategoryDto>(dbModel));
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "error occured");
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database failure while updating a Category by id.");
-            }
-            return BadRequest();
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<CategoryDto>> Add([FromBody] CategoryDto request)
-        {
-            try
-            {
-                if (request == null)
-                {
-                    return BadRequest("Please privde a valid Category");
-                }
-
-                Category dbItem = await _CategoryRepository.GetCategoryByTitle(request.Title);
-
-                if (dbItem != null)
-                {
-                    ModelState.AddModelError("Category title", "Category already exists");
-                }
-
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
-
-                //handle image upload
-                //string currentUrl = _httpContextAccessor.HttpContext.Request.Host.Value;
-                //var path = $"{_webHostEnvironment.WebRootPath}\\uploads\\{request.Title}.jpg";
-                //var fileStream = System.IO.File.Create(path);
-                //fileStream.Write(request.Image, 0, request.Image.Length);
-                //fileStream.Close();
-
-                //request.ImageName = $"https://{currentUrl}/uploads/{request.Title}.jpg";
-
-                Category newItem = _mapper.Map<Category>(request);
-
-                _CategoryRepository.Add(newItem);
-
-                if (await _CategoryRepository.SaveChangesAsync())
-                {
-                    _logger.LogInformation($"Created new Category {newItem.Id}");
-                    return Created($"/api/Category/{newItem.Id}", _mapper.Map<CategoryDto>(newItem));
-                }
-
-                return BadRequest("Faild to create Category");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "error occured");
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database failure while adding a Category");
             }
         }
 
