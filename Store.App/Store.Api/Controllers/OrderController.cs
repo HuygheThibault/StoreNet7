@@ -34,13 +34,13 @@ namespace Store.Api.Controllers
                     pageSize = maxPageSize;
                 }
 
-                var (cityEntities, paginationMetadata) = await _orderRepository.GetAllOrders(name, searchQuery, pageNumber, pageSize);
+                var (entities, paginationMetadata) = await _orderRepository.GetAllOrders(name, searchQuery, pageNumber, pageSize);
 
                 Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
 
                 //User.Claims.FirstOrDefault(x => x.Type == "UserName")?.Value;
 
-                return Ok(_mapper.Map<IEnumerable<OrderDto>>(cityEntities));
+                return Ok(_mapper.Map<IEnumerable<OrderDto>>(entities));
             }
             catch (Exception ex)
             {

@@ -131,6 +131,27 @@
                     <div class="loader"></div>
                 }
             </div>
+            @if (Pagination != null)
+            {
+                <div class="footer">
+                    <div class="pagination">
+                        <h4>Page: </h4>
+                        <i class="fa-solid fa-arrow-right fa-rotate-180" @onclick="DecrementPage" />
+                        <h4>@Pagination.CurrentPage of @Pagination.TotalPageCount</h4>
+                        <i class="fa-solid fa-arrow-right fa-rotate-360" @onclick="IncrementPage" />
+
+                        <h4>Show: </h4>
+                        <InputSelect id="page" class="dropdown" @bind-Value="@Pagination.PageSize" @onchange="SetPageSize">
+                            @foreach (int pageSize in new int[] { 5, 10, 15, 20 })
+                            {
+                                <option value="@pageSize">@pageSize</option>
+                            }
+                        </InputSelect>
+
+                        <h4>1 - @Pagination.PageSize of @Pagination.TotalItemCount</h4>
+                    </div>
+                </div>
+            }
         </div>
         <div class="notifications">
             <NotificationBar noticiation="_noticiation" />

@@ -38,13 +38,56 @@ namespace Store.Web.Pages
 
         List<string> ColumnsToIgnore = new List<string>() { "OrderLines", "Supplier", "RowId", "Id", "CreatedOn", "CreatedBy" };
 
+        PaginationMetadata Pagination = new PaginationMetadata() { PageSize = 10, CurrentPage = 1 };
+
         protected override async Task OnInitializedAsync()
         {
-            _data = (await OrderService.GetAllOrders()).ToList();
+            await GetGridData();
             _suppliers = (await SupplierService.GetAllSuppliers()).ToList();
             _products = (await ProductService.GetAllProducts()).ToList();
             CreateColumns();
             ApplySorting();
+        }
+
+        private async Task GetGridData()
+        {
+            var result = (await OrderService.GetAllOrders(pageNumber: Pagination.CurrentPage, pageSize: Pagination.PageSize));
+
+            if (result != null)
+            {
+                _data = result?.Item1.ToList();
+                Pagination = result?.Item2;
+            }
+
+        }
+
+        private async Task IncrementPage()
+        {
+            Pagination.CurrentPage++;
+
+            if (Pagination.CurrentPage >= Pagination.TotalPageCount)
+            {
+                Pagination.CurrentPage = Pagination.TotalPageCount;
+            }
+
+            await GetGridData();
+        }
+
+        private async Task DecrementPage()
+        {
+            Pagination.CurrentPage--;
+
+            if (Pagination.CurrentPage <= 0)
+            {
+                Pagination.CurrentPage = 1;
+            }
+
+            await GetGridData();
+        }
+
+        private async Task SetPageSize()
+        {
+            await GetGridData();
         }
 
         private void CreateColumns()
@@ -210,7 +253,7 @@ namespace Store.Web.Pages
         private async Task DeleteItem(OrderDto item)
         {
             bool isDeleted = await OrderService.DeleteOrder(item.Id);
-            if(isDeleted)
+            if (isDeleted)
             {
                 await ResultReceived(new Noticiation()
                 {
@@ -233,7 +276,7 @@ namespace Store.Web.Pages
         {
             _order = null;
             _noticiation = noticiation;
-            _data = (await OrderService.GetAllOrders()).ToList();
+            await GetGridData();
 
             await InvokeAsync(StateHasChanged);
 

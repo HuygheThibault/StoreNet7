@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Store.Shared.Dto;
 using Store.Shared.Enums;
 using Store.Shared.Modals;
 using Store.Web.Helpers.Modals;
@@ -28,6 +29,9 @@ namespace Store.Web.Components.Datagrid
 
         [Parameter]
         public EventCallback<T> OnEdit { get; set; } = default!;
+
+        [Parameter]
+        public PaginationMetadata? PaginationMetadata { get; set; } = default!;
 
         [Inject]
         public IJSRuntime? JsRuntime { get; set; }
