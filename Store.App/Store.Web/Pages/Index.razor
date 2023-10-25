@@ -1,4 +1,5 @@
-﻿@page "/"
+﻿@using Store.Web.Components.Wizard
+@page "/"
 
 <PageTitle>Index</PageTitle>
 
@@ -6,4 +7,21 @@
 
 Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+
+<Wizard Id="DemoWizard">
+    <WizardStep Name="Supplier">
+        <div class="row">
+           <p>This is the first step. You can enter something useful in here.</p>
+        </div>
+    </WizardStep>
+    <WizardStep Name="Second Step">
+        <div class="row">
+            <p>Wow, you've reached the second step!</p>
+        </div>
+    </WizardStep>
+    <WizardStep Name="Final Step">
+        <div class="row">
+      <p>The final step has been reached. Thank you \o/</p>
+        </div>
+    </WizardStep>
+</Wizard>

@@ -1,0 +1,70 @@
+$mainColor: #07c;
+$baseColor: #fff;
+
+.wizard-progress {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    position: relative;
+
+    .step {
+        display: table-cell;
+        text-align: center;
+        vertical-align: top;
+        overflow: visible;
+        position: relative;
+        font-size: 1.25rem;
+        color: $baseColor;
+        font-weight: bold;
+
+        &:not(:last-child):before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 37px;
+            background-color: $baseColor;
+            height: 6px;
+            width: 100%;
+        }
+
+        .node {
+            display: inline-block;
+            border: 6px solid $baseColor;
+            background-color: $baseColor;
+            border-radius: 18px;
+            height: 18px;
+            width: 18px;
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            margin-left: -18px;
+        }
+
+        &.complete {
+            &:before {
+                background-color: $mainColor;
+            }
+
+            .node {
+                border-color: $mainColor;
+                background-color: $mainColor;
+
+                &:before {
+                    font-family: FontAwesome;
+                    content: "\f00c";
+                }
+            }
+        }
+
+        &.in-progress {
+            &:before {
+                background: $mainColor;
+            }
+
+            .node {
+                border-color: $mainColor;
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+﻿﻿<CascadingValue Value="this">
+    <div class="card" id="@Id">
+        <div class="wizard-progress">
+            @foreach (var step in Steps)
+            {
+                <div id="step-@(StepsIndex(step) + 1)" class="step @((ActiveStep == step) ? "in-progress" : "") @((StepsIndex(ActiveStep) < StepsIndex(step)) ? "complete" : "")">
+                    <a class="nav-link" href="javascript: void(0)" @onclick="@(e=> SetActive(step))">@step.Name</a>
+                    <div class="node"></div>
+                </div>
+            }
+        </div>
+        <div id="container-fluid" class="mrg-t-2">
+            @ChildContent
+        </div>
+        <div class="actions">
+            <button class="btn btn-primary btn-lg" type="button"
+                    disabled="@(ActiveStepIx == 0)" @onclick="GoBack">
+                Previous
+            </button>
+            <button class="btn btn-primary btn-lg"
+                    type="@(IsLastStep ? "submit" : "button")" @onclick="GoNext">
+                @(IsLastStep ? "Submit" : "Next")
+            </button>
+        </div>
+    </div>
+</CascadingValue>

@@ -176,5 +176,9 @@
   {
     "outputFile": "Styles/components/02_molecules/_pagination.css",
     "inputFile": "Styles/components/02_molecules/_pagination.scss"
+  },
+  {
+    "outputFile": "Styles/components/03_organisms/_wizard.css",
+    "inputFile": "Styles/components/03_organisms/_wizard.scss"
   }
 ]
