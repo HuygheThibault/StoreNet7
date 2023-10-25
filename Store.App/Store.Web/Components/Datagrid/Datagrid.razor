@@ -83,22 +83,9 @@
                 </div>
             }
         </div>
-        @if (PaginationMetadata != null)
+        @if (Pagination != null)
         {
-            <div class="footer row">
-                <InputSelect id="page" class="dropdown" @bind-Value="@PaginationMetadata.PageSize">
-                    @foreach (int pageSize in new int[5, 10, 15, 20])
-                    {
-                        <option value="@pageSize">@pageSize</option>
-                    }
-                </InputSelect>
-
-                <h6>1</h6>
-                <i class="fa-solid fa-arrow-right fa-rotate-360" />
-                <h6>@PaginationMetadata.CurrentPage</h6>
-                <i class="fa-solid fa-arrow-right fa-rotate-180" />
-                <h6>@PaginationMetadata.TotalPageCount</h6>
-            </div>
+            <PaginationFooter Pagination="Pagination" ValueChanged="LoadData" />
         }
     </div>
 }

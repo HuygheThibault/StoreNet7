@@ -52,18 +52,6 @@
         .footer {
             grid-area: footer;
             background-color: rgba(0, 0, 0, 0.5);
-
-            .pagination {
-                width: 25%;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-evenly;
-
-                i {
-                    cursor: pointer;
-                }
-            }
         }
 
         .rows {

@@ -31,7 +31,7 @@ namespace Store.Web.Components.Datagrid
         public EventCallback<T> OnEdit { get; set; } = default!;
 
         [Parameter]
-        public PaginationMetadata? PaginationMetadata { get; set; } = default!;
+        public PaginationMetadata? Pagination { get; set; } = new PaginationMetadata();
 
         [Inject]
         public IJSRuntime? JsRuntime { get; set; }
@@ -41,6 +41,11 @@ namespace Store.Web.Components.Datagrid
         List<string> ColumnsToIgnore = new List<string>() { "Category", "RowId", "Id", "CreatedOn", "CreatedBy" };
 
         protected override void OnInitialized()
+        {
+            LoadData();
+        }
+
+        private void LoadData()
         {
             _data = Data;
             Columns = CreateColumns(data: _data);

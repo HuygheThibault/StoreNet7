@@ -172,5 +172,9 @@
   {
     "outputFile": "Styles/components/02_molecules/_profile.css",
     "inputFile": "Styles/components/02_molecules/_profile.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_pagination.css",
+    "inputFile": "Styles/components/02_molecules/_pagination.scss"
   }
 ]

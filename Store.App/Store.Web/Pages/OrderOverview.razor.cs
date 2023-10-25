@@ -4,6 +4,7 @@ using Store.Shared.Enums;
 using Store.Web.Helpers.Modals;
 using Store.Web.Models;
 using Store.Web.Services;
+using System;
 using System.Reflection;
 using static Store.Web.Models.Noticiation;
 
@@ -38,7 +39,7 @@ namespace Store.Web.Pages
 
         List<string> ColumnsToIgnore = new List<string>() { "OrderLines", "Supplier", "RowId", "Id", "CreatedOn", "CreatedBy" };
 
-        PaginationMetadata Pagination = new PaginationMetadata() { PageSize = 10, CurrentPage = 1 };
+        PaginationMetadata Pagination = new PaginationMetadata();
 
         protected override async Task OnInitializedAsync()
         {
@@ -51,7 +52,16 @@ namespace Store.Web.Pages
 
         private async Task GetGridData()
         {
-            var result = (await OrderService.GetAllOrders(pageNumber: Pagination.CurrentPage, pageSize: Pagination.PageSize));
+            Tuple<IEnumerable<OrderDto>, PaginationMetadata> result;
+
+            if (Pagination != null)
+            {
+                result = await OrderService.GetAllOrders(pageNumber: Pagination.CurrentPage, pageSize: Pagination.PageSize);
+            }
+            else
+            {
+                result = await OrderService.GetAllOrders();
+            }
 
             if (result != null)
             {
@@ -59,35 +69,6 @@ namespace Store.Web.Pages
                 Pagination = result?.Item2;
             }
 
-        }
-
-        private async Task IncrementPage()
-        {
-            Pagination.CurrentPage++;
-
-            if (Pagination.CurrentPage >= Pagination.TotalPageCount)
-            {
-                Pagination.CurrentPage = Pagination.TotalPageCount;
-            }
-
-            await GetGridData();
-        }
-
-        private async Task DecrementPage()
-        {
-            Pagination.CurrentPage--;
-
-            if (Pagination.CurrentPage <= 0)
-            {
-                Pagination.CurrentPage = 1;
-            }
-
-            await GetGridData();
-        }
-
-        private async Task SetPageSize()
-        {
-            await GetGridData();
         }
 
         private void CreateColumns()
