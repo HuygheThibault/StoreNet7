@@ -8,7 +8,9 @@
 Welcome to your new app.
 
 
-<Wizard Id="DemoWizard">
+<button @onclick="OpenWizard">Open wizard</button>
+
+<Wizard Id="DemoWizard" IsOpen="IsOpen">
     <WizardStep Name="Supplier">
         <div class="row">
            <p>This is the first step. You can enter something useful in here.</p>
@@ -25,3 +27,12 @@ Welcome to your new app.
         </div>
     </WizardStep>
 </Wizard>
+
+@code{
+    public bool IsOpen { get; set; }
+
+    public void OpenWizard()
+    {
+        IsOpen = !IsOpen;
+    }
+}

@@ -1,0 +1,138 @@
+.uni-dialog {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-width: 30rem;
+    max-width: 45vw;
+    width: auto;
+    max-height: 90vh;
+    height: auto;
+    padding: 0;
+    margin: 0 auto;
+    opacity: 1;
+    background-color: var(--third-color);
+    box-shadow: var(--table-shadow);
+    border: unset;
+    transform: translateY(-50%);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 9;
+
+    &:not(.open) {
+        transform: scale(0.7) translateY(-50%);
+        opacity: 0;
+        display: none;
+    }
+
+    .uni-dialog-header {
+        grid-row: 1 / 2;
+    }
+
+    .uni-dialog-content {
+        padding: 1.5em;
+        overflow-y: auto;
+        background-color: var(--fourth-color);
+    }
+
+    @media screen and (max-width: 1024px) {
+        max-width: 60vw;
+    }
+
+    @media screen and (max-width: 520px) {
+        min-width: 90vw;
+    }
+}
+
+.uni-dialog--side {
+    @extend .uni-dialog;
+    top: 0;
+    height: 100%;
+    max-height: 100vh;
+    margin: 0 0 0 auto;
+    transform: translateX(0) translateY(0);
+    animation-duration: 300ms;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+    max-width: 50vw;
+
+    &[open] {
+        animation-name: slide-in;
+    }
+
+    @media screen and (max-width: 1024px) {
+        max-width: 70vw;
+    }
+}
+
+.uni-dialog--wide-side {
+    @extend .uni-dialog--side;
+    max-width: 70vw;
+
+    @media screen and (max-width: 1024px) {
+        max-width: 90vw;
+    }
+}
+
+.uni-dialog--small {
+    @extend .uni-dialog;
+    position: relative;
+    top: unset;
+    right: unset;
+    bottom: unset;
+    left: unset;
+    margin: 0;
+    transform: unset;
+    min-width: 30rem;
+    max-width: 40rem;
+}
+
+.uni-dialog--full-screen {
+    @extend .uni-dialog;
+    top: 0rem;
+    min-width: unset;
+    max-width: unset;
+    width: calc(100% - 3rem);
+    max-height: unset;
+    height: calc(100% - 3rem);
+    margin: 1.5rem auto;
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+    animation-duration: 300ms;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+
+    &[open] {
+        animation-name: slide-up;
+    }
+
+    @media screen and (max-width: 1024px) {
+        max-width: unset;
+    }
+}
+
+dialog > *:first-child {
+    display: contents;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(3rem);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}

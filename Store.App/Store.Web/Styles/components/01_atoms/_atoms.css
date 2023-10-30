@@ -330,6 +330,10 @@ button.edit {
   background: var(--info-primary-color) !important;
 }
 
+button.primary {
+  background: var(--info-primary-color) !important;
+}
+
 .text-primary {
   color: var(--primary-text-color);
 }
@@ -382,4 +386,28 @@ button.edit {
   /*border: 0.75rem solid var(--fourth-color);*/
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_grids.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_paddings.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_margins.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_sizes.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_align.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_buttons.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_text.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_borders.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_animations.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_scrollbar.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;;;ACDA;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;ACxBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AC9BP;EACG;EACA;AACA;;AAII;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAQR;EACI;;;ACdP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;ACtBH;EACG;EACA;EACA;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AC3BH;EACG;;;AAGJ;EACI;;;AAGJ;EACI;;;ACTH;EACG;;;AAGJ;EACI;;;ACLJ;EACI;IACI;;EAGJ;IACI;;;AAIR;EACI;IACI;;EAGJ;IACI;;;AChBR;EACI;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;AACA%22%7D */
+.uni-dialog-actions {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  grid-template-areas: "extra-action . secondary-action primary-action";
+  align-items: center;
+  grid-gap: 1rem;
+  width: 100%;
+  padding: 0.5rem 1.5rem;
+  background-color: var(--uni-white);
+  border-top: 1px solid var(--uni-black--25);
+}
+.uni-dialog-actions.-has-action-menu {
+  grid-template-columns: 1fr 1fr auto auto;
+}
+.uni-dialog-actions .uni-dialog-actions__extra-action {
+  grid-area: extra-action;
+}
+.uni-dialog-actions .uni-dialog-actions__secondary-action {
+  grid-area: secondary-action;
+}
+.uni-dialog-actions .uni-dialog-actions__primary-action {
+  grid-area: primary-action;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_grids.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_paddings.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_margins.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_sizes.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_align.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_buttons.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_text.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_borders.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_animations.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_scrollbar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_dialog-actions.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;;;ACDA;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;ACxBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AC9BP;EACG;EACA;AACA;;AAII;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAQR;EACI;;;ACdP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;ACtBH;EACG;EACA;EACA;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AC/BH;EACG;;;AAGJ;EACI;;;AAGJ;EACI;;;ACTH;EACG;;;AAGJ;EACI;;;ACLJ;EACI;IACI;;EAGJ;IACI;;;AAIR;EACI;IACI;;EAGJ;IACI;;;AChBR;EACI;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;AACA;;;ACbJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI%22%7D */

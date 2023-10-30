@@ -245,4 +245,136 @@
   align-items: center;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-links.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_selected-items.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_forms.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_loader.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_dropdown.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_arrow-icons.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_profile.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_pagination.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;;;ACLH;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACC;EACA;EACA;;;AAIF;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;ACxBA;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;;AC9DX;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AChCH;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;ACxDX;EACG;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;;;ACvBH;EACG;EACA;;AAEA;EACI;EACA;;;ACNP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA;;;ACdH;EACG;EACA;;;ACFJ;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA%22%7D */
+.uni-dialog, .uni-dialog--full-screen, .uni-dialog--small, .uni-dialog--side, .uni-dialog--wide-side {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: auto;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-width: 30rem;
+  max-width: 45vw;
+  width: auto;
+  max-height: 90vh;
+  height: auto;
+  padding: 0;
+  margin: 0 auto;
+  opacity: 1;
+  background-color: var(--third-color);
+  box-shadow: var(--table-shadow);
+  border: unset;
+  transform: translateY(-50%);
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 9;
+}
+.uni-dialog:not(.open), .uni-dialog--full-screen:not(.open), .uni-dialog--small:not(.open), .uni-dialog--side:not(.open), .uni-dialog--wide-side:not(.open) {
+  transform: scale(0.7) translateY(-50%);
+  opacity: 0;
+  display: none;
+}
+.uni-dialog .uni-dialog-header, .uni-dialog--full-screen .uni-dialog-header, .uni-dialog--small .uni-dialog-header, .uni-dialog--side .uni-dialog-header, .uni-dialog--wide-side .uni-dialog-header {
+  grid-row: 1/2;
+}
+.uni-dialog .uni-dialog-content, .uni-dialog--full-screen .uni-dialog-content, .uni-dialog--small .uni-dialog-content, .uni-dialog--side .uni-dialog-content, .uni-dialog--wide-side .uni-dialog-content {
+  padding: 1.5em;
+  overflow-y: auto;
+  background-color: var(--fourth-color);
+}
+@media screen and (max-width: 1024px) {
+  .uni-dialog, .uni-dialog--full-screen, .uni-dialog--small, .uni-dialog--side, .uni-dialog--wide-side {
+    max-width: 60vw;
+  }
+}
+@media screen and (max-width: 520px) {
+  .uni-dialog, .uni-dialog--full-screen, .uni-dialog--small, .uni-dialog--side, .uni-dialog--wide-side {
+    min-width: 90vw;
+  }
+}
+
+.uni-dialog--side, .uni-dialog--wide-side {
+  top: 0;
+  height: 100%;
+  max-height: 100vh;
+  margin: 0 0 0 auto;
+  transform: translateX(0) translateY(0);
+  animation-duration: 300ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  max-width: 50vw;
+}
+.uni-dialog--side[open], [open].uni-dialog--wide-side {
+  animation-name: slide-in;
+}
+@media screen and (max-width: 1024px) {
+  .uni-dialog--side, .uni-dialog--wide-side {
+    max-width: 70vw;
+  }
+}
+
+.uni-dialog--wide-side {
+  max-width: 70vw;
+}
+@media screen and (max-width: 1024px) {
+  .uni-dialog--wide-side {
+    max-width: 90vw;
+  }
+}
+
+.uni-dialog--small {
+  position: relative;
+  top: unset;
+  right: unset;
+  bottom: unset;
+  left: unset;
+  margin: 0;
+  transform: unset;
+  min-width: 30rem;
+  max-width: 40rem;
+}
+
+.uni-dialog--full-screen {
+  top: 0rem;
+  min-width: unset;
+  max-width: unset;
+  width: calc(100% - 3rem);
+  max-height: unset;
+  height: calc(100% - 3rem);
+  margin: 1.5rem auto;
+  transform: translateX(0) translateY(0);
+  opacity: 1;
+  animation-duration: 300ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+}
+.uni-dialog--full-screen[open] {
+  animation-name: slide-up;
+}
+@media screen and (max-width: 1024px) {
+  .uni-dialog--full-screen {
+    max-width: unset;
+  }
+}
+
+dialog > *:first-child {
+  display: contents;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+@keyframes slide-up {
+  from {
+    transform: translateY(3rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-links.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_selected-items.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_forms.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_loader.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_dropdown.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_arrow-icons.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_profile.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_pagination.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_dialog.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;;;ACLH;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACC;EACA;EACA;;;AAIF;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;ACxBA;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;;AC9DX;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AChCH;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;ACxDX;EACG;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;;;ACvBH;EACG;EACA;;AAEA;EACI;EACA;;;ACNP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA;;;ACdH;EACG;EACA;;;ACFJ;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;;;ACbR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;;AAGJ;EAvCJ;IAwCQ;;;AAGJ;EA3CJ;IA4CQ;;;;AAIR;EAEI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EAhBJ;IAiBQ;;;;AAIR;EAEI;;AAEA;EAJJ;IAKQ;;;;AAIR;EAEI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EAEI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EAnBJ;IAoBQ;;;;AAIR;EACI;;;AAGJ;EACI;IACI;;EAGJ;IACI;;;AAIR;EACI;IACI;;EAGJ;IACI%22%7D */

@@ -180,5 +180,17 @@
   {
     "outputFile": "Styles/components/03_organisms/_wizard.css",
     "inputFile": "Styles/components/03_organisms/_wizard.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_dialog.css",
+    "inputFile": "Styles/components/02_molecules/_dialog.scss"
+  },
+  {
+    "outputFile": "Styles/settings/_shadows.css",
+    "inputFile": "Styles/settings/_shadows.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_dialog-actions.css",
+    "inputFile": "Styles/components/01_atoms/_dialog-actions.scss"
   }
 ]

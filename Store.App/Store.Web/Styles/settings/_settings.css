@@ -12,4 +12,10 @@
   --info-secondary-color: #51BBFE;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/settings/_variables.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EAIG;EACA;EACA;EACA;EAEA;EACA;EAEA;EACA;EACA;EACA;EACA%22%7D */
+:root {
+  --table-shadow: 0px 0px 8px rgba(0, 0, 0, 0.16);
+  --button-shadow: 0px 0px 8px rgba(0, 0, 0, 0.20);
+  --dropdown-shadow: 0px 2px 6px rgba(0, 0, 0, 0.26);
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/settings/_variables.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/settings/_shadows.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EAIG;EACA;EACA;EACA;EAEA;EACA;EAEA;EACA;EACA;EACA;EACA;;;AChBJ;EACI;EACA;EACA%22%7D */

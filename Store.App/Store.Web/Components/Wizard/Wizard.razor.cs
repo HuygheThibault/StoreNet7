@@ -4,6 +4,9 @@ namespace Store.Web.Components.Wizard
 {
     public partial class Wizard
     {
+        [Parameter]
+        public bool IsOpen { get; set; } = false;
+
         /// <summary>
         /// List of <see cref="WizardStep"/> added to the Wizard
         /// </summary>
