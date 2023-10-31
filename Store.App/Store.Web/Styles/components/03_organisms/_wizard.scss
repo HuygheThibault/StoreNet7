@@ -28,8 +28,16 @@
 
         &.in-progress {
             background-color: var(--primary-color);
-            /*border-top-right-radius: 25%;
-            border-bottom-right-radius: 25%;*/
+        }
+
+        &:not(:last-child) {
+            &.in-progress {
+                border-radius: 0rem 1rem 1rem 0rem;
+            }
+        }
+
+        &:not(.complete, .in-progress) {
+            opacity: 0.5;
         }
     }
 }

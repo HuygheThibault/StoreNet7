@@ -83,6 +83,7 @@ namespace Store.Web.Components.Wizard
         /// <param name="step">The WizardStep</param>
         /// <returns></returns>
         public int StepsIndex(WizardStep step) => StepsIndexInternal(step);
+
         protected int StepsIndexInternal(WizardStep step)
         {
             if (step == null)
@@ -90,6 +91,7 @@ namespace Store.Web.Components.Wizard
 
             return Steps.IndexOf(step);
         }
+
         /// <summary>
         /// Adds a <see cref="WizardStep"/> to the WizardSteps list
         /// </summary>

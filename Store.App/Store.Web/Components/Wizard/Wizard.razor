@@ -4,7 +4,11 @@
             <div class="wizard-progress">
                 @foreach (var step in Steps)
                 {
-                    <div id="step-@(StepsIndex(step) + 1)" class="step @((ActiveStep == step) ? "in-progress" : "") @((StepsIndex(ActiveStep) > StepsIndex(step)) ? "complete" : "")">
+                    <div 
+                        id="step-@(StepsIndex(step) + 1)" 
+                        class="step @((ActiveStep == step) ? "in-progress" : "") @((StepsIndex(ActiveStep) > StepsIndex(step)) ? "complete" : "")" 
+                        @onclick="@(e=> SetActive(step))">
+
                         <div class="circle">
                             @(StepsIndex(step) + 1)
                         </div>
