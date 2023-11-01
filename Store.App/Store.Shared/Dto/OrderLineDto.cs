@@ -1,6 +1,8 @@
-﻿namespace Store.Shared.Dto
+﻿using Store.Shared.Modals;
+
+namespace Store.Shared.Dto
 {
-    public class OrderLineDto
+    public class OrderLineDto : DatagridRows
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 

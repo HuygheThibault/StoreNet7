@@ -6,7 +6,7 @@
     <section class="parent-categories pd-2">
         @foreach (var category in _Categories.Where(x => x.ParentCategoryId == null))
         {
-            <article class="@( category.Id == _SelectedCategory?.Id || category.Id == _SelectedCategory?.ParentCategoryId ? "product-card active-category" : "product-card")" style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
+            <article class="@( category.Id == _SelectedCategory?.Id || category.Id == _SelectedCategory?.ParentCategoryId ? "card active" : "card")" style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
                 <picture class="thumbnail">
                     <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
                 </picture>
@@ -22,7 +22,7 @@
         {
             @if (_SelectedCategory.ParentCategoryId != null)
             {
-                <article class="product-card active-category" style="background-color:@_SelectedCategory?.Color;">
+                <article class="card active" style="background-color:@_SelectedCategory?.Color;">
                     <picture class="thumbnail">
                         <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
                     </picture>
@@ -34,7 +34,7 @@
 
             @foreach (var category in _Categories.Where(x => x.ParentCategoryId == _SelectedCategory.Id))
             {
-                <article class="product-card" style="background-color:@_SelectedCategory?.Color;" @onclick="() => SetSelectedCategroy(category)">
+                <article class="card" style="background-color:@_SelectedCategory?.Color;" @onclick="() => SetSelectedCategroy(category)">
                     <picture class="thumbnail">
                         <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
                     </picture>
@@ -48,7 +48,7 @@
     <section class="dashboard-products pd-2">
         @foreach (var product in _Products.Where(x => x.CategoryId == _SelectedCategory?.Id || x.CategoryId == _SelectedCategory?.ParentCategoryId).ToList())
         {
-            <article class="product-card" @onclick="() => AddItemToTicket(product)">
+            <article class="card" @onclick="() => AddItemToTicket(product)">
                 <picture class="thumbnail">
                     <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="@product.Title">
                 </picture>

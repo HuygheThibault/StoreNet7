@@ -2,9 +2,8 @@
 
 @if (_order != null)
 {
-    <div class="card right">
-        <p class="close" @onclick="() => Cancel()"><i class="fa-regular fa-circle-xmark"></i></p>
-        <div class="card-header padding-1rem">
+    <div class="@(_order != null ? "open": "") uni-dialog--side">
+        <div class="uni-dialog-header padding-1rem">
             @if (IsNew)
             {
 
@@ -14,8 +13,9 @@
             {
                 <p class="title text-primary">Edit order</p>
             }
+            <p class="close" @onclick="() => Cancel()"><i class="fa-regular fa-circle-xmark"></i></p>
         </div>
-        <EditForm Model="@_order" OnSubmit="@Submit">
+        <EditForm Model="@_order" OnSubmit="@Submit" class="uni-dialog-content">
             <DataAnnotationsValidator />
             <div class="form">
                 <label for="supplier" class="label">Supplier: </label>
@@ -58,23 +58,23 @@
                 <label for="comments" class="label">comments: </label>
                 <InputTextArea id="comments" class="form-control input" @bind-Value="@_order.Comments" placeholder="Comments" />
                 <ValidationMessage class="error" For="@(() => _order.Comments)" />
-                
+
                 <label for="File" class="label">File: </label>
                 <InputFile OnChange="OnInputFileChange" />
-                <div class="form-actions">
-                    @if (IsSaving)
-                    {
-                        <div class="loader"></div>
-                    }
-                    else
-                    {
-                        <button class="submit" type="submit">Submit</button>
-                        <button class="cancel" type="button" @onclick="() => Cancel()">Cancel</button>
-                    }
-
-                </div>
                 <ValidationSummary />
             </div>
         </EditForm>
+        <div class="uni-dialog-actions">
+            @if (IsSaving)
+            {
+                <div class="loader"></div>
+            }
+            else
+            {
+                <button class="submit" type="submit">Submit</button>
+                <button class="cancel" type="button" @onclick="() => Cancel()">Cancel</button>
+            }
+
+        </div>
     </div>
 }

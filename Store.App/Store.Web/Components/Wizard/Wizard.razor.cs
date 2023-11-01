@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using System;
 
 namespace Store.Web.Components.Wizard
 {
     public partial class Wizard
     {
         [Parameter]
-        public bool IsOpen { get; set; } = false;
+        public bool IsVisible { get; set; } = false;
 
         /// <summary>
         /// List of <see cref="WizardStep"/> added to the Wizard
@@ -66,15 +68,18 @@ namespace Store.Web.Components.Wizard
         /// </summary>
         /// <param name="step">The WizardStep</param>
 
-        protected internal void SetActive(WizardStep step)
+        protected internal void SetActive(WizardStep step, bool isfirstRender = false)
         {
-            ActiveStep = step ?? throw new ArgumentNullException(nameof(step));
+            if ((step.IsStepValid || (ActiveStep != null && StepsIndex(step) < StepsIndex(ActiveStep))) || isfirstRender)
+            {
+                ActiveStep = step ?? throw new ArgumentNullException(nameof(step));
 
-            ActiveStepIx = StepsIndex(step);
-            if (ActiveStepIx == Steps.Count - 1)
-                IsLastStep = true;
-            else
-                IsLastStep = false;
+                ActiveStepIx = StepsIndex(step);
+                if (ActiveStepIx == Steps.Count - 1)
+                    IsLastStep = true;
+                else
+                    IsLastStep = false;
+            }
         }
 
         /// <summary>
@@ -105,7 +110,7 @@ namespace Store.Web.Components.Wizard
         {
             if (firstRender)
             {
-                SetActive(Steps[0]);
+                SetActive(Steps[0], isfirstRender: firstRender);
                 StateHasChanged();
             }
         }

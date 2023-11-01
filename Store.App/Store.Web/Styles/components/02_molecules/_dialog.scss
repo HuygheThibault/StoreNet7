@@ -14,7 +14,7 @@
     padding: 0;
     margin: 0 auto;
     opacity: 1;
-    background-color: var(--third-color);
+    background-color: var(--fourth-color);
     box-shadow: var(--table-shadow);
     border: unset;
     transform: translateY(-50%);
@@ -29,12 +29,19 @@
 
     .uni-dialog-header {
         grid-row: 1 / 2;
+
+        .close {
+            position: fixed;
+            top: 0;
+            right: 1rem;
+            color: var(--primary-text-color);
+        }
     }
 
     .uni-dialog-content {
         padding: 1.5em;
         overflow-y: auto;
-        background-color: var(--fourth-color);
+        background-color: var(--third-color);
     }
 
     @media screen and (max-width: 1024px) {

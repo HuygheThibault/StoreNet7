@@ -1,0 +1,160 @@
+﻿@using Store.Shared.Dto;
+@using Store.Web.Components.Datagrid
+@using Store.Web.Components.Wizard
+@using Store.Web.Helpers.Modals;
+
+@if (Suppliers != null && Order != null)
+{
+    <div @onkeyup="(e) => HandleKeyDown(e)">
+        <Wizard Id="OrderWizard" IsVisible="IsVisible">
+            <WizardStep Name="@(Order.Supplier == null ? "Supplier" : Order.Supplier?.Name)"
+                        IsStepValid="IsSupplierValied() || (Order.Supplier != null && Suppliers.Select(x => x.Id).ToList().Contains(Order.Supplier.Id))">
+                @if (IsNewSupplier)
+                {
+                    <h3>Create a supplier supplier</h3>
+                }
+                else
+                {
+                    <h3>Choose your supplier</h3>
+                }
+                @* <i class="fa-solid fa-arrow-right fa-rotate-90"/> *@
+                <div class="search-box pd-b-1" style="@(IsNewSupplier ? "display:none;" : "")">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                    <input type="text" class="input-search" placeholder="Type to Search..." @bind-value="SearchValue">
+                </div>
+                <div class="flex-grid-hrztl" style="@(IsNewSupplier ? "display:none;" : "")">
+                    @if (Suppliers != null)
+                    {
+                        @foreach (var supplier in Suppliers.Where(x => x.Name.ToLower().Contains(SearchValue.ToLower())))
+                        {
+                            <article class="@( supplier.Id == Order.Supplier?.Id ? "card active" : "card")" @onclick="() => SetSelectedSupplier(supplier)" style="flex: 0 0 5rem;">
+                                <picture class="thumbnail">
+                                    <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
+                                </picture>
+                                <div class="details">
+                                    <h1>@supplier.Name</h1>
+                                </div>
+                            </article>
+                        }
+                    }
+                    else
+                    {
+                        <svg class="loading-progress">
+                            <circle r="40%" cx="50%" cy="50%" />
+                            <circle r="40%" cx="50%" cy="50%" />
+                        </svg>
+                        <div class="loading-progress-text"></div>
+                    }
+                </div>
+                <div class="row pd-t-1">
+                    <label id="IsNewSupplierLabel" for="IsNewSupplier" class="label mrg-r-1">New supplier: </label>
+                    <input id="IsNewSupplier" class="checkbox" type="checkbox" unchecked @bind="IsNewSupplier" />
+                </div>
+                @if (IsNewSupplier)
+                {
+                    <div class="row">
+                        <EditForm Model="@Order">
+                            <DataAnnotationsValidator />
+                            <div class="form">
+                                <label for="name" class="label">Name: </label>
+                                <InputText id="name" class="form-control input" @bind-Value="@Order.Supplier.Name" placeholder="Name" />
+                                @* <ValidationMessage class="error" For="@(() => SelectedSupplier.Name)" /> *@
+
+                                <label for="address" class="label">Address: </label>
+                                <InputText id="address" class="form-control input" @bind-Value="@Order.Supplier.Address" placeholder="Address" />
+                                @* <ValidationMessage class="error" For="@(() => SelectedSupplier.Address)" /> *@
+
+                                <label for="vat" class="label">Vat: </label>
+                                <InputText id="vat" class="form-control input" @bind-Value="@Order.Supplier.VatNumber" placeholder="Vat" />
+                                @* <ValidationMessage class="error" For="@(() => SelectedSupplier.VatNumber)" /> *@
+                                <ValidationSummary />
+
+                                <label for="image" class="label">Select image: </label>
+                                <div class="col-md-8">
+                                    <InputFile OnChange="OnInputFileChange" />
+                                </div>
+
+                            </div>
+                        </EditForm>
+                    </div>
+                }
+            </WizardStep>
+            <WizardStep Name="Second Step" IsStepValid="true">
+                <div class="search-box pd-b-1">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                    <input type="text" class="input-search" placeholder="Type to Search..." @bind-value="SearchValue">
+                </div>
+                <div class="data-grid-container pd-1">
+                    <button class="mrg-0 pd-1" @onclick="AddOrderLine"> Add</button>
+
+                    <div class="data-grid">
+                        <div class="headers row">
+                            @foreach (Column column in Columns)
+                            {
+                                <div class="col">
+                                    <span class="pd-1">
+                                        <strong>
+                                            @column.Name
+                                        </strong>
+                                    </span>
+                                </div>
+                            }
+                            <div class="col">
+                                <span class="pd-1">
+                                    <strong>
+                                        Actions
+                                    </strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="rows">
+                            @foreach (var item in Order.OrderLines)
+                            {
+                                <div class="@("row " + (Order.OrderLines.ToList().IndexOf(item) % 2 == 0 ? "even" : "odd"))">
+                                    @foreach (Column column in Columns)
+                                    {
+                                        <div class="col pd-0">
+                                            <span>
+                                                @if (column.ColumnType == "Bool")
+                                                {
+                                                    if (@GetPropValue(item, column.Name) == "True")
+                                                    {
+                                                        <i class="fa-solid fa-check"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fa-solid fa-xmark"></i>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    @GetPropValue(item, column.Name)
+                                                }
+                                            </span>
+                                        </div>
+                                    }
+                                    <div class="col">
+                                        <div class="actions">
+                                            <button class="edit" @onclick="() => Edit(item)">
+                                                <i class="fa-solid fa-edit"></i>
+                                            </button>
+                                            <button class="remove" @onclick="() => DeleteItem(item)">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </WizardStep>
+            <WizardStep Name="Final Step" IsStepValid="true">
+                <div class="row">
+                    <p>The final step has been reached. Thank you \o/</p>
+                </div>
+            </WizardStep>
+        </Wizard>
+    </div>
+
+}

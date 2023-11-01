@@ -23,38 +23,6 @@ header .h4 {
   margin-left: auto;
 }
 
-.product-card {
-  border-radius: 0.5rem;
-  cursor: pointer;
-  background-color: var(--third-color);
-  display: flex;
-  flex-direction: column;
-  height: fit-content;
-  width: fit-content;
-}
-.product-card .thumbnail img {
-  display: block;
-  border: 0;
-  height: auto;
-  width: 100%;
-}
-.product-card .details {
-  padding: 0.5rem;
-  text-transform: uppercase;
-  height: fit-content;
-}
-.product-card .details h1 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0;
-  word-break: normal;
-}
-.product-card .details h2 {
-  font-size: 0.75rem;
-  font-weight: 400;
-  margin: 0;
-}
-
 .side-nav-open {
   transition: 0.16s ease-in-out;
 }
@@ -99,43 +67,6 @@ header .h4 {
   transition: all 0.16s ease-in-out;
   cursor: pointer;
   /*color: var(--primary-text-color);*/
-}
-
-.product-card-counter {
-  background-color: var(--primary-color);
-  transition: display 0s linear 0.33s, grid-column 0.33s linear;
-}
-.product-card-counter .product {
-  display: grid;
-  grid-auto-flow: dense;
-  grid-template-areas: "product counter totals";
-  grid-template-columns: 1fr 1fr auto;
-  transition: display 0s linear 3s, grid-column 3s linear;
-}
-.product-card-counter .product .details {
-  grid-area: product;
-  display: grid;
-  grid-template-areas: "img title" "img description";
-  column-gap: 1rem;
-}
-.product-card-counter .product .details img {
-  grid-area: img;
-  width: 5rem;
-}
-.product-card-counter .product .details .title {
-  grid-area: title;
-}
-.product-card-counter .product .details .description {
-  grid-area: description;
-}
-.product-card-counter .product .counter {
-  grid-area: counter;
-  display: grid;
-  grid-auto-flow: column dense;
-  gap: 0.5rem;
-}
-.product-card-counter .product h4 {
-  grid-area: totals;
 }
 
 .footer-info {
@@ -302,4 +233,77 @@ header .h4 {
   opacity: 0.5;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_side-navigation.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card-counter.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_dashboard-sidebar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_datagrid.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_notification_bar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_wizard.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;AACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAIR;EACI;;AAGJ;EACI;;;ACzBP;EACG;EACA;EACA;EACA;EACA;EACA;EACA;;AAGI;EACI;EACA;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;;;ACjCX;EACG;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AAIR;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;AACA;;;AClDH;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI;;;ACvCX;EACG;EACA;EACA;;;AAEJ;EACI;EACA;;;AAIJ;EACI;;;ACZH;EACG;EACA;AACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;;AAGJ;EACI;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAIA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;;AChGpB;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;;AC7BR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIA;EACI;;AAIR;EACI%22%7D */
+.card {
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: var(--third-color);
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  width: fit-content;
+}
+.card .thumbnail img {
+  display: block;
+  border: 0;
+  height: auto;
+  width: 100%;
+}
+.card .details {
+  padding: 0.5rem;
+  text-transform: uppercase;
+  height: fit-content;
+}
+.card .details h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  word-break: normal;
+}
+.card .details h2 {
+  font-size: 0.75rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.card.active {
+  box-shadow: 0.5rem 1rem 1rem 0px rgba(0, 0, 0, 0.3), 0 1rem 2rem rgba(0, 0, 0, 0.22);
+}
+
+.card-counter {
+  background-color: var(--primary-color);
+  transition: display 0s linear 0.33s, grid-column 0.33s linear;
+}
+.card-counter .product {
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-areas: "product counter totals";
+  grid-template-columns: 1fr 1fr auto;
+  transition: display 0s linear 3s, grid-column 3s linear;
+}
+.card-counter .product .details {
+  grid-area: product;
+  display: grid;
+  grid-template-areas: "img title" "img description";
+  column-gap: 1rem;
+}
+.card-counter .product .details img {
+  grid-area: img;
+  width: 5rem;
+}
+.card-counter .product .details .title {
+  grid-area: title;
+}
+.card-counter .product .details .description {
+  grid-area: description;
+}
+.card-counter .product .counter {
+  grid-area: counter;
+  display: grid;
+  grid-auto-flow: column dense;
+  gap: 0.5rem;
+}
+.card-counter .product h4 {
+  grid-area: totals;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_side-navigation.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_dashboard-sidebar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_datagrid.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_notification_bar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_wizard.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card-counter.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;AACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAIR;EACI;;AAGJ;EACI;;;ACzBP;EACG;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AAIR;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;AACA;;;AClDH;EACG;EACA;EACA;;;AAEJ;EACI;EACA;;;AAIJ;EACI;;;ACZH;EACG;EACA;AACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;;AAGJ;EACI;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAIA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;;AChGpB;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;;AC7BR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIA;EACI;;AAIR;EACI;;;ACvCX;EACG;EACA;EACA;EACA;EACA;EACA;EACA;;AAGI;EACI;EACA;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;;;AAKZ;EACI;;;ACvCH;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI%22%7D */

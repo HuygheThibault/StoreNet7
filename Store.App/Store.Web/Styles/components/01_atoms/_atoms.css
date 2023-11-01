@@ -6,6 +6,13 @@
   gap: 1rem;
 }
 
+.flex-grid-hrztl {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  grid-gap: 1rem;
+}
+
 .pd-0 {
   padding: 0.5rem;
 }
@@ -311,7 +318,7 @@ button:hover {
 }
 
 button:focus {
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 button.submit {
@@ -332,6 +339,12 @@ button.edit {
 
 button.primary {
   background: var(--info-primary-color) !important;
+}
+
+button:disabled,
+button[disabled] {
+  background: var(--disabled-color) !important;
+  opacity: 0.5;
 }
 
 .text-primary {
@@ -410,4 +423,52 @@ button.primary {
   grid-area: primary-action;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_grids.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_paddings.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_margins.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_sizes.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_align.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_buttons.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_text.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_borders.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_animations.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_scrollbar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_dialog-actions.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;;;ACDA;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;ACxBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AC9BP;EACG;EACA;AACA;;AAII;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAQR;EACI;;;ACdP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;ACtBH;EACG;EACA;EACA;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AC/BH;EACG;;;AAGJ;EACI;;;AAGJ;EACI;;;ACTH;EACG;;;AAGJ;EACI;;;ACLJ;EACI;IACI;;EAGJ;IACI;;;AAIR;EACI;IACI;;EAGJ;IACI;;;AChBR;EACI;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;AACA;;;ACbJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI%22%7D */
+input[type=checkbox] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  appearance: none;
+  /* For iOS < 15 */
+  background-color: var(--form-background);
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+
+input[type=checkbox]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+
+input[type=checkbox]:checked::before {
+  transform: scale(1);
+}
+
+input[type=checkbox]:focus {
+  outline: max(2px, 0.15em) solid currentColor;
+  outline-offset: max(2px, 0.15em);
+}
+
+input[type=checkbox]:disabled {
+  --form-control-color: var(--form-control-disabled);
+  color: var(--form-control-disabled);
+  cursor: not-allowed;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_grids.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_paddings.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_margins.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_sizes.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_align.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_buttons.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_text.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_borders.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_animations.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_scrollbar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_dialog-actions.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_checkbox.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;;;ACRA;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;ACxBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AC9BP;EACG;EACA;AACA;;AAII;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAQR;EACI;;;ACdP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;ACtBH;EACG;EACA;EACA;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;AAAA;EAEI;EACA;;;ACrCH;EACG;;;AAGJ;EACI;;;AAGJ;EACI;;;ACTH;EACG;;;AAGJ;EACI;;;ACLJ;EACI;IACI;;EAGJ;IACI;;;AAIR;EACI;IACI;;EAGJ;IACI;;;AChBR;EACI;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;AACA;;;ACbJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;;ACxBR;AACI;EACA;AACA;EACA;AACA;EACA;AACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;AACA;EACA;;;AAGJ;EACI;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA;EACA%22%7D */

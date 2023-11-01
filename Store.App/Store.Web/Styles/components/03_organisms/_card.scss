@@ -1,4 +1,4 @@
-﻿.product-card {
+﻿.card {
     border-radius: 0.5rem;
     cursor: pointer;
     background-color: var(--third-color);
@@ -34,4 +34,8 @@
             margin: 0;
         }
     }
+}
+
+.card.active {
+    box-shadow: 0.5rem 1rem 1rem 0px rgba(0,0,0,.3), 0 1rem 2rem rgba(0,0,0,.22);
 }

@@ -6,14 +6,15 @@ namespace Store.Web.Components.Wizard
     {
         [CascadingParameter]
         protected internal Wizard Parent { get; set; }
+
         [Parameter]
         public RenderFragment ChildContent { get; set; }
-
 
         [Parameter]
         public string Name { get; set; }
 
-
+        [Parameter]
+        public bool IsStepValid { get; set; } = true;
 
         protected override void OnInitialized()
         {

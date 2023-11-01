@@ -1,38 +1,38 @@
-﻿.product-card-counter {
+﻿.card-counter {
   background-color: var(--primary-color);
   transition: display 0s linear 0.33s, grid-column 0.33s linear;
 }
-.product-card-counter .product {
+.card-counter .product {
   display: grid;
   grid-auto-flow: dense;
   grid-template-areas: "product counter totals";
   grid-template-columns: 1fr 1fr auto;
   transition: display 0s linear 3s, grid-column 3s linear;
 }
-.product-card-counter .product .details {
+.card-counter .product .details {
   grid-area: product;
   display: grid;
   grid-template-areas: "img title" "img description";
   column-gap: 1rem;
 }
-.product-card-counter .product .details img {
+.card-counter .product .details img {
   grid-area: img;
   width: 5rem;
 }
-.product-card-counter .product .details .title {
+.card-counter .product .details .title {
   grid-area: title;
 }
-.product-card-counter .product .details .description {
+.card-counter .product .details .description {
   grid-area: description;
 }
-.product-card-counter .product .counter {
+.card-counter .product .counter {
   grid-area: counter;
   display: grid;
   grid-auto-flow: column dense;
   gap: 0.5rem;
 }
-.product-card-counter .product h4 {
+.card-counter .product h4 {
   grid-area: totals;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card-counter.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_card-counter.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI%22%7D */

@@ -1,17 +1,22 @@
 ﻿<CascadingValue Value="this">
-    <div class="@(IsOpen ? "uni-dialog open": "uni-dialog")" id="@Id">
+    <div class="@(IsVisible ? "open": "") uni-dialog" id="@Id">
+        @* --full-screen *@
         <div class="uni-dialog-header">
             <div class="wizard-progress">
                 @foreach (var step in Steps)
                 {
-                    <div 
-                        id="step-@(StepsIndex(step) + 1)" 
-                        class="step @((ActiveStep == step) ? "in-progress" : "") @((StepsIndex(ActiveStep) > StepsIndex(step)) ? "complete" : "")" 
-                        @onclick="@(e=> SetActive(step))">
+                    <div id="step-@(StepsIndex(step) + 1)"
+                         class="step @((ActiveStep == step) ? "in-progress" : "") @((StepsIndex(ActiveStep) > StepsIndex(step)) ? "complete" : "")"
+                    @onclick="@(e=> SetActive(step))">
 
-                        <div class="circle">
-                            @(StepsIndex(step) + 1)
-                        </div>
+                        @if (!step.IsStepValid)
+                        {
+                            <div class="circle"> @(StepsIndex(step) + 1)</div>
+                        }
+                        else
+                        {
+                            <div class="circle">&#10003;</div>
+                        }
                         @step.Name
                     </div>
                 }
@@ -25,8 +30,8 @@
                     disabled="@(ActiveStepIx == 0)" @onclick="GoBack">
                 Previous
             </button>
-            <button class="@(IsLastStep ? "submit" : "primary")"
-                    type="@(IsLastStep ? "submit" : "button")" @onclick="GoNext">
+            <button class="@(ActiveStep?.IsStepValid == false ? "disabled" : IsLastStep ? "submit" : "primary") uni-dialog-actions__secondary-action"
+                    type="@(IsLastStep ? "submit" : "button") uni-dialog-actions__primary-action" @onclick="GoNext" disabled="@(!ActiveStep?.IsStepValid)">
                 @(IsLastStep ? "Submit" : "Next")
             </button>
         </div>

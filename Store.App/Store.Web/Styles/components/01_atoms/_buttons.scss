@@ -9,7 +9,7 @@ button:hover {
 }
 
 button:focus {
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 button.submit {
@@ -30,6 +30,12 @@ button.edit {
 
 button.primary {
     background: var(--info-primary-color) !important;
+}
+
+button:disabled,
+button[disabled] {
+    background: var(--disabled-color) !important;
+    opacity: 0.5;
 }
 
 button.cancel {

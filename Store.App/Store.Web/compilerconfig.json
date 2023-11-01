@@ -96,14 +96,6 @@
     "inputFile": "Styles/components/03_organisms/_organisms.scss"
   },
   {
-    "outputFile": "Styles/components/03_organisms/_product-card.css",
-    "inputFile": "Styles/components/03_organisms/_product-card.scss"
-  },
-  {
-    "outputFile": "Styles/components/03_organisms/_product-card-counter.css",
-    "inputFile": "Styles/components/03_organisms/_product-card-counter.scss"
-  },
-  {
     "outputFile": "Styles/components/03_organisms/_side-navigation.css",
     "inputFile": "Styles/components/03_organisms/_side-navigation.scss"
   },
@@ -150,10 +142,6 @@
     }
   },
   {
-    "outputFile": "Styles/components/02_molecules/_card.css",
-    "inputFile": "Styles/components/02_molecules/_card.scss"
-  },
-  {
     "outputFile": "Styles/components/01_atoms/_animations.css",
     "inputFile": "Styles/components/01_atoms/_animations.scss"
   },
@@ -192,5 +180,17 @@
   {
     "outputFile": "Styles/components/01_atoms/_dialog-actions.css",
     "inputFile": "Styles/components/01_atoms/_dialog-actions.scss"
+  },
+  {
+    "outputFile": "Styles/components/03_organisms/_card.css",
+    "inputFile": "Styles/components/03_organisms/_card.scss"
+  },
+  {
+    "outputFile": "Styles/components/01_atoms/_checkbox.css",
+    "inputFile": "Styles/components/01_atoms/_checkbox.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_order-wizard.css",
+    "inputFile": "Styles/components/02_molecules/_order-wizard.scss"
   }
 ]

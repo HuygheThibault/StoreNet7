@@ -19,10 +19,16 @@ namespace Store.Web.Components.Datagrid
         public List<DropdownColumn>? DropdownColumns { get; set; } = default!;
 
         [Parameter]
+        public bool CanAdd { get; set; } = false;
+
+        [Parameter]
         public bool CanEditItem { get; set; } = false;
 
         [Parameter]
         public bool CanDeleteItem { get; set; } = false;
+
+        [Parameter]
+        public EventCallback<T> OnAdd { get; set; } = default!;
 
         [Parameter]
         public EventCallback<T> OnDelete { get; set; } = default!;
@@ -31,7 +37,7 @@ namespace Store.Web.Components.Datagrid
         public EventCallback<T> OnEdit { get; set; } = default!;
 
         [Parameter]
-        public PaginationMetadata? Pagination { get; set; } = new PaginationMetadata();
+        public PaginationMetadata? Pagination { get; set; } = default!;
 
         [Inject]
         public IJSRuntime? JsRuntime { get; set; }
@@ -58,6 +64,7 @@ namespace Store.Web.Components.Datagrid
             {
                 _data = Data;
                 ApplySorting();
+                StateHasChanged();
             }
         }
 
@@ -80,7 +87,7 @@ namespace Store.Web.Components.Datagrid
                                 Dropdown = DropdownColumns.FirstOrDefault(x => x.Name == prop.Name)
                             });
                         }
-                        else
+                        else if(!prop.Name.Contains("Id"))
                         {
                             columns.Add(new Column
                             {
@@ -152,6 +159,12 @@ namespace Store.Web.Components.Datagrid
         {
             await OnEdit.InvokeAsync(item);
         }
+
+        private async Task Add()
+        {
+            await OnAdd.InvokeAsync();
+        }
+
 
         private static object GetPropValue(object src, string propName)
         {
