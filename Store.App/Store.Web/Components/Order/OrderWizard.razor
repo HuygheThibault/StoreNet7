@@ -9,15 +9,10 @@
         <Wizard Id="OrderWizard" IsVisible="IsVisible">
             <WizardStep Name="@(Order.Supplier == null ? "Supplier" : Order.Supplier?.Name)"
                         IsStepValid="IsSupplierValied() || (Order.Supplier != null && Suppliers.Select(x => x.Id).ToList().Contains(Order.Supplier.Id))">
-                @if (IsNewSupplier)
-                {
-                    <h3>Create a supplier supplier</h3>
-                }
-                else
-                {
-                    <h3>Choose your supplier</h3>
-                }
-                @* <i class="fa-solid fa-arrow-right fa-rotate-90"/> *@
+                <div class="row pd-b-1">
+                    <label id="IsNewSupplierLabel" for="IsNewSupplier" class="label mrg-r-1">New supplier: </label>
+                    <input id="IsNewSupplier" class="checkbox" type="checkbox" unchecked @bind="IsNewSupplier" />
+                </div>
                 <div class="search-box pd-b-1" style="@(IsNewSupplier ? "display:none;" : "")">
                     <button type="submit"><i class="fas fa-search"></i></button>
                     <input type="text" class="input-search" placeholder="Type to Search..." @bind-value="SearchValue">
@@ -45,10 +40,6 @@
                         </svg>
                         <div class="loading-progress-text"></div>
                     }
-                </div>
-                <div class="row pd-t-1">
-                    <label id="IsNewSupplierLabel" for="IsNewSupplier" class="label mrg-r-1">New supplier: </label>
-                    <input id="IsNewSupplier" class="checkbox" type="checkbox" unchecked @bind="IsNewSupplier" />
                 </div>
                 @if (IsNewSupplier)
                 {
