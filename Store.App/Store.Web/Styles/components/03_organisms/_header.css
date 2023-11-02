@@ -5,17 +5,6 @@
   flex-direction: row;
   align-items: center;
 }
-header .search-box {
-  align-self: flex-start;
-  justify-self: center;
-  height: 100%;
-}
-header .search-box button {
-  height: 2rem;
-  width: 2rem;
-  border-radius: 1rem;
-  align-self: center;
-}
 header .nav-link {
   margin-left: auto;
 }
@@ -23,4 +12,4 @@ header .h4 {
   margin-left: auto;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_header.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;AACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAIR;EACI;;AAGJ;EACI%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_header.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;AACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI%22%7D */

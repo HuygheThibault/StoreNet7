@@ -1,0 +1,44 @@
+﻿@using Store.Shared.Dto;
+
+@if (Product != null && EditContext != null)
+{
+    <div class="@(Product != null ? "open": "") uni-dialog--side">
+        <div class="uni-dialog-header padding-1rem">
+            @if (IsNew)
+            {
+                <p class="title text-primary">Add product</p>
+            }
+            else
+            {
+                <p class="title text-primary">Edit product</p>
+            }
+            <p class="close" @onclick="() => Close()"><i class="fa-regular fa-circle-xmark"></i></p>
+        </div>
+        <EditForm EditContext="@EditContext" class="uni-dialog-content">
+            <div class="form">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <label for="title" class="label">Title: </label>
+                <InputText id="title" class="form-control input" @bind-Value="@Product.Title" placeholder="Title" />
+
+                <label for="description" class="label">Description: </label>
+                <InputText id="description" class="form-control input" @bind-Value="@Product.Description" placeholder="Description" />
+
+                <label for="price" class="label">Price: </label>
+                <InputNumber id="price" class="form-control input" @bind-Value="@Product.PricePerUnit" placeholder="Price" />
+
+                <label for="category" class="label">Category: @Product?.Category?.Title </label>
+                <TreeView CategorySelected="CategoryChanged" />
+
+
+                <label for="File" class="label">Image: </label>
+                @* <InputFile OnChange="OnInputFileChange" /> *@
+            </div>
+        </EditForm>
+        <div class="uni-dialog-actions">
+            <button class="uni-dialog-actions__primary-action" type="submit" @onclick="() => Submit()">Submit</button>
+            <button class="uni-dialog-actions__secondary-action" type="button" @onclick="() => Close()">Cancel</button>
+        </div>
+    </div>
+}

@@ -1,10 +1,9 @@
 ﻿@page "/Suppliers"
 @using Store.Shared.Dto;
-@using Store.Web.Components.Suppliers
 
 <div class="row">
     @foreach (SupplierDto supplier in _suppliers)
     {
-        <SupplierCard Supplier="supplier"/>
+        <h1>@supplier.Name</h1>
     }
 </div>

@@ -1,0 +1,44 @@
+$border: #ddd;
+$border-hover: rgb(71,71,71);
+$bg-hover: rgba(0,0,0,.1);
+$text: rgba(102,102,102,1);
+$text-hover: #000;
+
+.tree-view {
+    overflow-y: scroll;
+    height: 15rem;
+
+    li {
+        list-style-type: none;
+        margin: 0.5rem 0 0.5rem 0.5rem;
+        position: relative;
+
+        &:last-child:after {
+            display: none;
+        }
+
+        span {
+            display: block;
+            border: 1px solid $border;
+            padding: 0.5rem;
+            text-decoration: none;
+            margin: 0.5rem;
+        }
+
+        span.active {
+            box-shadow: 0.5rem 1rem 1rem 0px rgba(0,0,0,.3), 0 1rem 2rem rgba(0,0,0,.22);
+        }
+    }
+}
+
+.tree-view {
+    li {
+        span {
+            &:hover,
+            &:focus {
+                color: $text-hover;
+                border: 1px solid $border-hover;
+            }
+        }
+    }
+}

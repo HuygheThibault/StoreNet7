@@ -1,44 +1,43 @@
 ﻿@using Store.Shared.Dto;
 @using Store.Web.Components.Datagrid
+@using Store.Web.Components.Product
 @using Store.Web.Components.Wizard
 @using Store.Web.Helpers.Modals;
+@using Store.Web.Helpers;
+
 
 @if (Suppliers != null && Order != null)
 {
     <div @onkeyup="(e) => HandleKeyDown(e)">
-        <Wizard Id="OrderWizard" IsVisible="IsVisible">
+        <Wizard Id="OrderWizard" IsVisible="IsWizardVisible">
             <WizardStep Name="@(Order.Supplier == null ? "Supplier" : Order.Supplier?.Name)"
-                        IsStepValid="IsSupplierValied() || (Order.Supplier != null && Suppliers.Select(x => x.Id).ToList().Contains(Order.Supplier.Id))">
+                        IsStepValid="IsSupplierValied()">
                 <div class="row pd-b-1">
                     <label id="IsNewSupplierLabel" for="IsNewSupplier" class="label mrg-r-1">New supplier: </label>
-                    <input id="IsNewSupplier" class="checkbox" type="checkbox" unchecked @bind="IsNewSupplier" />
+                    <input id="IsNewSupplier" class="checkbox" type="checkbox" value="IsNewSupplier" @onchange="(e) => SetSelectedSupplier(new SupplierDto(), bool.Parse(e.Value.ToString()))" />
                 </div>
                 <div class="search-box pd-b-1" style="@(IsNewSupplier ? "display:none;" : "")">
                     <button type="submit"><i class="fas fa-search"></i></button>
                     <input type="text" class="input-search" placeholder="Type to Search..." @bind-value="SearchValue">
                 </div>
                 <div class="flex-grid-hrztl" style="@(IsNewSupplier ? "display:none;" : "")">
-                    @if (Suppliers != null)
+                    @if (Suppliers.Count <= 0)
                     {
                         @foreach (var supplier in Suppliers.Where(x => x.Name.ToLower().Contains(SearchValue.ToLower())))
                         {
-                            <article class="@( supplier.Id == Order.Supplier?.Id ? "card active" : "card")" @onclick="() => SetSelectedSupplier(supplier)" style="flex: 0 0 5rem;">
+                            <div class="card @( supplier.Id == Order.SupplierId ? "active" : "")" @onclick="() => SetSelectedSupplier(supplier)" style="flex: 0 0 5rem;">
                                 <picture class="thumbnail">
                                     <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
                                 </picture>
                                 <div class="details">
                                     <h1>@supplier.Name</h1>
                                 </div>
-                            </article>
+                            </div>
                         }
                     }
                     else
                     {
-                        <svg class="loading-progress">
-                            <circle r="40%" cx="50%" cy="50%" />
-                            <circle r="40%" cx="50%" cy="50%" />
-                        </svg>
-                        <div class="loading-progress-text"></div>
+                        <div class="loader"></div>
                     }
                 </div>
                 @if (IsNewSupplier)
@@ -75,9 +74,28 @@
                     <button type="submit"><i class="fas fa-search"></i></button>
                     <input type="text" class="input-search" placeholder="Type to Search..." @bind-value="SearchValue">
                 </div>
+                <div class="flex-grid-hrztl">
+                    @if (Products != null)
+                    {
+                        @foreach (var product in Products.Where(x => x.Title.ToLower().Contains(SearchValue.ToLower())))
+                        {
+                            <div class="card @( product.Id == Order.SupplierId ? "active" : "")" style="flex: 0 0 5rem;" @onclick="() => AddOrderLine(product)">
+                                <picture class="thumbnail">
+                                    <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
+                                </picture>
+                                <div class="details">
+                                    <h1>@product.Title</h1>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="loader"></div>
+                    }
+                </div>
                 <div class="data-grid-container pd-1">
-                    <button class="mrg-0 pd-1" @onclick="AddOrderLine"> Add</button>
-
+                    <button class="mrg-0 pd-1" @onclick="AddNewProduct">Add new product</button>
                     <div class="data-grid">
                         <div class="headers row">
                             @foreach (Column column in Columns)
@@ -90,13 +108,6 @@
                                     </span>
                                 </div>
                             }
-                            <div class="col">
-                                <span class="pd-1">
-                                    <strong>
-                                        Actions
-                                    </strong>
-                                </span>
-                            </div>
                         </div>
                         <div class="rows">
                             @foreach (var item in Order.OrderLines)
@@ -104,11 +115,11 @@
                                 <div class="@("row " + (Order.OrderLines.ToList().IndexOf(item) % 2 == 0 ? "even" : "odd"))">
                                     @foreach (Column column in Columns)
                                     {
-                                        <div class="col pd-0">
+                                        <div class="col pd-1">
                                             <span>
                                                 @if (column.ColumnType == "Bool")
                                                 {
-                                                    if (@GetPropValue(item, column.Name) == "True")
+                                                    if (@GetPropertyValue.GetPropValue(item, column.Name) == "True")
                                                     {
                                                         <i class="fa-solid fa-check"></i>
                                                     }
@@ -117,23 +128,24 @@
                                                         <i class="fa-solid fa-xmark"></i>
                                                     }
                                                 }
+                                                else if (column.Name == "Actions")
+                                                {
+                                                    <div class="actions">
+                                                        <button class="edit" @onclick="() => Edit(item)">
+                                                            <i class="fa-solid fa-edit"></i>
+                                                        </button>
+                                                        <button class="remove" @onclick="() => DeleteItem(item)">
+                                                            <i class="fa-solid fa-trash-can"></i>
+                                                        </button>
+                                                    </div>
+                                                }
                                                 else
                                                 {
-                                                    @GetPropValue(item, column.Name)
+                                                    @GetPropertyValue.GetPropValue(item, column.Name)
                                                 }
                                             </span>
                                         </div>
                                     }
-                                    <div class="col">
-                                        <div class="actions">
-                                            <button class="edit" @onclick="() => Edit(item)">
-                                                <i class="fa-solid fa-edit"></i>
-                                            </button>
-                                            <button class="remove" @onclick="() => DeleteItem(item)">
-                                                <i class="fa-solid fa-trash-can"></i>
-                                            </button>
-                                        </div>
-                                    </div>
                                 </div>
                             }
                         </div>
@@ -142,10 +154,9 @@
             </WizardStep>
             <WizardStep Name="Final Step" IsStepValid="true">
                 <div class="row">
-                    <p>The final step has been reached. Thank you \o/</p>
                 </div>
             </WizardStep>
         </Wizard>
     </div>
-
+    <ProductDialog Product="NewProduct" />
 }

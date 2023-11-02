@@ -70,16 +70,13 @@ namespace Store.Web.Components.Wizard
 
         protected internal void SetActive(WizardStep step, bool isfirstRender = false)
         {
-            if ((step.IsStepValid || (ActiveStep != null && StepsIndex(step) < StepsIndex(ActiveStep))) || isfirstRender)
-            {
-                ActiveStep = step ?? throw new ArgumentNullException(nameof(step));
+            ActiveStep = step ?? throw new ArgumentNullException(nameof(step));
 
-                ActiveStepIx = StepsIndex(step);
-                if (ActiveStepIx == Steps.Count - 1)
-                    IsLastStep = true;
-                else
-                    IsLastStep = false;
-            }
+            ActiveStepIx = StepsIndex(step);
+            if (ActiveStepIx == Steps.Count - 1)
+                IsLastStep = true;
+            else
+                IsLastStep = false;
         }
 
         /// <summary>
@@ -113,6 +110,16 @@ namespace Store.Web.Components.Wizard
                 SetActive(Steps[0], isfirstRender: firstRender);
                 StateHasChanged();
             }
+        }
+
+        protected override void OnParametersSet()
+        {
+            StateHasChanged();
+        }
+
+        private void Close()
+        {
+            IsVisible = false;
         }
     }
 }

@@ -54,22 +54,22 @@ namespace Store.Api.Controllers
             }
         }
 
-        [HttpGet("{title}")]
-        public async Task<IActionResult> GetProductByTitle(string title)
-        {
-            try
-            {
-                var result = await _productRepository.GetProductByTitle(title);
-                if (result == null) return NotFound();
+        //[HttpGet("{title}")]
+        //public async Task<IActionResult> GetProductByTitle(string title)
+        //{
+        //    try
+        //    {
+        //        var result = await _productRepository.GetProductByTitle(title);
+        //        if (result == null) return NotFound();
 
-                return Ok(_mapper.Map<ProductDto>(result));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "error occured");
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database failure while getting a product by title.");
-            }
-        }
+        //        return Ok(_mapper.Map<ProductDto>(result));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "error occured");
+        //        return this.StatusCode(StatusCodes.Status500InternalServerError, "Database failure while getting a product by title.");
+        //    }
+        //}
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, [FromBody] ProductDto model)

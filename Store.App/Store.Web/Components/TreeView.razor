@@ -1,0 +1,38 @@
+﻿@using Store.Shared.Dto;
+
+@if (Categories != null)
+{
+    <ol class="tree-view">
+        @foreach (CategoryDto category in Categories.Where(x => x.ParentCategoryId == null))
+        {
+            <li>
+                <div @onclick="() => CategoriesChanged(category)">
+                    <span style="background-color: @category.Color" class="@(_selectedCategory == category ? "active" : "")">@category.Title</span>
+                </div>
+                @foreach (CategoryDto childCategory in Categories.Where(x => x.ParentCategoryId == category.Id))
+                {
+                    <ol>
+                        <li>
+                            <div @onclick="() => CategoriesChanged(childCategory)">
+                                <span style="background-color: @childCategory.Color" class="@(_selectedCategory == childCategory ? "active" : "")">@childCategory.Title</span>
+                            </div>
+                            @foreach (CategoryDto childCategory2 in Categories.Where(x => x.ParentCategoryId == childCategory.Id))
+                            {
+                                <ol>
+                                    <div @onclick="() => CategoriesChanged(childCategory2)">
+                                        <span style="background-color: @childCategory2.Color;" class="@(_selectedCategory == childCategory2 ? "active" : "")">@childCategory2.Title</span>
+                                    </div>
+                                </ol>
+                            }
+                        </li>
+                    </ol>
+                }
+            </li>
+        }
+
+    </ol>
+}
+else
+{
+    <div class="loader"></div>
+}

@@ -24,6 +24,12 @@ namespace Store.Shared.Dto
 
         public string ModifiedBy { get; set; }
 
-        public virtual ProductDto? Product { get; set; } = null!;
+        private ProductDto product;
+
+        public virtual ProductDto? Product
+        {
+            get { return product; }
+            set { product = value; if (value != null) ProductId = value.Id; }
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Store.Shared.Modals;
+using System.ComponentModel.DataAnnotations;
 
 namespace Store.Shared.Dto
 {
@@ -6,7 +7,8 @@ namespace Store.Shared.Dto
     {
         public Guid Id { get; set; }
 
-        public string Title { get; set; } = String.Empty;
+        [Required, MinLength(3)]
+        public string Title { get; set; }
 
         public string? Description { get; set; }
 
@@ -26,6 +28,12 @@ namespace Store.Shared.Dto
 
         public string ModifiedBy { get; set; } = "Unknown";
 
-        public CategoryDto? Category { get; set; }
+        private CategoryDto category;
+
+        public virtual CategoryDto? Category
+        {
+            get { return category; }
+            set { category = value; if (value != null) CategoryId = value.Id; }
+        }
     }
 }

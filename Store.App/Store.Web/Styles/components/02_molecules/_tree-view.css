@@ -1,0 +1,29 @@
+﻿.tree-view {
+  overflow-y: scroll;
+  height: 15rem;
+}
+.tree-view li {
+  list-style-type: none;
+  margin: 0.5rem 0 0.5rem 0.5rem;
+  position: relative;
+}
+.tree-view li:last-child:after {
+  display: none;
+}
+.tree-view li span {
+  display: block;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-decoration: none;
+  margin: 0.5rem;
+}
+.tree-view li span.active {
+  box-shadow: 0.5rem 1rem 1rem 0px rgba(0, 0, 0, 0.3), 0 1rem 2rem rgba(0, 0, 0, 0.22);
+}
+
+.tree-view li span:hover, .tree-view li span:focus {
+  color: #000;
+  border: 1px solid rgb(71, 71, 71);
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_tree-view.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAMA;EACI;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;;AAQA;EAEI,OAlCH;EAmCG%22%7D */

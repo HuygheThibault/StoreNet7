@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Components.Web;
 using Store.Shared.Dto;
 using Store.Web.Helpers.Modals;
 using Store.Web.Services;
-using System.Collections.Generic;
 
 namespace Store.Web.Components.Order
 {
@@ -23,11 +22,13 @@ namespace Store.Web.Components.Order
 
         public List<ProductDto> Products { get; set; } = new List<ProductDto>();
 
-        public bool IsVisible { get; set; } = true;
+        public bool IsWizardVisible { get; set; } = true;
 
         public OrderDto Order { get; set; } = new OrderDto() { Supplier = new SupplierDto(), OrderLines = new List<OrderLineDto>() };
 
         public bool IsNewSupplier { get; set; } = false;
+
+        public ProductDto NewProduct { get; set; } = default!;
 
         public string SearchValue { get; set; } = string.Empty;
 
@@ -43,7 +44,12 @@ namespace Store.Web.Components.Order
             },
             new Column
             {
-                Name = "Product"
+                Name = "Product.Title"
+            }
+            ,
+            new Column
+            {
+                Name = "Actions"
             }
         };
 
@@ -53,20 +59,31 @@ namespace Store.Web.Components.Order
             Products = (await ProductService.GetAllProducts()).ToList();
         }
 
-        private void SetSelectedSupplier(SupplierDto supplier)
+        private void SetSelectedSupplier(SupplierDto supplier, bool? isNewSupplier = null)
         {
-            Order.Supplier = supplier;
-            StateHasChanged();
+            if (isNewSupplier.HasValue)
+            {
+                IsNewSupplier = isNewSupplier.Value;
+                Order.Supplier = new SupplierDto();
+            }
+            else
+            {
+                Order.Supplier = supplier;
+            }
         }
 
         private void OnInputFileChange(InputFileChangeEventArgs e)
         {
             selectedFile = e.File;
-            StateHasChanged();
         }
 
         private bool IsSupplierValied()
         {
+            if (Suppliers.Any(x => x.Id == Order.SupplierId))
+            {
+                return true;
+            }
+
             if (Order.Supplier != null && Order.Supplier.Name != null && Order.Supplier.VatNumber != null)
             {
                 if (Order.Supplier.Name.Length < 5)
@@ -87,26 +104,26 @@ namespace Store.Web.Components.Order
         }
 
         // Orderlines
-
         private void DeleteItem(OrderLineDto orderLine)
         {
             Order.OrderLines.Remove(orderLine);
-            StateHasChanged();
         }
 
         private void Edit(OrderLineDto orderLine)
         {
-            StateHasChanged();
         }
 
-        private void AddOrderLine()
+        private void AddOrderLine(ProductDto product)
         {
             Order.OrderLines.Add(new OrderLineDto()
             {
-                ProductId = Products.First().Id,
-
+                Product = product,
             });
-            StateHasChanged();
+        }
+
+        private void AddNewProduct()
+        {
+            NewProduct = new ProductDto() { };
         }
 
         private void HandleKeyDown(KeyboardEventArgs e)
@@ -114,14 +131,9 @@ namespace Store.Web.Components.Order
             switch (e.Code)
             {
                 case "Escape":
-                    IsVisible = false;
+                    IsWizardVisible = false;
                     break;
             }
-        }
-
-        private static object GetPropValue(object src, string propName)
-        {
-            return src?.GetType()?.GetProperty(propName)?.GetValue(src, null);
         }
     }
 }

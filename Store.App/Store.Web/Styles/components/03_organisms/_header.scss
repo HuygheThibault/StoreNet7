@@ -5,19 +5,6 @@
     flex-direction: row;
     align-items: center;
 
-    .search-box {
-        align-self: flex-start;
-        justify-self: center;
-        height: 100%;
-
-        button {
-            height: 2rem;
-            width: 2rem;
-            border-radius: 1rem;
-            align-self: center;
-        }
-    }
-
     .nav-link {
         margin-left: auto;
     }

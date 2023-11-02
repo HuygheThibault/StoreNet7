@@ -192,5 +192,13 @@
   {
     "outputFile": "Styles/components/02_molecules/_order-wizard.css",
     "inputFile": "Styles/components/02_molecules/_order-wizard.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_tree-view.css",
+    "inputFile": "Styles/components/02_molecules/_tree-view.scss"
+  },
+  {
+    "outputFile": "Styles/components/02_molecules/_search-box.css",
+    "inputFile": "Styles/components/02_molecules/_search-box.scss"
   }
 ]

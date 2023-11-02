@@ -1,7 +1,8 @@
 ﻿<CascadingValue Value="this">
-    <div class="@(IsVisible ? "open": "") uni-dialog" id="@Id">
+    <div class="@(IsVisible ? "open": "") uni-dialog--full-screen" id="@Id">
         @* --full-screen *@
         <div class="uni-dialog-header">
+            <p class="close" @onclick="() => Close()"><i class="fa-regular fa-circle-xmark"></i></p>
             <div class="wizard-progress">
                 @foreach (var step in Steps)
                 {
@@ -31,7 +32,7 @@
                 Previous
             </button>
             <button class="@(ActiveStep?.IsStepValid == false ? "disabled" : IsLastStep ? "submit" : "primary") uni-dialog-actions__secondary-action"
-                    type="@(IsLastStep ? "submit" : "button") uni-dialog-actions__primary-action" @onclick="GoNext" disabled="@(!ActiveStep?.IsStepValid)">
+                    type="@(IsLastStep ? "submit" : "button") uni-dialog-actions__primary-action" @onclick="GoNext" disabled="@(IsLastStep ? Steps.Any(x => x.IsStepValid == false) ? true : false : !ActiveStep?.IsStepValid)">
                 @(IsLastStep ? "Submit" : "Next")
             </button>
         </div>

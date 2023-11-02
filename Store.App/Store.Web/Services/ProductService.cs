@@ -1,6 +1,8 @@
 ﻿using Blazored.LocalStorage;
 using Store.Shared.Dto;
+using Store.Web.Exceptions;
 using Store.Web.Helpers;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -54,24 +56,35 @@ namespace Store.Web.Services
             }
         }
 
+        public async Task<ProductDto> GetProductById(Guid id)
+        {
+            var request = await _httpClient.GetAsync($"api/products/{id}");
+
+            if (request != null)
+            {
+                if (request.IsSuccessStatusCode)
+                {
+                    return await request.Content.ReadFromJsonAsync<ProductDto>();
+                }
+                else if (request.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
+            }
+
+            throw new HttpRequestFailedException(message: $"Request failed: {request?.StatusCode}, {request}");
+        }
+
         public async Task<ProductDto> AddProduct(ProductDto item)
         {
-            try
-            {
-                var itemJson = new StringContent(JsonSerializer.Serialize(item), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsJsonAsync("product", itemJson);
+            var response = await _httpClient.PostAsJsonAsync("api/products", item);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    return await JsonSerializer.DeserializeAsync<ProductDto>(await response.Content.ReadAsStreamAsync());
-                }
-
-                return null;
-            }
-            catch (Exception ex)
+            if (response.IsSuccessStatusCode)
             {
-                throw;
+                return await response.Content.ReadFromJsonAsync<ProductDto>();
             }
+
+            throw new HttpRequestFailedException(message: $"Request failed: {response?.StatusCode}, {response}");
         }
 
         public async Task<ProductDto> UpdateProduct(ProductDto item)
@@ -98,7 +111,7 @@ namespace Store.Web.Services
         {
             try
             {
-                var response = await _httpClient.DeleteAsync($"product/{id}");
+                var response = await _httpClient.DeleteAsync($"api/products/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -117,6 +130,8 @@ namespace Store.Web.Services
     public interface IProductService
     {
         Task<IEnumerable<ProductDto>> GetAllProducts(bool refreshRequired = false);
+
+        Task<ProductDto> GetProductById(Guid id);
 
         Task<ProductDto> AddProduct(ProductDto item);
 

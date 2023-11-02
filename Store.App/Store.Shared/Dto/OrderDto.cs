@@ -35,6 +35,12 @@ namespace Store.Shared.Dto
 
         public virtual ICollection<OrderLineDto> OrderLines { get; set; } = new List<OrderLineDto>();
 
-        public virtual SupplierDto? Supplier { get; set; } = null!;
+        private SupplierDto supplier;
+
+        public virtual SupplierDto? Supplier 
+        { 
+            get { return supplier; } 
+            set { supplier = value; if(value != null) SupplierId = value.Id; } 
+        }
     }
 }

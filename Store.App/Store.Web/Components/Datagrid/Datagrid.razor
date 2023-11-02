@@ -1,5 +1,6 @@
 ﻿@using Store.Shared.Enums;
 @using Store.Web.Helpers.Modals;
+@using Store.Web.Helpers;
 @typeparam T
 @if (_data != null)
 {
@@ -43,11 +44,11 @@
                             <span>
                                 @if (column.ColumnType == "Dropdown")
                                 {
-                                    @column?.Dropdown?.Values.FirstOrDefault(x => x.Id.ToString() == @GetPropValue(item, column.Name).ToString()).Value
+                                    @column?.Dropdown?.Values.FirstOrDefault(x => x.Id.ToString() == @GetPropertyValue.GetPropValue(item, column.Name).ToString()).Value
                                 }
                                 else if (column.ColumnType == "Bool")
                                 {
-                                    if (@GetPropValue(item, column.Name) == "True")
+                                    if (@GetPropertyValue.GetPropValue(item, column.Name) == "True")
                                     {
                                         <i class="fa-solid fa-check"></i>
                                     }
@@ -58,7 +59,7 @@
                                 }
                                 else
                                 {
-                                    @GetPropValue(item, column.Name)
+                                    @GetPropertyValue.GetPropValue(item, column.Name)
                                 }
                             </span>
                         </div>
@@ -93,10 +94,5 @@
 }
 else
 {
-    <svg class="loading-progress">
-        <circle r="40%" cx="50%" cy="50%" />
-        <circle r="40%" cx="50%" cy="50%" />
-    </svg>
-    <div class="loading-progress-text"></div>
-    @* <div class="loader"></div> *@
+    <div class="loader"></div>
 }
