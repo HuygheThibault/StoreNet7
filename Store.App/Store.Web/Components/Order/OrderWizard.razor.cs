@@ -18,11 +18,12 @@ namespace Store.Web.Components.Order
         [Inject]
         public IProductService ProductService { get; set; } = default!;
 
+        [Parameter]
+        public bool IsWizardVisible { get; set; } = false;
+
         public List<SupplierDto> Suppliers { get; set; } = default!;
 
         public List<ProductDto> Products { get; set; } = default!;
-
-        public bool IsWizardVisible { get; set; } = true;
 
         public OrderDto Order { get; set; } = new OrderDto() { Supplier = new SupplierDto(), OrderLines = new List<OrderLineDto>() };
 

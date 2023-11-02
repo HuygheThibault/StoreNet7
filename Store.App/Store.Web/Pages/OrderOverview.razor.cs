@@ -21,7 +21,9 @@ namespace Store.Web.Pages
         [Inject]
         public IProductService ProductService { get; set; }
 
-        private OrderDto? _order;
+        private OrderDto? _EditedOrder;
+
+        private OrderDto? _NewOrder;
 
         private OrderDto? _expandedOrder;
 
@@ -223,12 +225,12 @@ namespace Store.Web.Pages
 
         private void AddOrder()
         {
-            _order = new OrderDto();
+            _NewOrder = new OrderDto();
         }
 
         private void Edit(OrderDto item)
         {
-            _order = item;
+            _EditedOrder = item;
         }
 
         private async Task DeleteItem(OrderDto item)
@@ -255,7 +257,7 @@ namespace Store.Web.Pages
 
         public async Task ResultReceived(Noticiation noticiation)
         {
-            _order = null;
+            _EditedOrder = null;
             _noticiation = noticiation;
             await GetGridData();
 

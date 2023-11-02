@@ -7,7 +7,8 @@
 @using Store.Web.Components.Order
 @* @attribute [Authorize] *@
 
-<OrderDialog Order="@_order" OnResult="ResultReceived" />
+<OrderDialog Order="@_EditedOrder" OnResult="ResultReceived" />
+<OrderWizard IsWizardVisible="_NewOrder != null" />
 
 <div class=row>
     <div class="data-grid-container sze-12 pd-1">
