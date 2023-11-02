@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Store.Shared.Dto;
 using System;
 
 namespace Store.Web.Components.Wizard
 {
     public partial class Wizard
     {
+        [Parameter]
+        public EventCallback OnSubmit { get; set; }
+
         [Parameter]
         public bool IsVisible { get; set; } = false;
 
@@ -60,7 +64,13 @@ namespace Store.Web.Components.Wizard
         protected internal void GoNext()
         {
             if (ActiveStepIx < Steps.Count - 1)
+            {
                 SetActive(Steps[(Steps.IndexOf(ActiveStep) + 1)]);
+            }
+            else
+            {
+                OnSubmit.InvokeAsync();
+            }
         }
 
         /// <summary>

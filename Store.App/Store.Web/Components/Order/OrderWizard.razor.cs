@@ -34,7 +34,9 @@ namespace Store.Web.Components.Order
 
         private IBrowserFile _SelectedFile;
 
-        private string _FileContent = "";
+        private List<string> _ImageUrisOrder = new List<string>();
+
+        private string _ImageUriSupplier = "";
 
         private List<DropdownColumn> DropdownColumns = new List<DropdownColumn>();
 
@@ -77,14 +79,37 @@ namespace Store.Web.Components.Order
             }
         }
 
-        private async Task OnInputFileChange(InputFileChangeEventArgs e)
+        private async Task OnInputFileSupplierChange(InputFileChangeEventArgs e)
         {
-            _SelectedFile = e.File;
-            long maxsize = 512000;
+            var image = await e.File.RequestImageFileAsync("image/png", 600, 600);
 
-            var buffer = new byte[_SelectedFile.Size];
-            await _SelectedFile.OpenReadStream(maxsize).ReadAsync(buffer);
-            _FileContent = System.Text.Encoding.UTF8.GetString(buffer);
+            using Stream imageStream = image.OpenReadStream(1024 * 1024 * 10);
+
+            using MemoryStream ms = new();
+            //copy imageStream to Memory stream
+            await imageStream.CopyToAsync(ms);
+
+            //convert stream to base64
+            _ImageUriSupplier = $"data:image/png;base64,{Convert.ToBase64String(ms.ToArray())}";
+            StateHasChanged();
+        }
+
+        private async Task OnInputFileOrderChange(InputFileChangeEventArgs e)
+        {
+            foreach (var file in e.GetMultipleFiles(e.FileCount))
+            {
+                var image = await file.RequestImageFileAsync("image/png", 600, 600);
+
+                using Stream imageStream = image.OpenReadStream(1024 * 1024 * 10);
+
+                using MemoryStream ms = new();
+                //copy imageStream to Memory stream
+                await imageStream.CopyToAsync(ms);
+
+                //convert stream to base64
+                _ImageUrisOrder.Add($"data:image/png;base64,{Convert.ToBase64String(ms.ToArray())}");
+            }
+            StateHasChanged();
         }
 
         private bool IsSupplierValied()
@@ -125,7 +150,7 @@ namespace Store.Web.Components.Order
 
         private void AddOrderLine(ProductDto product)
         {
-            if(!Order.OrderLines.Any(x => x.ProductId == product.Id))
+            if (!Order.OrderLines.Any(x => x.ProductId == product.Id))
             {
                 Order.OrderLines.Add(new OrderLineDto()
                 {
@@ -146,6 +171,12 @@ namespace Store.Web.Components.Order
                 AddOrderLine(product);
             }
             NewProduct = null;
+        }
+
+        private void SubmitOrder()
+        {
+            Console.WriteLine("Submitted order ", Order);
+            IsWizardVisible = false;
         }
 
         private void HandleKeyDown(KeyboardEventArgs e)

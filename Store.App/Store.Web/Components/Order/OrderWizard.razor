@@ -9,7 +9,7 @@
 @if (Order != null)
 {
     <div @onkeyup="(e) => HandleKeyDown(e)">
-        <Wizard Id="OrderWizard" IsVisible="IsWizardVisible">
+        <Wizard Id="OrderWizard" IsVisible="IsWizardVisible" OnSubmit="SubmitOrder">
             <WizardStep Name="@(Order.Supplier == null ? "Supplier" : Order.Supplier?.Name)"
                         IsStepValid="IsSupplierValied()">
                 <div class="row pd-b-1">
@@ -60,12 +60,11 @@
                                 <ValidationSummary />
 
                                 <label for="image" class="label">Select image: </label>
-                                <div class="col-md-8">
-                                    <InputFile OnChange="OnInputFileChange" />
-                                </div>
+                                <InputFile OnChange="OnInputFileSupplierChange" />
 
                             </div>
                         </EditForm>
+                        <img src="@_ImageUriSupplier" />
                     </div>
                 }
             </WizardStep>
@@ -167,12 +166,15 @@
                 <div class="row">
                     <div class="form">
                         <label for="File" class="label">Image: </label>
-                        <InputFile OnChange="OnInputFileChange" />
+                        <InputFile OnChange="OnInputFileOrderChange" multiple />
                         <label for="expirationDate" class="label">Expiration date: </label>
                         <InputDate id="vexpirationDateat" class="form-control input" @bind-Value="@Order.ExpirationDate" />
                     </div>
-                    @_FileContent
                 </div>
+                @foreach (string imageUri in _ImageUrisOrder)
+                {
+                    <img src="@imageUri" />
+                }
             </WizardStep>
         </Wizard>
     </div>
