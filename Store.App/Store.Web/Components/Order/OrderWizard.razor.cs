@@ -18,9 +18,9 @@ namespace Store.Web.Components.Order
         [Inject]
         public IProductService ProductService { get; set; } = default!;
 
-        public List<SupplierDto> Suppliers { get; set; } = new List<SupplierDto>();
+        public List<SupplierDto> Suppliers { get; set; } = default!;
 
-        public List<ProductDto> Products { get; set; } = new List<ProductDto>();
+        public List<ProductDto> Products { get; set; } = default!;
 
         public bool IsWizardVisible { get; set; } = true;
 
@@ -79,28 +79,32 @@ namespace Store.Web.Components.Order
 
         private bool IsSupplierValied()
         {
-            if (Suppliers.Any(x => x.Id == Order.SupplierId))
+            if (Suppliers != null)
             {
+                if (Suppliers.Any(x => x.Id == Order.SupplierId))
+                {
+                    return true;
+                }
+
+                if (Order.Supplier != null && Order.Supplier.Name != null && Order.Supplier.VatNumber != null)
+                {
+                    if (Order.Supplier.Name.Length < 5)
+                    {
+                        return false;
+                    }
+                    else if (Order.Supplier.VatNumber.Length < 1)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+
                 return true;
             }
-
-            if (Order.Supplier != null && Order.Supplier.Name != null && Order.Supplier.VatNumber != null)
-            {
-                if (Order.Supplier.Name.Length < 5)
-                {
-                    return false;
-                }
-                else if (Order.Supplier.VatNumber.Length < 1)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-
-            return true;
+            return false;
         }
 
         // Orderlines
@@ -124,6 +128,15 @@ namespace Store.Web.Components.Order
         private void AddNewProduct()
         {
             NewProduct = new ProductDto() { };
+        }
+
+        private void ProductDialogResult(ProductDto product)
+        {
+            if (product != null)
+            {
+                AddOrderLine(product);
+            }
+            NewProduct = null;
         }
 
         private void HandleKeyDown(KeyboardEventArgs e)

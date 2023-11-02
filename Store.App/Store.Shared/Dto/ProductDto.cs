@@ -5,7 +5,7 @@ namespace Store.Shared.Dto
 {
     public class ProductDto : DatagridRows
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = new Guid();
 
         [Required, MinLength(3)]
         public string Title { get; set; }

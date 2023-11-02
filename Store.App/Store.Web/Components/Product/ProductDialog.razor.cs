@@ -18,6 +18,9 @@ namespace Store.Web.Components.Product
         [Parameter]
         public ProductDto? Product { get; set; }
 
+        [Parameter]
+        public EventCallback<ProductDto> Result { get; set; }
+
         public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
 
         protected bool IsNew = true;
@@ -57,23 +60,43 @@ namespace Store.Web.Components.Product
 
         private async Task Submit()
         {
-            ProductDto savedProduct;
+            ProductDto savedProduct = null;
 
             if (EditContext.Validate())
             {
                 if (IsNew)
                 {
-                    savedProduct = await ProductService.AddProduct(Product);
+                    try
+                    {
+                        savedProduct = await ProductService.AddProduct(Product);
+                    }
+                    catch (HttpRequestFailedException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
                 else
                 {
-                    savedProduct = await ProductService.UpdateProduct(Product);
+                    try
+                    {
+                        savedProduct = await ProductService.UpdateProduct(Product);
+                    }
+                    catch (HttpRequestFailedException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
 
                 if (savedProduct != null)
                 {
+                    Product = savedProduct;
+                }
+                else
+                {
                     Product = null;
                 }
+
+                await Result.InvokeAsync(Product);
             }
             else
             {
@@ -81,9 +104,10 @@ namespace Store.Web.Components.Product
             }
         }
 
-        private void Close()
+        private async Task Close()
         {
             Product = null;
+            await Result.InvokeAsync(Product);
         }
     }
 }

@@ -6,7 +6,7 @@
 @using Store.Web.Helpers;
 
 
-@if (Suppliers != null && Order != null)
+@if (Order != null)
 {
     <div @onkeyup="(e) => HandleKeyDown(e)">
         <Wizard Id="OrderWizard" IsVisible="IsWizardVisible">
@@ -21,7 +21,7 @@
                     <input type="text" class="input-search" placeholder="Type to Search..." @bind-value="SearchValue">
                 </div>
                 <div class="flex-grid-hrztl" style="@(IsNewSupplier ? "display:none;" : "")">
-                    @if (Suppliers.Count <= 0)
+                    @if (Suppliers != null)
                     {
                         @foreach (var supplier in Suppliers.Where(x => x.Name.ToLower().Contains(SearchValue.ToLower())))
                         {
@@ -158,5 +158,5 @@
             </WizardStep>
         </Wizard>
     </div>
-    <ProductDialog Product="NewProduct" />
+    <ProductDialog Product="NewProduct" Result="ProductDialogResult"/>
 }

@@ -38,14 +38,25 @@ namespace Store.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProductById(Guid id)
+        public async Task<IActionResult> GetProductById(string id)
         {
             try
             {
-                var result = await _productRepository.GetProductById(id);
-                if (result == null) return NotFound();
+                Guid guidId;
+                bool isGuid = Guid.TryParse(id, out guidId);
 
-                return Ok(_mapper.Map<ProductDto>(result));
+                if (isGuid)
+                {
+                    var result = await _productRepository.GetProductById(guidId);
+                    if (result == null) return NotFound();
+                    return Ok(_mapper.Map<ProductDto>(result));
+                }
+                else
+                {
+                    var result = await _productRepository.GetProductByTitle(id);
+                    if (result == null) return NotFound();
+                    return Ok(_mapper.Map<ProductDto>(result));
+                }
             }
             catch (Exception ex)
             {
@@ -131,7 +142,7 @@ namespace Store.Api.Controllers
 
                 Product newItem = _mapper.Map<Product>(request);
 
-                _productRepository.Add(newItem);
+                _productRepository.AddProduct(newItem);
 
                 if (await _productRepository.SaveChangesAsync())
                 {

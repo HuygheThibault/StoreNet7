@@ -1,32 +1,33 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Store.Api.Models;
 
 namespace Store.Api.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly StoreContext context;
-        private readonly ILogger<ProductRepository> logger;
+        private readonly StoreContext _context;
+        private readonly ILogger<ProductRepository> _logger;
 
         public ProductRepository(StoreContext context, ILogger<ProductRepository> logger)
         {
-            this.context = context;
-            this.logger = logger;
+            _context = context ?? throw new ArgumentNullException(nameof(context)); ;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger)); ;
         }
 
         public async Task<List<Product>> GetAllProducts()
         {
             try
             {
-                logger.LogInformation($"Getting all Products");
+                _logger.LogInformation($"Getting all Products");
 
-                IQueryable<Product> query = context.Products.Include("Category");
+                IQueryable<Product> query = _context.Products.Include("Category");
 
                 return await query.ToListAsync();
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "error occured");
+                _logger.LogError(ex, "error occured");
                 throw;
             }
         }
@@ -35,9 +36,9 @@ namespace Store.Api.Repositories
         {
             try
             {
-                logger.LogInformation($"Getting Product: {id}");
+                _logger.LogInformation($"Getting Product: {id}");
 
-                IQueryable<Product> query = context.Products.Include("Category");
+                IQueryable<Product> query = _context.Products.Include("Category");
 
                 // Query It
                 query = query.Where(c => c.Id == id);
@@ -46,7 +47,7 @@ namespace Store.Api.Repositories
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "error occured");
+                _logger.LogError(ex, "error occured");
                 throw;
             }
         }
@@ -55,9 +56,9 @@ namespace Store.Api.Repositories
         {
             try
             {
-                logger.LogInformation($"Getting Product: {title}");
+                _logger.LogInformation($"Getting Product: {title}");
 
-                IQueryable<Product> query = context.Products.Include("Category");
+                IQueryable<Product> query = _context.Products.Include("Category");
 
                 // Query It
                 query = query.Where(c => c.Title == title);
@@ -66,34 +67,35 @@ namespace Store.Api.Repositories
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "error occured");
+                _logger.LogError(ex, "error occured");
                 throw;
             }
         }
 
-        public void Add<T>(T entity) where T : class
+        public async Task AddProduct(Product product)
         {
             try
             {
-                logger.LogInformation($"Adding an object of type {entity.GetType()} to the context.");
-                context.Add(entity);
+                _logger.LogInformation($"Adding an product: {product}.");
+                product.Category = null;
+                _context.Products.Add(product);
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "error occured");
+                _logger.LogError(ex, "error occured");
             }
         }
 
-        public void Delete<T>(T entity) where T : class
+        public void Delete(Product product)
         {
             try
             {
-                logger.LogInformation($"Removing an object of type {entity.GetType()} to the context.");
-                context.Remove(entity);
+                _logger.LogInformation($"Removing product {product} from the context.");
+                _context.Remove(product);
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "error occured");
+                _logger.LogError(ex, "error occured");
             }
         }
 
@@ -101,14 +103,14 @@ namespace Store.Api.Repositories
         {
             try
             {
-                logger.LogInformation($"Attempitng to save the changes in the context");
+                _logger.LogInformation($"Attempitng to save the changes in the context");
 
                 // Only return success if at least one row was changed
-                return (await context.SaveChangesAsync()) > 0;
+                return (await _context.SaveChangesAsync()) > 0;
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "error occured");
+                _logger.LogError(ex, "error occured");
                 throw;
             }
         }
@@ -123,8 +125,10 @@ namespace Store.Api.Repositories
 
         Task<Product> GetProductByTitle(string title);
 
-        void Add<T>(T entity) where T : class;
-        void Delete<T>(T entity) where T : class;
+        Task AddProduct(Product product);
+
+        void Delete(Product product);
+
         Task<bool> SaveChangesAsync();
     }
 }
