@@ -95,7 +95,9 @@
                     }
                 </div>
                 <div class="data-grid-container pd-1">
-                    <button class="mrg-0 pd-1" @onclick="AddNewProduct">Add new product</button>
+                    <div class="grid-actions">
+                        <button class="mrg-0 pd-1" @onclick="AddNewProduct">Add new product</button>
+                    </div>
                     <div class="data-grid">
                         <div class="headers row">
                             @foreach (Column column in Columns)
@@ -115,48 +117,64 @@
                                 <div class="@("row " + (Order.OrderLines.ToList().IndexOf(item) % 2 == 0 ? "even" : "odd"))">
                                     @foreach (Column column in Columns)
                                     {
-                                        <div class="col pd-1">
-                                            <span>
-                                                @if (column.ColumnType == "Bool")
-                                                {
-                                                    if (@GetPropertyValue.GetPropValue(item, column.Name) == "True")
-                                                    {
-                                                        <i class="fa-solid fa-check"></i>
-                                                    }
-                                                    else
-                                                    {
-                                                        <i class="fa-solid fa-xmark"></i>
-                                                    }
-                                                }
-                                                else if (column.Name == "Actions")
-                                                {
-                                                    <div class="actions">
-                                                        <button class="edit" @onclick="() => Edit(item)">
-                                                            <i class="fa-solid fa-edit"></i>
-                                                        </button>
-                                                        <button class="remove" @onclick="() => DeleteItem(item)">
-                                                            <i class="fa-solid fa-trash-can"></i>
-                                                        </button>
-                                                    </div>
-                                                }
-                                                else
-                                                {
-                                                    @GetPropertyValue.GetPropValue(item, column.Name)
-                                                }
-                                            </span>
+                                        <div class="col">
+                                            @if (column.Name == "Actions")
+                                            {
+                                                <div class="actions">
+                                                    <button class="remove" @onclick="() => DeleteItem(item)">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </button>
+                                                </div>
+                                            }
+                                            else if (column.Name == "Product.Title")
+                                            {
+                                                <span>@item.Product.Title</span>
+                                            }
+                                            else if (column.Name == "Quantity")
+                                            {
+                                                <span>
+                                                    <EditForm Model="item">
+                                                        <InputNumber class="input" @bind-Value="item.Quantity" />
+                                                    </EditForm>
+                                                </span>
+                                            }
+                                            else if (column.Name == "Cost")
+                                            {
+                                                <span>
+                                                    <EditForm Model="item">
+                                                        <InputNumber class="input" @bind-Value="item.Cost" />
+                                                    </EditForm>
+                                                </span>
+                                            }
                                         </div>
                                     }
                                 </div>
                             }
                         </div>
+                        <div class="footer">
+                            <div class="col" style="justify-content: flex-end;">
+                                <span class="pd-1">
+                                    <strong>
+                                        Total cost: @Order.OrderLines.Sum(x => x.Cost)
+                                    </strong>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </WizardStep>
-            <WizardStep Name="Final Step" IsStepValid="true">
+            <WizardStep Name="Final Step" IsStepValid="Order.ExpirationDate > DateTime.Now">
                 <div class="row">
+                    <div class="form">
+                        <label for="File" class="label">Image: </label>
+                        <InputFile OnChange="OnInputFileChange" />
+                        <label for="expirationDate" class="label">Expiration date: </label>
+                        <InputDate id="vexpirationDateat" class="form-control input" @bind-Value="@Order.ExpirationDate" />
+                    </div>
+                    @_FileContent
                 </div>
             </WizardStep>
         </Wizard>
     </div>
-    <ProductDialog Product="NewProduct" Result="ProductDialogResult"/>
+    <ProductDialog Product="NewProduct" Result="ProductDialogResult" />
 }

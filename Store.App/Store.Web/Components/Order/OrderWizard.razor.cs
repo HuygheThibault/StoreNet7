@@ -32,7 +32,9 @@ namespace Store.Web.Components.Order
 
         public string SearchValue { get; set; } = string.Empty;
 
-        private IBrowserFile selectedFile;
+        private IBrowserFile _SelectedFile;
+
+        private string _FileContent = "";
 
         private List<DropdownColumn> DropdownColumns = new List<DropdownColumn>();
 
@@ -40,13 +42,16 @@ namespace Store.Web.Components.Order
         {
             new Column
             {
+                Name = "Product.Title"
+            },
+            new Column
+            {
                 Name = "Quantity"
             },
             new Column
             {
-                Name = "Product.Title"
-            }
-            ,
+                Name = "Cost"
+            },
             new Column
             {
                 Name = "Actions"
@@ -72,9 +77,14 @@ namespace Store.Web.Components.Order
             }
         }
 
-        private void OnInputFileChange(InputFileChangeEventArgs e)
+        private async Task OnInputFileChange(InputFileChangeEventArgs e)
         {
-            selectedFile = e.File;
+            _SelectedFile = e.File;
+            long maxsize = 512000;
+
+            var buffer = new byte[_SelectedFile.Size];
+            await _SelectedFile.OpenReadStream(maxsize).ReadAsync(buffer);
+            _FileContent = System.Text.Encoding.UTF8.GetString(buffer);
         }
 
         private bool IsSupplierValied()
@@ -113,16 +123,15 @@ namespace Store.Web.Components.Order
             Order.OrderLines.Remove(orderLine);
         }
 
-        private void Edit(OrderLineDto orderLine)
-        {
-        }
-
         private void AddOrderLine(ProductDto product)
         {
-            Order.OrderLines.Add(new OrderLineDto()
+            if(!Order.OrderLines.Any(x => x.ProductId == product.Id))
             {
-                Product = product,
-            });
+                Order.OrderLines.Add(new OrderLineDto()
+                {
+                    Product = product,
+                });
+            }
         }
 
         private void AddNewProduct()
