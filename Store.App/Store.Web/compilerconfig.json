@@ -1,135 +1,201 @@
-﻿[
+[
   {
     "outputFile": "Styles/base/_normalize.css",
-    "inputFile": "Styles/base/_normalize.scss"
+    "inputFile": "Styles/base/_normalize.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/01_atoms/_align.css",
-    "inputFile": "Styles/components/01_atoms/_align.scss"
+    "inputFile": "Styles/components/01_atoms/_align.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/01_atoms/_atoms.css",
-    "inputFile": "Styles/components/01_atoms/_atoms.scss"
+    "inputFile": "Styles/components/01_atoms/_atoms.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/01_atoms/_borders.css",
-    "inputFile": "Styles/components/01_atoms/_borders.scss"
+    "inputFile": "Styles/components/01_atoms/_borders.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/01_atoms/_buttons.css",
-    "inputFile": "Styles/components/01_atoms/_buttons.scss"
+    "inputFile": "Styles/components/01_atoms/_buttons.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/01_atoms/_grids.css",
-    "inputFile": "Styles/components/01_atoms/_grids.scss"
+    "inputFile": "Styles/components/01_atoms/_grids.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/01_atoms/_margins.css",
-    "inputFile": "Styles/components/01_atoms/_margins.scss"
+    "inputFile": "Styles/components/01_atoms/_margins.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/01_atoms/_sizes.css",
-    "inputFile": "Styles/components/01_atoms/_sizes.scss"
+    "inputFile": "Styles/components/01_atoms/_sizes.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/01_atoms/_text.css",
-    "inputFile": "Styles/components/01_atoms/_text.scss"
+    "inputFile": "Styles/components/01_atoms/_text.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_arrow-icons.css",
-    "inputFile": "Styles/components/02_molecules/_arrow-icons.scss"
+    "inputFile": "Styles/components/02_molecules/_arrow-icons.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_dropdown.css",
-    "inputFile": "Styles/components/02_molecules/_dropdown.scss"
+    "inputFile": "Styles/components/02_molecules/_dropdown.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_forms.css",
-    "inputFile": "Styles/components/02_molecules/_forms.scss"
+    "inputFile": "Styles/components/02_molecules/_forms.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_loader.css",
-    "inputFile": "Styles/components/02_molecules/_loader.scss"
+    "inputFile": "Styles/components/02_molecules/_loader.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_molecule.css",
-    "inputFile": "Styles/components/02_molecules/_molecule.scss"
+    "inputFile": "Styles/components/02_molecules/_molecule.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_nav-header.css",
-    "inputFile": "Styles/components/02_molecules/_nav-header.scss"
+    "inputFile": "Styles/components/02_molecules/_nav-header.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/01_atoms/_paddings.css",
-    "inputFile": "Styles/components/01_atoms/_paddings.scss"
+    "inputFile": "Styles/components/01_atoms/_paddings.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_nav-links.css",
-    "inputFile": "Styles/components/02_molecules/_nav-links.scss"
+    "inputFile": "Styles/components/02_molecules/_nav-links.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_selected-items.css",
-    "inputFile": "Styles/components/02_molecules/_selected-items.scss"
+    "inputFile": "Styles/components/02_molecules/_selected-items.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/03_organisms/_content.css",
-    "inputFile": "Styles/components/03_organisms/_content.scss"
+    "inputFile": "Styles/components/03_organisms/_content.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/03_organisms/_dashboard-sidebar.css",
-    "inputFile": "Styles/components/03_organisms/_dashboard-sidebar.scss"
+    "inputFile": "Styles/components/03_organisms/_dashboard-sidebar.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/03_organisms/_datagrid.css",
-    "inputFile": "Styles/components/03_organisms/_datagrid.scss"
+    "inputFile": "Styles/components/03_organisms/_datagrid.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/03_organisms/_footer.css",
-    "inputFile": "Styles/components/03_organisms/_footer.scss"
+    "inputFile": "Styles/components/03_organisms/_footer.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/03_organisms/_header.css",
-    "inputFile": "Styles/components/03_organisms/_header.scss"
+    "inputFile": "Styles/components/03_organisms/_header.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/03_organisms/_organisms.css",
-    "inputFile": "Styles/components/03_organisms/_organisms.scss"
+    "inputFile": "Styles/components/03_organisms/_organisms.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/03_organisms/_side-navigation.css",
-    "inputFile": "Styles/components/03_organisms/_side-navigation.scss"
+    "inputFile": "Styles/components/03_organisms/_side-navigation.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/04_templates/_dashboard.css",
-    "inputFile": "Styles/components/04_templates/_dashboard.scss"
+    "inputFile": "Styles/components/04_templates/_dashboard.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/04_templates/_templates.css",
-    "inputFile": "Styles/components/04_templates/_templates.scss"
+    "inputFile": "Styles/components/04_templates/_templates.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/05_pages/_pages.css",
-    "inputFile": "Styles/components/05_pages/_pages.scss"
+    "inputFile": "Styles/components/05_pages/_pages.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/_components.css",
-    "inputFile": "Styles/components/_components.scss"
+    "inputFile": "Styles/components/_components.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/settings/_settings.css",
-    "inputFile": "Styles/settings/_settings.scss"
+    "inputFile": "Styles/settings/_settings.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/settings/_variables.css",
-    "inputFile": "Styles/settings/_variables.scss"
+    "inputFile": "Styles/settings/_variables.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/tools/_helpers.css",
-    "inputFile": "Styles/tools/_helpers.scss"
+    "inputFile": "Styles/tools/_helpers.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/tools/_mixins.css",
-    "inputFile": "Styles/tools/_mixins.scss"
+    "inputFile": "Styles/tools/_mixins.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "wwwroot/css/App.css",
@@ -137,68 +203,100 @@
     "minify": {
       "enabled": true
     },
+    "sourceMap": false,
+    "useNodeSass": false,
     "options": {
       "sourceMap": true
     }
   },
   {
     "outputFile": "Styles/components/01_atoms/_animations.css",
-    "inputFile": "Styles/components/01_atoms/_animations.scss"
+    "inputFile": "Styles/components/01_atoms/_animations.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/03_organisms/_notification_bar.css",
-    "inputFile": "Styles/components/03_organisms/_notification_bar.scss"
+    "inputFile": "Styles/components/03_organisms/_notification_bar.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/03_organisms/_supplier-card.css",
-    "inputFile": "Styles/components/03_organisms/_supplier-card.scss"
+    "inputFile": "Styles/components/03_organisms/_supplier-card.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/01_atoms/_scrollbar.css",
-    "inputFile": "Styles/components/01_atoms/_scrollbar.scss"
+    "inputFile": "Styles/components/01_atoms/_scrollbar.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_profile.css",
-    "inputFile": "Styles/components/02_molecules/_profile.scss"
+    "inputFile": "Styles/components/02_molecules/_profile.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_pagination.css",
-    "inputFile": "Styles/components/02_molecules/_pagination.scss"
+    "inputFile": "Styles/components/02_molecules/_pagination.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/03_organisms/_wizard.css",
-    "inputFile": "Styles/components/03_organisms/_wizard.scss"
+    "inputFile": "Styles/components/03_organisms/_wizard.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_dialog.css",
-    "inputFile": "Styles/components/02_molecules/_dialog.scss"
+    "inputFile": "Styles/components/02_molecules/_dialog.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/settings/_shadows.css",
-    "inputFile": "Styles/settings/_shadows.scss"
+    "inputFile": "Styles/settings/_shadows.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/01_atoms/_dialog-actions.css",
-    "inputFile": "Styles/components/01_atoms/_dialog-actions.scss"
+    "inputFile": "Styles/components/01_atoms/_dialog-actions.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/03_organisms/_card.css",
-    "inputFile": "Styles/components/03_organisms/_card.scss"
+    "inputFile": "Styles/components/03_organisms/_card.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/01_atoms/_checkbox.css",
-    "inputFile": "Styles/components/01_atoms/_checkbox.scss"
+    "inputFile": "Styles/components/01_atoms/_checkbox.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_order-wizard.css",
-    "inputFile": "Styles/components/02_molecules/_order-wizard.scss"
+    "inputFile": "Styles/components/02_molecules/_order-wizard.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_tree-view.css",
-    "inputFile": "Styles/components/02_molecules/_tree-view.scss"
+    "inputFile": "Styles/components/02_molecules/_tree-view.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   },
   {
     "outputFile": "Styles/components/02_molecules/_search-box.css",
-    "inputFile": "Styles/components/02_molecules/_search-box.scss"
+    "inputFile": "Styles/components/02_molecules/_search-box.scss",
+    "sourceMap": false,
+    "useNodeSass": false
   }
 ]

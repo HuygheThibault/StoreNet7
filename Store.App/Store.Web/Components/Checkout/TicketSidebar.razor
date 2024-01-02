@@ -1,36 +1,37 @@
 ﻿@using Store.Shared.Dto;
 
-<div class="dashboard-sidebar mrg-r-1">
+<div class="dashboard-sidebar">
     <div class="selected-items">
         @foreach (SaleLineDto saleLine in Sale?.SaleLines)
         {
-            <div class="item pd-1">
+            <div class="item">
                 <i class="fa-solid fa-xmark pd-1" @onclick="() => Remove(saleLine)"></i>
-                <picture class="thumbnail">
+                <div class="thumbnail">
                     <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
-                </picture>
+                </div>
                 <div class="details">
                     <h2>@saleLine.Product.Title</h2>
                 </div>
                 <div class="actions">
-                    <button class="add pd-1" @onclick="() => AddQuantity(saleLine)"><i class="fa-solid fa-plus"></i></button>
-                    <h2 class="mrg-hrztl-1">@saleLine.Quantity</h2>
-                    <button class="remove pd-1" @onclick="() => RemoveQuantity(saleLine)"><i class="fa-solid fa-minus"></i></button>
+                    <div class="remove" @onclick="() => RemoveQuantity(saleLine)"><i class="fa-solid fa-minus"></i></div>
+                    <h2>@saleLine.Quantity</h2>
+                    <div class="add" @onclick="() => AddQuantity(saleLine)"><i class="fa-solid fa-plus"></i></div>
                 </div>
-                <h3>@((saleLine.Product.PricePerUnit * saleLine.Quantity).ToString("C"))</h3>
+                <div class="total">
+                    <h3>@((saleLine.Product.PricePerUnit * saleLine.Quantity).ToString("C"))</h3>
+                </div>
             </div>
 
         }
     </div>
     <div class="footer-info">
         <div class="total">
-            <p>Total: @Sale.SaleLines.Sum(x => x.Quantity * x.Product.PricePerUnit).ToString("C")</p>
+            <p>Total</p>
+            <h1>@Sale.SaleLines.Sum(x => x.Quantity * x.Product.PricePerUnit).ToString("C")</h1>
         </div>
         <div class="payment-methods">
-            <h4>Select Payment Method:</h4>
-            <button class="payment-button">Method 1</button>
-            <button class="payment-button">Method 2</button>
-            <button class="payment-button">Method 3</button>
+            <button class="payment-button"><i class="fa-solid fa-coins"></i></button>
+            <button class="payment-button"><i class="fa-solid fa-credit-card"></i></button>
         </div>
     </div>
 

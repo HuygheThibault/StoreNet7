@@ -21,7 +21,7 @@
         {
             @foreach (var category in _Categories.Where(x => x.ParentCategoryId == _SelectedCategory.Id))
             {
-                <li class="card @(_SelectedSubCategory != null && category.Id == _SelectedSubCategory.Id ? "active" : "")" style="background-color:@_SelectedCategory?.Color;" @onclick="() => SetSelectedSubCategroy(category)">
+                <li class="card @(_SelectedSubCategory != null && category.Id == _SelectedSubCategory.Id ? "active" : "")" @onclick="() => SetSelectedSubCategroy(category)">
                     <div class="details">
                         <h1>@category.Title</h1>
                     </div>

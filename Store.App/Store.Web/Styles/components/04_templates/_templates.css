@@ -1,10 +1,10 @@
 ﻿.dashboard {
   display: grid;
-  grid-template-columns: 20% 50% 30%;
+  grid-template-columns: 20% 50% 25%;
   grid-template-rows: 20% 80%;
   grid-gap: 2rem;
   align-content: center;
-  height: calc(100vh - var(--header-height));
+  height: calc(95vh - var(--header-height));
 }
 .dashboard .parent-categories {
   grid-row: 1/-1;
@@ -16,6 +16,9 @@
   padding: 1rem;
   align-content: start;
   justify-content: center;
+}
+.dashboard .parent-categories .card.active {
+  box-shadow: 0.5rem 1rem 1rem 0px rgba(0, 0, 0, 0.3), 0 1rem 2rem rgba(0, 0, 0, 0.22);
 }
 .dashboard .children-categories {
   grid-column: 2;
@@ -29,6 +32,12 @@
   scroll-snap-type: x proximity;
   padding-bottom: calc(0.75 * var(--gutter));
   margin-bottom: calc(-0.25 * var(--gutter));
+}
+.dashboard .children-categories .card {
+  background-color: var(--fourth-color);
+}
+.dashboard .children-categories .card.active {
+  box-shadow: 0px 1rem 1rem 1rem rgba(0, 0, 0, 0.3), 0 1rem 2rem rgba(0, 0, 0, 0.22);
 }
 .dashboard .children-categories:before,
 .dashboard .children-categories:after {
@@ -44,9 +53,12 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
+.dashboard .dashboard-products .card {
+  background-color: var(--fourth-color);
+}
 .dashboard .dashboard-sidebar {
   grid-column: 3;
-  grid-row: 1/3;
+  grid-row: 1/-1;
   height: 100%;
   overflow: hidden;
   background-color: var(--third-color);
@@ -54,4 +66,4 @@
   max-width: 100%;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/04_templates/_dashboard.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;AAAA;EAEI;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/04_templates/_dashboard.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAIJ;EACI;;AAIR;AAAA;EAEI;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA%22%7D */

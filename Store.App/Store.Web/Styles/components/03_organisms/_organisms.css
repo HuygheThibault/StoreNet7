@@ -62,14 +62,21 @@ header .h4 {
   height: 30%;
   display: flex;
   flex-direction: column;
+  justify-content: end;
+  align-items: end;
 }
-
-.payment-button {
-  background-color: var(--primary-info-color);
+.footer-info .total {
+  align-content: end;
+}
+.footer-info .payment-methods {
+  width: 100%;
+}
+.footer-info .payment-methods .payment-button {
+  background-color: var(--info-primary-color);
   color: var(--secondary-color);
+  width: 5rem;
 }
-
-.payment-button:hover {
+.footer-info .payment-methods .payment-button:hover {
   opacity: 0.5;
 }
 
@@ -232,15 +239,6 @@ header .h4 {
   background-color: var(--primary-color);
   border-radius: 0.5rem;
 }
-.card .thumbnail {
-  width: 100%;
-  overflow: hidden;
-}
-.card .thumbnail img {
-  width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
-}
 .card .details {
   text-align: center;
 }
@@ -310,4 +308,4 @@ header .h4 {
   grid-area: totals;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_side-navigation.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_dashboard-sidebar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_datagrid.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_notification_bar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_wizard.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card-counter.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;AACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;;ACZP;EACG;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AAIR;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;AACA;;;AClDH;EACG;EACA;EACA;;;AAEJ;EACI;EACA;;;AAIJ;EACI;;;ACZH;EACG;EACA;AACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;;AAGJ;EACI;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAIA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;;AChGpB;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;;AC7BR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIA;EACI;;AAIR;EACI;;;ACrCZ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;;ACxDX;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_side-navigation.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_dashboard-sidebar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_datagrid.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_notification_bar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_wizard.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card-counter.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;AACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;;ACZP;EACG;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AAIR;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;AACA;;;AClDH;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;ACrBX;EACG;EACA;AACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;;AAGJ;EACI;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAIA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;;AChGpB;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;;AC7BR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIA;EACI;;AAIR;EACI;;;ACrCZ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;;AC7CX;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI%22%7D */
