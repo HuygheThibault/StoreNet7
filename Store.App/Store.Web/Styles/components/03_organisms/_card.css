@@ -1,37 +1,52 @@
 ﻿.card {
-  border-radius: 0.5rem;
-  cursor: pointer;
-  background-color: var(--third-color);
+  scroll-snap-align: center;
+  padding: calc(var(--gutter) / 2 * 1.5);
   display: flex;
   flex-direction: column;
-  height: fit-content;
-  width: fit-content;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  border-radius: 0.5rem;
+}
+.card .thumbnail {
+  width: 100%;
+  overflow: hidden;
 }
 .card .thumbnail img {
-  display: block;
-  border: 0;
-  height: auto;
   width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
 }
 .card .details {
-  padding: 0.5rem;
-  text-transform: uppercase;
-  height: fit-content;
+  text-align: center;
 }
-.card .details h1 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0;
-  word-break: normal;
+.card .size-selection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
 }
-.card .details h2 {
-  font-size: 0.75rem;
-  font-weight: 400;
-  margin: 0;
+.card .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #4CAF50;
+  margin: 0 5px;
+}
+.card .button-container {
+  width: 100%;
+}
+.card .add-to-card {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+.card .add-to-card:hover {
+  background-color: #45a049;
 }
 
-.card.active {
-  box-shadow: 0.5rem 1rem 1rem 0px rgba(0, 0, 0, 0.3), 0 1rem 2rem rgba(0, 0, 0, 0.22);
-}
-
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_card.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;EACA;EACA;;AAGI;EACI;EACA;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;;;AAKZ;EACI%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_card.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAEA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI%22%7D */

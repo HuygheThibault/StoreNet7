@@ -11,6 +11,9 @@
   --info-primary-color: #1D3461;
   --info-secondary-color: #51BBFE;
   --disabled-color: #333;
+  --header-height: 10vh;
+  --gutter: 1rem;
+  --total: 0.5rem;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/settings/_variables.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EAIG;EACA;EACA;EACA;EAEA;EACA;EAEA;EACA;EACA;EACA;EACA;EACA%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/settings/_variables.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EAIG;EACA;EACA;EACA;EAEA;EACA;EAEA;EACA;EACA;EACA;EACA;EACA;EAEA;EACA;EACA%22%7D */

@@ -20,6 +20,8 @@ namespace Store.Web.Pages
 
         private CategoryDto _SelectedCategory = default!;
 
+        private CategoryDto _SelectedSubCategory = default!;
+
         private SaleLineDto? _SaleLine = default!;
 
         protected override async Task OnInitializedAsync()
@@ -33,6 +35,11 @@ namespace Store.Web.Pages
         private void SetSelectedCategroy(CategoryDto category)
         {
             _SelectedCategory = category;
+        }
+
+        private void SetSelectedSubCategroy(CategoryDto category)
+        {
+            _SelectedSubCategory = category;
         }
 
         private void AddItemToTicket(ProductDto product)

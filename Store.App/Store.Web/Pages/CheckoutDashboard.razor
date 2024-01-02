@@ -1,62 +1,55 @@
 ﻿@page "/CheckoutDashboard"
 @using Store.Web.Components
 @using Store.Web.Components.Checkout
+@attribute [Authorize]
+
 <PageTitle>Checkout dashoard</PageTitle>
 <div class="dashboard pd-0">
-    <section class="parent-categories pd-2">
+    <ul class="parent-categories">
         @foreach (var category in _Categories.Where(x => x.ParentCategoryId == null))
         {
-            <article class="@( category.Id == _SelectedCategory?.Id || category.Id == _SelectedCategory?.ParentCategoryId ? "card active" : "card")" style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
-                <picture class="thumbnail">
-                    <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
-                </picture>
+            <li class="card @( category.Id == _SelectedCategory?.Id ? "active" : "")" style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
                 <div class="details">
                     <h1>@category.Title</h1>
                 </div>
-            </article>
+            </li>
         }
-    </section>
+    </ul>
 
-    <section class="children-categories pd-2">
+    <ul class="children-categories">
         @if (_SelectedCategory != null)
         {
-            @if (_SelectedCategory.ParentCategoryId != null)
-            {
-                <article class="card active" style="background-color:@_SelectedCategory?.Color;">
-                    <picture class="thumbnail">
-                        <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
-                    </picture>
-                    <div class="details">
-                        <h1>@_SelectedCategory?.Title</h1>
-                    </div>
-                </article>
-            }
-
             @foreach (var category in _Categories.Where(x => x.ParentCategoryId == _SelectedCategory.Id))
             {
-                <article class="card" style="background-color:@_SelectedCategory?.Color;" @onclick="() => SetSelectedCategroy(category)">
-                    <picture class="thumbnail">
-                        <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
-                    </picture>
+                <li class="card @(_SelectedSubCategory != null && category.Id == _SelectedSubCategory.Id ? "active" : "")" style="background-color:@_SelectedCategory?.Color;" @onclick="() => SetSelectedSubCategroy(category)">
                     <div class="details">
                         <h1>@category.Title</h1>
                     </div>
-                </article>
+                </li>
             }
         }
-    </section>
+    </ul>
     <section class="dashboard-products pd-2">
-        @foreach (var product in _Products.Where(x => x.CategoryId == _SelectedCategory?.Id || x.CategoryId == _SelectedCategory?.ParentCategoryId).ToList())
+        @foreach (var product in _Products.Where(x => x.CategoryId == _SelectedSubCategory?.Id).ToList())
         {
             <article class="card" @onclick="() => AddItemToTicket(product)">
-                <picture class="thumbnail">
+                <div class="thumbnail">
                     <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="@product.Title">
-                </picture>
+                </div>
                 <div class="details">
                     <h1>@product?.Title</h1>
-                    <h2>@product?.PricePerUnit.ToString("C")</h2>
+                    <p>@product?.PricePerUnit.ToString("C")</p>
+                </div>
+                <div class="size-selection">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="button-container">
+                    <button class="add-to-card">Add to Card</button>
                 </div>
             </article>
-        }    </section>
+        }
+    </section>
     <TicketSidebar NewSaleLine="_SaleLine" />
 </div>
