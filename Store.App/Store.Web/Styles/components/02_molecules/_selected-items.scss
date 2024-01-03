@@ -11,7 +11,7 @@
         display: grid;
         grid-template-columns: 30% 40% 25%;
         grid-template-rows: auto;
-        width: 100%;
+        justify-items: center;
         gap: 0.5rem;
 
         i {
@@ -22,34 +22,24 @@
             cursor: pointer;
         }
 
-        .details {
+        .thumbnail {
             grid-column: 1;
-            grid-row: 2;
-            align-self: center;
+            grid-roww: 1 /-1;
+        } 
+        
+        .details {
+            grid-column: 2;
+            grid-row: 1;
             justify-self: start;
         }
 
         .actions {
-            grid-column: 2;
+            grid-column: 3;
             grid-row: 1;
-            justify-content: center;
-            align-items: center;
             width: 100%;
-            display: grid;
-            grid-template-columns: 10% 75% 10%;
-
-            .add {
-                grid-column: 1;
-            }
-
-            .remove {
-                grid-column: 3;
-            }
-
-            h2 {
-                grid-column: 2;
-                justify-self: center;
-            }
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
         }
 
         .total {
@@ -57,6 +47,7 @@
             grid-row: 1;
             align-self: center;
             justify-self: center;
+            margin-right: 0.5rem;
         }
     }
 }

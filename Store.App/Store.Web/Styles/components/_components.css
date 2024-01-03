@@ -529,7 +529,7 @@ input[type=checkbox]:disabled {
   display: grid;
   grid-template-columns: 30% 40% 25%;
   grid-template-rows: auto;
-  width: 100%;
+  justify-items: center;
   gap: 0.5rem;
 }
 .selected-items .item i {
@@ -539,36 +539,29 @@ input[type=checkbox]:disabled {
   justify-self: end;
   cursor: pointer;
 }
-.selected-items .item .details {
+.selected-items .item .thumbnail {
   grid-column: 1;
-  grid-row: 2;
-  align-self: center;
+  grid-roww: 1/-1;
+}
+.selected-items .item .details {
+  grid-column: 2;
+  grid-row: 1;
   justify-self: start;
 }
 .selected-items .item .actions {
-  grid-column: 2;
-  grid-row: 1;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 10% 75% 10%;
-}
-.selected-items .item .actions .add {
-  grid-column: 1;
-}
-.selected-items .item .actions .remove {
   grid-column: 3;
-}
-.selected-items .item .actions h2 {
-  grid-column: 2;
-  justify-self: center;
+  grid-row: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 .selected-items .item .total {
   grid-column: 3;
   grid-row: 1;
   align-self: center;
   justify-self: center;
+  margin-right: 0.5rem;
 }
 
 .form {
@@ -956,16 +949,24 @@ header .h4 {
   display: flex;
   flex-direction: column;
   justify-content: start;
-  align-items: end;
   border-top: 1px solid #000;
 }
 .footer-info .total {
-  align-content: end;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+}
+.footer-info .payment-methods {
+  width: 100%;
+  heihgt: 10%;
+  display: flex;
+  gap: 0.5rem;
 }
 .footer-info .payment-methods .payment-button {
   background-color: var(--info-primary-color);
   color: var(--secondary-color);
-  width: 5rem;
+  width: 50%;
 }
 .footer-info .payment-methods .payment-button:hover {
   opacity: 0.5;
@@ -1123,43 +1124,8 @@ header .h4 {
 .card {
   scroll-snap-align: center;
   padding: calc(var(--gutter) / 2 * 1.5);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: var(--primary-color);
   border-radius: 0.5rem;
-}
-.card .details {
-  text-align: center;
-}
-.card .size-selection {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 0.5rem;
-}
-.card .dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #4CAF50;
-  margin: 0 5px;
-}
-.card .button-container {
-  width: 100%;
-}
-.card .add-to-card {
-  width: 100%;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.3s;
-}
-.card .add-to-card:hover {
-  background-color: #45a049;
 }
 
 .card-counter {
@@ -1218,27 +1184,38 @@ header .h4 {
   align-content: start;
   justify-content: center;
 }
+.dashboard .parent-categories .card {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 800;
+}
 .dashboard .parent-categories .card.active {
-  box-shadow: 0.5rem 1rem 1rem 0px rgba(0, 0, 0, 0.3), 0 1rem 2rem rgba(0, 0, 0, 0.22);
+  box-shadow: 0.5rem 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.3), 0 0.5rem 1rem rgba(0, 0, 0, 0.22);
 }
 .dashboard .children-categories {
   grid-column: 2;
   display: grid;
   grid-gap: calc(var(--gutter) / 2);
-  grid-template-columns: 0.5rem;
-  grid-template-rows: minmax(5rem, 1fr);
+  grid-template-columns: auto;
   grid-auto-flow: column;
   grid-auto-columns: calc(50% - var(--gutter) * 2);
   overflow-x: scroll;
   scroll-snap-type: x proximity;
   padding-bottom: calc(0.75 * var(--gutter));
   margin-bottom: calc(-0.25 * var(--gutter));
+  height: 5rem;
+  overflow-y: hidden;
 }
 .dashboard .children-categories .card {
   background-color: var(--fourth-color);
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 .dashboard .children-categories .card.active {
-  box-shadow: 0px 1rem 1rem 1rem rgba(0, 0, 0, 0.3), 0 1rem 2rem rgba(0, 0, 0, 0.22);
+  box-shadow: 0.5rem 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.3), 0 0.5rem 1rem rgba(0, 0, 0, 0.22);
 }
 .dashboard .children-categories:before,
 .dashboard .children-categories:after {
@@ -1249,13 +1226,23 @@ header .h4 {
   grid-column: 2;
   grid-row: 2;
   display: grid;
-  grid-template-columns: 30% 30% 30%;
+  grid-template-columns: 20% 20% 20% 20%;
+  grid-template-rows: min-content;
   grid-gap: 1rem;
   overflow-y: scroll;
   overflow-x: hidden;
 }
 .dashboard .dashboard-products .card {
   background-color: var(--fourth-color);
+  display: grid;
+  grid-template-rows: 50% 50%;
+}
+.dashboard .dashboard-products .card .thumbnail {
+  grid-row: 1;
+}
+.dashboard .dashboard-products .card .details {
+  grid-row: 2;
+  text-align: center;
 }
 .dashboard .dashboard-sidebar {
   grid-column: 3;
@@ -1310,4 +1297,4 @@ body {
   grid-area: footer;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_grids.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_paddings.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_margins.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_sizes.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_align.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_buttons.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_text.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_borders.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_animations.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_scrollbar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_dialog-actions.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_checkbox.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_thumbnail.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-links.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_selected-items.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_forms.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_loader.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_dropdown.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_arrow-icons.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_profile.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_pagination.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_dialog.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_order-wizard.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_tree-view.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_search-box.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_side-navigation.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_dashboard-sidebar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_datagrid.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_notification_bar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_wizard.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card-counter.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/04_templates/_dashboard.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/05_pages/_pages.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;;;ACRA;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;ACxBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AC9BP;EACG;EACA;AACA;;AAII;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAQR;EACI;;;ACdP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;ACtBH;EACG;EACA;EACA;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;AAAA;EAEI;EACA;;;ACrCH;EACG;;;AAGJ;EACI;;;AAGJ;EACI;;;ACTH;EACG;;;AAGJ;EACI;;;ACLJ;EACI;IACI;;EAGJ;IACI;;;AAIR;EACI;IACI;;EAGJ;IACI;;;AChBR;EACI;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;AACA;;;ACbJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;;ACxBR;AACI;EACA;AACA;EACA;AACA;EACA;AACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;AACA;EACA;;;AAGJ;EACI;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA;EACA;;;AC7CJ;EACI;EACA;;;AAGJ;EACI;EACA;EACA;;;ACRH;EACG;EACA;EACA;EACA;EACA;;;ACLH;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACC;EACA;EACA;;;AAIF;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;ACxBA;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAIR;EACI;EACA;EACA;EACA;;;AC1DX;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;ACxDX;EACG;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;;;ACvBH;EACG;EACA;;AAEA;EACI;EACA;;;ACNP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA;;;ACdH;EACG;EACA;;;ACFJ;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;;;ACbR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAGJ;EAnDJ;IAoDQ;;;AAGJ;EAvDJ;IAwDQ;;;;AAIR;EAEI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EAhBJ;IAiBQ;;;;AAIR;EAEI;;AAEA;EAJJ;IAKQ;;;;AAIR;EAEI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EAEI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EAnBJ;IAoBQ;;;;AAIR;EACI;;;AAGJ;EACI;IACI;;EAGJ;IACI;;;AAIR;EACI;IACI;;EAGJ;IACI;;;ACnJR;EACI;EACA;EACA;;;AAGJ;EACI;;;ACDJ;EACI;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;;AAQA;EAEI,OAlCH;EAmCG;;;ACvChB;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;;;ACfP;EACG;AACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;;ACZP;EACG;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AAIR;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;AACA;;;AClDH;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAIA;EACI;EACA;EACA;;AAGJ;EACI;;;ACpBX;EACG;EACA;AACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;;AAGJ;EACI;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAIA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;;AChGpB;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;;AC7BR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIA;EACI;;AAIR;EACI;;;ACrCZ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;;AC7CX;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI;;;ACvCX;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAIJ;EACI;;AAIR;AAAA;EAEI;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;;ACzER;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;;;AAIJ;EACI;EACA;;;AAGJ;EACI;EACA,qBACI;EACJ;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_grids.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_paddings.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_margins.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_sizes.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_align.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_buttons.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_text.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_borders.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_animations.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_scrollbar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_dialog-actions.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_checkbox.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/01_atoms/_thumbnail.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_nav-links.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_selected-items.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_forms.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_loader.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_dropdown.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_arrow-icons.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_profile.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_pagination.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_dialog.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_order-wizard.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_tree-view.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/02_molecules/_search-box.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_side-navigation.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_dashboard-sidebar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_datagrid.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_notification_bar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_wizard.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card-counter.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/04_templates/_dashboard.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/05_pages/_pages.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;;;ACRA;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,SALS;;;AAQb;EACI,aATS;;;AAYb;EACI,gBAbS;;;AAgBb;EACI,cAjBS;;;AAoBb;EACI,eArBS;;;AAwBb;EACI;;;AAGJ;EACI;;;ACxBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AAzBJ;EACI,QANQ;;;AASZ;EACI,YAVQ;;;AAaZ;EACI,eAdQ;;;AAiBZ;EACI,aAlBQ;;;AAqBZ;EACI,cAtBQ;;;AAyBZ;EACI;;;AAGJ;EACI;;;AC9BP;EACG;EACA;AACA;;AAII;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAEJ;EACI,YAHA;;AAQR;EACI;;;ACdP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;ACtBH;EACG;EACA;EACA;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;AAAA;EAEI;EACA;;;ACrCH;EACG;;;AAGJ;EACI;;;AAGJ;EACI;;;ACTH;EACG;;;AAGJ;EACI;;;ACLJ;EACI;IACI;;EAGJ;IACI;;;AAIR;EACI;IACI;;EAGJ;IACI;;;AChBR;EACI;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;AACA;;;ACbJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;;ACxBR;AACI;EACA;AACA;EACA;AACA;EACA;AACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;AACA;EACA;;;AAGJ;EACI;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA;EACA;;;AC7CJ;EACI;EACA;;;AAGJ;EACI;EACA;EACA;;;ACRH;EACG;EACA;EACA;EACA;EACA;;;ACLH;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACC;EACA;EACA;;;AAIF;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;ACxBA;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;;ACjDX;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;ACxDX;EACG;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;;;ACvBH;EACG;EACA;;AAEA;EACI;EACA;;;ACNP;EACG;EACA;EACA;EACA;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA;;;ACdH;EACG;EACA;;;ACFJ;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;;;ACbR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAGJ;EAnDJ;IAoDQ;;;AAGJ;EAvDJ;IAwDQ;;;;AAIR;EAEI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EAhBJ;IAiBQ;;;;AAIR;EAEI;;AAEA;EAJJ;IAKQ;;;;AAIR;EAEI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EAEI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EAnBJ;IAoBQ;;;;AAIR;EACI;;;AAGJ;EACI;IACI;;EAGJ;IACI;;;AAIR;EACI;IACI;;EAGJ;IACI;;;ACnJR;EACI;EACA;EACA;;;AAGJ;EACI;;;ACDJ;EACI;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;;AAQA;EAEI,OAlCH;EAmCG;;;ACvChB;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;;;ACfP;EACG;AACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;;ACZP;EACG;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AAIR;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;AACA;;;AClDH;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AC3BX;EACG;EACA;AACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;;AAGJ;EACI;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAIA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;;AChGpB;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;;AC7BR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIA;EACI;;AAIR;EACI;;;ACrCZ;EACI;EACA;EACA;EACA;;;ACNH;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI;;;ACvCX;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAIJ;EACI;;AAIR;AAAA;EAEI;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;;ACjGR;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;;;AAIJ;EACI;EACA;;;AAGJ;EACI;EACA,qBACI;EACJ;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI%22%7D */

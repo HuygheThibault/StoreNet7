@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 
 Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Warning()
+    .MinimumLevel.Information()
     .WriteTo.Console()
     //.WriteTo.File("logs/store_.txt", rollingInterval: RollingInterval.Day)
     .CreateLogger();

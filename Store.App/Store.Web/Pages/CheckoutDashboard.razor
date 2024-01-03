@@ -10,7 +10,7 @@
         {
             <li class="card @( category.Id == _SelectedCategory?.Id ? "active" : "")" style="background-color:@category?.Color" @onclick="() => SetSelectedCategroy(category)">
                 <div class="details">
-                    <h1>@category.Title</h1>
+                    <p>@category.Title</p>
                 </div>
             </li>
         }
@@ -19,34 +19,26 @@
     <ul class="children-categories">
         @if (_SelectedCategory != null)
         {
-            @foreach (var category in _Categories.Where(x => x.ParentCategoryId == _SelectedCategory.Id))
+            @foreach (var category in GetAllChildCategories(_SelectedCategory.Id))
             {
                 <li class="card @(_SelectedSubCategory != null && category.Id == _SelectedSubCategory.Id ? "active" : "")" @onclick="() => SetSelectedSubCategroy(category)">
                     <div class="details">
-                        <h1>@category.Title</h1>
+                        <p>@category.Title</p>
                     </div>
                 </li>
             }
         }
     </ul>
     <section class="dashboard-products pd-2">
-        @foreach (var product in _Products.Where(x => x.CategoryId == _SelectedSubCategory?.Id).ToList())
+        @foreach (var product in GetAllProductsUnderTopCategory())
         {
             <article class="card" @onclick="() => AddItemToTicket(product)">
                 <div class="thumbnail">
                     <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="@product.Title">
                 </div>
                 <div class="details">
-                    <h1>@product?.Title</h1>
+                    <p>@product?.Title</p>
                     <p>@product?.PricePerUnit.ToString("C")</p>
-                </div>
-                <div class="size-selection">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
-                <div class="button-container">
-                    <button class="add-to-card">Add to Card</button>
                 </div>
             </article>
         }

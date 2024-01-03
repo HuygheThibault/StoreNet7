@@ -2,15 +2,28 @@
   height: 30%;
   display: flex;
   flex-direction: column;
+  justify-content: start;
+  border-top: 1px solid #000;
 }
-
-.payment-button {
-  background-color: var(--primary-info-color);
+.footer-info .total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+}
+.footer-info .payment-methods {
+  width: 100%;
+  heihgt: 10%;
+  display: flex;
+  gap: 0.5rem;
+}
+.footer-info .payment-methods .payment-button {
+  background-color: var(--info-primary-color);
   color: var(--secondary-color);
+  width: 50%;
 }
-
-.payment-button:hover {
+.footer-info .payment-methods .payment-button:hover {
   opacity: 0.5;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_dashboard-sidebar.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;;;AAEJ;EACI;EACA;;;AAIJ;EACI%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_dashboard-sidebar.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI%22%7D */

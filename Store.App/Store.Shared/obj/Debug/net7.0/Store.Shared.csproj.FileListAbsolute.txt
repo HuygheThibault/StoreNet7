@@ -5,8 +5,8 @@ C:\myProjects\StoreNet7\Store.App\Store.Shared\obj\Debug\net7.0\Store.Shared.Gen
 C:\myProjects\StoreNet7\Store.App\Store.Shared\obj\Debug\net7.0\Store.Shared.AssemblyInfoInputs.cache
 C:\myProjects\StoreNet7\Store.App\Store.Shared\obj\Debug\net7.0\Store.Shared.AssemblyInfo.cs
 C:\myProjects\StoreNet7\Store.App\Store.Shared\obj\Debug\net7.0\Store.Shared.csproj.CoreCompileInputs.cache
+C:\myProjects\StoreNet7\Store.App\Store.Shared\obj\Debug\net7.0\Store.Shared.sourcelink.json
 C:\myProjects\StoreNet7\Store.App\Store.Shared\obj\Debug\net7.0\Store.Shared.dll
 C:\myProjects\StoreNet7\Store.App\Store.Shared\obj\Debug\net7.0\refint\Store.Shared.dll
 C:\myProjects\StoreNet7\Store.App\Store.Shared\obj\Debug\net7.0\Store.Shared.pdb
 C:\myProjects\StoreNet7\Store.App\Store.Shared\obj\Debug\net7.0\ref\Store.Shared.dll
-C:\myProjects\StoreNet7\Store.App\Store.Shared\obj\Debug\net7.0\Store.Shared.sourcelink.json
