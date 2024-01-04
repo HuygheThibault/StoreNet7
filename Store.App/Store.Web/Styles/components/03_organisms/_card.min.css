@@ -1,1 +1,1 @@
-﻿.card{scroll-snap-align:center;padding:calc(var(--gutter)/2*1.5);background-color:var(--primary-color);border-radius:.5rem;display:flex;}
+﻿.card{scroll-snap-align:center;padding:calc(var(--gutter)/2*1.5);background-color:var(--primary-color);border-radius:.5rem;overflow:hidden;}.card.active{box-shadow:.5rem .25rem .25rem 0 rgba(0,0,0,.3),0 .5rem 1rem rgba(0,0,0,.22);}

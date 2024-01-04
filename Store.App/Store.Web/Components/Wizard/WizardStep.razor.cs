@@ -14,7 +14,7 @@ namespace Store.Web.Components.Wizard
         public string Name { get; set; }
 
         [Parameter]
-        public bool IsStepValid { get; set; } = true;
+        public bool IsStepValid { get; set; } = false;
 
         protected override void OnInitialized()
         {

@@ -3,7 +3,11 @@
   padding: calc(var(--gutter) / 2 * 1.5);
   background-color: var(--primary-color);
   border-radius: 0.5rem;
-  display: flex;
+  overflow: hidden;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_card.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAEA;EACI;EACA;EACA;EACA;EACA%22%7D */
+.card.active {
+  box-shadow: 0.5rem 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.3), 0 0.5rem 1rem rgba(0, 0, 0, 0.22);
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_card.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;;;AAGJ;EACI%22%7D */

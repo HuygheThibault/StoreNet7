@@ -34,16 +34,19 @@ namespace Store.Web.Components.Wizard
             if (ActiveStepIx > 0)
                 SetActive(Steps[ActiveStepIx - 1]);
         }
-        
+
         protected internal void GoNext()
         {
-            if (ActiveStepIx < Steps.Count - 1)
+            if (ActiveStep.IsStepValid)
             {
-                SetActive(Steps[(Steps.IndexOf(ActiveStep) + 1)]);
-            }
-            else
-            {
-                OnSubmit.InvokeAsync();
+                if (ActiveStepIx < Steps.Count - 1)
+                {
+                    SetActive(Steps[(Steps.IndexOf(ActiveStep) + 1)]);
+                }
+                else
+                {
+                    OnSubmit.InvokeAsync();
+                }
             }
         }
 
@@ -51,11 +54,15 @@ namespace Store.Web.Components.Wizard
         {
             ActiveStep = step ?? throw new ArgumentNullException(nameof(step));
 
-            ActiveStepIx = StepsIndex(step);
-            if (ActiveStepIx == Steps.Count - 1)
-                IsLastStep = true;
-            else
-                IsLastStep = false;
+            if (ActiveStep?.IsStepValid)
+            {
+
+                ActiveStepIx = StepsIndex(step);
+                if (ActiveStepIx == Steps.Count - 1)
+                    IsLastStep = true;
+                else
+                    IsLastStep = false;
+            }
         }
 
         public int StepsIndex(WizardStep step) => StepsIndexInternal(step);
@@ -67,7 +74,7 @@ namespace Store.Web.Components.Wizard
 
             return Steps.IndexOf(step);
         }
-        
+
         protected internal void AddStep(WizardStep step)
         {
             Steps.Add(step);

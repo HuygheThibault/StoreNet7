@@ -9,8 +9,8 @@
 @if (Order != null)
 {
     <div @onkeyup="(e) => HandleKeyDown(e)">
-        <Wizard Id="OrderWizard" IsVisible="IsWizardVisible" OnSubmit="SubmitOrder">
-            <WizardStep Name="@(Order.Supplier == null ? "Supplier" : Order.Supplier?.Name)"
+        <Wizard Id="OrderWizard" IsVisible="Order != null" OnSubmit="SubmitOrder">
+            <WizardStep Name="@(Order.Supplier == null ? "Supplier" : Order.Supplier.Name)"
                         IsStepValid="IsSupplierValied()">
                 <div class="row pd-b-1">
                     <label id="IsNewSupplierLabel" for="IsNewSupplier" class="label mrg-r-1">New supplier: </label>
@@ -20,12 +20,12 @@
                     <button type="submit"><i class="fas fa-search"></i></button>
                     <input type="text" class="input-search" placeholder="Type to Search..." @bind-value="SearchValue">
                 </div>
-                <div class="flex-grid-hrztl" style="@(IsNewSupplier ? "display:none;" : "")">
+                <div class="hrztl-scrl-grid" style="@(IsNewSupplier ? "display:none;" : "")">
                     @if (Suppliers != null)
                     {
                         @foreach (var supplier in Suppliers.Where(x => x.Name.ToLower().Contains(SearchValue.ToLower())))
                         {
-                            <div class="card @( supplier.Id == Order.SupplierId ? "active" : "")" @onclick="() => SetSelectedSupplier(supplier)" style="flex: 0 0 5rem;">
+                            <div class="card @( supplier.Id == Order.SupplierId ? "active" : "")" @onclick="() => SetSelectedSupplier(supplier, false)" style="flex: 0 0 5rem;">
                                 <picture class="thumbnail">
                                     <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
                                 </picture>
@@ -68,12 +68,12 @@
                     </div>
                 }
             </WizardStep>
-            <WizardStep Name="Second Step" IsStepValid="true">
+            <WizardStep Name="Second Step" IsStepValid="Order.OrderLines.Sum(x => x.Cost) > 0">
                 <div class="search-box pd-b-1">
                     <button type="submit"><i class="fas fa-search"></i></button>
                     <input type="text" class="input-search" placeholder="Type to Search..." @bind-value="SearchValue">
                 </div>
-                <div class="flex-grid-hrztl">
+                <div class="hrztl-scrl-grid">
                     @if (Products != null)
                     {
                         @foreach (var product in Products.Where(x => x.Title.ToLower().Contains(SearchValue.ToLower())))

@@ -23,10 +23,6 @@
             font-size: 2rem;
             font-weight: 800;
         }
-
-        .card.active {
-            box-shadow: 0.5rem 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.3), 0 0.5rem 1rem rgba(0, 0, 0, 0.22);
-        }
     }
 
     .children-categories {
@@ -49,11 +45,6 @@
             justify-content: center;
             font-size: 1.5rem;
             font-weight: 600;
-        }
-
-
-        .card.active {
-            box-shadow: 0.5rem 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.3), 0 0.5rem 1rem rgba(0, 0, 0, 0.22);
         }
     }
 

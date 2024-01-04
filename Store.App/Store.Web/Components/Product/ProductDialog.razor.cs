@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Components.Forms;
 using Store.Shared.Dto;
 using Store.Web.Exceptions;
 using Store.Web.Services;
-using System.Collections.Generic;
 
 namespace Store.Web.Components.Product
 {

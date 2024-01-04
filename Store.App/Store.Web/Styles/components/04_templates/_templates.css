@@ -23,9 +23,6 @@
   font-size: 2rem;
   font-weight: 800;
 }
-.dashboard .parent-categories .card.active {
-  box-shadow: 0.5rem 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.3), 0 0.5rem 1rem rgba(0, 0, 0, 0.22);
-}
 .dashboard .children-categories {
   grid-column: 2;
   display: grid;
@@ -46,9 +43,6 @@
   justify-content: center;
   font-size: 1.5rem;
   font-weight: 600;
-}
-.dashboard .children-categories .card.active {
-  box-shadow: 0.5rem 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.3), 0 0.5rem 1rem rgba(0, 0, 0, 0.22);
 }
 .dashboard .children-categories:before,
 .dashboard .children-categories:after {
@@ -87,4 +81,4 @@
   max-width: 100%;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/04_templates/_dashboard.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAIJ;EACI;;AAIR;AAAA;EAEI;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;EACA%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/04_templates/_dashboard.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAIR;AAAA;EAEI;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;EACA%22%7D */

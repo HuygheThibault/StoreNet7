@@ -8,7 +8,7 @@
 @* @attribute [Authorize] *@
 
 <OrderDialog Order="@_EditedOrder" OnResult="ResultReceived" />
-<OrderWizard IsWizardVisible="_NewOrder != null" />
+<OrderWizard Order="@_NewOrder" />
 
 <div class=row>
     <div class="data-grid-container sze-12 pd-1">

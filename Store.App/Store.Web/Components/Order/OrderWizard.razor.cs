@@ -19,17 +19,15 @@ namespace Store.Web.Components.Order
         public IProductService ProductService { get; set; } = default!;
 
         [Parameter]
-        public bool IsWizardVisible { get; set; } = false;
+        public OrderDto Order { get; set; }
 
         public List<SupplierDto> Suppliers { get; set; } = default!;
 
         public List<ProductDto> Products { get; set; } = default!;
 
-        public OrderDto Order { get; set; } = new OrderDto() { Supplier = new SupplierDto(), OrderLines = new List<OrderLineDto>() };
-
         public bool IsNewSupplier { get; set; } = false;
 
-        public ProductDto NewProduct { get; set; } = default!;
+        public ProductDto? NewProduct { get; set; }
 
         public string SearchValue { get; set; } = string.Empty;
 
@@ -67,17 +65,17 @@ namespace Store.Web.Components.Order
             Products = (await ProductService.GetAllProducts()).ToList();
         }
 
-        private void SetSelectedSupplier(SupplierDto supplier, bool? isNewSupplier = null)
+        private void SetSelectedSupplier(SupplierDto supplier, bool isNewSupplier)
         {
-            if (isNewSupplier.HasValue)
+            if (isNewSupplier)
             {
-                IsNewSupplier = isNewSupplier.Value;
                 Order.Supplier = new SupplierDto();
             }
             else
             {
                 Order.Supplier = supplier;
             }
+            IsNewSupplier = isNewSupplier;
         }
 
         private async Task OnInputFileSupplierChange(InputFileChangeEventArgs e)
@@ -115,13 +113,8 @@ namespace Store.Web.Components.Order
 
         private bool IsSupplierValied()
         {
-            if (Suppliers != null)
+            if (IsNewSupplier)
             {
-                if (Suppliers.Any(x => x.Id == Order.SupplierId))
-                {
-                    return true;
-                }
-
                 if (Order.Supplier != null && Order.Supplier.Name != null && Order.Supplier.VatNumber != null)
                 {
                     if (Order.Supplier.Name.Length < 5)
@@ -140,6 +133,17 @@ namespace Store.Web.Components.Order
 
                 return true;
             }
+            else
+            {
+                if (Suppliers != null)
+                {
+                    if (Suppliers.Any(x => x.Id == Order.SupplierId))
+                    {
+                        return true;
+                    }
+                }
+            }
+
             return false;
         }
 
@@ -177,7 +181,7 @@ namespace Store.Web.Components.Order
         private void SubmitOrder()
         {
             Console.WriteLine("Submitted order ", Order);
-            IsWizardVisible = false;
+            Order = null;
         }
 
         private void HandleKeyDown(KeyboardEventArgs e)
@@ -185,7 +189,7 @@ namespace Store.Web.Components.Order
             switch (e.Code)
             {
                 case "Escape":
-                    IsWizardVisible = false;
+                    Order = null;
                     break;
             }
         }
