@@ -1,5 +1,8 @@
 ﻿.side-nav-open {
     transition: .16s ease-in-out;
+    display: grid;
+    grid-template-rows: var(--header-height) auto;
+    grid-auto-flow: row;
 
     img {
         width: 5rem;
@@ -15,6 +18,9 @@
 .side-nav-closed {
     width: 5rem !important;
     overflow: hidden;
+    display: grid;
+    grid-template-rows: var(--header-height) auto;
+    grid-auto-flow: row;
 
     .nav-link {
         justify-content: center;
@@ -41,12 +47,7 @@
 }
 
 .nav-toggler {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    left: 1rem;
-    position: relative;
+    position: absolute;
     transition: all .16s ease-in-out;
     cursor: pointer;
-    /*color: var(--primary-text-color);*/
 }

@@ -24,7 +24,7 @@ body {
     grid-template-areas:
         'nav header' 'nav main' 'nav footer';
     grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: var(--header-height) 1fr auto;
     overflow: hidden;
 
     header {
@@ -35,7 +35,6 @@ body {
         grid-area: nav;
         z-index: 1;
         height: 100vh;
-        padding: 0 0.5rem;
         background-color: var(--secondary-color);
     }
 

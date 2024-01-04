@@ -1,6 +1,5 @@
 ﻿header {
   height: var(--header-height);
-  /*background-color: var(--secondary-color);*/
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -12,4 +11,4 @@ header .h4 {
   margin-left: auto;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_header.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;AACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_header.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI%22%7D */

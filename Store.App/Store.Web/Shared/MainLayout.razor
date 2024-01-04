@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager navManager
+@using Store.Web.Components
 
 <div class="page">
     <Header />
@@ -7,6 +8,7 @@
 
     <main>
         @Body
+        <NotificationBase></NotificationBase>
     </main>
 @* 
     <footer>

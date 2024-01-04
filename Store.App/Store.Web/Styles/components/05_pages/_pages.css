@@ -21,7 +21,7 @@ body {
   display: grid;
   grid-template-areas: "nav header" "nav main" "nav footer";
   grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: var(--header-height) 1fr auto;
   overflow: hidden;
 }
 .page header {
@@ -31,7 +31,6 @@ body {
   grid-area: nav;
   z-index: 1;
   height: 100vh;
-  padding: 0 0.5rem;
   background-color: var(--secondary-color);
 }
 .page main {
@@ -41,4 +40,4 @@ body {
   grid-area: footer;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/05_pages/_pages.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AACA;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;;;AAIJ;EACI;EACA;;;AAGJ;EACI;EACA,qBACI;EACJ;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/05_pages/_pages.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AACA;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;;;AAIJ;EACI;EACA;;;AAGJ;EACI;EACA,qBACI;EACJ;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI%22%7D */

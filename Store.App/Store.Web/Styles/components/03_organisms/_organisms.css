@@ -1,6 +1,5 @@
 ﻿header {
   height: var(--header-height);
-  /*background-color: var(--secondary-color);*/
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -14,6 +13,9 @@ header .h4 {
 
 .side-nav-open {
   transition: 0.16s ease-in-out;
+  display: grid;
+  grid-template-rows: var(--header-height) auto;
+  grid-auto-flow: row;
 }
 .side-nav-open img {
   width: 5rem;
@@ -27,6 +29,9 @@ header .h4 {
 .side-nav-closed {
   width: 5rem !important;
   overflow: hidden;
+  display: grid;
+  grid-template-rows: var(--header-height) auto;
+  grid-auto-flow: row;
 }
 .side-nav-closed .nav-link {
   justify-content: center;
@@ -48,14 +53,9 @@ header .h4 {
 }
 
 .nav-toggler {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  left: 1rem;
-  position: relative;
+  position: absolute;
   transition: all 0.16s ease-in-out;
   cursor: pointer;
-  /*color: var(--primary-text-color);*/
 }
 
 .footer-info {
@@ -170,34 +170,54 @@ header .h4 {
   color: inherit;
 }
 
-.notifications {
+.notifications-container {
   bottom: 0;
   position: absolute;
   width: 90%;
-  margin: 1rem;
+  margin: auto;
   z-index: 999;
 }
-.notifications .notification-bar {
+.notifications-container .notification {
+  display: none;
+}
+.notifications-container .notification-visible {
   border-radius: 1rem;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  gap: 0.5rem;
+  animation: fadein 1.5s;
 }
-.notifications .notification-bar.Danger {
+.notifications-container .notification-visible .notification-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  font-size: 2.5rem;
+}
+.notifications-container .danger {
   background-color: var(--danger-color);
 }
-.notifications .notification-bar.Success {
+.notifications-container .success {
   background-color: var(--success-color);
 }
-.notifications .notification-bar.Info {
+.notifications-container .info {
   background-color: var(--info-color);
 }
-.notifications .notification-bar.Warning {
+.notifications-container .warning {
   background-color: var(--warning-color);
 }
 
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .circle {
   display: flex;
   width: 2rem;
@@ -284,4 +304,4 @@ header .h4 {
   grid-area: totals;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_side-navigation.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_dashboard-sidebar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_datagrid.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_notification_bar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_wizard.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card-counter.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;AACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;;ACZP;EACG;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AAIR;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;AACA;;;AClDH;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AC3BX;EACG;EACA;AACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;;AAGJ;EACI;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAIA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;;AChGpB;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;;AC7BR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIA;EACI;;AAIR;EACI;;;ACvCX;EACG;EACA;EACA;EACA;EACA;;;AAGJ;EACI;;;ACTH;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_header.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_side-navigation.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_dashboard-sidebar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_datagrid.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_notification_bar.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_wizard.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_card.scss%22,%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_product-card-counter.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;;ACXP;EACG;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AAIR;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;;;AAIR;EACI;EACA;EACA;;;ACnDH;EACG;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AC3BX;EACG;EACA;AACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;;AAGJ;EACI;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAIA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;;;AChGpB;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAIR;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;;;AAIR;EACI;IACI;;EAGJ;IACI;;;ACrDR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIA;EACI;;AAIR;EACI;;;ACvCX;EACG;EACA;EACA;EACA;EACA;;;AAGJ;EACI;;;ACTH;EACG;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;EACA;EACA;;AAGJ;EACI%22%7D */

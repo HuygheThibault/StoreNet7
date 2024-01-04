@@ -54,7 +54,7 @@ namespace Store.Web.Components.Wizard
         {
             ActiveStep = step ?? throw new ArgumentNullException(nameof(step));
 
-            if (ActiveStep?.IsStepValid)
+            if (ActiveStep != null && ActiveStep.IsStepValid)
             {
 
                 ActiveStepIx = StepsIndex(step);

@@ -13,6 +13,9 @@ namespace Store.Web.Pages
     public partial class OrderOverview
     {
         [Inject]
+        public NotificationService NotificationService { get; set; }
+
+        [Inject]
         public IOrderService OrderService { get; set; }
 
         [Inject]
@@ -50,6 +53,12 @@ namespace Store.Web.Pages
             _products = (await ProductService.GetAllProducts()).ToList();
             CreateColumns();
             ApplySorting();
+
+            NotificationService.ShowNotification(new Noticiation()
+            {
+                Name = "Welcome to the order overview page",
+                Level = NoticiationLevel.Info
+            }); 
         }
 
         private async Task GetGridData()
@@ -226,6 +235,11 @@ namespace Store.Web.Pages
         private void AddOrder()
         {
             _NewOrder = new OrderDto();
+            NotificationService.ShowNotification(new Noticiation()
+            {
+                Name = "New order",
+                Level = NoticiationLevel.Success
+            });
         }
 
         private void Edit(OrderDto item)
@@ -241,7 +255,7 @@ namespace Store.Web.Pages
                 await ResultReceived(new Noticiation()
                 {
                     Name = "Order deleted successfully",
-                    Sort = NoticiationType.Success
+                    Level = NoticiationLevel.Success
                 });
             }
             else
@@ -249,7 +263,7 @@ namespace Store.Web.Pages
                 await ResultReceived(new Noticiation()
                 {
                     Name = "Failed to delete order",
-                    Sort = NoticiationType.Danger
+                    Level = NoticiationLevel.Danger
                 });
             }
 

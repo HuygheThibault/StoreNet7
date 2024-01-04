@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Components.Forms;
 using Store.Shared.Dto;
 using Store.Web.Exceptions;
+using Store.Web.Models;
 using Store.Web.Services;
+using static Store.Web.Models.Noticiation;
 
 namespace Store.Web.Components.Product
 {
@@ -13,6 +15,9 @@ namespace Store.Web.Components.Product
 
         [Inject]
         public ICategoryService CategoryService { get; set; } = default!;
+
+        [Inject]
+        public NotificationService NotificationService { get; set; } = default!;
 
         [Parameter]
         public ProductDto? Product { get; set; }
@@ -63,43 +68,48 @@ namespace Store.Web.Components.Product
 
             if (EditContext.Validate())
             {
-                if (IsNew)
+                try
                 {
-                    try
+                    if (IsNew)
                     {
                         savedProduct = await ProductService.AddProduct(Product);
                     }
-                    catch (HttpRequestFailedException ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                }
-                else
-                {
-                    try
+                    else
                     {
                         savedProduct = await ProductService.UpdateProduct(Product);
                     }
-                    catch (HttpRequestFailedException ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
+                }
+                catch (HttpRequestFailedException ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
 
                 if (savedProduct != null)
                 {
+                    NotificationService.ShowNotification(new Noticiation()
+                    {
+                        Name = $"{savedProduct.Title}: sucessfully saved",
+                        Level = NoticiationLevel.Success
+                    });
                     Product = savedProduct;
+                    await Result.InvokeAsync(Product);
                 }
                 else
                 {
-                    Product = null;
+                    NotificationService.ShowNotification(new Noticiation()
+                    {
+                        Name = $"{EditContext.GetValidationMessages()}",
+                        Level = NoticiationLevel.Danger
+                    });
                 }
-
-                await Result.InvokeAsync(Product);
             }
             else
             {
-                Console.WriteLine("Form is Invalid...");
+                NotificationService.ShowNotification(new Noticiation()
+                {
+                    Name = $"{EditContext.GetValidationMessages()}",
+                    Level = NoticiationLevel.Danger
+                });
             }
         }
 

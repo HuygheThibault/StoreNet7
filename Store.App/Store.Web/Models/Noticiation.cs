@@ -2,11 +2,11 @@
 {
     public class Noticiation
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
-        public NoticiationType Sort { get; set; }
+        public NoticiationLevel Level { get; set; } = NoticiationLevel.Info;
 
-        public enum NoticiationType
+        public enum NoticiationLevel
         {
             Info,
             Warning,

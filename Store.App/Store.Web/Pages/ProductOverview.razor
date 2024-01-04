@@ -1,10 +1,14 @@
 ﻿@page "/ProductOverview"
 @using Store.Shared.Dto;
 @using Store.Web.Components.Datagrid
+@using Store.Web.Components.Product
 
 <PageTitle>Users</PageTitle>
 <div class="row">
     <div class="data-grid-container sze-12 pd-1">
+
+        <button class="mrg-0 pd-1" @onclick="AddItem"> Add</button>
+
         @if (Items != null)
         {
             <Datagrid T="ProductDto" Data="Items" DropdownColumns="DropdownColumns"
@@ -12,3 +16,4 @@
         }
     </div>
 </div>
+<ProductDialog Product="EditProduct" Result="ProductDialogResult"></ProductDialog>

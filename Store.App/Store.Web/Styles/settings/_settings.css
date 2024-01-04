@@ -11,7 +11,7 @@
   --info-primary-color: #1D3461;
   --info-secondary-color: #51BBFE;
   --disabled-color: #333;
-  --header-height: 10vh;
+  --header-height: 5rem;
   --gutter: 1rem;
   --total: 0.5rem;
 }

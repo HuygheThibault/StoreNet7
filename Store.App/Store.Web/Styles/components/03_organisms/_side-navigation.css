@@ -1,5 +1,8 @@
 ﻿.side-nav-open {
   transition: 0.16s ease-in-out;
+  display: grid;
+  grid-template-rows: var(--header-height) auto;
+  grid-auto-flow: row;
 }
 .side-nav-open img {
   width: 5rem;
@@ -13,6 +16,9 @@
 .side-nav-closed {
   width: 5rem !important;
   overflow: hidden;
+  display: grid;
+  grid-template-rows: var(--header-height) auto;
+  grid-auto-flow: row;
 }
 .side-nav-closed .nav-link {
   justify-content: center;
@@ -34,14 +40,9 @@
 }
 
 .nav-toggler {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  left: 1rem;
-  position: relative;
+  position: absolute;
   transition: all 0.16s ease-in-out;
   cursor: pointer;
-  /*color: var(--primary-text-color);*/
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_side-navigation.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AAIR;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;;;AAIR;EACI;EACA;EACA;EACA;EACA;EACA;EACA;AACA%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_side-navigation.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;;AAIR;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;;;AAIR;EACI;EACA;EACA%22%7D */

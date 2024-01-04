@@ -111,7 +111,7 @@ namespace Store.Web.Components.Order
                     await OnResult.InvokeAsync(new Noticiation()
                     {
                         Name = "Order saved successfully",
-                        Sort = NoticiationType.Success
+                        Level = NoticiationLevel.Success
                     });
                 }
                 else
@@ -119,7 +119,7 @@ namespace Store.Web.Components.Order
                     await OnResult.InvokeAsync(new Noticiation()
                     {
                         Name = "Error while saving order",
-                        Sort = NoticiationType.Danger
+                        Level = NoticiationLevel.Danger
                     });
                 }
             }
@@ -135,7 +135,7 @@ namespace Store.Web.Components.Order
             await OnResult.InvokeAsync(new Noticiation()
             {
                 Name = "Order canceled",
-                Sort = NoticiationType.Danger
+                Level = NoticiationLevel.Danger
             });
         }
 

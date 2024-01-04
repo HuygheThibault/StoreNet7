@@ -14,6 +14,8 @@ builder.Services.AddHttpClient<ICategoryService, CategoryService>(client => clie
 builder.Services.AddHttpClient<IOrderService, OrderService>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)).AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 builder.Services.AddHttpClient<ISupplierService, SupplierService>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)).AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
+builder.Services.AddScoped<NotificationService>();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddBlazoredLocalStorage();
 

@@ -18,6 +18,8 @@ namespace Store.Web.Pages
 
         public List<CategoryDto>? Categories { get; set; } = default!;
 
+        public ProductDto? EditProduct { get; set; }
+
         List<DropdownColumn>? DropdownColumns = default!;
 
         protected override async Task OnInitializedAsync()
@@ -45,7 +47,20 @@ namespace Store.Web.Pages
 
         private void EditItem(ProductDto item)
         {
+            EditProduct = item;
+        }
 
+        private void AddItem()
+        {
+            EditProduct = new ProductDto();
+        }
+
+        private void ProductDialogResult(ProductDto product)
+        {
+            if (product != null)
+            {
+            }
+            EditProduct = null;
         }
 
         private async Task DeleteItem(ProductDto item)
