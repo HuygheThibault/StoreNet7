@@ -77,12 +77,6 @@ namespace Store.Web.Components.Order
             {
                 IsSaving = true;
 
-                _order.ModifiedBy = "Admin";
-                _order.ModifiedOn = DateTime.Now;
-                _order.OrderLines.ToList().ForEach(x => x.ModifiedBy = "Admin");
-                _order.OrderLines.ToList().ForEach(x => x.ModifiedOn = DateTime.Now);
-                _order.OrderLines.Where(x => x.CreatedBy == null).ToList().ForEach(x => x.CreatedBy = "Admin");
-
                 OrderDto savedOrder;
 
                 if (IsNew)
@@ -97,9 +91,6 @@ namespace Store.Web.Components.Order
 
                         _order.FileName = file.Name;
                     }
-
-                    _order.OrderLines.ToList().ForEach(x => x.OrderId = _order.Id);
-                    _order.CreatedBy = "Admin";
 
                     savedOrder = await OrderService.AddOrder(_order);
                 }
@@ -129,7 +120,11 @@ namespace Store.Web.Components.Order
             }
             catch (Exception ex)
             {
-
+                NotificationService.ShowNotification(new Noticiation()
+                {
+                    Name = $"{ex.Message}",
+                    Level = NoticiationLevel.Danger
+                });
             }
         }
 

@@ -77,6 +77,13 @@ namespace Store.Web.Pages
 
         }
 
+        private async Task RefreshData()
+        {
+            await GetGridData();
+            ApplySorting();
+            await InvokeAsync(StateHasChanged);
+        }
+
         private void CreateColumns()
         {
             Columns = new List<Column>()
@@ -273,7 +280,7 @@ namespace Store.Web.Pages
             NewOrder = null;
             if (order != null)
             {
-                await GetGridData();
+                await RefreshData();
             }
         }
 

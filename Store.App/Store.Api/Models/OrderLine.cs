@@ -17,11 +17,11 @@ public partial class OrderLine
 
     public DateTime CreatedOn { get; set; }
 
-    public string CreatedBy { get; set; } = null!;
+    public string CreatedBy { get; set; } = string.Empty;
 
     public DateTime ModifiedOn { get; set; }
 
-    public string ModifiedBy { get; set; } = null!;
+    public string ModifiedBy { get; set; } = string.Empty;
 
     public Guid OrderId { get; set; }
 

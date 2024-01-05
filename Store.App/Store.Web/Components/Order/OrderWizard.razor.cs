@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using Store.Shared.Dto;
 using Store.Web.Helpers.Modals;
+using Store.Web.Models;
 using Store.Web.Services;
+using static Store.Web.Models.Noticiation;
 
 namespace Store.Web.Components.Order
 {
@@ -17,6 +19,9 @@ namespace Store.Web.Components.Order
 
         [Inject]
         public IProductService ProductService { get; set; } = default!;
+
+        [Inject]
+        public NotificationService NotificationService { get; set; } = default!;
 
         [Parameter]
         public OrderDto Order { get; set; }
@@ -181,8 +186,42 @@ namespace Store.Web.Components.Order
 
         private async Task SubmitOrder()
         {
-            Console.WriteLine("Submitted order ", Order);
-            await OnResult.InvokeAsync(Order);
+            if (Order != null)
+            {
+                if (Order.Supplier != null)
+                {
+                    if (IsNewSupplier)
+                    {
+                        Order.Supplier = await SupplierService.AddSupplier(Order.Supplier);
+                    }
+
+                    Order = await OrderService.AddOrder(Order);
+
+                    if (Order != null)
+                    {
+                        NotificationService.ShowNotification(new Noticiation()
+                        {
+                            Name = $"{Order.FileName}: sucessfully saved new order",
+                            Level = NoticiationLevel.Success
+                        });
+                        await OnResult.InvokeAsync(Order);
+                    }
+                    else
+                    {
+                        NotificationService.ShowNotification(new Noticiation()
+                        {
+                            Name = $"Error while saving order",
+                            Level = NoticiationLevel.Danger
+                        });
+                    }
+                }
+                else
+                    NotificationService.ShowNotification(new Noticiation()
+                    {
+                        Name = $"Error with the supplier",
+                        Level = NoticiationLevel.Danger
+                    });
+            }
         }
     }
 }

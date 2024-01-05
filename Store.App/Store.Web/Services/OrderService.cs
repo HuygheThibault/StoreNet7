@@ -3,19 +3,23 @@ using Newtonsoft.Json;
 using Store.Shared.Dto;
 using Store.Shared.Modals;
 using Store.Web.Exceptions;
+using Store.Web.Models;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text;
+using static Store.Web.Models.Noticiation;
 
 namespace Store.Web.Services
 {
     public partial class OrderService : IOrderService
     {
         private readonly HttpClient _httpClient;
+        private readonly NotificationService _notificationService;
 
-        public OrderService(HttpClient httpClient)
+        public OrderService(HttpClient httpClient, NotificationService notificationService)
         {
             _httpClient = httpClient;
+            this._notificationService = notificationService;
         }
 
         public async Task<Tuple<IEnumerable<OrderDto>, PaginationMetadata>> GetAllOrders(string? name = null, string? searchQuery = null, int pageNumber = 1, int pageSize = 10)
@@ -81,6 +85,22 @@ namespace Store.Web.Services
             {
                 return await response.Content.ReadFromJsonAsync<OrderDto>();
             }
+            else
+            {
+                var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+
+                foreach (var error in errorResponse.errors)
+                {
+                    foreach (var errorMessage in error.Value)
+                    {
+                        _notificationService.ShowNotification(new Noticiation()
+                        {
+                            Name = $"{errorMessage}",
+                            Level = NoticiationLevel.Danger
+                        });
+                    }
+                }
+            }
 
             throw new HttpRequestFailedException(message: $"Request failed: {response?.StatusCode}, {response}");
         }
@@ -93,6 +113,22 @@ namespace Store.Web.Services
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadFromJsonAsync<OrderDto>();
+            }
+            else
+            {
+                var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+
+                foreach (var error in errorResponse.errors)
+                {
+                    foreach (var errorMessage in error.Value)
+                    {
+                        _notificationService.ShowNotification(new Noticiation()
+                        {
+                            Name = $"{errorMessage}",
+                            Level = NoticiationLevel.Danger
+                        });
+                    }
+                }
             }
 
             throw new HttpRequestFailedException(message: $"Request failed: {response?.StatusCode}, {response}");

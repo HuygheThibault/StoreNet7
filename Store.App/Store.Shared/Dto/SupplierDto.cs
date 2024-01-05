@@ -11,7 +11,7 @@ namespace Store.Shared.Dto
 
         public string? Address { get; set; }
 
-        [Required, MinLength(16)]
+        //[Required, MinLength(16)]
         public string VatNumber { get; set; }
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;

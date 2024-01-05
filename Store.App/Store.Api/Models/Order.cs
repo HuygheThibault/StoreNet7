@@ -21,11 +21,11 @@ public partial class Order
 
     public DateTime CreatedOn { get; set; }
 
-    public string Createdby { get; set; } = null!;
+    public string Createdby { get; set; } = string.Empty;
 
     public DateTime ModifiedOn { get; set; }
 
-    public string ModifiedBy { get; set; } = null!;
+    public string ModifiedBy { get; set; } = string.Empty;
 
     public virtual ICollection<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
 

@@ -82,6 +82,7 @@ namespace Store.Api.Repositories
 
                     if(await GetOrderById(order.Id) == null)
                     {
+                        order.Cost = (decimal)order.OrderLines.Sum(x => x.Cost);
                         _context.Orders.Add(order);
 
                         foreach (OrderLine orderLine in order.OrderLines)

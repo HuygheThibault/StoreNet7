@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using Store.Api.Models;
 using Store.Api.Repositories;
@@ -67,16 +68,21 @@ namespace Store.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<OrderDto>> Put(Guid id, [FromBody] OrderDto model)
+        public async Task<ActionResult<OrderDto>> Put(Guid id, [FromBody] OrderDto request)
         {
             try
             {
-                if (id != model.Id) ModelState.AddModelError("Order id", "Id in uri and body must be equal and cannot be changed");
+                if (id != request.Id) ModelState.AddModelError("Order id", "Id in uri and body must be equal and cannot be changed");
 
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                var dbModel = await _orderRepository.UpdateOrder(_mapper.Map<Order>(model));
+                request.ModifiedBy = User.Identity.Name ?? "Unknown";
+                request.ModifiedOn = DateTime.Now;
+                request.OrderLines.ToList().ForEach(x => x.ModifiedBy = User.Identity.Name ?? "Unknown");
+                request.OrderLines.ToList().ForEach(x => x.ModifiedOn = DateTime.Now);
+
+                var dbModel = await _orderRepository.UpdateOrder(_mapper.Map<Order>(request));
 
                 return Ok(_mapper.Map<OrderDto>(dbModel));
             }
@@ -99,6 +105,13 @@ namespace Store.Api.Controllers
 
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
+
+                request.ModifiedBy = User.Identity.Name ?? "Unknown";
+                request.ModifiedOn = DateTime.Now;
+                request.OrderLines.ToList().ForEach(x => x.ModifiedBy = User.Identity.Name ?? "Unknown");
+                request.OrderLines.ToList().ForEach(x => x.ModifiedOn = DateTime.Now);
+                request.OrderLines.ToList().ForEach(x => x.CreatedBy = User.Identity.Name ?? "Unknown");
+                request.OrderLines.ToList().ForEach(x => x.CreatedOn = DateTime.Now);
 
                 Order newItem = _mapper.Map<Order>(request);
 

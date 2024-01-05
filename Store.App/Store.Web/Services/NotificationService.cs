@@ -35,7 +35,7 @@ namespace Store.Web.Services
         {
             if (Countdown == null)
             {
-                Countdown = new System.Timers.Timer(5000);
+                Countdown = new System.Timers.Timer(10000);
                 Countdown.Elapsed += HideNoticiation;
                 Countdown.AutoReset = false;
             }
