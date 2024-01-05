@@ -21,6 +21,9 @@ namespace Store.Web.Components.Order
         [Parameter]
         public OrderDto Order { get; set; }
 
+        [Parameter]
+        public EventCallback<OrderDto> OnResult { get; set; }
+
         public List<SupplierDto> Suppliers { get; set; } = default!;
 
         public List<ProductDto> Products { get; set; } = default!;
@@ -36,8 +39,6 @@ namespace Store.Web.Components.Order
         private List<string> _ImageUrisOrder = new List<string>();
 
         private string _ImageUriSupplier = "";
-
-        private List<DropdownColumn> DropdownColumns = new List<DropdownColumn>();
 
         private List<Column> Columns = new List<Column>()
         {
@@ -148,7 +149,7 @@ namespace Store.Web.Components.Order
         }
 
         // Orderlines
-        private void DeleteItem(OrderLineDto orderLine)
+        private void DeleteItemFromProductLines(OrderLineDto orderLine)
         {
             Order.OrderLines.Remove(orderLine);
         }
@@ -171,25 +172,25 @@ namespace Store.Web.Components.Order
 
         private void ProductDialogResult(ProductDto product)
         {
+            NewProduct = null;
             if (product != null)
             {
                 AddOrderLine(product);
             }
-            NewProduct = null;
         }
 
-        private void SubmitOrder()
+        private async Task SubmitOrder()
         {
             Console.WriteLine("Submitted order ", Order);
-            Order = null;
+            await OnResult.InvokeAsync(Order);
         }
 
-        private void HandleKeyDown(KeyboardEventArgs e)
+        private async Task HandleKeyDown(KeyboardEventArgs e)
         {
             switch (e.Code)
             {
                 case "Escape":
-                    Order = null;
+                    await OnResult.InvokeAsync(null);
                     break;
             }
         }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Store.Api.Models;
-using Store.Shared.Dto;
+using Store.Shared.Modals;
 
 namespace Store.Api.Repositories
 {

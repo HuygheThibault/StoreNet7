@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using Store.Shared.Dto;
 using Store.Shared.Enums;
 using Store.Shared.Modals;
 using Store.Web.Helpers.Modals;
@@ -19,13 +18,16 @@ namespace Store.Web.Components.Datagrid
         public List<DropdownColumn>? DropdownColumns { get; set; } = default!;
 
         [Parameter]
-        public EventCallback<T> OnDelete { get; set; } = default!;
+        public PaginationMetadata? PaginationData { get; set; } = default!;
 
         [Parameter]
         public EventCallback<T> OnEdit { get; set; } = default!;
 
         [Parameter]
-        public PaginationMetadata? Pagination { get; set; } = default!;
+        public EventCallback<T> OnDelete { get; set; } = default!;
+
+        [Parameter]
+        public EventCallback<T> OnRefresh { get; set; } = default!;
 
         [Inject]
         public IJSRuntime? JsRuntime { get; set; }

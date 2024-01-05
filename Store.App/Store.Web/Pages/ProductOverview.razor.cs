@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Store.Shared.Dto;
+using Store.Shared.Modals;
 using Store.Web.Helpers.Modals;
 using Store.Web.Services;
 using System.Data;
@@ -14,7 +15,7 @@ namespace Store.Web.Pages
         [Inject]
         public ICategoryService CategoryService { get; set; } = default!;
 
-        public List<ProductDto>? Items { get; set; } = default!;
+        public List<ProductDto>? GridData { get; set; } = default!;
 
         public List<CategoryDto>? Categories { get; set; } = default!;
 
@@ -22,9 +23,11 @@ namespace Store.Web.Pages
 
         List<DropdownColumn>? DropdownColumns = default!;
 
+        public PaginationMetadata PaginationData = new PaginationMetadata();
+
         protected override async Task OnInitializedAsync()
         {
-            Items = (await ProductService.GetAllProducts()).ToList();
+            await GetGridData();
             Categories = (await CategoryService.GetAllCategorys()).ToList();
 
             DropdownColumns = new List<DropdownColumn>()
@@ -40,9 +43,34 @@ namespace Store.Web.Pages
             };
         }
 
+        private async Task GetGridData()
+        {
+
+            if (PaginationData != null)
+            {
+                Tuple<IEnumerable<ProductDto>, PaginationMetadata> gridData;
+                gridData = await ProductService.GetAllProducts(pageNumber: PaginationData.CurrentPage, pageSize: PaginationData.PageSize);
+
+                if (gridData != null)
+                {
+                    GridData = gridData?.Item1.ToList();
+                    PaginationData = gridData?.Item2;
+                }
+            }
+            else
+            {
+                IEnumerable<ProductDto> gridData = await ProductService.GetAllProducts();
+                if (gridData != null)
+                {
+                    GridData = gridData.ToList();
+                }
+            }
+        }
+
         private async Task RefreshData()
         {
-            Items = (await ProductService.GetAllProducts()).ToList();
+            await GetGridData();
+            await InvokeAsync(StateHasChanged);
         }
 
         private void EditItem(ProductDto item)
@@ -55,12 +83,13 @@ namespace Store.Web.Pages
             EditProduct = new ProductDto();
         }
 
-        private void ProductDialogResult(ProductDto product)
+        private async void ProductDialogResult(ProductDto product)
         {
+            EditProduct = null;
             if (product != null)
             {
+                await RefreshData();
             }
-            EditProduct = null;
         }
 
         private async Task DeleteItem(ProductDto item)

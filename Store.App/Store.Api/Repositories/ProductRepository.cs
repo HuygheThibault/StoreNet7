@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Store.Api.Models;
+using Store.Shared.Modals;
 
 namespace Store.Api.Repositories
 {
@@ -15,15 +16,37 @@ namespace Store.Api.Repositories
             _logger = logger ?? throw new ArgumentNullException(nameof(logger)); ;
         }
 
-        public async Task<List<Product>> GetAllProducts()
+        public async Task<(IEnumerable<Product>, PaginationMetadata)> GetAllProducts(string? name, string? searchQuery, int pageNumber, int pageSize)
         {
             try
             {
-                _logger.LogInformation($"Getting all Products");
+                _logger.LogInformation($"Getting all product");
 
-                IQueryable<Product> query = _context.Products.Include("Category");
+                var collection = _context.Products as IQueryable<Product>;
 
-                return await query.ToListAsync();
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    name = name.Trim();
+                    collection = collection.Where(c => c.Title == name);
+                }
+
+                if (!string.IsNullOrWhiteSpace(searchQuery))
+                {
+                    searchQuery = searchQuery.Trim();
+                    collection = collection.Where(x => (x.Title != null && x.Title.Contains(searchQuery)));
+                }
+
+                var totalItemCount = await collection.CountAsync();
+
+                var paginationMetadata = new PaginationMetadata(
+                    totalItemCount, pageSize, pageNumber);
+
+                var collectionToReturn = await collection.Include(x => x.Category)
+                .Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize)
+                .ToListAsync();
+
+                return (collectionToReturn, paginationMetadata);
             }
             catch (Exception ex)
             {
@@ -38,7 +61,7 @@ namespace Store.Api.Repositories
             {
                 _logger.LogInformation($"Getting Product: {id}");
 
-                IQueryable<Product> query = _context.Products.Include("Category");
+                IQueryable<Product> query = _context.Products.Include(x => x.Category);
 
                 // Query It
                 query = query.Where(c => c.Id == id);
@@ -58,7 +81,7 @@ namespace Store.Api.Repositories
             {
                 _logger.LogInformation($"Getting Product: {title}");
 
-                IQueryable<Product> query = _context.Products.Include("Category");
+                IQueryable<Product> query = _context.Products.Include(x => x.Category);
 
                 // Query It
                 query = query.Where(c => c.Title == title);
@@ -119,7 +142,7 @@ namespace Store.Api.Repositories
 
     public interface IProductRepository
     {
-        Task<List<Product>> GetAllProducts();
+        Task<(IEnumerable<Product>, PaginationMetadata)> GetAllProducts(string? name, string? searchQuery, int pageNumber, int pageSize);
 
         Task<Product> GetProductById(Guid id);
 

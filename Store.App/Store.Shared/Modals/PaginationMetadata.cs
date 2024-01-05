@@ -1,4 +1,4 @@
-﻿namespace Store.Shared.Dto
+﻿namespace Store.Shared.Modals
 {
     public class PaginationMetadata
     {

@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using Store.Shared.Dto;
+using Store.Shared.Modals;
 using Store.Web.Exceptions;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text;
-using System.Text.Json;
 
 namespace Store.Web.Services
 {

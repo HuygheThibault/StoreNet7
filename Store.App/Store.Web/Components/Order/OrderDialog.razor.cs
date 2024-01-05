@@ -20,13 +20,16 @@ namespace Store.Web.Components.Order
         [Inject]
         public IProductService ProductService { get; set; } = default!;
 
+        [Inject]
+        public NotificationService NotificationService { get; set; } = default!;
+
         [Parameter]
         public OrderDto? Order { get; set; }
 
         private OrderDto? _order;
 
         [Parameter]
-        public EventCallback<Noticiation> OnResult { get; set; }
+        public EventCallback<OrderDto> OnResult { get; set; }
 
         public List<SupplierDto> Suppliers { get; set; } = new List<SupplierDto>();
 
@@ -107,18 +110,19 @@ namespace Store.Web.Components.Order
 
                 if (savedOrder != null)
                 {
-                    _order = null;
-                    await OnResult.InvokeAsync(new Noticiation()
+                    NotificationService.ShowNotification(new Noticiation()
                     {
-                        Name = "Order saved successfully",
+                        Name = $"{_order.FileName}: sucessfully saved",
                         Level = NoticiationLevel.Success
                     });
+                    _order = null;
+                    await OnResult.InvokeAsync(savedOrder);
                 }
                 else
                 {
-                    await OnResult.InvokeAsync(new Noticiation()
+                    NotificationService.ShowNotification(new Noticiation()
                     {
-                        Name = "Error while saving order",
+                        Name = $"Error while updating",
                         Level = NoticiationLevel.Danger
                     });
                 }
@@ -127,16 +131,6 @@ namespace Store.Web.Components.Order
             {
 
             }
-        }
-
-        private async Task Cancel()
-        {
-            _order = null;
-            await OnResult.InvokeAsync(new Noticiation()
-            {
-                Name = "Order canceled",
-                Level = NoticiationLevel.Danger
-            });
         }
 
         private void AddOrderLine()

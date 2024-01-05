@@ -2,37 +2,37 @@
 @using Store.Web.Helpers.Modals;
 @using Store.Web.Helpers;
 @typeparam T
-@if (_data != null)
-{
-    <div class="data-grid">
-        <div class="headers row">
-            @foreach (Column column in Columns)
-            {
-                <div class="col">
-                    <span class="pd-1" @onclick="() => ToggleSort(column)">
-                        <strong>
-                            @column.Name
-                        </strong>
-                        <i class="@(column.Sort == SortDirection.Ascending ? "fa-solid fa-arrow-right fa-rotate-270" : column.Sort == SortDirection.Descending ? "fa-solid fa-arrow-right fa-rotate-90" : "")" />
-                        @if (column.SortOrder > -1)
-                        {
-                            <span>@column.SortOrder</span>
-                        }
-                    </span>
-                </div>
-            }
-            @if (OnDelete.HasDelegate || OnEdit.HasDelegate)
-            {
-                <div class="col">
-                    <span class="pd-1">
-                        <strong>
-                            Actions
-                        </strong>
-                    </span>
-                </div>
-            }
-        </div>
-        <div class="rows">
+<div class="data-grid">
+    <div class="headers row">
+        @foreach (Column column in Columns)
+        {
+            <div class="col">
+                <span class="pd-1" @onclick="() => ToggleSort(column)">
+                    <strong>
+                        @column.Name
+                    </strong>
+                    <i class="@(column.Sort == SortDirection.Ascending ? "fa-solid fa-arrow-right fa-rotate-270" : column.Sort == SortDirection.Descending ? "fa-solid fa-arrow-right fa-rotate-90" : "")" />
+                    @if (column.SortOrder > -1)
+                    {
+                        <span>@column.SortOrder</span>
+                    }
+                </span>
+            </div>
+        }
+        @if (OnDelete.HasDelegate || OnEdit.HasDelegate)
+        {
+            <div class="col">
+                <span class="pd-1">
+                    <strong>
+                        Actions
+                    </strong>
+                </span>
+            </div>
+        }
+    </div>
+    <div class="rows">
+        @if (_data != null)
+        {
             @foreach (var item in _data)
             {
                 <div class="@("row " + (_data.IndexOf(item) % 2 == 0 ? "even" : "odd"))">
@@ -42,11 +42,11 @@
                             <span>
                                 @if (column.ColumnType == "Dropdown")
                                 {
-                                    @column?.Dropdown?.Values.FirstOrDefault(x => x.Id.ToString() == @GetPropertyValue.GetPropValue(item, column.Name).ToString()).Value
+                                    @column?.Dropdown?.Values.FirstOrDefault(x => x.Id.ToString() == @GetPropValue(item, column.Name).ToString()).Value
                                 }
                                 else if (column.ColumnType == "Bool")
                                 {
-                                    if (@GetPropertyValue.GetPropValue(item, column.Name) == "True")
+                                    if (@GetPropValue(item, column.Name) == "True")
                                     {
                                         <i class="fa-solid fa-check"></i>
                                     }
@@ -57,7 +57,7 @@
                                 }
                                 else
                                 {
-                                    @GetPropertyValue.GetPropValue(item, column.Name)
+                                    @GetPropValue(item, column.Name)
                                 }
                             </span>
                         </div>
@@ -83,14 +83,14 @@
                     }
                 </div>
             }
-        </div>
-        @if (Pagination != null)
+        }
+        else
         {
-            <PaginationFooter Pagination="Pagination" ValueChanged="LoadData" />
+            <div class="loader"></div>
         }
     </div>
-}
-else
-{
-    <div class="loader"></div>
-}
+    @if (PaginationData != null)
+    {
+        <PaginationFooter Pagination="PaginationData" ValueChanged="@(() => OnRefresh.InvokeAsync())" />
+    }
+</div>

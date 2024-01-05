@@ -13,7 +13,7 @@
             {
                 <p class="title text-primary">Edit order</p>
             }
-            <p class="close" @onclick="() => Cancel()"><i class="fa-regular fa-circle-xmark"></i></p>
+            <p class="close" @onclick="() => OnResult.InvokeAsync(null)"><i class="fa-regular fa-circle-xmark"></i></p>
         </div>
         <EditForm Model="@_order" OnSubmit="@Submit" class="uni-dialog-content">
             <DataAnnotationsValidator />
@@ -72,7 +72,7 @@
             else
             {
                 <button class="submit" type="submit">Submit</button>
-                <button class="cancel" type="button" @onclick="() => Cancel()">Cancel</button>
+                <button class="cancel" type="button" @onclick="(() => OnResult.InvokeAsync(null))">Cancel</button>
             }
 
         </div>

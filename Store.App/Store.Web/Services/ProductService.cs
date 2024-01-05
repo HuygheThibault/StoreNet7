@@ -1,11 +1,15 @@
 ﻿using Blazored.LocalStorage;
+using Microsoft.AspNetCore.WebUtilities;
+using Newtonsoft.Json;
 using Store.Shared.Dto;
+using Store.Shared.Modals;
 using Store.Web.Exceptions;
 using Store.Web.Helpers;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
+
 
 namespace Store.Web.Services
 {
@@ -18,6 +22,42 @@ namespace Store.Web.Services
         {
             _httpClient = httpClient;
             _localStorageService = localStorageService;
+        }
+
+        public async Task<Tuple<IEnumerable<ProductDto>, PaginationMetadata>> GetAllProducts(int pageNumber, int pageSize, string? name = null, string? searchQuery = null)
+        {
+            var query = new Dictionary<string, string>();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query["name"] = name;
+            }
+
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                query["searchQuery"] = searchQuery;
+            }
+
+            query["pageNumber"] = pageNumber.ToString();
+            query["pageSize"] = pageSize.ToString();
+
+            var request = await _httpClient.GetAsync(QueryHelpers.AddQueryString($"api/products", query));
+
+            if (request != null)
+            {
+                if (request.IsSuccessStatusCode)
+                {
+                    request.Headers.TryGetValues("X-Pagination", out IEnumerable<string> headerValue);
+
+                    return Tuple.Create(await request.Content.ReadFromJsonAsync<IEnumerable<ProductDto>>(), JsonConvert.DeserializeObject<PaginationMetadata>(headerValue.FirstOrDefault()));
+                }
+                else if (request.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
+            }
+
+            throw new HttpRequestFailedException(message: $"Request failed: {request?.StatusCode}, {request}");
         }
 
         public async Task<IEnumerable<ProductDto>> GetAllProducts(bool refreshRequired = false)
@@ -42,7 +82,7 @@ namespace Store.Web.Services
 
                 //otherwise refresh the list locally from the API and set expiration to 1 minute in future
 
-                var list = await JsonSerializer.DeserializeAsync<IEnumerable<ProductDto>>
+                var list = await System.Text.Json.JsonSerializer.DeserializeAsync<IEnumerable<ProductDto>>
                     (await _httpClient.GetStreamAsync($"api/products"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
                 await _localStorageService.SetItemAsync(LocalStorageConstants.ProductListKey, list);
@@ -91,12 +131,12 @@ namespace Store.Web.Services
         {
             try
             {
-                var itemJson = new StringContent(JsonSerializer.Serialize(item), Encoding.UTF8, "application/json");
+                var itemJson = new StringContent(System.Text.Json.JsonSerializer.Serialize(item), Encoding.UTF8, "application/json");
                 var response = await _httpClient.PutAsync($"api/products/{item.Id}", itemJson);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await JsonSerializer.DeserializeAsync<ProductDto>(await response.Content.ReadAsStreamAsync());
+                    return await System.Text.Json.JsonSerializer.DeserializeAsync<ProductDto>(await response.Content.ReadAsStreamAsync());
                 }
 
                 return null;
@@ -129,6 +169,8 @@ namespace Store.Web.Services
 
     public interface IProductService
     {
+        Task<Tuple<IEnumerable<ProductDto>, PaginationMetadata>> GetAllProducts(int pageNumber, int pageSize, string? name = null, string? searchQuery = null);
+
         Task<IEnumerable<ProductDto>> GetAllProducts(bool refreshRequired = false);
 
         Task<ProductDto> GetProductById(Guid id);

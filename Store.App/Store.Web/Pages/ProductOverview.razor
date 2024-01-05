@@ -1,19 +1,24 @@
 ﻿@page "/ProductOverview"
-@using Store.Shared.Dto;
 @using Store.Web.Components.Datagrid
 @using Store.Web.Components.Product
+@using Store.Web.Helpers.Modals
+@using Store.Shared.Dto
+@attribute [Authorize]
 
 <PageTitle>Users</PageTitle>
-<div class="row">
+ @if (GridData != null)
+{
     <div class="data-grid-container sze-12 pd-1">
+        <div class="row">
+            <button class="mrg-0 pd-1" @onclick="AddItem"> Add</button>
 
-        <button class="mrg-0 pd-1" @onclick="AddItem"> Add</button>
-
-        @if (Items != null)
-        {
-            <Datagrid T="ProductDto" Data="Items" DropdownColumns="DropdownColumns"
-                      OnDelete="DeleteItem" OnEdit="EditItem"/>
-        }
+            <Datagrid T="ProductDto" Data="GridData" DropdownColumns="DropdownColumns" PaginationData="PaginationData"
+                      OnDelete="DeleteItem" OnEdit="EditItem" OnRefresh="RefreshData" />
+        </div>
     </div>
-</div>
-<ProductDialog Product="EditProduct" Result="ProductDialogResult"></ProductDialog>
+}
+else
+{
+    <div class="loader"></div>
+}
+<ProductDialog Product="EditProduct" OnResult="ProductDialogResult"></ProductDialog>

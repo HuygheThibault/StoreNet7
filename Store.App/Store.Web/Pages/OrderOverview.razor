@@ -5,10 +5,10 @@
 @using Store.Web.Helpers.Modals;
 @using Store.Web.Components
 @using Store.Web.Components.Order
-@* @attribute [Authorize] *@
+@attribute [Authorize]
 
-<OrderDialog Order="@_EditedOrder" OnResult="ResultReceived" />
-<OrderWizard Order="@_NewOrder" />
+<OrderDialog Order="@EditedOrder" OnResult="OrderDialogResultReceived" />
+<OrderWizard Order="@NewOrder" OnResult="OrderWizardResultReceived" />
 
 <div class=row>
     <div class="data-grid-container sze-12 pd-1">
@@ -137,9 +137,6 @@
             {
                 <PaginationFooter Pagination="Pagination" ValueChanged="GetGridData" />
             }
-        </div>
-        <div class="notifications">
-            <NotificationBar noticiation="_noticiation" />
         </div>
     </div>
 </div>

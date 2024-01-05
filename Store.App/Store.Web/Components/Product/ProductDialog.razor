@@ -12,7 +12,7 @@
             {
                 <p class="title text-primary">Edit product</p>
             }
-            <p class="close" @onclick="() => Close()"><i class="fa-regular fa-circle-xmark"></i></p>
+            <p class="close" @onclick="() => OnResult.InvokeAsync(null)"><i class="fa-regular fa-circle-xmark"></i></p>
         </div>
         <EditForm EditContext="@EditContext" class="uni-dialog-content">
             <div class="form">
@@ -38,7 +38,7 @@
         </EditForm>
         <div class="uni-dialog-actions">
             <button class="uni-dialog-actions__primary-action" type="submit" @onclick="() => Submit()">Submit</button>
-            <button class="uni-dialog-actions__secondary-action" type="button" @onclick="() => Close()">Cancel</button>
+            <button class="uni-dialog-actions__secondary-action" type="button" @onclick="() => OnResult.InvokeAsync(null)">Cancel</button>
         </div>
     </div>
 }

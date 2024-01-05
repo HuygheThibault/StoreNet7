@@ -41,11 +41,11 @@ namespace Store.Web.Components
         {
             switch (noticiation.Level)
             {
-                case NoticiationLevel.Success:
+                case NoticiationLevel.Info:
                     BackgroundCssClass = "info";
                     IconCssClass = "info";
                     break;
-                case NoticiationLevel.Danger:
+                case NoticiationLevel.Success:
                     BackgroundCssClass = "success";
                     IconCssClass = "check";
                     break;
@@ -53,7 +53,7 @@ namespace Store.Web.Components
                     BackgroundCssClass = "warning";
                     IconCssClass = "exclamation";
                     break;
-                case NoticiationLevel.Info:
+                case NoticiationLevel.Danger:
                     BackgroundCssClass = "danger";
                     IconCssClass = "times";
                     break;

@@ -1,5 +1,6 @@
 ﻿@page "/Suppliers"
 @using Store.Shared.Dto;
+@attribute [Authorize]
 
 <div class="row">
     @foreach (SupplierDto supplier in _suppliers)

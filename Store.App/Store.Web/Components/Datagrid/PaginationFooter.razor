@@ -1,21 +1,24 @@
 ﻿<div class="footer">
-    <div class="pagination">
-        <div class="pd-hrztl-1">
-            <h4 class="pd-hrztl-1" >Page: </h4>
-            <i class="fa-solid fa-arrow-right fa-rotate-180" @onclick="DecrementPage" />
-            <h4 class="pd-hrztl-1">@Pagination.CurrentPage of @Pagination.TotalPageCount</h4>
-            <i class="fa-solid fa-arrow-right fa-rotate-360" @onclick="IncrementPage" />
-        </div>
+    @if (Pagination != null)
+    {
+        <div class="pagination">
+            <div class="pd-hrztl-1">
+                <h4 class="pd-hrztl-1">Page: </h4>
+                <i class="fa-solid fa-arrow-right fa-rotate-180" @onclick="DecrementPage" />
+                <h4 class="pd-hrztl-1">@Pagination.CurrentPage of @Pagination.TotalPageCount</h4>
+                <i class="fa-solid fa-arrow-right fa-rotate-360" @onclick="IncrementPage" />
+            </div>
 
-        <div class="pd-hrztl-1">
-            <h4 class="pd-hrztl-1">Show: </h4>
-            <select class="dropdown pd-hrztl-1" value="@Pagination.PageSize" @onchange="@PageSizeChanged">
-                @foreach (int pageSize in new int[] { 5, 10, 15, 20 })
-                {
-                    <option value="@pageSize">@pageSize</option>
-                }
-            </select>
-            <h4 class="pd-hrztl-1">@((Pagination.PageSize * (Pagination.CurrentPage - 1)) + 1) - @((Pagination.PageSize * (Pagination.CurrentPage - 1)) + Pagination.PageSize) of @Pagination.TotalItemCount</h4>
+            <div class="pd-hrztl-1">
+                <h4 class="pd-hrztl-1">Show: </h4>
+                <select class="dropdown pd-hrztl-1" value="@Pagination.PageSize" @onchange="@PageSizeChanged">
+                    @foreach (int pageSize in new int[] { 5, 10, 15, 20 })
+                    {
+                        <option value="@pageSize">@pageSize</option>
+                    }
+                </select>
+                <h4 class="pd-hrztl-1">@((Pagination.PageSize * (Pagination.CurrentPage - 1)) + 1) - @((Pagination.PageSize * (Pagination.CurrentPage - 1)) + Pagination.PageSize) of @Pagination.TotalItemCount</h4>
+            </div>
         </div>
-    </div>
+    }
 </div>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Store.Api.Models;
 using Store.Api.Repositories;
 using Store.Shared.Dto;
+using System.Text.Json;
 
 namespace Store.Api.Controllers
 {
@@ -13,6 +14,7 @@ namespace Store.Api.Controllers
         private readonly ILogger<ProductController> _logger;
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
+        const int maxPageSize = 20;
 
         public ProductController(ILogger<ProductController> logger, IProductRepository repository, IMapper mapper
             )
@@ -23,12 +25,20 @@ namespace Store.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProducts()
+        public async Task<IActionResult> GetAllProducts(string? name, string? searchQuery, int pageNumber = 1, int pageSize = 10)
         {
             try
             {
-                List<Product> items = await _productRepository.GetAllProducts();
-                return Ok(_mapper.Map<List<ProductDto>>(items));
+                if (pageSize > maxPageSize)
+                {
+                    pageSize = maxPageSize;
+                }
+
+                var (entities, paginationMetadata) = await _productRepository.GetAllProducts(name, searchQuery, pageNumber, pageSize);
+
+                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
+
+                return Ok(_mapper.Map<IEnumerable<ProductDto>>(entities));
             }
             catch (Exception ex)
             {
@@ -96,6 +106,9 @@ namespace Store.Api.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
+                model.ModifiedOn = DateTime.Now;
+                model.ModifiedBy = User.Identity.Name ?? "Unknown";
+
                 _mapper.Map(model, dbModel); // map model to dbmodel (destination)
 
                 if (await _productRepository.SaveChangesAsync())
@@ -112,16 +125,16 @@ namespace Store.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductDto>> Add([FromBody] ProductDto request)
+        public async Task<ActionResult<ProductDto>> Add([FromBody] ProductDto model)
         {
             try
             {
-                if (request == null)
+                if (model == null)
                 {
                     return BadRequest("Please privde a valid product");
                 }
 
-                Product dbItem = await _productRepository.GetProductByTitle(request.Title);
+                Product dbItem = await _productRepository.GetProductByTitle(model.Title);
 
                 if (dbItem != null)
                 {
@@ -140,7 +153,12 @@ namespace Store.Api.Controllers
 
                 //request.ImageName = $"https://{currentUrl}/uploads/{request.Title}.jpg";
 
-                Product newItem = _mapper.Map<Product>(request);
+                model.ModifiedOn = DateTime.Now;
+                model.ModifiedBy = User.Identity.Name ?? "Unknown";
+                model.CreatedOn = DateTime.Now;
+                model.CreatedBy = User.Identity.Name ?? "Unknown";
+
+                Product newItem = _mapper.Map<Product>(model);
 
                 _productRepository.AddProduct(newItem);
 

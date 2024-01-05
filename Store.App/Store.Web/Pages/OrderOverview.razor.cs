@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Store.Shared.Dto;
 using Store.Shared.Enums;
+using Store.Shared.Modals;
 using Store.Web.Helpers.Modals;
 using Store.Web.Models;
 using Store.Web.Services;
@@ -24,9 +25,9 @@ namespace Store.Web.Pages
         [Inject]
         public IProductService ProductService { get; set; }
 
-        private OrderDto? _EditedOrder;
+        public OrderDto? EditedOrder;
 
-        private OrderDto? _NewOrder;
+        public OrderDto? NewOrder;
 
         private OrderDto? _expandedOrder;
 
@@ -53,31 +54,25 @@ namespace Store.Web.Pages
             _products = (await ProductService.GetAllProducts()).ToList();
             CreateColumns();
             ApplySorting();
-
-            NotificationService.ShowNotification(new Noticiation()
-            {
-                Name = "Welcome to the order overview page",
-                Level = NoticiationLevel.Info
-            }); 
         }
 
         private async Task GetGridData()
         {
-            Tuple<IEnumerable<OrderDto>, PaginationMetadata> result;
+            Tuple<IEnumerable<OrderDto>, PaginationMetadata> gridData;
 
             if (Pagination != null)
             {
-                result = await OrderService.GetAllOrders(pageNumber: Pagination.CurrentPage, pageSize: Pagination.PageSize);
+                gridData = await OrderService.GetAllOrders(pageNumber: Pagination.CurrentPage, pageSize: Pagination.PageSize);
             }
             else
             {
-                result = await OrderService.GetAllOrders();
+                gridData = await OrderService.GetAllOrders();
             }
 
-            if (result != null)
+            if (gridData != null)
             {
-                _data = result?.Item1.ToList();
-                Pagination = result?.Item2;
+                _data = gridData?.Item1.ToList();
+                Pagination = gridData?.Item2;
             }
 
         }
@@ -234,17 +229,12 @@ namespace Store.Web.Pages
 
         private void AddOrder()
         {
-            _NewOrder = new OrderDto();
-            NotificationService.ShowNotification(new Noticiation()
-            {
-                Name = "New order",
-                Level = NoticiationLevel.Success
-            });
+            NewOrder = new OrderDto();
         }
 
         private void Edit(OrderDto item)
         {
-            _EditedOrder = item;
+            EditedOrder = item;
         }
 
         private async Task DeleteItem(OrderDto item)
@@ -252,32 +242,39 @@ namespace Store.Web.Pages
             bool isDeleted = await OrderService.DeleteOrder(item.Id);
             if (isDeleted)
             {
-                await ResultReceived(new Noticiation()
+                NotificationService.ShowNotification(new Noticiation()
                 {
-                    Name = "Order deleted successfully",
-                    Level = NoticiationLevel.Success
+                    Name = $"{item.FileName} deleted",
+                    Level = NoticiationLevel.Info
                 });
             }
             else
             {
-                await ResultReceived(new Noticiation()
+                NotificationService.ShowNotification(new Noticiation()
                 {
-                    Name = "Failed to delete order",
-                    Level = NoticiationLevel.Danger
+                    Name = $"Failed to delete {item.FileName}",
+                    Level = NoticiationLevel.Info
                 });
             }
 
         }
 
-        public async Task ResultReceived(Noticiation noticiation)
+        public async Task OrderDialogResultReceived(OrderDto order)
         {
-            _EditedOrder = null;
-            _noticiation = noticiation;
-            await GetGridData();
+            EditedOrder = null;
+            if (order != null)
+            {
+                await GetGridData();
+            }
+        }
 
-            await InvokeAsync(StateHasChanged);
-
-            _noticiation = null;
+        public async Task OrderWizardResultReceived(OrderDto order)
+        {
+            NewOrder = null;
+            if (order != null)
+            {
+                await GetGridData();
+            }
         }
 
         private static object GetPropValue(object src, string propName)

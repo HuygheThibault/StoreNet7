@@ -120,7 +120,7 @@
                                             @if (column.Name == "Actions")
                                             {
                                                 <div class="actions">
-                                                    <button class="remove" @onclick="() => DeleteItem(item)">
+                                                    <button class="remove" @onclick="() => DeleteItemFromProductLines(item)">
                                                         <i class="fa-solid fa-trash-can"></i>
                                                     </button>
                                                 </div>
@@ -178,5 +178,5 @@
             </WizardStep>
         </Wizard>
     </div>
-    <ProductDialog Product="NewProduct" Result="ProductDialogResult" />
+    <ProductDialog Product="NewProduct" OnResult="ProductDialogResult" />
 }

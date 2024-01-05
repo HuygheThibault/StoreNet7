@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Store.Shared.Dto;
+using Store.Shared.Modals;
 
 namespace Store.Web.Components.Datagrid
 {

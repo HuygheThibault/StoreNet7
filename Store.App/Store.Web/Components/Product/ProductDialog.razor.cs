@@ -23,7 +23,7 @@ namespace Store.Web.Components.Product
         public ProductDto? Product { get; set; }
 
         [Parameter]
-        public EventCallback<ProductDto> Result { get; set; }
+        public EventCallback<ProductDto> OnResult { get; set; }
 
         public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
 
@@ -91,14 +91,14 @@ namespace Store.Web.Components.Product
                         Name = $"{savedProduct.Title}: sucessfully saved",
                         Level = NoticiationLevel.Success
                     });
-                    Product = savedProduct;
-                    await Result.InvokeAsync(Product);
+                    Product = null;
+                    await OnResult.InvokeAsync(savedProduct);
                 }
                 else
                 {
                     NotificationService.ShowNotification(new Noticiation()
                     {
-                        Name = $"{EditContext.GetValidationMessages()}",
+                        Name = $"Error while updating",
                         Level = NoticiationLevel.Danger
                     });
                 }
@@ -107,16 +107,10 @@ namespace Store.Web.Components.Product
             {
                 NotificationService.ShowNotification(new Noticiation()
                 {
-                    Name = $"{EditContext.GetValidationMessages()}",
+                    Name = $"{EditContext.GetValidationMessages().ToList()}",
                     Level = NoticiationLevel.Danger
                 });
             }
-        }
-
-        private async Task Close()
-        {
-            Product = null;
-            await Result.InvokeAsync(Product);
         }
     }
 }
