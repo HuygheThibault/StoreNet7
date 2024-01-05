@@ -21,7 +21,7 @@
                     </span>
                 </div>
             }
-            @if (CanEditItem || CanDeleteItem)
+            @if (OnDelete.HasDelegate || OnEdit.HasDelegate)
             {
                 <div class="col">
                     <span class="pd-1">
@@ -62,17 +62,17 @@
                             </span>
                         </div>
                     }
-                    @if (CanEditItem || CanDeleteItem)
+                    @if (OnDelete.HasDelegate || OnEdit.HasDelegate)
                     {
                         <div class="col">
                             <div class="actions">
-                                @if (CanEditItem)
+                                @if (OnEdit.HasDelegate)
                                 {
                                     <button class="edit" @onclick="() => Edit(item)">
                                         <i class="fa-solid fa-edit"></i>
                                     </button>
                                 }
-                                @if (CanDeleteItem)
+                                @if (OnDelete.HasDelegate)
                                 {
                                     <button class="remove" @onclick="() => DeleteItem(item)">
                                         <i class="fa-solid fa-trash-can"></i>

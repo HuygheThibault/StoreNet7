@@ -19,18 +19,6 @@ namespace Store.Web.Components.Datagrid
         public List<DropdownColumn>? DropdownColumns { get; set; } = default!;
 
         [Parameter]
-        public bool CanAdd { get; set; } = false;
-
-        [Parameter]
-        public bool CanEditItem { get; set; } = false;
-
-        [Parameter]
-        public bool CanDeleteItem { get; set; } = false;
-
-        [Parameter]
-        public EventCallback<T> OnAdd { get; set; } = default!;
-
-        [Parameter]
         public EventCallback<T> OnDelete { get; set; } = default!;
 
         [Parameter]
@@ -87,7 +75,7 @@ namespace Store.Web.Components.Datagrid
                                 Dropdown = DropdownColumns.FirstOrDefault(x => x.Name == prop.Name)
                             });
                         }
-                        else if(!prop.Name.Contains("Id"))
+                        else if (!prop.Name.Contains("Id"))
                         {
                             columns.Add(new Column
                             {
@@ -135,34 +123,32 @@ namespace Store.Web.Components.Datagrid
 
         private void ApplySorting()
         {
-            int sortCounter = 0;
-
-            foreach (var column in Columns.Where(x => x.SortOrder > -1).OrderBy(x => x.SortOrder))
+            if (_data != null && _data.Count() > 0)
             {
-                if (column.Sort == SortDirection.Ascending)
-                {
-                    PropertyInfo prop = typeof(T).GetProperty(column.Name);
-                    _data = (_data.AsQueryable().OrderBy(x => prop.GetValue(x, null))).ToList();
-                }
-                else if (column.Sort == SortDirection.Descending)
-                {
-                    PropertyInfo prop = typeof(T).GetProperty(column.Name);
-                    _data = (_data.AsQueryable().OrderByDescending(x => prop.GetValue(x, null))).ToList();
-                }
+                int sortCounter = 0;
 
-                column.SortOrder = sortCounter;
-                sortCounter++;
+                foreach (var column in Columns.Where(x => x.SortOrder > -1).OrderBy(x => x.SortOrder))
+                {
+                    if (column.Sort == SortDirection.Ascending)
+                    {
+                        PropertyInfo prop = typeof(T).GetProperty(column.Name);
+                        _data = (_data.AsQueryable().OrderBy(x => prop.GetValue(x, null))).ToList();
+                    }
+                    else if (column.Sort == SortDirection.Descending)
+                    {
+                        PropertyInfo prop = typeof(T).GetProperty(column.Name);
+                        _data = (_data.AsQueryable().OrderByDescending(x => prop.GetValue(x, null))).ToList();
+                    }
+
+                    column.SortOrder = sortCounter;
+                    sortCounter++;
+                }
             }
         }
 
         private async Task Edit(T item)
         {
             await OnEdit.InvokeAsync(item);
-        }
-
-        private async Task Add()
-        {
-            await OnAdd.InvokeAsync();
         }
 
 
