@@ -11,6 +11,9 @@ namespace Store.Web.Components.Wizard
         public EventCallback OnSubmit { get; set; }
 
         [Parameter]
+        public EventCallback OnCancel { get; set; }
+
+        [Parameter]
         public bool IsVisible { get; set; } = false;
 
         protected internal List<WizardStep> Steps = new List<WizardStep>();
@@ -94,9 +97,14 @@ namespace Store.Web.Components.Wizard
             StateHasChanged();
         }
 
-        private void Close()
+        private async Task HandleKeyDown(KeyboardEventArgs e)
         {
-            IsVisible = false;
+            switch (e.Code)
+            {
+                case "Escape":
+                    await OnCancel.InvokeAsync();
+                    break;
+            }
         }
     }
 }

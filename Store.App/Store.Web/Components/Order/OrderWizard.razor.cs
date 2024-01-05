@@ -114,7 +114,7 @@ namespace Store.Web.Components.Order
 
         private bool IsSupplierValied()
         {
-            if (IsNewSupplier)
+            if (Order != null && IsNewSupplier)
             {
                 if (Order.Supplier != null && Order.Supplier.Name != null && Order.Supplier.VatNumber != null)
                 {
@@ -183,16 +183,6 @@ namespace Store.Web.Components.Order
         {
             Console.WriteLine("Submitted order ", Order);
             await OnResult.InvokeAsync(Order);
-        }
-
-        private async Task HandleKeyDown(KeyboardEventArgs e)
-        {
-            switch (e.Code)
-            {
-                case "Escape":
-                    await OnResult.InvokeAsync(null);
-                    break;
-            }
         }
     }
 }

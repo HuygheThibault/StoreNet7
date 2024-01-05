@@ -1,18 +1,25 @@
 ﻿.data-grid-container {
   display: grid;
-  grid-template-areas: "actions validations" "grid grid";
-  /*background-color: var(--secondary-color);*/
+  grid-template-columns: auto;
+  grid-template-rows: 5rem auto;
   overflow: auto;
   border-radius: 0.5rem;
+  gap: 1rem;
 }
 .data-grid-container .grid-actions {
-  grid-area: actions;
+  grid-row: 1;
+  grid-column: 1;
+}
+.data-grid-container .grid-actions button {
+  height: inherit;
 }
 .data-grid-container .grid-validations {
-  grid-area: validations;
+  grid-row: 1;
+  grid-column: 2;
 }
 .data-grid-container .data-grid {
-  grid-area: grid;
+  grid-row: 2;
+  grid-column: 1/-1;
   display: grid;
   grid-template-areas: "headers" "rows" "footer";
   background-color: var(--third-color);
@@ -47,6 +54,8 @@
 }
 .data-grid-container .data-grid .rows {
   grid-area: rows;
+  max-height: calc(100vh - var(--header-height) - 15rem);
+  overflow-y: scroll;
 }
 .data-grid-container .data-grid .rows .even > .col {
   background-color: rgba(0, 0, 0, 0.1);
@@ -82,4 +91,4 @@
   color: inherit;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_datagrid.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;AACA;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;;AAGJ;EACI;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAIA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///C:/myProjects/StoreNet7/Store.App/Store.Web/Styles/components/03_organisms/_datagrid.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACG;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAEA;EACI;;AAIR;EACI;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;;AAGJ;EACI;;AAIR;EACI;EACA;;AAGJ;EACI;EACA;EACA;;AAEA;EACI;;AAGJ;EACI;;AAGJ;EACI;;AAIA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA%22%7D */

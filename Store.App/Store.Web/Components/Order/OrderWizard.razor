@@ -8,8 +8,7 @@
 
 @if (Order != null)
 {
-    <div @onkeyup="(e) => HandleKeyDown(e)">
-        <Wizard Id="OrderWizard" IsVisible="Order != null" OnSubmit="SubmitOrder">
+        <Wizard Id="OrderWizard" IsVisible="Order != null" OnSubmit="SubmitOrder" OnCancel="@(() => OnResult.InvokeAsync(null))">
             <WizardStep Name="@(Order.Supplier == null ? "Supplier" : Order.Supplier.Name)"
                         IsStepValid="IsSupplierValied()">
                 <div class="row pd-b-1">
@@ -177,6 +176,5 @@
                 }
             </WizardStep>
         </Wizard>
-    </div>
     <ProductDialog Product="NewProduct" OnResult="ProductDialogResult" />
 }
