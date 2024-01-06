@@ -1,9 +1,9 @@
 ﻿@using Store.Web.Models;
 <div class="notifications-container">
     <div class="notification @(IsVisible ? "notification-visible" : null) @BackgroundCssClass">
-        <div class="close-icon" @onclick="HideNotification">
+        @* <div class="close-icon" @onclick="HideNotification">
             <i class="fa fa-close" aria-hidden="true"></i>
-        </div>
+        </div> *@
         <div class="noticiation-icon">
             <i class="fa fa-@IconCssClass" aria-hidden="true"></i>
         </div>

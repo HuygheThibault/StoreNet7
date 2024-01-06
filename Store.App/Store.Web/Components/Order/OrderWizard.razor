@@ -8,173 +8,177 @@
 
 @if (Order != null)
 {
-        <Wizard Id="OrderWizard" IsVisible="Order != null" OnSubmit="SubmitOrder" OnCancel="@(() => OnResult.InvokeAsync(null))">
-            <WizardStep Name="@(Order.Supplier == null ? "Supplier" : Order.Supplier.Name)"
-                        IsStepValid="IsSupplierValied()">
-                <div class="row pd-b-1">
-                    <label id="IsNewSupplierLabel" for="IsNewSupplier" class="label mrg-r-1">New supplier: </label>
-                    <input id="IsNewSupplier" class="checkbox" type="checkbox" value="IsNewSupplier" @onchange="(e) => SetSelectedSupplier(new SupplierDto(), bool.Parse(e.Value.ToString()))" />
-                </div>
-                <div class="search-box pd-b-1" style="@(IsNewSupplier ? "display:none;" : "")">
-                    <button type="submit"><i class="fas fa-search"></i></button>
-                    <input type="text" class="input-search" placeholder="Type to Search..." @bind-value="SearchValue">
-                </div>
-                <div class="hrztl-scrl-grid" style="@(IsNewSupplier ? "display:none;" : "")">
-                    @if (Suppliers != null)
-                    {
-                        @foreach (var supplier in Suppliers.Where(x => x.Name.ToLower().Contains(SearchValue.ToLower())))
-                        {
-                            <div class="card @( supplier.Id == Order.SupplierId ? "active" : "")" @onclick="() => SetSelectedSupplier(supplier, false)" style="flex: 0 0 5rem;">
-                                <picture class="thumbnail">
-                                    <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
-                                </picture>
-                                <div class="details">
-                                    <h1>@supplier.Name</h1>
-                                </div>
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        <div class="loader"></div>
-                    }
-                </div>
-                @if (IsNewSupplier)
+    <Wizard Id="OrderWizard" IsVisible="Order != null" OnSubmit="SubmitOrder" OnCancel="@(() => OnResult.InvokeAsync(null))">
+        <WizardStep Name="@(Order.Supplier == null ? "Supplier" : Order.Supplier.Name)"
+                    IsStepValid="IsSupplierValied()">
+            <div class="row pd-b-1">
+                <label id="IsNewSupplierLabel" for="IsNewSupplier" class="label mrg-r-1">New supplier: </label>
+                <input id="IsNewSupplier" class="checkbox" type="checkbox" value="IsNewSupplier" @onchange="(e) => SetSelectedSupplier(new SupplierDto(), bool.Parse(e.Value.ToString()))" />
+            </div>
+            <div class="search-box pd-b-1" style="@(IsNewSupplier ? "display:none;" : "")">
+                <button type="submit"><i class="fas fa-search"></i></button>
+                <input type="text" class="input-search" placeholder="Type to Search..." @bind-value="SearchValue">
+            </div>
+            <div class="hrztl-scrl-grid" style="@(IsNewSupplier ? "display:none;" : "")">
+                @if (Suppliers != null)
                 {
-                    <div class="row">
-                        <EditForm Model="@Order">
-                            <DataAnnotationsValidator />
-                            <div class="form">
-                                <label for="name" class="label">Name: </label>
-                                <InputText id="name" class="form-control input" @bind-Value="@Order.Supplier.Name" placeholder="Name" />
-                                @* <ValidationMessage class="error" For="@(() => SelectedSupplier.Name)" /> *@
-
-                                <label for="address" class="label">Address: </label>
-                                <InputText id="address" class="form-control input" @bind-Value="@Order.Supplier.Address" placeholder="Address" />
-                                @* <ValidationMessage class="error" For="@(() => SelectedSupplier.Address)" /> *@
-
-                                <label for="vat" class="label">Vat: </label>
-                                <InputText id="vat" class="form-control input" @bind-Value="@Order.Supplier.VatNumber" placeholder="Vat" />
-                                @* <ValidationMessage class="error" For="@(() => SelectedSupplier.VatNumber)" /> *@
-                                <ValidationSummary />
-
-                                <label for="image" class="label">Select image: </label>
-                                <InputFile OnChange="OnInputFileSupplierChange" />
-
+                    @foreach (var supplier in Suppliers.Where(x => x.Name.ToLower().Contains(SearchValue.ToLower())))
+                    {
+                        <div class="card @( supplier.Id == Order.SupplierId ? "active" : "")" @onclick="() => SetSelectedSupplier(supplier, false)" style="flex: 0 0 5rem;">
+                            <picture class="thumbnail">
+                                <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
+                            </picture>
+                            <div class="details">
+                                <h1>@supplier.Name</h1>
                             </div>
-                        </EditForm>
-                        <img src="@_ImageUriSupplier" />
-                    </div>
+                        </div>
+                    }
                 }
-            </WizardStep>
-            <WizardStep Name="Second Step" IsStepValid="Order.OrderLines.Sum(x => x.Cost) > 0">
-                <div class="search-box pd-b-1">
-                    <button type="submit"><i class="fas fa-search"></i></button>
-                    <input type="text" class="input-search" placeholder="Type to Search..." @bind-value="SearchValue">
+                else
+                {
+                    <div class="loader"></div>
+                }
+            </div>
+            @if (IsNewSupplier)
+            {
+                <div class="row">
+                    <EditForm Model="@Order">
+                        <DataAnnotationsValidator />
+                        <div class="form">
+                            <label for="name" class="label">Name: </label>
+                            <InputText id="name" class="form-control input" @bind-Value="@Order.Supplier.Name" placeholder="Name" />
+                            @* <ValidationMessage class="error" For="@(() => SelectedSupplier.Name)" /> *@
+
+                            <label for="address" class="label">Address: </label>
+                            <InputText id="address" class="form-control input" @bind-Value="@Order.Supplier.Address" placeholder="Address" />
+                            @* <ValidationMessage class="error" For="@(() => SelectedSupplier.Address)" /> *@
+
+                            <label for="vat" class="label">Vat: </label>
+                            <InputText id="vat" class="form-control input" @bind-Value="@Order.Supplier.VatNumber" placeholder="Vat" />
+                            @* <ValidationMessage class="error" For="@(() => SelectedSupplier.VatNumber)" /> *@
+                            <ValidationSummary />
+
+                            <label for="image" class="label">Select image: </label>
+                            <InputFile OnChange="OnInputFileSupplierChange" />
+
+                        </div>
+                    </EditForm>
+                    <img src="@_ImageUriSupplier" />
                 </div>
-                <div class="hrztl-scrl-grid">
-                    @if (Products != null)
+            }
+        </WizardStep>
+        <WizardStep Name="Second Step" IsStepValid="Order.OrderLines.Sum(x => x.Cost) > 0">
+            <div class="search-box pd-b-1">
+                <button type="submit"><i class="fas fa-search"></i></button>
+                <input type="text" class="input-search" placeholder="Type to Search..." @bind-value="SearchValue">
+            </div>
+            <div class="hrztl-scrl-grid">
+                @if (Products != null)
+                {
+                    @foreach (var product in Products.Where(x => x.Title.ToLower().Contains(SearchValue.ToLower())))
                     {
-                        @foreach (var product in Products.Where(x => x.Title.ToLower().Contains(SearchValue.ToLower())))
-                        {
-                            <div class="card @( product.Id == Order.SupplierId ? "active" : "")" style="flex: 0 0 5rem;" @onclick="() => AddOrderLine(product)">
-                                <picture class="thumbnail">
-                                    <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
-                                </picture>
-                                <div class="details">
-                                    <h1>@product.Title</h1>
-                                </div>
+                        <div class="card @( product.Id == Order.SupplierId ? "active" : "")" style="flex: 0 0 5rem;" @onclick="() => AddOrderLine(product)">
+                            <picture class="thumbnail">
+                                <img src="https://www.coca-cola.com/content/dam/onexp/be/nl/home-images/brands/coca-cola/BE_coca-cola-regular_750x750.jpg" alt="Product.Title">
+                            </picture>
+                            <div class="details">
+                                <h1>@product.Title</h1>
                             </div>
-                        }
+                        </div>
                     }
-                    else
-                    {
-                        <div class="loader"></div>
-                    }
+                }
+                else
+                {
+                    <div class="loader"></div>
+                }
+            </div>
+            <div class="data-grid-container pd-1">
+                <div class="grid-actions">
+                    <button class="mrg-0 pd-1" @onclick="AddNewProduct">Add new product</button>
                 </div>
-                <div class="data-grid-container pd-1">
-                    <div class="grid-actions">
-                        <button class="mrg-0 pd-1" @onclick="AddNewProduct">Add new product</button>
-                    </div>
-                    <div class="data-grid">
-                        <div class="headers row">
-                            @foreach (Column column in Columns)
-                            {
-                                <div class="col">
-                                    <span class="pd-1">
-                                        <strong>
-                                            @column.Name
-                                        </strong>
-                                    </span>
-                                </div>
-                            }
-                        </div>
-                        <div class="rows">
-                            @foreach (var item in Order.OrderLines)
-                            {
-                                <div class="@("row " + (Order.OrderLines.ToList().IndexOf(item) % 2 == 0 ? "even" : "odd"))">
-                                    @foreach (Column column in Columns)
-                                    {
-                                        <div class="col">
-                                            @if (column.Name == "Actions")
-                                            {
-                                                <div class="actions">
-                                                    <button class="remove" @onclick="() => DeleteItemFromProductLines(item)">
-                                                        <i class="fa-solid fa-trash-can"></i>
-                                                    </button>
-                                                </div>
-                                            }
-                                            else if (column.Name == "Product.Title")
-                                            {
-                                                <span>@item.Product.Title</span>
-                                            }
-                                            else if (column.Name == "Quantity")
-                                            {
-                                                <span>
-                                                    <EditForm Model="item">
-                                                        <InputNumber class="input" @bind-Value="item.Quantity" />
-                                                    </EditForm>
-                                                </span>
-                                            }
-                                            else if (column.Name == "Cost")
-                                            {
-                                                <span>
-                                                    <EditForm Model="item">
-                                                        <InputNumber class="input" @bind-Value="item.Cost" />
-                                                    </EditForm>
-                                                </span>
-                                            }
-                                        </div>
-                                    }
-                                </div>
-                            }
-                        </div>
-                        <div class="footer">
-                            <div class="col" style="justify-content: flex-end;">
+                <div class="data-grid">
+                    <div class="headers row">
+                        @foreach (Column column in Columns)
+                        {
+                            <div class="col">
                                 <span class="pd-1">
                                     <strong>
-                                        Total cost: @Order.OrderLines.Sum(x => x.Cost)
+                                        @column.Name
                                     </strong>
                                 </span>
                             </div>
+                        }
+                    </div>
+                    <div class="rows">
+                        @foreach (var item in Order.OrderLines)
+                        {
+                            <div class="@("row " + (Order.OrderLines.ToList().IndexOf(item) % 2 == 0 ? "even" : "odd"))">
+                                @foreach (Column column in Columns)
+                                {
+                                    <div class="col">
+                                        @if (column.Name == "Actions")
+                                        {
+                                            <div class="actions">
+                                                <button class="remove" @onclick="() => DeleteItemFromProductLines(item)">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </button>
+                                            </div>
+                                        }
+                                        else if (column.Name == "Product.Title")
+                                        {
+                                            <span>@item.Product.Title</span>
+                                        }
+                                        else if (column.Name == "Quantity")
+                                        {
+                                            <span>
+                                                <EditForm Model="item">
+                                                    <InputNumber class="input" @bind-Value="item.Quantity" />
+                                                </EditForm>
+                                            </span>
+                                        }
+                                        else if (column.Name == "CostPerItem")
+                                        {
+                                            <span>
+                                                <EditForm Model="item">
+                                                    <InputNumber class="input" @bind-Value="item.CostPerItem" />
+                                                </EditForm>
+                                            </span>
+                                        }
+                                        else if (column.Name == "Cost")
+                                        {
+                                            <span>@item.Cost</span>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                    <div class="footer">
+                        <div class="col" style="justify-content: flex-end;">
+                            <span class="pd-1">
+                                <strong>
+                                    Total cost: @Order.OrderLines.Sum(x => x.Cost)
+                                </strong>
+                            </span>
                         </div>
                     </div>
                 </div>
-            </WizardStep>
-            <WizardStep Name="Final Step" IsStepValid="Order.ExpirationDate > DateTime.Now">
-                <div class="row">
-                    <div class="form">
-                        <label for="File" class="label">Image: </label>
-                        <InputFile OnChange="OnInputFileOrderChange" multiple />
-                        <label for="expirationDate" class="label">Expiration date: </label>
-                        <InputDate id="vexpirationDateat" class="form-control input" @bind-Value="@Order.ExpirationDate" />
-                    </div>
+            </div>
+        </WizardStep>
+        <WizardStep Name="Final Step" IsStepValid="Order.ExpirationDate > DateTime.Now">
+            <div class="row">
+                <div class="form">
+                    <label for="File" class="label">Image: </label>
+                    <InputFile OnChange="OnInputFileOrderChange" multiple />
+                    <label for="expirationDate" class="label">Expiration date: </label>
+                    <InputDate id="vexpirationDateat" class="form-control input" @bind-Value="@Order.ExpirationDate" />
                 </div>
-                @foreach (string imageUri in _ImageUrisOrder)
-                {
-                    <img src="@imageUri" />
-                }
-            </WizardStep>
-        </Wizard>
+            </div>
+            @foreach (string imageUri in _ImageUrisOrder)
+            {
+                <img src="@imageUri" />
+            }
+        </WizardStep>
+    </Wizard>
     <ProductDialog Product="NewProduct" OnResult="ProductDialogResult" />
 }

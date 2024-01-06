@@ -39,8 +39,6 @@ namespace Store.Web.Components.Order
 
         protected bool IsSaving = false;
 
-        protected bool IsNew = true;
-
         protected override async Task OnInitializedAsync()
         {
             Suppliers = (await SupplierService.GetAllSuppliers()).ToList();
@@ -59,11 +57,6 @@ namespace Store.Web.Components.Order
                     if (dbOrder != null)
                     {
                         _order = dbOrder;
-                        IsNew = false;
-                    }
-                    else
-                    {
-                        IsNew = true;
                     }
                 }
                 catch (HttpRequestFailedException) { }
@@ -71,33 +64,13 @@ namespace Store.Web.Components.Order
             IsSaving = false;
         }
 
-        private async Task Submit()
+        public async Task Submit()
         {
             try
             {
                 IsSaving = true;
 
-                OrderDto savedOrder;
-
-                if (IsNew)
-                {
-                    if (selectedFile != null)
-                    {
-                        var file = selectedFile;
-                        Stream stream = file.OpenReadStream();
-                        MemoryStream ms = new();
-                        await stream.CopyToAsync(ms);
-                        stream.Close();
-
-                        _order.FileName = file.Name;
-                    }
-
-                    savedOrder = await OrderService.AddOrder(_order);
-                }
-                else
-                {
-                    savedOrder = await OrderService.UpdateOrder(_order);
-                }
+                OrderDto savedOrder = await OrderService.UpdateOrder(_order);
 
                 if (savedOrder != null)
                 {
@@ -126,11 +99,16 @@ namespace Store.Web.Components.Order
                     Level = NoticiationLevel.Danger
                 });
             }
+            finally
+            {
+                IsSaving = false;
+            }
         }
 
         private void AddOrderLine()
         {
-            _order.OrderLines.Add(new OrderLineDto());
+            if(_order != null)
+                _order.OrderLines.Add(new OrderLineDto());
         }
 
         private void OnInputFileChange(InputFileChangeEventArgs e)

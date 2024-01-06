@@ -108,6 +108,7 @@ namespace Store.Api.Controllers
 
                 model.ModifiedOn = DateTime.Now;
                 model.ModifiedBy = User.Identity.Name ?? "Unknown";
+                model.Category = null;
 
                 _mapper.Map(model, dbModel); // map model to dbmodel (destination)
 

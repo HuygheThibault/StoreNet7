@@ -32,6 +32,8 @@
     fieldset {
         grid-column: 1 / span 2;
         padding-left: 1rem;
+        display: grid;
+        gap: 0.5rem;
 
         .label {
             grid-column: 1;

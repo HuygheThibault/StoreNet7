@@ -4,15 +4,7 @@
 {
     <div class="@(_order != null ? "open": "") uni-dialog--side">
         <div class="uni-dialog-header padding-1rem">
-            @if (IsNew)
-            {
-
-                <p class="title text-primary">Add order</p>
-            }
-            else
-            {
-                <p class="title text-primary">Edit order</p>
-            }
+            <p class="title text-primary">Edit order</p>
             <p class="close" @onclick="() => OnResult.InvokeAsync(null)"><i class="fa-regular fa-circle-xmark"></i></p>
         </div>
         <EditForm Model="@_order" OnSubmit="@Submit" class="uni-dialog-content">
@@ -48,12 +40,13 @@
                             <InputNumber id="costPerItem" class="form-control input" @bind-Value="@orderLine.CostPerItem" />
 
                             <label for="cost" class="label">Cost: </label>
-                            <InputNumber id="cost" class="form-control input" @bind-Value="@orderLine.Cost" />
+                            <span>@orderLine.Cost</span>
                         </fieldset>
                     }
                 </fieldset>
                 <label for="orderCost" class="label">Cost: </label>
-                <InputNumber id="orderCost" class="form-control input" @bind-Value="@_order.Cost" placeholder="Cost" />
+                <span>@Order.Cost</span>
+                @* <InputNumber id="orderCost" class="form-control input" @bind-Value="@_order.Cost" placeholder="Cost" /> *@
                 <ValidationMessage class="error" For="@(() => _order.Cost)" />
                 <label for="comments" class="label">comments: </label>
                 <InputTextArea id="comments" class="form-control input" @bind-Value="@_order.Comments" placeholder="Comments" />
@@ -71,8 +64,8 @@
             }
             else
             {
-                <button class="submit" type="submit">Submit</button>
-                <button class="cancel" type="button" @onclick="(() => OnResult.InvokeAsync(null))">Cancel</button>
+                <button class="uni-dialog-actions__primary-action" type="submit" @onclick="() => Submit()">Submit</button>
+                <button class="uni-dialog-actions__secondary-action" type="button" @onclick="() => OnResult.InvokeAsync(null)">Cancel</button>
             }
 
         </div>

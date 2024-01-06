@@ -1,4 +1,5 @@
 ﻿using Store.Shared.Modals;
+using System.ComponentModel.DataAnnotations;
 
 namespace Store.Shared.Dto
 {
@@ -8,13 +9,17 @@ namespace Store.Shared.Dto
 
         public Guid OrderId { get; set; }
 
+
+        [Required]
         public Guid ProductId { get; set; }
 
+        [Required]
         public int Quantity { get; set; }
 
+        [Required]
         public decimal? CostPerItem { get; set; }
 
-        public decimal? Cost { get; set; }
+        public decimal? Cost { get { return this.CostPerItem * this.Quantity; } }
 
         public DateTime CreatedOn { get; set; }
 

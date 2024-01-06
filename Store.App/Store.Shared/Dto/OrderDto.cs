@@ -9,7 +9,7 @@ namespace Store.Shared.Dto
         public string? FileName { get; set; }
 
         [Required]
-        public decimal Cost { get; set; }
+        public decimal Cost { get { return this.OrderLines.Sum(x => x.Cost).Value; } }
 
         public bool IsPaid { get; set; }
 

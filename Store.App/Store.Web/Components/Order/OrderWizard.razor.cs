@@ -57,6 +57,10 @@ namespace Store.Web.Components.Order
             },
             new Column
             {
+                Name = "CostPerItem"
+            },
+            new Column
+            {
                 Name = "Cost"
             },
             new Column

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Store.Api.Models;
 using Store.Shared.Modals;
@@ -80,9 +81,13 @@ namespace Store.Api.Repositories
                 {
                     _logger.LogInformation($"Adding an order: {order}.");
 
+                    order.Supplier = null;
+                    order.OrderLines.ToList().ForEach(x => x.Product = null);
+
                     if(await GetOrderById(order.Id) == null)
                     {
                         order.Cost = (decimal)order.OrderLines.Sum(x => x.Cost);
+                        
                         _context.Orders.Add(order);
 
                         foreach (OrderLine orderLine in order.OrderLines)
