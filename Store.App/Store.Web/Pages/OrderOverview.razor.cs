@@ -49,11 +49,7 @@ namespace Store.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            await GetGridData();
-            _suppliers = (await SupplierService.GetAllSuppliers()).ToList();
-            _products = (await ProductService.GetAllProducts()).ToList();
-            CreateColumns();
-            ApplySorting();
+            await RefreshData();
         }
 
         private async Task GetGridData()
@@ -80,6 +76,9 @@ namespace Store.Web.Pages
         private async Task RefreshData()
         {
             await GetGridData();
+            _suppliers = (await SupplierService.GetAllSuppliers()).ToList();
+            _products = (await ProductService.GetAllProducts()).ToList();
+            CreateColumns();
             ApplySorting();
             await InvokeAsync(StateHasChanged);
         }
@@ -252,18 +251,18 @@ namespace Store.Web.Pages
                 NotificationService.ShowNotification(new Noticiation()
                 {
                     Name = $"{item.FileName} deleted",
-                    Level = NoticiationLevel.Info
+                    Level = NoticiationLevel.Success
                 });
+                await RefreshData();
             }
             else
             {
                 NotificationService.ShowNotification(new Noticiation()
                 {
                     Name = $"Failed to delete {item.FileName}",
-                    Level = NoticiationLevel.Info
+                    Level = NoticiationLevel.Danger
                 });
             }
-
         }
 
         public async Task OrderDialogResultReceived(OrderDto order)

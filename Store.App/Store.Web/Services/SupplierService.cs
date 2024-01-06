@@ -1,9 +1,12 @@
 ﻿using Blazored.LocalStorage;
 using Store.Shared.Dto;
+using Store.Web.Exceptions;
 using Store.Web.Helpers;
+using Store.Web.Models;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
+using static Store.Web.Models.Noticiation;
 
 namespace Store.Web.Services
 {
@@ -11,11 +14,13 @@ namespace Store.Web.Services
     {
         private readonly HttpClient _httpClient;
         private readonly ILocalStorageService _localStorageService;
+        private readonly NotificationService _notificationService;
 
-        public SupplierService(HttpClient httpClient, ILocalStorageService localStorageService)
+        public SupplierService(HttpClient httpClient, ILocalStorageService localStorageService, NotificationService notificationService)
         {
             _httpClient = httpClient;
             _localStorageService = localStorageService;
+            _notificationService = notificationService;
         }
 
         public async Task<IEnumerable<SupplierDto>> GetAllSuppliers(bool refreshRequired = false)
@@ -33,22 +38,30 @@ namespace Store.Web.Services
 
         public async Task<SupplierDto> AddSupplier(SupplierDto item)
         {
-            try
-            {
-                var itemJson = new StringContent(JsonSerializer.Serialize(item), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsJsonAsync("api/suppliers", itemJson);
+            var response = await _httpClient.PostAsJsonAsync("api/suppliers", item);
 
-                if (response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<SupplierDto>();
+            }
+            else
+            {
+                var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+
+                foreach (var error in errorResponse.errors)
                 {
-                    return await JsonSerializer.DeserializeAsync<SupplierDto>(await response.Content.ReadAsStreamAsync());
+                    foreach (var errorMessage in error.Value)
+                    {
+                        _notificationService.ShowNotification(new Noticiation()
+                        {
+                            Name = $"{errorMessage}",
+                            Level = NoticiationLevel.Danger
+                        });
+                    }
                 }
+            }
 
-                return null;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            throw new HttpRequestFailedException(message: $"Request failed: {response?.StatusCode}, {response}");
         }
 
         public async Task<SupplierDto> UpdateSupplier(SupplierDto item)

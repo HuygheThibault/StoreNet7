@@ -75,17 +75,24 @@ namespace Store.Web.Components.Order
             Products = (await ProductService.GetAllProducts()).ToList();
         }
 
-        private void SetSelectedSupplier(SupplierDto supplier, bool isNewSupplier)
+        private void SetSelectedSupplier(SupplierDto supplier)
         {
-            if (isNewSupplier)
+            Order.Supplier = supplier;
+            IsNewSupplier = false;
+        }
+
+        private void SetNewSupplier(bool isNewSupplier)
+        {
+            IsNewSupplier = isNewSupplier;
+
+            if (IsNewSupplier)
             {
                 Order.Supplier = new SupplierDto();
             }
             else
             {
-                Order.Supplier = supplier;
+                Order.Supplier = null;
             }
-            IsNewSupplier = isNewSupplier;
         }
 
         private async Task OnInputFileSupplierChange(InputFileChangeEventArgs e)
@@ -197,7 +204,7 @@ namespace Store.Web.Components.Order
                     if (IsNewSupplier)
                     {
                         Order.Supplier = await SupplierService.AddSupplier(Order.Supplier);
-                    }
+                     }
 
                     Order = await OrderService.AddOrder(Order);
 

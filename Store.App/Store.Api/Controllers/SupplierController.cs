@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using Store.Api.Models;
 using Store.Api.Repositories;
@@ -55,20 +56,23 @@ namespace Store.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, [FromBody] SupplierDto model)
+        public async Task<IActionResult> Put(Guid id, [FromBody] SupplierDto request)
         {
             try
             {
-                if (id != model.Id) ModelState.AddModelError("Supplier id", "Id in uri and body must be equal and cannot be changed");
+                if (id != request.Id) ModelState.AddModelError("Supplier id", "Id in uri and body must be equal and cannot be changed");
 
                 var dbModel = await _SupplierRepository.GetSupplierById(id);
 
-                if (dbModel == null) ModelState.AddModelError("Supplier", $"Could not find item: {model}");
+                if (dbModel == null) ModelState.AddModelError("Supplier", $"Could not find item: {request}");
 
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                _mapper.Map(model, dbModel); // map model to dbmodel (destination)
+                request.ModifiedBy = User.Identity.Name ?? "Unknown";
+                request.ModifiedOn = DateTime.Now;
+
+                _mapper.Map(request, dbModel); // map model to dbmodel (destination)
 
                 if (await _SupplierRepository.SaveChangesAsync())
                 {
@@ -102,6 +106,11 @@ namespace Store.Api.Controllers
 
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
+
+                request.ModifiedBy = User.Identity.Name ?? "Unknown";
+                request.ModifiedOn = DateTime.Now;
+                request.CreatedBy = User.Identity.Name ?? "Unknown";
+                request.CreatedOn = DateTime.Now;
 
                 Supplier newItem = _mapper.Map<Supplier>(request);
 
