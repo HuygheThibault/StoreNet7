@@ -81,24 +81,48 @@ namespace Store.Api.Repositories
                 {
                     _logger.LogInformation($"Adding an order: {order}.");
 
-                    order.Supplier = null;
-                    order.OrderLines.ToList().ForEach(x => x.Product = null);
+                    //order.Supplier = null;
+                    //order.OrderLines.ToList().ForEach(x => x.Product = null);
 
-                    if(await GetOrderById(order.Id) == null)
+                    //_context.Entry(order.Supplier).State = EntityState.Unchanged;
+                    //foreach (var orderLine in order.OrderLines)
+                    //{
+                    //    // Attach associated product to the context if it's not null
+                    //    if (orderLine.Product != null)
+                    //    {
+                    //        _context.Products.Attach(orderLine.Product);
+                    //    }
+                    //}
+
+                    //foreach (var orderLine in order.OrderLines)
+                    //{
+                    //    if (orderLine.Product != null)
+                    //    {
+                    //        _context.Entry(orderLine.Product).State = EntityState.Unchanged;
+                    //        orderLine.Product.QuantityInStock += orderLine.Quantity;
+                    //    }
+                    //}
+
+                    if (await GetOrderById(order.Id) == null)
                     {
+                        _context.Entry(order.Supplier).State = EntityState.Unchanged;
+
                         order.Cost = (decimal)order.OrderLines.Sum(x => x.Cost);
-                        
                         _context.Orders.Add(order);
 
                         foreach (OrderLine orderLine in order.OrderLines)
                         {
                             _logger.LogInformation($"Adding an orderLine {orderLine} to the context.");
-                         
+
+                            if (orderLine.Product != null)
+                            {
+                                _context.Entry(orderLine.Product).State = EntityState.Unchanged;
+                                _context.Entry(orderLine.Product.Category).State = EntityState.Unchanged;
+                                orderLine.Product.QuantityInStock += orderLine.Quantity;
+                            }
+
                             orderLine.OrderId = order.Id;
                             _context.OrderLines.Add(orderLine);
-
-                            Product product = _context.Products.First(x => x.Id == orderLine.ProductId);
-                            product.QuantityInStock += orderLine.Quantity;
                         }
                         transaction.Commit();
                     }
