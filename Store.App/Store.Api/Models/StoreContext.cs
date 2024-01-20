@@ -109,7 +109,7 @@ public partial class StoreContext : DbContext
         {
             entity.ToTable("Order");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
             entity.Property(e => e.Comments).HasMaxLength(255);
             entity.Property(e => e.Cost).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.CreatedOn)
@@ -174,6 +174,7 @@ public partial class StoreContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.PricePerUnit).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.QuantityInStock).HasDefaultValueSql("((0))");
             entity.Property(e => e.Title).HasMaxLength(255);
 
             entity.HasOne(d => d.Category).WithMany(p => p.Products)
