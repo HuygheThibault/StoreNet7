@@ -31,7 +31,7 @@ namespace Store.Api.Repositories
             }
         }
 
-        public async Task<Category> GetCategoryById(Guid id)
+        public async Task<Category> GetCategoryById(Guid id) 
         {
             try
             {

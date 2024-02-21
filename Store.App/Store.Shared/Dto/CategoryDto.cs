@@ -1,6 +1,8 @@
-﻿namespace Store.Shared.Dto
+﻿using Store.Shared.Modals;
+
+namespace Store.Shared.Dto
 {
-    public class CategoryDto
+    public class CategoryDto : BaseEntity
     {
         public Guid Id { get; set; }
 
@@ -11,13 +13,5 @@
         public string? Description { get; set; }
 
         public string? Color { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-
-        public string CreatedBy { get; set; }
-
-        public DateTime ModifiedOn { get; set; }
-
-        public string ModifiedBy { get; set; }
     }
 }

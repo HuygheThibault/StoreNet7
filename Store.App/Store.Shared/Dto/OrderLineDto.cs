@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Store.Shared.Dto
 {
-    public class OrderLineDto : DatagridRows
+    public class OrderLineDto : BaseEntity
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
@@ -20,14 +20,6 @@ namespace Store.Shared.Dto
         public decimal? CostPerItem { get; set; }
 
         public decimal? Cost { get { return this.CostPerItem * this.Quantity; } }
-
-        public DateTime CreatedOn { get; set; }
-
-        public string CreatedBy { get; set; } = string.Empty;
-
-        public DateTime ModifiedOn { get; set; }
-
-        public string ModifiedBy { get; set; } = string.Empty;
 
         private ProductDto product;
 

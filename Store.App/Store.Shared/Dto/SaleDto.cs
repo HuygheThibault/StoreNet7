@@ -1,6 +1,8 @@
-﻿namespace Store.Shared.Dto
+﻿using Store.Shared.Modals;
+
+namespace Store.Shared.Dto
 {
-    public class SaleDto
+    public class SaleDto : BaseEntity
     {
         public Guid Id { get; set; }
 
@@ -9,14 +11,6 @@
         public decimal? TotalCost { get; set; }
 
         public decimal? TotalVastCost { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-
-        public string CreatedBy { get; set; } = null!;
-
-        public DateTime ModifiedOn { get; set; }
-
-        public string ModifiedBy { get; set; } = null!;
 
         public virtual ICollection<SaleLineDto> SaleLines { get; set; } = new List<SaleLineDto>();
     }

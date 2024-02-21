@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace Store.Web.Components.Datagrid
 {
-    public partial class DatagridEdit<T> where T : DatagridRows
+    public partial class DatagridEdit<T> 
     {
         [Parameter]
         public T? Item { get; set; } = default(T);

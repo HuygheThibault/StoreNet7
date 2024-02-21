@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Store.Shared.Modals;
+using System.ComponentModel.DataAnnotations;
 
 namespace Store.Shared.Dto
 {
-    public class SupplierDto
+    public class SupplierDto : BaseEntity
     {
         public Guid Id { get; set; } = new Guid();
 
@@ -13,13 +14,5 @@ namespace Store.Shared.Dto
 
         //[Required, MinLength(16)]
         public string VatNumber { get; set; }
-
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
-
-        public string? CreatedBy { get; set; }
-
-        public DateTime ModifiedOn { get; set; } = DateTime.UtcNow;
-
-        public string? ModifiedBy { get; set; }
     }
 }

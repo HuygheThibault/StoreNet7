@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Store.Shared.Modals;
 
 namespace Store.Api.Models;
 
-public partial class OrderLine
+public partial class OrderLine: BaseEntity
 {
-    public Guid Id { get; set; }
-
     public Guid ProductId { get; set; }
 
     public int Quantity { get; set; }
@@ -14,14 +11,6 @@ public partial class OrderLine
     public decimal? CostPerItem { get; set; }
 
     public decimal? Cost { get; set; }
-
-    public DateTime CreatedOn { get; set; }
-
-    public string CreatedBy { get; set; } = string.Empty;
-
-    public DateTime ModifiedOn { get; set; }
-
-    public string ModifiedBy { get; set; } = string.Empty;
 
     public Guid OrderId { get; set; }
 

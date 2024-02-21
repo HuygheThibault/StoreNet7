@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Store.Shared.Modals;
 
 namespace Store.Api.Models;
 
-public partial class Order
+public partial class Order: BaseEntity
 {
-    public Guid Id { get; set; }
-
     public Guid SupplierId { get; set; }
 
     public string? FileName { get; set; }
@@ -18,14 +15,6 @@ public partial class Order
     public string? Comments { get; set; }
 
     public DateTime? ExpirationDate { get; set; }
-
-    public DateTime CreatedOn { get; set; }
-
-    public string Createdby { get; set; } = string.Empty;
-
-    public DateTime ModifiedOn { get; set; }
-
-    public string ModifiedBy { get; set; } = string.Empty;
 
     public virtual ICollection<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
 

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using Store.Api.Models;
 using Store.Api.Repositories;
@@ -17,8 +16,7 @@ namespace Store.Api.Controllers
         private readonly IMapper _mapper;
         const int maxPageSize = 20;
 
-        public OrderController(ILogger<OrderController> logger, IOrderRepository repository, IMapper mapper
-            )
+        public OrderController(ILogger<OrderController> logger, IOrderRepository repository, IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _orderRepository = repository ?? throw new ArgumentNullException(nameof(repository));
@@ -77,11 +75,6 @@ namespace Store.Api.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                request.ModifiedBy = User.Identity.Name ?? "Unknown";
-                request.ModifiedOn = DateTime.Now;
-                request.OrderLines.ToList().ForEach(x => x.ModifiedBy = User.Identity.Name ?? "Unknown");
-                request.OrderLines.ToList().ForEach(x => x.ModifiedOn = DateTime.Now);
-
                 var dbModel = await _orderRepository.UpdateOrder(_mapper.Map<Order>(request));
 
                 return Ok(_mapper.Map<OrderDto>(dbModel));
@@ -106,24 +99,10 @@ namespace Store.Api.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                request.ModifiedBy = User.Identity.Name ?? "Unknown";
-                request.ModifiedOn = DateTime.Now;
-                request.OrderLines.ToList().ForEach(x => x.ModifiedBy = User.Identity.Name ?? "Unknown");
-                request.OrderLines.ToList().ForEach(x => x.ModifiedOn = DateTime.Now);
-                request.OrderLines.ToList().ForEach(x => x.CreatedBy = User.Identity.Name ?? "Unknown");
-                request.OrderLines.ToList().ForEach(x => x.CreatedOn = DateTime.Now);
-
                 Order newItem = _mapper.Map<Order>(request);
 
-                await _orderRepository.AddOrder(newItem);
-
-                if (await _orderRepository.SaveChangesAsync())
-                {
-                    _logger.LogInformation($"Created new Order {newItem.Id}");
-                    return Created($"/api/Order/{newItem.Id}", _mapper.Map<OrderDto>(newItem));
-                }
-
-                return BadRequest("Faild to create Order");
+                newItem = await _orderRepository.AddOrder(newItem);
+                return Created($"/api/Order/{newItem.Id}", _mapper.Map<OrderDto>(newItem));
             }
             catch (Exception ex)
             {
@@ -140,16 +119,11 @@ namespace Store.Api.Controllers
                 var dbModel = await _orderRepository.GetOrderById(id);
                 if (dbModel == null) return NotFound();
 
-                _orderRepository.Delete(dbModel);
-
-                if (await _orderRepository.SaveChangesAsync())
-                {
-                    return NoContent();
-                }
+                await _orderRepository.Delete(dbModel);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "error occured");
+                _logger.LogError(ex, "error occured while deleting order");
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Database failure while deleting Order by id.");
             }
             return BadRequest("Failed to delete the item");

@@ -106,10 +106,6 @@ namespace Store.Api.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                model.ModifiedOn = DateTime.Now;
-                model.ModifiedBy = User.Identity.Name ?? "Unknown";
-                model.Category = null;
-
                 _mapper.Map(model, dbModel); // map model to dbmodel (destination)
 
                 if (await _productRepository.SaveChangesAsync())
@@ -153,11 +149,6 @@ namespace Store.Api.Controllers
                 //fileStream.Close();
 
                 //request.ImageName = $"https://{currentUrl}/uploads/{request.Title}.jpg";
-
-                model.ModifiedOn = DateTime.Now;
-                model.ModifiedBy = User.Identity.Name ?? "Unknown";
-                model.CreatedOn = DateTime.Now;
-                model.CreatedBy = User.Identity.Name ?? "Unknown";
 
                 Product newItem = _mapper.Map<Product>(model);
 

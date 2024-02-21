@@ -6,12 +6,12 @@ using Store.Shared.Modals;
 
 namespace Store.Api.Repositories
 {
-    public class OrderRepository : IOrderRepository
+    public class OrderRepository : BaseRepository, IOrderRepository
     {
         private readonly StoreContext _context;
         private readonly ILogger<OrderRepository> _logger;
 
-        public OrderRepository(StoreContext context, ILogger<OrderRepository> logger)
+        public OrderRepository(StoreContext context, ILogger<OrderRepository> logger) : base(context, logger)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -25,7 +25,7 @@ namespace Store.Api.Repositories
 
                 var collection = _context.Orders as IQueryable<Order>;
 
-                if(!string.IsNullOrWhiteSpace(name))
+                if (!string.IsNullOrWhiteSpace(name))
                 {
                     name = name.Trim();
                     collection = collection.Where(c => c.FileName == name);
@@ -73,7 +73,7 @@ namespace Store.Api.Repositories
             }
         }
 
-        public async Task AddOrder(Order order)
+        public async Task<Order> AddOrder(Order order)
         {
             using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
@@ -81,56 +81,68 @@ namespace Store.Api.Repositories
                 {
                     _logger.LogInformation($"Adding an order: {order}.");
 
-                    //order.Supplier = null;
-                    //order.OrderLines.ToList().ForEach(x => x.Product = null);
-
-                    //_context.Entry(order.Supplier).State = EntityState.Unchanged;
-                    //foreach (var orderLine in order.OrderLines)
-                    //{
-                    //    // Attach associated product to the context if it's not null
-                    //    if (orderLine.Product != null)
-                    //    {
-                    //        _context.Products.Attach(orderLine.Product);
-                    //    }
-                    //}
-
-                    //foreach (var orderLine in order.OrderLines)
-                    //{
-                    //    if (orderLine.Product != null)
-                    //    {
-                    //        _context.Entry(orderLine.Product).State = EntityState.Unchanged;
-                    //        orderLine.Product.QuantityInStock += orderLine.Quantity;
-                    //    }
-                    //}
-
-                    if (await GetOrderById(order.Id) == null)
+                    // Check if the order already exists in the database
+                    if (await GetOrderById(order.Id) != null)
                     {
-                        _context.Entry(order.Supplier).State = EntityState.Unchanged;
+                        _logger.LogError($"Order with ID {order.Id} already exists.");
+                        return null;
+                    }
 
-                        order.Cost = (decimal)order.OrderLines.Sum(x => x.Cost);
-                        _context.Orders.Add(order);
+                    // Retrieve the supplier from the database
+                    var supplier = await _context.Suppliers.FindAsync(order.SupplierId);
+                    if (supplier == null)
+                    {
+                        _logger.LogError($"Supplier with ID {order.SupplierId} not found.");
+                        return null;
+                    }
+                    order.Supplier = supplier;
 
-                        foreach (OrderLine orderLine in order.OrderLines)
+                    // Add the order to the context (but don't save the changes yet)
+                    _context.Orders.Add(order);
+
+                    foreach (OrderLine orderLine in order.OrderLines)
+                    {
+                        _logger.LogInformation($"Adding an orderLine {orderLine} to the context.");
+
+                        // Retrieve the product from the database
+                        var product = await _context.Products.FindAsync(orderLine.ProductId);
+                        if (product == null)
                         {
-                            _logger.LogInformation($"Adding an orderLine {orderLine} to the context.");
-
-                            if (orderLine.Product != null)
-                            {
-                                _context.Entry(orderLine.Product).State = EntityState.Unchanged;
-                                _context.Entry(orderLine.Product.Category).State = EntityState.Unchanged;
-                                orderLine.Product.QuantityInStock += orderLine.Quantity;
-                            }
-
-                            orderLine.OrderId = order.Id;
-                            _context.OrderLines.Add(orderLine);
+                            _logger.LogError($"Product with ID {orderLine.ProductId} not found.");
+                            continue;
                         }
+
+                        // Update the quantity in stock
+                        product.QuantityInStock += orderLine.Quantity;
+
+                        orderLine.ProductId = product.Id; // Set the product ID
+                        orderLine.OrderId = order.Id;
+
+                        // Add the order line to the context
+                        _context.OrderLines.Add(orderLine);
+                    }
+
+                    // Calculate the total cost of the order
+                    order.Cost = (decimal)order.OrderLines.Sum(x => x.Cost);
+
+                    // Save changes and commit the transaction
+                    if (await SaveChangesAsync())
+                    {
                         transaction.Commit();
+                        return order;
+                    }
+                    else
+                    {
+                        _logger.LogError("No rows were affected by the add operation.");
+                        transaction.Rollback();
+                        return null;
                     }
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "error occured");
+                    _logger.LogError(ex, "Error occurred while adding order");
                     transaction.Rollback();
+                    throw;
                 }
             }
         }
@@ -143,113 +155,120 @@ namespace Store.Api.Repositories
                 {
                     _logger.LogInformation($"Updating order: {order.Id}.");
 
-                    Order dbOrder = await GetOrderById(order.Id);
+                    Order dbOrder = await _context.Orders.Include(x => x.OrderLines).ThenInclude(x => x.Product).SingleOrDefaultAsync(c => c.Id == order.Id);
 
-                    foreach (OrderLine dbOrderline in dbOrder.OrderLines.Where(x => !order.OrderLines.Select(ol => ol.Id).Contains(x.Id))) // Remove order lines
+                    if (dbOrder == null)
                     {
-                        _logger.LogInformation($"Removed orderLine: {dbOrderline.Id}.");
-
-                        dbOrderline.Product.QuantityInStock -= dbOrderline.Quantity;
-                        dbOrder.OrderLines.Remove(dbOrderline);
+                        _logger.LogError($"Order with ID {order.Id} not found.");
+                        return null;
                     }
 
-                    foreach (OrderLine dbOrderline in dbOrder.OrderLines.Where(x => order.OrderLines.Select(ol => ol.Id).Contains(x.Id))) // Updating order lines
+                    // Update parent
+                    _context.Entry(dbOrder).CurrentValues.SetValues(order);
+
+                    // Delete children
+                    var orderLineIdsToDelete = dbOrder.OrderLines.Where(x => !order.OrderLines.Any(ol => ol.Id == x.Id)).Select(x => x.Id).ToList();
+                    var orderLinesToDelete = await _context.OrderLines.Where(x => orderLineIdsToDelete.Contains(x.Id)).ToListAsync();
+                    _context.OrderLines.RemoveRange(orderLinesToDelete);
+
+                    // Update and Insert children
+                    foreach (OrderLine orderLine in order.OrderLines)
                     {
-                        _logger.LogInformation($"Updating orderLine: {dbOrderline}.");
+                        var existingChild = dbOrder.OrderLines.FirstOrDefault(c => c.Id == orderLine.Id);
 
-                        OrderLine newOrderLine = order.OrderLines.FirstOrDefault(x => x.Id == dbOrderline.Id);
-
-                        if (dbOrderline.Quantity != newOrderLine.Quantity)
+                        if (existingChild != null)
                         {
-                            dbOrderline.Product.QuantityInStock -= dbOrderline.Quantity;
-                            dbOrderline.Product.QuantityInStock += newOrderLine.Quantity;
+                            // Update child
+                            _logger.LogInformation($"Updating orderLine: {orderLine}.");
+                            _context.Entry(existingChild).CurrentValues.SetValues(orderLine);
+                            existingChild.Product.QuantityInStock += (orderLine.Quantity - existingChild.Quantity);
                         }
-
-                        dbOrderline.ProductId = newOrderLine.ProductId;
-                        dbOrderline.Quantity = newOrderLine.Quantity;
-                        dbOrderline.CostPerItem = newOrderLine.CostPerItem;
-                        dbOrderline.Cost = newOrderLine.Cost;
-                    }
-
-                    foreach (OrderLine orderLine in order.OrderLines.Where(x => x.Id == Guid.Empty)) // Add order lines
-                    {
-                        _logger.LogInformation($"Adding orderLine: {orderLine}.");
-                        orderLine.OrderId = order.Id;
-
-                        Product product = _context.Products.FirstOrDefault(x => x.Id == orderLine.ProductId);
-
-                        if(product != null)
+                        else
                         {
-                            orderLine.Product = product;
-                            orderLine.Product.QuantityInStock += orderLine.Quantity;
+                            // Insert child
+                            _logger.LogInformation($"Adding orderLine: {orderLine}.");
+                            var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == orderLine.ProductId);
+                            if (product == null)
+                            {
+                                _logger.LogError($"Product with ID {orderLine.ProductId} not found.");
+                                continue;
+                            }
+                            product.QuantityInStock += orderLine.Quantity;
+                            dbOrder.OrderLines.Add(orderLine);
+                            _context.Entry(orderLine).State = EntityState.Added;  // Explicitly set the state to Added
                         }
-
-                        dbOrder.OrderLines.Add(orderLine);
                     }
 
-                    dbOrder.SupplierId = order.SupplierId;
-                    dbOrder.Cost = order.Cost;
-                    dbOrder.Comments = order.Comments;
-                    dbOrder.IsPaid = order.IsPaid;
-
-                    _context.Update(dbOrder);
-
-                    await _context.SaveChangesAsync();
-
-                    transaction.Commit();
+                    if (await SaveChangesAsync())
+                    {
+                        transaction.Commit();
+                    }
+                    else
+                    {
+                        _logger.LogError("No rows were affected by the update operation.");
+                        transaction.Rollback();
+                    }
 
                     return dbOrder;
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "error occured while updating order");
+                    _logger.LogError(ex, "Error occurred while updating order");
                     transaction.Rollback();
                     throw;
                 }
             }
         }
 
-        public void Delete(Order order)
+        public async Task Delete(Order order)
         {
-            try
+            using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
-                _logger.LogInformation($"Removing order {order} from the context.");
-
-                foreach(OrderLine orderLine in order.OrderLines)
+                try
                 {
-                    Product product = _context.Products.First(x => x.Id == orderLine.ProductId);
-                    if(product != null )
+                    _logger.LogInformation($"Removing order {order.Id} from the context.");
+
+                    // Load the order with its order lines from the database
+                    var dbOrder = await _context.Orders.Include(o => o.OrderLines).SingleOrDefaultAsync(o => o.Id == order.Id);
+
+                    if (dbOrder == null)
                     {
-                        product.QuantityInStock -= orderLine.Quantity;
+                        _logger.LogError($"Order with ID {order.Id} not found.");
+                        return;
                     }
 
-                    _context.Remove(orderLine);
+                    // Decrease the quantity in stock for each product
+                    foreach (OrderLine orderLine in dbOrder.OrderLines)
+                    {
+                        var product = await _context.Products.FindAsync(orderLine.ProductId);
+                        if (product != null)
+                        {
+                            product.QuantityInStock -= orderLine.Quantity;
+                        }
+                    }
+
+                    // Remove the order, which will also remove the order lines because of the cascade delete
+                    _context.Orders.Remove(dbOrder);
+
+                    // Save changes and commit the transaction
+                    if (await SaveChangesAsync())
+                    {
+                        transaction.Commit();
+                    }
+                    else
+                    {
+                        _logger.LogError("No rows were affected by the delete operation.");
+                        transaction.Rollback();
+                    }
                 }
-
-                _context.Remove(order);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "error occured");
-            }
-        }
-
-        public async Task<bool> SaveChangesAsync()
-        {
-            try
-            {
-                _logger.LogInformation($"Attempitng to save the changes in the context");
-
-                // Only return success if at least one row was changed
-                return (await _context.SaveChangesAsync()) > 0;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "error occured");
-                throw;
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error occurred while deleting order");
+                    transaction.Rollback();
+                    throw;
+                }
             }
         }
-
     }
 
     public interface IOrderRepository
@@ -258,12 +277,10 @@ namespace Store.Api.Repositories
 
         Task<Order> GetOrderById(Guid id);
 
+        Task<Order> AddOrder(Order order);
+
         Task<Order> UpdateOrder(Order order);
 
-        Task AddOrder(Order order);
-
-        void Delete(Order order);
-
-        Task<bool> SaveChangesAsync();
+        Task Delete(Order order);
     }
 }

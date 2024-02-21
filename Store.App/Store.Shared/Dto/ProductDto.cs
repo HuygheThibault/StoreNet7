@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Store.Shared.Dto
 {
-    public class ProductDto : DatagridRows
+    public class ProductDto : BaseEntity
     {
         public Guid Id { get; set; } = new Guid();
 
@@ -18,15 +18,8 @@ namespace Store.Shared.Dto
 
         public byte[]? Image { get; set; }
 
+        [Required]
         public Guid CategoryId { get; set; }
-
-        public DateTime CreatedOn { get; set; } = DateTime.Now;
-
-        public string CreatedBy { get; set; } = "Unknown";
-
-        public DateTime ModifiedOn { get; set; } = DateTime.Now;
-
-        public string ModifiedBy { get; set; } = "Unknown";
 
         private CategoryDto category;
 

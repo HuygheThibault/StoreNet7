@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Store.Shared.Modals;
+using System;
 using System.Collections.Generic;
 
 namespace Store.Api.Models;
 
-public partial class Sale
+public partial class Sale: BaseEntity
 {
     public Guid Id { get; set; }
 
@@ -13,13 +14,13 @@ public partial class Sale
 
     public decimal? TotalVastCost { get; set; }
 
-    public DateTime CreatedOn { get; set; }
+    //public DateTime CreatedOn { get; set; }
 
-    public string CreatedBy { get; set; } = null!;
+    //public string CreatedBy { get; set; } = null!;
 
-    public DateTime ModifiedOn { get; set; }
+    //public DateTime ModifiedOn { get; set; }
 
-    public string ModifiedBy { get; set; } = null!;
+    //public string ModifiedBy { get; set; } = null!;
 
     public virtual ICollection<SaleLine> SaleLines { get; set; } = new List<SaleLine>();
 }

@@ -24,6 +24,7 @@ builder.Services.AddDbContext<StoreContext>(options =>
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+#if !DEBUG
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, c =>
     {
@@ -34,6 +35,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidIssuer = $"https://{builder.Configuration["Auth0:Domain"]}"
         };
     });
+#endif
 
 builder.Services.AddControllers(options =>
 {
@@ -91,9 +93,11 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseAuthentication();
+#if !DEBUG
 
+app.UseAuthentication();
 app.UseAuthorization();
+#endif
 
 app.MapControllers();
 app.MapFallbackToFile("index.html");

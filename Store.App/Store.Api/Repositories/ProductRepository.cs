@@ -99,13 +99,14 @@ namespace Store.Api.Repositories
         {
             try
             {
-                _logger.LogInformation($"Adding an product: {product}.");
-                product.Category = null;
+                _logger.LogInformation($"Adding a product: {product}.");
+                product.Category = product?.CategoryId != null ? _context.Categories.FirstOrDefault(x => x.Id == product.CategoryId) : null;
                 _context.Products.Add(product);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "error occured");
+                _logger.LogError(ex, "An error occurred while adding the product.");
+                throw;
             }
         }
 

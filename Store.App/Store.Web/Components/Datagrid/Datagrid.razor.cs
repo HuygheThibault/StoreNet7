@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Store.Web.Components.Datagrid
 {
-    public partial class Datagrid<T> where T : DatagridRows
+    public partial class Datagrid<T>
     {
         [Parameter]
         public List<T>? Data { get; set; } = default!;
