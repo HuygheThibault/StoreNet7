@@ -105,15 +105,18 @@ namespace Store.Api.Repositories
                         _logger.LogInformation($"Adding an orderLine {orderLine} to the context.");
 
                         // Retrieve the product from the database
-                        var product = await _context.Products.FindAsync(orderLine.ProductId);
+                        var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == orderLine.ProductId);
                         if (product == null)
                         {
                             _logger.LogError($"Product with ID {orderLine.ProductId} not found.");
                             continue;
                         }
+                        _context.Entry(product).State = EntityState.Modified;
+                        _context.Entry(product.Category).State = EntityState.Detached;
 
                         // Update the quantity in stock
                         product.QuantityInStock += orderLine.Quantity;
+
 
                         orderLine.ProductId = product.Id; // Set the product ID
                         orderLine.OrderId = order.Id;
