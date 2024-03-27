@@ -81,14 +81,12 @@ namespace Store.Api.Repositories
                 {
                     _logger.LogInformation($"Adding an order: {order}.");
 
-                    // Check if the order already exists in the database
                     if (await GetOrderById(order.Id) != null)
                     {
                         _logger.LogError($"Order with ID {order.Id} already exists.");
                         return null;
                     }
 
-                    // Retrieve the supplier from the database
                     var supplier = await _context.Suppliers.FindAsync(order.SupplierId);
                     if (supplier == null)
                     {
@@ -116,7 +114,6 @@ namespace Store.Api.Repositories
 
                         // Update the quantity in stock
                         product.QuantityInStock += orderLine.Quantity;
-
 
                         orderLine.ProductId = product.Id; // Set the product ID
                         orderLine.OrderId = order.Id;

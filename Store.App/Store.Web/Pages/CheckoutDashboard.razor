@@ -23,7 +23,7 @@
             {
                 <li class="card @(_SelectedSubCategory != null && category.Id == _SelectedSubCategory.Id ? "active" : "")" @onclick="() => SetSelectedSubCategroy(category)">
                     <div class="details">
-                        <p>@category.Title</p>
+                        <span>@category.Title</span>
                     </div>
                 </li>
             }

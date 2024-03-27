@@ -1572,19 +1572,19 @@ header .h4 {
   grid-gap: calc(var(--gutter) / 2);
   grid-template-columns: auto;
   grid-auto-flow: column;
-  grid-auto-columns: calc(50% - var(--gutter) * 2);
+  grid-auto-columns: calc(25% - var(--gutter) * 2);
   overflow-x: scroll;
   scroll-snap-type: x proximity;
   padding-bottom: calc(0.75 * var(--gutter));
   margin-bottom: calc(-0.25 * var(--gutter));
-  height: 5rem;
   overflow-y: hidden;
+  align-items: center;
 }
 .dashboard .children-categories .card {
   background-color: var(--fourth-color);
   display: flex;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 .dashboard .children-categories:before,
